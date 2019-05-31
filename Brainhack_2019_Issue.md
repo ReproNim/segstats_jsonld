@@ -6,7 +6,7 @@ This project ultimately aims to facilitate both query and analysis of parcellati
 We aim to tackle this problem in steps.  For this hackathon project we'll be focusing on conversion from Freesurfer's [mri_segstats](https://surfer.nmr.mgh.harvard.edu/fswiki/mri_segstat) program output along with some additional parsing/conversion of Freesurfer log files.
 
 ## Skills required to participate
-Python and structural neuroimaging experience.  If one has experience with [rdflib](https://github.com/RDFLib/rdflib) or [PROV](https://github.com/trungdong/prov) that would also be helpful.
+Python and structural neuroimaging experience.  If one has experience with [rdflib](https://github.com/RDFLib/rdflib) or [PROV](https://github.com/trungdong/prov) that would also be helpful. A good appreciation of Japanese sake may also help for late night discussion.
 
 ## Integration
 This project will need expertise in programming, structural neuroimaging, and anatomy.  To make this project sucessful we need individuals who have skills in any of these domains to help with: (1) understand Freesurfer's segmentation results format and log files; (2) programming up a script in Python; (3) understand anatomy well enough to select the proper anatomical concept that maps to a specific atlas designation of a region and ***can define new anatomy terms where needed, linking them to broader concepts*** to facilitate segmentation results queries across softwares.
