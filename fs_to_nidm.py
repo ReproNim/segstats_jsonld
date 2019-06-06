@@ -71,7 +71,7 @@ crypto = prov.Namespace("crypto",
 
 
 
-def add_brainvolume_data(nidmdoc, measure, json_map,   png_file=None, output_file=None, root_act=None, nidm_graph=None):
+def add_seg_data(nidmdoc, measure, header, tableinfo, json_map,   png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add
     :param nidmdoc:
@@ -82,6 +82,12 @@ def add_brainvolume_data(nidmdoc, measure, json_map,   png_file=None, output_fil
     :param nidm_graph:
     :return:
     '''
+
+    #read in json_map
+
+
+
+
     #dictionary to store activities for each software agent
     software_agent={}
     software_activity={}
@@ -94,8 +100,11 @@ def add_brainvolume_data(nidmdoc, measure, json_map,   png_file=None, output_fil
     #if an existing NIDM graph is passed as a parameter then add to existing file
     if nidm_graph is None:
         first_row=True
-        #iterate over measure dictionary 
-        for key, values in measure.iter():
+        #iterate over measure dictionary
+        for measures in measure:
+
+            #key is
+            print(measures)
 
             #store other data from row with columns_to_term mappings
             for row_variable,row_data in csv_row.iteritems():
@@ -385,45 +394,30 @@ def main(argv):
 
     args = parser.parse_args()
 
+
     [header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats","aseg.stats"))
 
     #for measures we need to create NIDM structures using anatomy mappings
     #If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
-    if args.nidm_file is not None:
-        print("Adding to NIDM file...")
-        #read in NIDM file
-        project = read_nidm(args.nidm_file)
+    if args.nidm_file is None:
 
-        root_act = project.graph.activity(QualifiedName(provNamespace("nidm",Constants.NIDM),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Brain volumes provenance document"})
-
-        #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-        add_brainvolume_data(nidmdoc=project,df=df,id_field=id_field,root_act=root_act,column_to_terms=column_to_terms,png_file=args.png,output_file=args.output_file,source_row=source_row,nidm_graph=True)
-
-        #serialize NIDM file
-        with open(args.output_file,'w') as f:
-            print("Writing NIDM file...")
-            f.write(project.serializeTurtle())
-    else:
         print("Creating NIDM file...")
         #If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
 
         #create an empty NIDM graph
         nidmdoc = Core()
-        root_act = nidmdoc.graph.activity(QualifiedName(provNamespace("nidm",Constants.NIDM),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Brain volumes provenance document"})
+        root_act = nidmdoc.graph.activity(QualifiedName(provNamespace("nidm",Constants.NIDM),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
 
         #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-        add_brainvolume_data(nidmdoc=nidmdoc,measure=measures,id_field=id_field,root_act=root_act,column_to_terms=column_to_terms,png_file=args.png,output_file=args.output_file,source_row=source_row)
+        add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo, json_map=args.json_file)
 
 
 
         #serialize NIDM file
         with open(args.output_file,'w') as f:
             print("Writing NIDM file...")
-            f.write(nidmdoc.serializeTurtle())
-            if args.png:
-            #    nidmdoc.save_DotGraph(str(args.output_file + ".png"), format="png")
-
-                nidmdoc.save_DotGraph(str(args.output_file + ".pdf"), format="pdf")
+            f.write(nidmdoc.serializeJSONLD())
+            nidmdoc.save_DotGraph(str(args.output_file + ".pdf"), format="pdf")
 
 
 if __name__ == "__main__":
