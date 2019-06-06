@@ -118,7 +118,7 @@ def safe_encode(x, as_literal=True):
         if not as_literal:
             return dumps(x)
         return prov.Literal(dumps(x), nidm['pickle'])
-    except TypeError, e:
+    except TypeError as e:
         value = "Could not encode: " + str(e)
         if not as_literal:
             return value
