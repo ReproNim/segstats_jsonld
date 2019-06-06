@@ -1,9 +1,4 @@
 {
-	"participant_id": {
-		"definition": "ndar:src_subject_id",
-		"label": "ndar:src_subject_id",
-		"url": "https://ndar.nih.gov/api/datadictionary/v2/dataelement/src_subject_id"
-	}, 
 	"posterior corpus callosum volume":{"url":"http://uri.interlex.org/base/ilx_0172279#","label":"posterior corpus callosum volume","definition":"NA"},
 	"middle posterior corpus callosum volume":{"url":"http://uri.interlex.org/base/ilx_0172280#","label":"middle posterior corpus callosum volume","definition":"NA"},
 	"central corpus callosum volume":{"url":"http://uri.interlex.org/base/ilx_0172281#","label":"central corpus callosum volume","definition":"NA"},
