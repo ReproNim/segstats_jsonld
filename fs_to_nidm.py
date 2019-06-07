@@ -47,31 +47,19 @@ from pickle import dumps
 from datetime import datetime as dt
 import hashlib
 import os
+from os.path import join,basename,splitext
 import pwd
 from socket import getfqdn
 import uuid
+import glob
 
 import prov.model as prov
 import rdflib
 import sys
 
 
-# create namespace references to terms used
-foaf = prov.Namespace("foaf", "http://xmlns.com/foaf/0.1/")
-dcterms = prov.Namespace("dcterms", "http://purl.org/dc/terms/")
-fs = prov.Namespace("fs", "http://www.incf.org/ns/nidash/fs#")
-nidm = prov.Namespace("nidm", "http://www.incf.org/ns/nidash/nidm#")
-niiri = prov.Namespace("niiri", "http://iri.nidash.org/")
-obo = prov.Namespace("obo", "http://purl.obolibrary.org/obo/")
-nif = prov.Namespace("nif", "http://neurolex.org/wiki/")
-crypto = prov.Namespace("crypto", "http://www.w3.org/2000/10/swap/crypto#")
-crypto = prov.Namespace("crypto",
-                        ("http://id.loc.gov/vocabulary/preservation/"
-                         "cryptographicHashFunctions/"))
 
-
-
-def add_seg_data(nidmdoc, measure, header, tableinfo, json_map,   png_file=None, output_file=None, root_act=None, nidm_graph=None):
+def add_seg_data(nidmdoc, measure, header, tableinfo, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add
     :param nidmdoc:
@@ -110,18 +98,6 @@ def add_seg_data(nidmdoc, measure, header, tableinfo, json_map,   png_file=None,
 
 
 
-            #just for debugging.  resulting graph is too big right now for DOT graph creation so here I'm simply creating
-            #a DOT graph for the processing of 1 row of the brain volumes CSV file so we can at least visually see the
-            #model
-            if png_file is not None:
-                if first_row:
-                    #serialize NIDM file
-                    #with open(args.output_file,'w') as f:
-                    #   print("Writing NIDM file...")
-                    #   f.write(nidmdoc.serializeTurtle())
-                    if png_file:
-                        nidmdoc.save_DotGraph(str(output_file + ".pdf"), format="pdf")
-                    first_row=False
 
 
 max_text_len = 1024000
@@ -197,6 +173,7 @@ def read_stats(filename):
                     if tableinfo[col_idx][fields[2]] == "StructName":
                         struct_idx = col_idx
                 elif tag == "Measure":
+                    fields = ' '.join(fields).replace('CortexVol ', 'CortexVol, ').split()
                     fields = ' '.join(fields[1:]).split(', ')
                     measures.append({'structure': fields[0],
                                      'name': fields[1],
@@ -337,9 +314,7 @@ def main(argv):
                                         NIDM serializations (i.e. TURTLE, JSON-LD RDF))''')
     parser.add_argument('-s', '--subject_dir', dest='subject_dir', type=str, required=True,
                         help='Path to Freesurfer subject directory')
-    parser.add_argument('-j','--json_map', dest='json_file',type=str, required=True,
-                        help='JSON mapping file which maps Freesurfer aseg anatomy terms to commond data elements')
-    parser.add_argument('-o', '--output_dir', dest='output_file', type=str,
+    parser.add_argument('-o', '--output_dir', dest='output_=dir', type=str,
                         help='Output directory')
     parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
                         help='Optional NIDM file to add segmentation data to.')
@@ -347,28 +322,30 @@ def main(argv):
     args = parser.parse_args()
 
 
-    [header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats","aseg.stats"))
+    #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
+    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
+        if basename(stats_file) in files:
+            [header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
 
-    #for measures we need to create NIDM structures using anatomy mappings
-    #If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
-    if args.nidm_file is None:
+            #for measures we need to create NIDM structures using anatomy mappings
+            #If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
+            if args.nidm_file is None:
 
-        print("Creating NIDM file...")
-        #If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
+                print("Creating NIDM file...")
+                #If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
 
-        #create an empty NIDM graph
-        nidmdoc = Core()
+                #create an empty NIDM graph
+                nidmdoc = Core()
 
-        #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-        add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo, json_map=args.json_file)
+                #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo)
 
-
-
-        #serialize NIDM file
-        with open(args.output_file,'w') as f:
-            print("Writing NIDM file...")
-            f.write(nidmdoc.serializeJSONLD())
-            nidmdoc.save_DotGraph(str(args.output_file + ".pdf"), format="pdf")
+                #serialize NIDM file
+                with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
+                    print("Writing NIDM file...")
+                    f.write(nidmdoc.serializeJSONLD())
+                    nidmdoc.save_DotGraph(str(args.output_file + ".pdf"), format="pdf")
 
 
 if __name__ == "__main__":
