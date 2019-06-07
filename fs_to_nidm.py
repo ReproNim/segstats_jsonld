@@ -314,7 +314,7 @@ def main(argv):
                                         NIDM serializations (i.e. TURTLE, JSON-LD RDF))''')
     parser.add_argument('-s', '--subject_dir', dest='subject_dir', type=str, required=True,
                         help='Path to Freesurfer subject directory')
-    parser.add_argument('-o', '--output_dir', dest='output_=dir', type=str,
+    parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
                         help='Output directory')
     parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
                         help='Optional NIDM file to add segmentation data to.')
@@ -345,7 +345,7 @@ def main(argv):
                 with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
                     print("Writing NIDM file...")
                     f.write(nidmdoc.serializeJSONLD())
-                    nidmdoc.save_DotGraph(str(args.output_file + ".pdf"), format="pdf")
+                    nidmdoc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
 
 
 if __name__ == "__main__":
