@@ -1,230 +1,230 @@
 {
     "Left-Lateral-Ventricle": {
-        "url": "http://uri.interlex.org/ILX:0381413",
+        "url": "http://uri.interlex.org/ILX:0106125",
         "isAbout": "UBERON:0002285",
         "hasLaterality": "Left",
         "definition": "left lateral ventricle cerebral spinal fluid volume",
         "label": "left lateral ventricle volume"
     },
     "Left-Inf-Lat-Vent": {
-        "url": "http://uri.interlex.org/ILX:0381411",
+        "url": "http://uri.interlex.org/ILX:0105444",
         "isAbout": "UBERON:0006091",
         "hasLaterality": "Left",
         "definition": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
         "label": "left inferior horn of the lateral ventricle volume"
     },
     "Left-Cerebellum-White-Matter": {
-        "url": "http://uri.interlex.org/ILX:0381405",
+        "url": "http://uri.interlex.org/ILX:0101963",
         "isAbout": "UBERON:0002037",
         "hasLaterality": "Left",
         "definition": "left cerebellum white matter volume",
         "label": "left cerebellum white matter volume"
     },
     "Left-Cerebellum-Cortex": {
-        "url": "http://uri.interlex.org/ILX:0381404",
+        "url": "http://uri.interlex.org/ILX:0101946",
         "isAbout": "UBERON:0002129",
         "hasLaterality": "Left",
         "definition": "left cerebellar cortex gray matter volume",
         "label": "left cerebellar cortex volume"
     },
     "Left-Thalamus-Proper": {
-        "url": "http://uri.interlex.org/ILX:0381419",
+        "url": "http://uri.interlex.org/ILX:0111657",
         "isAbout": "UBERON:0001897",
         "hasLaterality": "Left",
         "definition": "left thalamus gray matter volume",
         "label": "left thalamus volume"
     },
     "Left-Caudate": {
-        "url": "http://uri.interlex.org/ILX:0381403",
+        "url": "http://uri.interlex.org/ILX:0101734",
         "isAbout": "UBERON:0001873",
         "hasLaterality": "Left",
         "definition": "left caudate nucleus gray matter volume",
         "label": "left caudate nucleus volume"
     },
     "Left-Putamen": {
-        "url": "http://uri.interlex.org/ILX:0381417",
+        "url": "http://uri.interlex.org/ILX:0109549",
         "isAbout": "UBERON:0001874",
         "hasLaterality": "Left",
         "definition": "left putamen gray matter volume",
         "label": "left putamen volume"
     },
     "Left-Pallidum": {
-        "url": "http://uri.interlex.org/ILX:0381415",
+        "url": "http://uri.interlex.org/ILX:0381379",
         "isAbout": "UBERON:0006514",
         "hasLaterality": "Left",
         "definition": "left pallidum gray matter volume",
         "label": "left pallidum volume"
     },
     "3rd-Ventricle": {
-        "url": "http://uri.interlex.org/ILX:0381444",
+        "url": "http://uri.interlex.org/ILX:0111707",
         "isAbout": "UBERON:0002286",
         "hasLaterality": "None",
         "definition": "third ventricle cerebral spinal fluid volume",
         "label": "third ventricle volume"
     },
     "4th-Ventricle": {
-        "url": "http://uri.interlex.org/ILX:0381399",
+        "url": "http://uri.interlex.org/ILX:0104381",
         "isAbout": "UBERON:0002422",
         "hasLaterality": "None",
         "definition": "fourth ventricle cerebral spinal fluid volume",
         "label": "fourth ventricle volume"
     },
     "Brain-Stem": {
-        "url": "http://uri.interlex.org/ILX:0381391",
+        "url": "http://uri.interlex.org/ILX:0101444",
         "isAbout": "UBERON:0002298",
         "hasLaterality": "None",
         "definition": "brainstem gray matter volume",
         "label": "brainstem volume"
     },
     "Left-Hippocampus": {
-        "url": "http://uri.interlex.org/ILX:0381410",
+        "url": "http://uri.interlex.org/ILX:0105021",
         "isAbout": "UBERON:0001954",
         "hasLaterality": "Left",
         "definition": "left hippocampus gray matter volume",
         "label": "left hippocampus volume"
     },
     "Left-Amygdala": {
-        "url": "http://uri.interlex.org/ILX:0381401",
+        "url": "http://uri.interlex.org/ILX:0100573",
         "isAbout": "UBERON:0001876",
         "hasLaterality": "Left",
         "definition": "left amygdala gray matter volume",
         "label": "left amygdala volume"
     },
     "CSF": {
-        "url": "http://uri.interlex.org/ILX:0381394",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "None",
         "definition": "cerebrum cerebral spinal fluid volume",
         "label": "cerebrum cerebral spinal fluid volume"
     },
     "Left-Accumbens-area": {
-        "url": "http://uri.interlex.org/ILX:0381414",
+        "url": "http://uri.interlex.org/ILX:0107736",
         "isAbout": "UBERON:0001882",
         "hasLaterality": "Left",
         "definition": "left nucleus accumbens gray matter volume",
         "label": "left nucleus accumbens volume"
     },
     "Left-VentralDC": {
-        "url": "http://uri.interlex.org/ILX:0381420",
+        "url": "http://uri.interlex.org/ILX:0112300",
         "isAbout": "",
         "hasLaterality": "Left",
         "definition": "left ventral diencephalon gray matter volume",
         "label": "left ventral diencephalon gray matter volume"
     },
     "Left-vessel": {
-        "url": "http://uri.interlex.org/ILX:0381416",
+        "url": "http://uri.interlex.org/ILX:0381378",
         "isAbout": "UBERON:0014930",
         "hasLaterality": "Left",
         "definition": "left perivascular space blood volume",
         "label": "left perivascular space volume"
     },
     "Left-choroid-plexus": {
-        "url": "http://uri.interlex.org/ILX:0381409",
+        "url": "http://uri.interlex.org/ILX:0102142",
         "isAbout": "UBERON:0001886",
         "hasLaterality": "Left",
         "definition": "left choroid plexus gray matter volume",
         "label": "left choroid plexus volume"
     },
     "Right-Lateral-Ventricle": {
-        "url": "http://uri.interlex.org/ILX:0381435",
+        "url": "http://uri.interlex.org/ILX:0106125",
         "isAbout": "UBERON:0002285",
         "hasLaterality": "Right",
         "definition": "right lateral ventricle cerebral spinal fluid volume",
         "label": "right lateral ventricle volume"
     },
     "Right-Inf-Lat-Vent": {
-        "url": "http://uri.interlex.org/ILX:0381433",
+        "url": "http://uri.interlex.org/ILX:0105444",
         "isAbout": "UBERON:0006091",
         "hasLaterality": "Right",
         "definition": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
         "label": "right inferior horn of the lateral ventricle volume"
     },
     "Right-Cerebellum-White-Matter": {
-        "url": "http://uri.interlex.org/ILX:0381427",
+        "url": "http://uri.interlex.org/ILX:0101963",
         "isAbout": "UBERON:0002037",
         "hasLaterality": "Right",
         "definition": "right cerebellum white matter volume",
         "label": "right cerebellum white matter volume"
     },
     "Right-Cerebellum-Cortex": {
-        "url": "http://uri.interlex.org/ILX:0381426",
+        "url": "http://uri.interlex.org/ILX:0101946",
         "isAbout": "UBERON:0002129",
         "hasLaterality": "Right",
         "definition": "right cerebellar cortex gray matter volume",
         "label": "right cerebellar cortex volume"
     },
     "Right-Thalamus-Proper": {
-        "url": "http://uri.interlex.org/ILX:0381441",
+        "url": "http://uri.interlex.org/ILX:0111657",
         "isAbout": "UBERON:0001897",
         "hasLaterality": "Right",
         "definition": "right thalamus gray matter volume",
         "label": "right thalamus volume"
     },
     "Right-Caudate": {
-        "url": "http://uri.interlex.org/ILX:0381425",
+        "url": "http://uri.interlex.org/ILX:0101734",
         "isAbout": "UBERON:0001873",
         "hasLaterality": "Right",
         "definition": "right caudate nucleus gray matter volume",
         "label": "right caudate nucleus volume"
     },
     "Right-Putamen": {
-        "url": "http://uri.interlex.org/ILX:0381439",
+        "url": "http://uri.interlex.org/ILX:0109549",
         "isAbout": "UBERON:0001874",
         "hasLaterality": "Right",
         "definition": "right putamen gray matter volume",
         "label": "right putamen volume"
     },
     "Right-Pallidum": {
-        "url": "http://uri.interlex.org/ILX:0381437",
+        "url": "http://uri.interlex.org/ILX:0381379",
         "isAbout": "UBERON:0006514",
         "hasLaterality": "Right",
         "definition": "right pallidum gray matter volume",
         "label": "right pallidum volume"
     },
     "Right-Hippocampus": {
-        "url": "http://uri.interlex.org/ILX:0381432",
+        "url": "http://uri.interlex.org/ILX:0105021",
         "isAbout": "UBERON:0001954",
         "hasLaterality": "Right",
         "definition": "right hippocampus gray matter volume",
         "label": "right hippocampus volume"
     },
     "Right-Amygdala": {
-        "url": "http://uri.interlex.org/ILX:0381423",
+        "url": "http://uri.interlex.org/ILX:0100573",
         "isAbout": "UBERON:0001876",
         "hasLaterality": "Right",
         "definition": "right amygdala gray matter volume",
         "label": "right amygdala volume"
     },
     "Right-Accumbens-area": {
-        "url": "http://uri.interlex.org/ILX:0381436",
+        "url": "http://uri.interlex.org/ILX:0107736",
         "isAbout": "UBERON:0001882",
         "hasLaterality": "Right",
         "definition": "right nucleus accumbens gray matter volume",
         "label": "right nucleus accumbens volume"
     },
     "Right-VentralDC": {
-        "url": "http://uri.interlex.org/ILX:0381442",
+        "url": "http://uri.interlex.org/ILX:0112300",
         "isAbout": "",
         "hasLaterality": "Right",
         "definition": "right ventral diencephalon gray matter volume",
         "label": "right ventral diencephalon gray matter volume"
     },
     "Right-vessel": {
-        "url": "http://uri.interlex.org/ILX:0381438",
+        "url": "http://uri.interlex.org/ILX:0381378",
         "isAbout": "UBERON:0014930",
         "hasLaterality": "Right",
         "definition": "right perivascular space blood volume",
         "label": "right perivascular space volume"
     },
     "Right-choroid-plexus": {
-        "url": "http://uri.interlex.org/ILX:0381431",
+        "url": "http://uri.interlex.org/ILX:0102142",
         "isAbout": "UBERON:0001886",
         "hasLaterality": "Right",
         "definition": "right choroid plexus gray matter volume",
         "label": "right choroid plexus volume"
     },
     "5th-Ventricle": {
-        "url": "http://uri.interlex.org/ILX:0381392",
+        "url": "http://uri.interlex.org/ILX:0381380",
         "isAbout": "UBERON:0009857",
         "hasLaterality": "None",
         "definition": "cavum septum pellucidum cerebral spinal fluid volume",
@@ -273,112 +273,112 @@
         "label": ""
     },
     "Optic-Chiasm": {
-        "url": "http://uri.interlex.org/ILX:0381422",
+        "url": "http://uri.interlex.org/ILX:0108069",
         "isAbout": "UBERON:0000959",
         "hasLaterality": "None",
         "definition": "optic chiasm white matter volume",
         "label": "optic chiasm volume"
     },
     "CC_Posterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "CC_Mid_Posterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "CC_Central": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "CC_Mid_Anterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "CC_Anterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "lhCortexVol": {
-        "url": "http://uri.interlex.org/ILX:0381406",
+        "url": "http://uri.interlex.org/ILX:0101978",
         "isAbout": "UBERON:0000956",
         "hasLaterality": "Left",
         "definition": "left cerebral cortex gray matter volume",
         "label": "left cerebral cortex volume"
     },
     "rhCortexVol": {
-        "url": "http://uri.interlex.org/ILX:0381428",
+        "url": "http://uri.interlex.org/ILX:0101978",
         "isAbout": "UBERON:0000956",
         "hasLaterality": "Right",
         "definition": "right cerebral cortex gray matter volume",
         "label": "right cerebral cortex volume"
     },
     "CortexVol": {
-        "url": "http://uri.interlex.org/ILX:0381393",
+        "url": "http://uri.interlex.org/ILX:0101978",
         "isAbout": "UBERON:0000956",
         "hasLaterality": "None",
         "definition": "cerebral cortex gray matter volume",
         "label": "cerebral cortex volume"
     },
     "lhCorticalWhiteMatterVol": {
-        "url": "http://uri.interlex.org/ILX:0381408",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Left",
         "definition": "left cerebrum white matter volume",
         "label": "left cerebrum white matter volume"
     },
     "rhCorticalWhiteMatterVol": {
-        "url": "http://uri.interlex.org/ILX:0381430",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Right",
         "definition": "right cerebrum white matter volume",
         "label": "right cerebrum white matter volume"
     },
     "CorticalWhiteMatterVol": {
-        "url": "http://uri.interlex.org/ILX:0381396",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "None",
         "definition": "cerebrum white matter volume",
         "label": "cerebrum white matter volume"
     },
     "SubCortGrayVol": {
-        "url": "http://uri.interlex.org/ILX:0381443",
+        "url": "http://uri.interlex.org/ILX:0101431",
         "isAbout": "UBERON:0000955",
         "hasLaterality": "None",
         "definition": "part of brain gray matter volume",
         "label": "sub-cortical gray matter volume"
     },
     "TotalGrayVol": {
-        "url": "http://uri.interlex.org/ILX:0381390",
+        "url": "http://uri.interlex.org/ILX:0101431",
         "isAbout": "UBERON:0000955",
         "hasLaterality": "None",
         "definition": "brain gray matter volume",
         "label": "brain gray matter volume"
     },
     "SupraTentorialVol": {
-        "url": "http://uri.interlex.org/ILX:0381395",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "None",
         "definition": "cerebrum tissue volume",
         "label": "cerebrum tissue volume"
     },
     "IntraCranialVol": {
-        "url": "http://uri.interlex.org/ILX:0381400",
+        "url": "http://uri.interlex.org/ILX:0381382",
         "isAbout": "UBERON:0003128",
         "hasLaterality": "None",
         "definition": "within cranium tissue volume",
@@ -392,14 +392,14 @@
         "label": ""
     },
     "Left-Cerebral-White-Matter": {
-        "url": "http://uri.interlex.org/ILX:0381408",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Left",
         "definition": "left cerebrum white matter volume",
         "label": "left cerebrum white matter volume"
     },
     "Left-Cerebral-Cortex": {
-        "url": "http://uri.interlex.org/ILX:0381406",
+        "url": "http://uri.interlex.org/ILX:0101978",
         "isAbout": "UBERON:0000956",
         "hasLaterality": "Left",
         "definition": "left cerebral cortex gray matter volume",
@@ -413,14 +413,14 @@
         "label": ""
     },
     "Left-Thalamus": {
-        "url": "http://uri.interlex.org/ILX:0381419",
+        "url": "http://uri.interlex.org/ILX:0111657",
         "isAbout": "UBERON:0001897",
         "hasLaterality": "Left",
         "definition": "left thalamus gray matter volume",
         "label": "left thalamus volume"
     },
     "Left-Insula": {
-        "url": "http://uri.interlex.org/ILX:0381412",
+        "url": "http://uri.interlex.org/ILX:0105519",
         "isAbout": "UBERON:0002022",
         "hasLaterality": "Left",
         "definition": "left insula gray matter volume",
@@ -434,14 +434,14 @@
         "label": ""
     },
     "Left-Lesion": {
-        "url": "http://uri.interlex.org/ILX:0381407",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Left",
         "definition": "left cerebrum lesion volume",
         "label": "left cerebrum lesion volume"
     },
     "Left-Substantia-Nigra": {
-        "url": "http://uri.interlex.org/ILX:0381418",
+        "url": "http://uri.interlex.org/ILX:0111214",
         "isAbout": "UBERON:0002038",
         "hasLaterality": "Left",
         "definition": "left substantia nigra gray matter volume",
@@ -455,14 +455,14 @@
         "label": ""
     },
     "Right-Cerebral-White-Matter": {
-        "url": "http://uri.interlex.org/ILX:0381430",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Right",
         "definition": "right cerebrum white matter volume",
         "label": "right cerebrum white matter volume"
     },
     "Right-Cerebral-Cortex": {
-        "url": "http://uri.interlex.org/ILX:0381428",
+        "url": "http://uri.interlex.org/ILX:0101978",
         "isAbout": "UBERON:0000956",
         "hasLaterality": "Right",
         "definition": "right cerebral cortex gray matter volume",
@@ -476,14 +476,14 @@
         "label": ""
     },
     "Right-Thalamus": {
-        "url": "http://uri.interlex.org/ILX:0381441",
+        "url": "http://uri.interlex.org/ILX:0111657",
         "isAbout": "UBERON:0001897",
         "hasLaterality": "Right",
         "definition": "right thalamus gray matter volume",
         "label": "right thalamus volume"
     },
     "Right-Insula": {
-        "url": "http://uri.interlex.org/ILX:0381434",
+        "url": "http://uri.interlex.org/ILX:0105519",
         "isAbout": "UBERON:0002022",
         "hasLaterality": "Right",
         "definition": "right insula gray matter volume",
@@ -497,42 +497,42 @@
         "label": ""
     },
     "Right-Lesion": {
-        "url": "http://uri.interlex.org/ILX:0381429",
+        "url": "http://uri.interlex.org/ILX:0102003",
         "isAbout": "UBERON:0001869",
         "hasLaterality": "Right",
         "definition": "right cerebrum lesion volume",
         "label": "right cerebrum lesion volume"
     },
     "Right-Substantia-Nigra": {
-        "url": "http://uri.interlex.org/ILX:0381440",
+        "url": "http://uri.interlex.org/ILX:0111214",
         "isAbout": "UBERON:0002038",
         "hasLaterality": "Right",
         "definition": "right substantia nigra gray matter volume",
         "label": "right substantia nigra volume"
     },
     "Left-Amygdala-Anterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0100573",
         "isAbout": "UBERON:0001876",
         "hasLaterality": "Left",
         "definition": "NA",
         "label": NaN
     },
     "Right-Amygdala-Anterior": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0100573",
         "isAbout": "UBERON:0001876",
         "hasLaterality": "Right",
         "definition": "NA",
         "label": NaN
     },
     "Dura": {
-        "url": "http://uri.interlex.org/ILX:0381398",
+        "url": "http://uri.interlex.org/ILX:0103596",
         "isAbout": "UBERON:0002363",
         "hasLaterality": "None",
         "definition": "dura mater tissue volume",
         "label": "dura mater tissue volume"
     },
     "Corpus-Callosum": {
-        "url": "http://uri.interlex.org/ILX:0381397",
+        "url": "http://uri.interlex.org/ILX:0102562",
         "isAbout": "UBERON:0002336",
         "hasLaterality": "None",
         "definition": "corpus callosum white matter volume",
@@ -546,42 +546,42 @@
         "label": ""
     },
     "Right-Vessel": {
-        "url": "http://uri.interlex.org/ILX:0381438",
+        "url": "http://uri.interlex.org/ILX:0381378",
         "isAbout": "UBERON:0014930",
         "hasLaterality": "Right",
         "definition": "right perivascular space blood volume",
         "label": "right perivascular space volume"
     },
     "Left-Basal-Forebrain": {
-        "url": "http://uri.interlex.org/ILX:0381402",
+        "url": "http://uri.interlex.org/ILX:0101101",
         "isAbout": "UBERON:0002743",
         "hasLaterality": "Left",
         "definition": "left basal forebrain gray matter volume",
         "label": "left basal forebrain gray matter volume"
     },
     "Right-Basal-Forebrain": {
-        "url": "http://uri.interlex.org/ILX:0381424",
+        "url": "http://uri.interlex.org/ILX:0101101",
         "isAbout": "UBERON:0002743",
         "hasLaterality": "Right",
         "definition": "right basal forebrain gray matter volume",
         "label": "right basal forebrain gray matter volume"
     },
     "cerebellar vermal lobules I-V": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0112407",
         "isAbout": "UBERON:0004720",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "cerebellar vermal lobules VI-VII": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0112407",
         "isAbout": "UBERON:0004720",
         "hasLaterality": "None",
         "definition": "NA",
         "label": NaN
     },
     "cerebellar vermal lobules VIII-X": {
-        "url": "",
+        "url": "http://uri.interlex.org/ILX:0112407",
         "isAbout": "UBERON:0004720",
         "hasLaterality": "None",
         "definition": "NA",
