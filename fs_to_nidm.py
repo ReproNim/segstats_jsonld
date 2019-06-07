@@ -315,6 +315,13 @@ def remap2json(xslxfile,
     typeoffile: one of [segstats, ...]
     outfilename: name for resulting json to be written to
     :return:
+
+    (xslx file to be found (under development):
+    https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g/edit#gid=1737769619
+    example:
+    jsonmap = remap2json(xslxfile='ReproNimCDEs.xlsx',
+                         fs_stat_file='aseg.stats)
+
     """
     import io
     import requests
