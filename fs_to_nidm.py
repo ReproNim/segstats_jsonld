@@ -302,6 +302,187 @@ def parse_stats(g, fs_stat_file, entity_uri):
     return g, measure_graph
 
 
+def remap2json(xslxfile,
+               fs_stat_file,
+               outfile = None,
+               ):
+    """
+    TODO insightful docstring
+
+    Query ReproNimCDEs and Freesurfer stat files, return json mapping
+
+    xslxfile: path to xslx file with ReproNimCDEs
+    typeoffile: one of [segstats, ...]
+    outfilename: name for resulting json to be written to
+    :return:
+    """
+    import io
+    import requests
+    import json
+    import pandas as pd
+    import numpy as np
+    import xlrd
+
+    # read in the xlxs file
+    mapping = pd.read_excel(xslxfile, header=[0,1])
+    # rename the URIs so that they resolve, scrape definition
+    definition = []
+    for i, row in mapping.iterrows():
+        if row['Federated DE']['URI'] is not np.nan:
+            # this fixes the ilx link to resolve to scicrunch
+            url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
+            #print(url)
+            r = requests.get(url)
+            file = io.StringIO(r.text)
+            lines = file.readlines()
+            for line in lines:
+                if 'definition' in line[:14]:
+                    definition.append(line.split('"')[1])
+                    #print(line.split('"')[1])
+        else:
+            definition.append('NA')
+    mapping['definition'] = definition
+
+    d = {}
+    for i, row in mapping.iterrows():
+        # store missing values as empty strings, not NaNs that json can't parse
+        label = row['Atlas Segmentation Label'].values[0]
+        url = row['Structure']['URI'] if row['Structure']['URI'] is not np.nan else ""
+        isAbout = row['Structure']['Preferred'] if row['Structure']['Preferred'] is not np.nan else ""
+        hasLaterality = row['Laterality']['ILX:0106135'] if row['Laterality']['ILX:0106135'] is not np.nan else ""
+        l = row['Federated DE']['Name'] if row['Structure']['Label'] is not np.nan else ""
+        d[label] = {'url': url,
+                    'isAbout': isAbout,
+                    'hasLaterality': hasLaterality,
+                    'definition': row['definition'][0],
+                    'label': l
+                    }
+    # read the measures output of a of a read_stats() call. Depending on the header in the file,
+    # include present measures in json
+    [header, tableinfo, measures] = read_stats(fs_stat_file)
+    d2 = {}
+    for i, row in mapping.iterrows():
+        anatomical = row['Atlas Segmentation Label'][0]
+        for c in measures:
+            if c['structure'] == anatomical:
+                for dic in c['items']:
+                    # iterate over the list of dicts in items
+                    if dic['name'] == 'normMean':
+                        d2['normMean'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738264'
+                                    }
+                    if dic['name'] == 'normStdDev':
+                        d2['normStdDev'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738265'
+                                    }
+                    if dic['name'] == 'normMax':
+                        d2['normMax'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738267'
+                                    }
+                    if dic['name'] == 'NVoxels':
+                        d2['NVoxels'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0102597'
+                                    }
+                    if dic['name'] == 'Volume_mm3':
+                        d2['Volume_mm3'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0112559'
+                                    }
+                    if dic['name'] == 'normMin':
+                        d2['normMin'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738266'
+                                     }
+                    if dic['name'] == 'normRange':
+                        d2['normRange'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738268'
+                                    }
+                    if dic['name'] == 'NumVert':
+                        d2['NumVert'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738270', #vertex
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0102597' # count
+                                    }
+                    if dic['name'] == 'SurfArea':
+                        d2['SurfArea'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738271', #surface
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0100885' #area
+                                    }
+                    if dic['name'] == 'GrayVol':
+                        d2['GrayVol'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0104768', # gray matter
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                    }
+                    if dic['name'] == 'ThickAvg':
+                        d2['ThickAvg'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
+                                    }
+                    if dic['name'] == 'ThickStd':
+                        d2['ThickStd'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
+                                    }
+                    if dic['name'] == 'MeanCurv':
+                        d2['MeanCurv'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738272', #mean curvature
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                    }
+                    if dic['name'] == 'GausCurv':
+                        d2['GausCurv'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738273', #gaussian curvature
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                    }
+                    if dic['name'] == 'FoldInd':
+                        d2['FoldInd'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738274', #foldind
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                    }
+                    if dic['name'] == 'CurvInd':
+                        d2['CurvInd'] = {
+                                    "measureOf": 'http://uri.interlex.org/base/ilx_0738275', #curvind
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                    }
+                    if dic['name'] == 'nuMean':
+                        d2['nuMean'] = {
+                                    "measureOf": 'TODO',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
+                                    }
+                    if dic['name'] == 'nuStdDev':
+                        d2['nuStdDev'] = {
+                                    "measureOf":'TODO',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
+                                    }
+                    if dic['name'] == 'nuMin':
+                        d2['nuMin'] = {
+                                    "measureOf":'TODO',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738266' #min
+                                    }
+                    if dic['name'] == 'nuMax':
+                        d2['nuMax'] = {
+                                    "measureOf":'TODO',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738267' #max
+                                    }
+                    if dic['name'] == 'nuRange':
+                        d2['nuRange'] = {
+                                    "measureOf":'TODO',
+                                    "datumType": 'http://uri.interlex.org/base/ilx_0738268' #range
+                                    }
+    # join anatomical and measures dictionaries
+    biggie = {'Anatomy': d,
+              'Measures': d2}
+
+    if outfile:
+        with open(outfile, 'w') as f:
+            json.dump(biggie, f, indent=4)
+
+    return biggie
+
+
 
 
 def main(argv):
