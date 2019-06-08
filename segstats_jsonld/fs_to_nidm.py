@@ -80,11 +80,18 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
         first_row=True
 
         #for each of the header items create a dictionary where namespaces are freesurfer
-        software_activity = nidmdoc.graph.activity(QualifiedName(provNamespace("nidm",Constants.NIDM),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
+        software_activity = nidmdoc.graph.activity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
         for key,value in header.items():
             software_activity.add_attributes({QualifiedName(provNamespace("fs",Constants.FREESURFER),key):value})
 
-        print(nidmdoc.serializeTurtle())
+        #create software agent and associate with software activity
+        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={'prov:type':QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""),
+                                                                    QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):"Freesurfer" } )
+        #create qualified association with brain volume computation activity
+        nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),"")})
+        nidmdoc.graph.wasAssociatedWith(activity=software_activity,agent=software_agent)
+
+        #print(nidmdoc.serializeTurtle())
 
 
 
@@ -514,8 +521,11 @@ def main(argv):
                         help='Path to Freesurfer subject directory')
     parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
                         help='Output directory')
-    parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
-                        help='Optional NIDM file to add segmentation data to.')
+    parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
+                        help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
+
+    #parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
+    #                    help='Optional NIDM file to add segmentation data to.')
 
     args = parser.parse_args()
 
@@ -544,10 +554,16 @@ def main(argv):
                 add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo,json_map=json_map)
 
                 #serialize NIDM file
-                with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
-                    print("Writing NIDM file...")
-                    f.write(nidmdoc.serializeJSONLD())
-                    nidmdoc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
+                if args.jsonld is not None:
+                    with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
+                        print("Writing NIDM file...")
+                        f.write(nidmdoc.serializeJSONLD())
+                else:
+                    with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
+                        print("Writing NIDM file...")
+                        f.write(nidmdoc.serializeTurtle())
+
+                nidmdoc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
 
 
 if __name__ == "__main__":
