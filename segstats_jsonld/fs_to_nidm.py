@@ -55,6 +55,7 @@ import glob
 
 import prov.model as prov
 import rdflib
+from rdflib import RDFS
 import sys
 import json
 
@@ -104,16 +105,29 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
         #iterate over measure dictionary
         for measures in measure:
 
-            for key, value in measures.items():
-                #for each structure create a measure entity
-                #if we have a mapping for the anatomical entity
-                #if json_map['Anatomy'][key]:
-                nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
-                                QualifiedName(provNamespace("ilx","http://uri.interlex.org/base/ilx_0738269#")),
+            entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                                QualifiedName(provNamespace("measurement_datum","http://uri.interlex.org/base/ilx_0738269#"),"")
                                 })
+            nidmdoc.graph.wasGeneratedBy(software_activity,entity)
 
-                #print("%s:%s" %(key,value))
+            if measures["structure"] in json_map['Anatomy']:
 
+                for key, value in measures.items():
+                    #for each structure create a measure entity
+                    #if we have a mapping for the anatomical entity
+                    #add information about anatomical region we're measuring
+
+                    entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):json_map['Anatomy'][measures["structure"]]['isAbout'],
+                                    QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
+                                    Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
+                                    QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
+                                    "http://uri.interlex.org/ilx_0104768#"),""),
+                                    QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']      })
+
+                    #QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/ilx_0381384#"),""):json_map['Anatomy'][measures["structure"]]['units'],
+                    #print("%s:%s" %(key,value))
+
+                entity2=
             #key is
             #print(measures)
 
