@@ -47,7 +47,7 @@ from pickle import dumps
 from datetime import datetime as dt
 import hashlib
 import os
-from os.path import join,basename,splitext
+from os.path import join,basename,splitext,dirname,realpath
 import pwd
 from socket import getfqdn
 import uuid
@@ -59,7 +59,7 @@ import sys
 
 
 
-def add_seg_data(nidmdoc, measure, header, tableinfo, png_file=None, output_file=None, root_act=None, nidm_graph=None):
+def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add
     :param nidmdoc:
@@ -70,8 +70,6 @@ def add_seg_data(nidmdoc, measure, header, tableinfo, png_file=None, output_file
     :param nidm_graph:
     :return:
     '''
-
-    #read in json_map
 
 
     #this function can be used for both creating a brainvolumes NIDM file from scratch or adding brain volumes to
@@ -487,7 +485,7 @@ def remap2json(xslxfile,
         with open(outfile, 'w') as f:
             json.dump(biggie, f, indent=4)
 
-    return biggie
+    return [header, tableinfo, measures,biggie]
 
 
 
@@ -514,7 +512,11 @@ def main(argv):
     files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
     for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
         if basename(stats_file) in files:
-            [header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
+            #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
+            #read in json_map
+            [header, tableinfo, measures,json_map] = remap2json(xslxfile=join(dirname(realpath(sys.argv[0])),'mapping_data','ReproNimCDEs.xlsx'),
+                                 fs_stat_file=os.path.join(args.subject_dir,"stats",stats_file))
+
 
             #for measures we need to create NIDM structures using anatomy mappings
             #If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
@@ -527,7 +529,7 @@ def main(argv):
                 nidmdoc = Core()
 
                 #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo)
+                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo,json_map=json_map)
 
                 #serialize NIDM file
                 with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
