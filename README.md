@@ -9,12 +9,12 @@ We aim to tackle this problem in steps.  For this hackathon project we'll be foc
 Python and structural neuroimaging experience.  If one has experience with [rdflib](https://github.com/RDFLib/rdflib) or [PROV](https://github.com/trungdong/prov) that would also be helpful.
 
 ## Participants
-David Keator
-Adina Wagner
-Jeffrey Grethe
-Satra Gosh
-David Kennedy
-JB Poline
+- David Keator
+- Adina Wagner
+- Jeffrey Grethe
+- Satra Gosh
+- David Kennedy
+- JB Poline
 
 ## Integration
 This project will need expertise in programming, structural neuroimaging, and anatomy.  To make this project sucessful we need individuals who have skills in any of these domains to help with: (1) understand Freesurfer's segmentation results format and log files; (2) programming up a script in Python; (3) understand anatomy well enough to select the proper anatomical concept that maps to a specific atlas designation of a region and ***can define new anatomy terms where needed, linking them to broader concepts*** to facilitate segmentation results queries across softwares.
