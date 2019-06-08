@@ -379,16 +379,16 @@ def remap2json(xslxfile,
     print("""creating json mapping from anatomicals...""")
     for i, row in mapping.iterrows():
         # store missing values as empty strings, not NaNs that json can't parse
-        label = row['Atlas Segmentation Label'].values[0]
+        label = row['Atlas Segmentation Label'].values[0] if row['Atlas Segmentation Label'].values[0] is not np.nan else ""
         url = row['Structure']['URI'] if row['Structure']['URI'] is not np.nan else ""
         isAbout = row['Structure']['Preferred'] if row['Structure']['Preferred'] is not np.nan else ""
         hasLaterality = row['Laterality']['ILX:0106135'] if row['Laterality']['ILX:0106135'] is not np.nan else ""
-        l = row['Federated DE']['Name'] if row['Structure']['Label'] is not np.nan else ""
-        d[label] = {'url': url,
-                    'isAbout': isAbout,
-                    'hasLaterality': hasLaterality,
-                    'definition': row['definition'][0],
-                    'label': l
+        l = row['Federated DE']['Name'] if row['Federated DE']['Name'] is not np.nan else ""
+        d[label] = {"url": url,
+                    "isAbout": isAbout,
+                    "hasLaterality": hasLaterality,
+                    "definition": row['definition'][0],
+                    "label": l
                     }
     print("Done.")
     # read the measures output of a of a read_stats() call. Depending on the header in the file,
