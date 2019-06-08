@@ -36,7 +36,7 @@ setup(
     description='Freesurfer metadata extraction & conversion to jsonld',
     long_description=long_description,
     author='David Keator',
-    author_email='TODO',
+    author_email='dbkeator@uci.edu',
     url='https://github.com/dbkeator/segstats_jsonld',
     packages=[pkg for pkg in find_packages('.') if pkg.startswith('segstats_jsonld')],
     install_requires=[
