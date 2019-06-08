@@ -27,3 +27,11 @@ This project will need expertise in programming, structural neuroimaging, and an
 * [InterLex Term Search](https://scicrunch.org/scicrunch/interlex/dashboard)
 * [Anatomical Term Mappings via InterLex](https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g)
 * Examples done pseudo-manually of Freesurfer, FSL, and ANTS segmentation data added to NIDM documents for [ABIDE](https://github.com/dbkeator/simple2_NIDM_examples/tree/master/datasets.datalad.org/abide/RawDataBIDS) and [ADHD200](https://github.com/dbkeator/simple2_NIDM_examples/tree/master/datasets.datalad.org/adhd200/RawDataBIDS) datasets
+
+
+## Installation
+Currently, ``segstats_jsonld`` is available from test PyPi with the following command:
+
+```
+pip install -i https://test.pypi.org/simple/ segstats-jsonld
+```
