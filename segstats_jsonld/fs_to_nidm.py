@@ -55,7 +55,9 @@ import glob
 
 import prov.model as prov
 import rdflib
+from rdflib import RDFS
 import sys
+import json
 
 
 
@@ -85,21 +87,61 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
             software_activity.add_attributes({QualifiedName(provNamespace("fs",Constants.FREESURFER),key):value})
 
         #create software agent and associate with software activity
-        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={'prov:type':QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""),
-                                                                    QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):"Freesurfer" } )
+        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+            QualifiedName(provNamespace("Neuroimaging_Analysis_Software",Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):Constants.FREESURFER ,
+            prov.PROV_TYPE:prov.PROV["SoftwareAgent"]} )
         #create qualified association with brain volume computation activity
-        nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),"")})
+        nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE})
         nidmdoc.graph.wasAssociatedWith(activity=software_activity,agent=software_agent)
 
         #print(nidmdoc.serializeTurtle())
 
+        with open('measure.json', 'w') as fp:
+            json.dump(measure, fp)
 
+        with open('json_map.json', 'w') as fp:
+            json.dump(json_map, fp)
+
+
+        datum_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+                    prov.PROV_TYPE:QualifiedName(provNamespace("nidm","http://purl.org/nidash/nidm#"),"FSStatsCollection")})
+        nidmdoc.graph.wasGeneratedBy(software_activity,datum_entity)
 
         #iterate over measure dictionary
         for measures in measure:
 
-            for key, value in measures.items():
-                print("%s:%s" %(key,value))
+
+            if measures["structure"] in json_map['Anatomy']:
+
+
+                for items in measures["items"]:
+                    if items['name'] in json_map['Measures'].keys():
+
+                        region_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                                QualifiedName(provNamespace("measurement_datum","http://uri.interlex.org/base/ilx_0738269#"),"")
+                                })
+
+
+                        region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):json_map['Anatomy'][measures["structure"]]['isAbout'],
+                                    QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
+                                    Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
+                                    QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
+                                    "http://uri.interlex.org/ilx_0104768#"),""),
+                                    QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']      })
+
+                            #QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/ilx_0381384#"),""):json_map['Anatomy'][measures["structure"]]['units'],
+                            #print("%s:%s" %(key,value))
+
+                        region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
+                                json_map['Measures'][items['name']]["measureOf"], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
+                                json_map['Measures'][items['name']]["datumType"]})
+
+                        datum_entity.add_attributes({region_entity.identifier:items['value']})
+
+
+
+
+
 
             #key is
             #print(measures)
@@ -432,108 +474,108 @@ def remap2json(xlsxfile,
                         # iterate over the list of dicts in items
                         if dic['name'] == 'normMean':
                             d2['normMean'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#'
                                         }
                         if dic['name'] == 'normStdDev':
                             d2['normStdDev'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#'
                                         }
                         if dic['name'] == 'normMax':
                             d2['normMax'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267#'
                                         }
                         if dic['name'] == 'NVoxels':
                             d2['NVoxels'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597#'
                                         }
                         if dic['name'] == 'Volume_mm3':
                             d2['Volume_mm3'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0112559'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0112559#'
                                         }
                         if dic['name'] == 'normMin':
                             d2['normMin'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266#'
                                          }
                         if dic['name'] == 'normRange':
                             d2['normRange'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268#'
                                         }
                         if dic['name'] == 'NumVert':
                             d2['NumVert'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738270', #vertex
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597' # count
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738270#', #vertex
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597#' # count
                                         }
                         if dic['name'] == 'SurfArea':
                             d2['SurfArea'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738271', #surface
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0100885' #area
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738271#', #surface
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0100885#' #area
                                         }
                         if dic['name'] == 'GrayVol':
                             d2['GrayVol'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0104768', # gray matter
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0104768#', # gray matter
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
                                         }
                         if dic['name'] == 'ThickAvg':
                             d2['ThickAvg'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689#', #thickness
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#' #mean
                                         }
                         if dic['name'] == 'ThickStd':
                             d2['ThickStd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689#', #thickness
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#' #stddev
                                         }
                         if dic['name'] == 'MeanCurv':
                             d2['MeanCurv'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738272', #mean curvature
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738272#', #mean curvature
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
                                         }
                         if dic['name'] == 'GausCurv':
                             d2['GausCurv'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738273', #gaussian curvature
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738273#', #gaussian curvature
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
                                         }
                         if dic['name'] == 'FoldInd':
                             d2['FoldInd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738274', #foldind
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738274#', #foldind
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
                                         }
                         if dic['name'] == 'CurvInd':
                             d2['CurvInd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738275', #curvind
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738275#', #curvind
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
                                         }
                         if dic['name'] == 'nuMean':
                             d2['nuMean'] = {
                                         "measureOf": 'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#' #mean
                                         }
                         if dic['name'] == 'nuStdDev':
                             d2['nuStdDev'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#' #stddev
                                         }
                         if dic['name'] == 'nuMin':
                             d2['nuMin'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266' #min
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266#' #min
                                         }
                         if dic['name'] == 'nuMax':
                             d2['nuMax'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267' #max
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267#' #max
                                         }
                         if dic['name'] == 'nuRange':
                             d2['nuRange'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268' #range
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268#' #range
                                         }
     print("Done.")
     # join anatomical and measures dictionaries
@@ -563,15 +605,15 @@ def main(argv):
                         help='Output directory')
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
-
-    #parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
-    #                    help='Optional NIDM file to add segmentation data to.')
+    parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
+                        help='Optional NIDM file to add segmentation data to.')
 
     args = parser.parse_args()
 
 
     #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
-    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    #files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    files=['aseg.stats']
     for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
@@ -594,7 +636,7 @@ def main(argv):
                 add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo,json_map=json_map)
 
                 #serialize NIDM file
-                if args.jsonld is not None:
+                if args.jsonld is not False:
                     with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
                         print("Writing NIDM file...")
                         f.write(nidmdoc.serializeJSONLD())
