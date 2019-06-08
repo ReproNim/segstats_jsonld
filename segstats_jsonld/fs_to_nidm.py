@@ -332,6 +332,10 @@ def remap2json(xslxfile,
     mapping = pd.read_excel(xslxfile, header=[0,1])
     # rename the URIs so that they resolve, scrape definition
     definition = []
+    print("""
+        Scraping anatomical definitions from interlex. This might take a few minutes,
+        depending on your internet connection.
+        """)
     for i, row in mapping.iterrows():
         if row['Federated DE']['URI'] is not np.nan:
             # this fixes the ilx link to resolve to scicrunch
@@ -347,8 +351,9 @@ def remap2json(xslxfile,
         else:
             definition.append('NA')
     mapping['definition'] = definition
-
+    print("""Done collecting definitions.""")
     d = {}
+    print("""creating json mapping from anatomicals...""")
     for i, row in mapping.iterrows():
         # store missing values as empty strings, not NaNs that json can't parse
         label = row['Atlas Segmentation Label'].values[0]
@@ -362,10 +367,13 @@ def remap2json(xslxfile,
                     'definition': row['definition'][0],
                     'label': l
                     }
+    print("Done.")
     # read the measures output of a of a read_stats() call. Depending on the header in the file,
     # include present measures in json
+    print("Reading in FS stat file...")
     [header, tableinfo, measures] = read_stats(fs_stat_file)
     d2 = {}
+    print("""Creating measures json mapping...""")
     for i, row in mapping.iterrows():
         anatomical = row['Atlas Segmentation Label'][0]
         for c in measures:
@@ -477,6 +485,7 @@ def remap2json(xslxfile,
                                     "measureOf":'TODO',
                                     "datumType": 'http://uri.interlex.org/base/ilx_0738268' #range
                                     }
+    print("Done.")
     # join anatomical and measures dictionaries
     biggie = {'Anatomy': d,
               'Measures': d2}
