@@ -16,7 +16,7 @@ def get_version():
 
 # extension version
 version = get_version()
-
+PACKAGES = find_packages()
 
 README = opj(dirname(__file__), 'README.md')
 try:
@@ -38,7 +38,7 @@ setup(
     author='David Keator',
     author_email='dbkeator@uci.edu',
     url='https://github.com/dbkeator/segstats_jsonld',
-    packages=[pkg for pkg in find_packages('.') if pkg.startswith('segstats_jsonld')],
+    packages=PACKAGES,
     install_requires=[
         'numpy',
         'pandas'
