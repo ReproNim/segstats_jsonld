@@ -6,8 +6,13 @@
 #   license terms.
 #
 # ## ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ### ##
+from __future__ import absolute_import
 
-__version__ = 0.0.1
+__version__ = '0.0.1'
 
 # do imports of all of the functions that should be available here
-from .segstats_jsonld import #TODO
+from .fs_to_nidm import (remap2json,
+                         parse_stats,
+                         read_stats,
+                         safe_encode,
+                         add_seg_data)
