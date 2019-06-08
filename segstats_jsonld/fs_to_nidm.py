@@ -56,6 +56,7 @@ import glob
 import prov.model as prov
 import rdflib
 import sys
+import json
 
 
 
@@ -85,21 +86,33 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
             software_activity.add_attributes({QualifiedName(provNamespace("fs",Constants.FREESURFER),key):value})
 
         #create software agent and associate with software activity
-        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={'prov:type':QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""),
-                                                                    QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):"Freesurfer" } )
+        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+            QualifiedName(provNamespace("Neuroimaging_Analysis_Software",Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):Constants.FREESURFER ,
+            prov.PROV_TYPE:prov.PROV["SoftwareAgent"]} )
         #create qualified association with brain volume computation activity
-        nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:QualifiedName(provNamespace(Core.safe_string(None,string=str("Neuroimaging Analysis Software")),Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),"")})
+        nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE})
         nidmdoc.graph.wasAssociatedWith(activity=software_activity,agent=software_agent)
 
         #print(nidmdoc.serializeTurtle())
 
+        with open('measure.json', 'w') as fp:
+            json.dump(measure, fp)
 
+        with open('json_map.json', 'w') as fp:
+            json.dump(json_map, fp)
 
         #iterate over measure dictionary
         for measures in measure:
 
             for key, value in measures.items():
-                print("%s:%s" %(key,value))
+                #for each structure create a measure entity
+                #if we have a mapping for the anatomical entity
+                #if json_map['Anatomy'][key]:
+                nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                                QualifiedName(provNamespace("ilx","http://uri.interlex.org/base/ilx_0738269#")),
+                                })
+
+                #print("%s:%s" %(key,value))
 
             #key is
             #print(measures)
@@ -523,15 +536,15 @@ def main(argv):
                         help='Output directory')
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
-
-    #parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
-    #                    help='Optional NIDM file to add segmentation data to.')
+    parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
+                        help='Optional NIDM file to add segmentation data to.')
 
     args = parser.parse_args()
 
 
     #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
-    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    #files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    files=['aseg.stats']
     for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
@@ -554,7 +567,7 @@ def main(argv):
                 add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo,json_map=json_map)
 
                 #serialize NIDM file
-                if args.jsonld is not None:
+                if args.jsonld is not False:
                     with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
                         print("Writing NIDM file...")
                         f.write(nidmdoc.serializeJSONLD())
