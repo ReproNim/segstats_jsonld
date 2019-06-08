@@ -91,8 +91,11 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
         #iterate over measure dictionary
         for measures in measure:
 
+            for key, value in measures.items():
+                print("%s:%s" %(key,value))
+
             #key is
-            print(measures)
+            #print(measures)
 
 
 
