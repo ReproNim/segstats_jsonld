@@ -1,5 +1,5 @@
-# Name of your awesome project
-Script to Export Freesurfer-based Parcellation/Segmentation Stats and Provenance as JSON-LD and NIDM 
+# Making Freesurfer FAIR
+Script to Export Freesurfer-based Parcellation/Segmentation Stats and Provenance as JSON-LD and NIDM
 ## Project Description
 This project ultimately aims to facilitate both query and analysis of parcellation/segmentation based regional statistics across popular softwares such as [Freesurfer](https://surfer.nmr.mgh.harvard.edu/), [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki), and [ANTS](http://stnava.github.io/ANTs/). Currently each software produces its own output format and brain region labels are specific to the atlas used in generating the regional statistics.  This makes life difficult when trying to search for "nucleaus accumbens" volume, for example, across the different software products.  Further, knowing which version of the software tool used and what atlas and version of the atlas in a structured representation facilitating query is lacking.  To this end we propose augmenting the various segmentation tools with scripts that will: (1) map atlas-specific anatomical nomeclature to anatomical concepts hosted in terminology resources (e.g. InterLex); (2) capture better structured provenance about the input image(s) and the atlases used for the segmentation; (3) export the segmentation results and the provenance as either [JSON-LD](https://json-ld.org/), [NIDM](http://nidm.nidash.org/) which can then link the derived data to broader records of the original project metadata, or as an additional component of a BIDS derivative.
 
@@ -17,4 +17,5 @@ This project will need expertise in programming, structural neuroimaging, and an
 * [rdflib](https://github.com/RDFLib/rdflib)
 * [PyNIDM](https://github.com/incf-nidash/PyNIDM)
 * [InterLex Term Search](https://scicrunch.org/scicrunch/interlex/dashboard)
+* [Anatomical Term Mappings via InterLex](https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g)
 * Examples done pseudo-manually of Freesurfer, FSL, and ANTS segmentation data added to NIDM documents for [ABIDE](https://github.com/dbkeator/simple2_NIDM_examples/tree/master/datasets.datalad.org/abide/RawDataBIDS) and [ADHD200](https://github.com/dbkeator/simple2_NIDM_examples/tree/master/datasets.datalad.org/adhd200/RawDataBIDS) datasets
