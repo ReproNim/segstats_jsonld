@@ -36,7 +36,6 @@
 
 
 from nidm.core import Constants
-from nidm.experiment.Utils import read_nidm, map_variables_to_terms, getSubjIDColumn
 from nidm.experiment.Core import getUUID
 from nidm.experiment.Core import Core
 from prov.model import QualifiedName,PROV_ROLE, ProvDocument, PROV_ATTR_USED_ENTITY
@@ -61,11 +60,13 @@ import json
 
 
 
-def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, output_file=None, root_act=None, nidm_graph=None):
+def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
-    WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add
+    WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
+    NIDM-E file for the matching subject ID
     :param nidmdoc:
     :param measure:
+    :param header:
     :param json_map:
     :param png_file:
     :param root_act:
@@ -73,7 +74,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
     :return:
     '''
 
-
+    niiri=prov.Namespace("niiri","http://iri.nidash.org/")
     #this function can be used for both creating a brainvolumes NIDM file from scratch or adding brain volumes to
     #existing NIDM file.  The following logic basically determines which route to take...
 
@@ -82,12 +83,14 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
         first_row=True
 
         #for each of the header items create a dictionary where namespaces are freesurfer
-        software_activity = nidmdoc.graph.activity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
+        #software_activity = nidmdoc.graph.activity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
+        software_activity = nidmdoc.graph.activity(niiri[getUUID()],other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
         for key,value in header.items():
             software_activity.add_attributes({QualifiedName(provNamespace("fs",Constants.FREESURFER),key):value})
 
         #create software agent and associate with software activity
-        software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+        #software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+        software_agent = nidmdoc.graph.agent(niiri[getUUID()],other_attributes={
             QualifiedName(provNamespace("Neuroimaging_Analysis_Software",Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE),""):Constants.FREESURFER ,
             prov.PROV_TYPE:prov.PROV["SoftwareAgent"]} )
         #create qualified association with brain volume computation activity
@@ -103,31 +106,37 @@ def add_seg_data(nidmdoc, measure, header, json_map, tableinfo, png_file=None, o
             json.dump(json_map, fp)
 
 
-        datum_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+        #datum_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+        datum_entity=nidmdoc.graph.entity(niiri[getUUID()],other_attributes={
                     prov.PROV_TYPE:QualifiedName(provNamespace("nidm","http://purl.org/nidash/nidm#"),"FSStatsCollection")})
         nidmdoc.graph.wasGeneratedBy(software_activity,datum_entity)
 
-        #iterate over measure dictionary
+        #iterate over measure dictionary where measures are the lines in the FS stats files which start with '# Measure' and
+        #the whole table at the bottom of the FS stats file that starts with '# ColHeaders
         for measures in measure:
 
-
+            #check if we have a CDE mapping for the anatomical structure referenced in the FS stats file
             if measures["structure"] in json_map['Anatomy']:
 
-
+                #for the various fields in the FS stats file row starting with '# Measure'...
                 for items in measures["items"]:
+                    # if the
                     if items['name'] in json_map['Measures'].keys():
 
-                        region_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                        if not json_map['Anatomy'][measures["structure"]]['label']:
+                            continue
+                        #region_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                        region_entity=nidmdoc.graph.entity(niiri[getUUID()],other_attributes={prov.PROV_TYPE:
                                 QualifiedName(provNamespace("measurement_datum","http://uri.interlex.org/base/ilx_0738269#"),"")
                                 })
 
-
+                        #construct the custom CDEs to describe measurements of the various brain regions
                         region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):json_map['Anatomy'][measures["structure"]]['isAbout'],
                                     QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
                                     Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
                                     QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
                                     "http://uri.interlex.org/ilx_0104768#"),""),
-                                    QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']      })
+                                    QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']})
 
                             #QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/ilx_0381384#"),""):json_map['Anatomy'][measures["structure"]]['units'],
                             #print("%s:%s" %(key,value))
@@ -261,95 +270,6 @@ def read_stats(filename):
                         })
     return header, tableinfo, measures
 
-def parse_stats(g, fs_stat_file, entity_uri):
-    """Convert stats file to a nidm object
-"""
-
-    header, tableinfo, measures = read_stats(fs_stat_file)
-
-    get_id = lambda : niiri[uuid.uuid1().hex]
-    a0 = g.activity(get_id(), startTime=dt.isoformat(dt.utcnow()))
-    user_agent = g.agent(get_id(),
-                         {prov.PROV["type"]: prov.PROV["Person"],
-                          prov.PROV["label"]: pwd.getpwuid(os.geteuid()).pw_name,
-                          foaf["name"]: pwd.getpwuid(os.geteuid()).pw_name})
-    g.wasAssociatedWith(a0, user_agent, None, None,
-                        {prov.PROV["Role"]: "LoggedInUser"})
-    stat_collection = g.collection(get_id())
-    stat_collection.add_extra_attributes({prov.PROV['type']: fs['FreeSurferStatsCollection']})
-    # header elements
-    statheader_collection = g.entity(get_id())
-    attributes = {prov.PROV['type']: fs['StatFileHeader']}
-    for key, value in header.items():
-        attributes[fs[key.replace('.c', '-c')]] = value
-    statheader_collection.add_extra_attributes(attributes)
-    # measures
-    struct_info = {}
-    measure_list = []
-    measure_graph = rdflib.ConjunctiveGraph()
-    measure_graph.namespace_manager.bind('fs', fs.get_uri())
-    measure_graph.namespace_manager.bind('nidm', nidm.get_uri())
-    unknown_units = set(('unitless', 'NA'))
-    for measure in measures:
-        obj_attr = []
-        struct_uri = fs[measure['structure'].replace('.', '-')]
-        if measure['source'] == 'Header':
-            measure_name = measure['name']
-            if measure_name not in measure_list:
-                measure_list.append(measure_name)
-                measure_uri = fs[measure_name].rdf_representation()
-                measure_graph.add((measure_uri,
-                                   rdflib.RDF['type'],
-                                   fs['Measure'].rdf_representation()))
-                measure_graph.add((measure_uri,
-                                   rdflib.RDFS['label'],
-                                   rdflib.Literal(measure['description'])))
-                measure_graph.add((measure_uri,
-                                   nidm['unitsLabel'].rdf_representation(),
-                                   rdflib.Literal(measure['units'])))
-            obj_attr.append((nidm["anatomicalAnnotation"], struct_uri))
-            if str(measure['units']) in unknown_units and \
-                    '.' not in measure['value']:
-                valref = prov.Literal(int(measure['value']), prov.XSD['integer'])
-            else:
-                valref= prov.Literal(float(measure['value']), prov.XSD['float'])
-            obj_attr.append((fs[measure_name], valref))
-        elif measure['source'] == 'Table':
-            obj_attr.append((nidm["anatomicalAnnotation"], struct_uri))
-            for column_info in measure['items']:
-                measure_name = column_info['name']
-                if column_info['units'] in unknown_units and \
-                   '.' not in column_info['value']:
-                    valref = prov.Literal(int(column_info['value']),
-                                          prov.XSD['integer'])
-                else:
-                    valref= prov.Literal(float(column_info['value']),
-                                         prov.XSD['float'])
-                obj_attr.append((fs[measure_name], valref))
-                if measure_name not in measure_list:
-                    measure_list.append(measure_name)
-                    measure_uri = fs[measure_name].rdf_representation()
-                    measure_graph.add((measure_uri,
-                                       rdflib.RDF['type'],
-                                       fs['Measure'].rdf_representation()))
-                    measure_graph.add((measure_uri,
-                                       rdflib.RDFS['label'],
-                                       rdflib.Literal(column_info['description'])))
-                    measure_graph.add((measure_uri,
-                                       nidm['unitsLabel'].rdf_representation(),
-                                       rdflib.Literal(column_info['units'])))
-        id = get_id()
-        if struct_uri in struct_info:
-            euri = struct_info[struct_uri]
-            euri.add_extra_attributes(obj_attr)
-        else:
-            euri = g.entity(id, obj_attr)
-            struct_info[struct_uri] = euri
-        g.hadMember(stat_collection, id)
-    g.hadMember(stat_collection, statheader_collection)
-    g.derivation(stat_collection, entity_uri)
-    g.wasGeneratedBy(stat_collection, a0)
-    return g, measure_graph
 
 
 def remap2json(xlsxfile,
@@ -633,8 +553,10 @@ def main(argv):
                 #create an empty NIDM graph
                 nidmdoc = Core()
 
-                #this function sucks...more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, tableinfo=tableinfo,json_map=json_map)
+                #print(nidmdoc.serializeTurtle())
+
+                #WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
 
                 #serialize NIDM file
                 if args.jsonld is not False:
