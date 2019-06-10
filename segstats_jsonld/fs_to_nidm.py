@@ -601,6 +601,8 @@ def main(argv):
                                         NIDM serializations (i.e. TURTLE, JSON-LD RDF))''')
     parser.add_argument('-s', '--subject_dir', dest='subject_dir', type=str, required=True,
                         help='Path to Freesurfer subject directory')
+    parser.add_argument('-jmap', '--json_map', dest='json_map', action='store_true', default = False,
+                        help='If provided, json information will be used instead of scraping InterLex')
     parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
                         help='Output directory')
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
@@ -618,7 +620,7 @@ def main(argv):
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
             #read in json_map
-            [header, tableinfo, measures,json_map] = remap2json(xslxfile=join(dirname(realpath(sys.argv[0])),'mapping_data','ReproNimCDEs.xlsx'),
+            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(dirname(realpath(sys.argv[0])),'mapping_data','ReproNimCDEs.xlsx'),
                                  fs_stat_file=os.path.join(args.subject_dir,"stats",stats_file))
 
 
