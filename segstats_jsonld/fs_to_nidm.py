@@ -408,8 +408,8 @@ def remap2json(xlsxfile,
 
     definition_cort = []
     for i, row in corticals.iterrows():
-        if row['Structure - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
-            url = row['Structure - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
+        if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
+            url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
             r = requests.get(url)
             file = io.StringIO(r.text)
             lines = file.readlines()
@@ -443,14 +443,14 @@ def remap2json(xlsxfile,
                     }
     print("Done. Creating json mapping from cortical structures...")
     for i, row in corticals.iterrows():
-        label = row['Structure - Assuming Cortical Areas (not sulci)']['Label'] \
-            if row['Structure - Assuming Cortical Areas (not sulci)']['Label'] is not np.nan else ""
-        url = row['Structure - Assuming Cortical Areas (not sulci)']['URI'] \
-            if row['Structure - Assuming Cortical Areas (not sulci)']['URI'] is not np.nan else ""
-        isAbout = row['Structure - Assuming Cortical Areas (not sulci)']['Preferred'] \
-            if row['Structure - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
-        l = row['Structure - Assuming Cortical Areas (not sulci)']['Interlex Label'] \
-            if row['Structure - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan else ""
+        label = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'] \
+            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'] is not np.nan else ""
+        url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] \
+            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] is not np.nan else ""
+        isAbout = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'] \
+            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
+        l = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] \
+            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan else ""
         d[label] = {"url": url,
                     "isAbout": isAbout,
                     "definition": row['definition'][0],
@@ -464,10 +464,9 @@ def remap2json(xlsxfile,
     print("""Creating measures json mapping...""")
 
     for fi, ind1, ind2 in [(mapping, 'Atlas Segmentation Label', 0),
-                           (corticals, 'Structure - Assuming Cortical Areas (not sulci)', 'Label')]:
+                           (corticals, 'APARC Structures - Assuming Cortical Areas (not sulci)', 'Label')]:
         for i, row in fi.iterrows():
             anatomical = row[ind1][ind2]
-            print(anatomical)
             for c in measures:
                 if c['structure'] == anatomical:
                     for dic in c['items']:
