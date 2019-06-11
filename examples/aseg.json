@@ -1,0 +1,4240 @@
+{
+    "@context": {
+        "@version": "1.1",
+        "Acquisition": "http://purl.org/nidash/nidm#Acquisition",
+        "AcquisitionObject": "http://purl.org/nidash/nidm#AcquisitionObject",
+        "Age": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#Age",
+        "Anatomical": "http://purl.org/nidash/nidm#Anatomical",
+        "DemographicsInstrument": "http://purl.org/nidash/nidm#DemographicsInstrument",
+        "Diagnosis": "http://ncitt.ncit.nih.gov/Diagnosis",
+        "DiffusionTensor": "http://purl.org/nidash/nidm#DiffusionTensor",
+        "DiffusionWeighted": "http://purl.org/nidash/nidm#DiffusionWeighted",
+        "FlowWeighted": "http://purl.org/nidash/nidm#FlowWeighted",
+        "Functional": "http://purl.org/nidash/nidm#Functional",
+        "GrayMatter": "http://uri.interlex.org/ilx_0104768#",
+        "Identifier": "http://semanticscience.org/ontology/sio.owl#Identifier",
+        "MagneticResonanceImaging": "http://purl.org/nidash/nidm#MagneticResonanceImaging",
+        "Neuroimaging_Analysis_Software": "http://purl.org/nidash/nidm#NIDM_0000164",
+        "PhenotypicSex": "http://purl.obolibrary.org/obo/pato#PhenotypicSex",
+        "Project": "http://purl.org/nidash/nidm#Project",
+        "Session": "http://purl.org/nidash/nidm#Session",
+        "StimulusResponseFile": "http://purl.org/nidash/nidm#StimulusResponseFile",
+        "Structural": "http://purl.org/nidash/nidm#Structural",
+        "Subject": "http://semanticscience.org/ontology/sio.owl#Subject",
+        "T1Weighted": "http://purl.org/nidash/nidm#T1Weighted",
+        "T2StarWeighted": "http://purl.org/nidash/nidm#T2StarWeighted",
+        "T2Weighted": "http://purl.org/nidash/nidm#T2Weighted",
+        "Task": "http://purl.org/nidash/nidm#Task",
+        "URL": "http://semanticscience.org/ontology/sio.owl#URL",
+        "activity": {
+            "@id": "prov:activity",
+            "@type": "@id"
+        },
+        "afni": "http://purl.org/nidash/afni#",
+        "agent": {
+            "@id": "prov:agent",
+            "@type": "@id"
+        },
+        "ants": "http://stnava.github.io/ANTs/",
+        "assessment-instrument": "http://neurolog.unice.fr/ontoneurolog/v3.0/instrument.owl#assessment-instrument",
+        "association": {
+            "@id": "prov:qualifiedAssociation",
+            "@type": "@id"
+        },
+        "author": "http://www.w3.org/ns/dcat#author",
+        "b-value": "http://purl.org/nidash/nidm#b-value",
+        "b-vector": "http://purl.org/nidash/nidm#b-vector",
+        "bids": "http://bids.neuroimaging.io/",
+        "birnlex": "http://bioontology.org/projects/ontologies/birnlex/",
+        "birnlex_2152": "http://bioontology.org/projects/ontologies/birnlex/birnlex_2152",
+        "birnlex_2199": "http://bioontology.org/projects/ontologies/birnlex/birnlex_2199",
+        "creator": "http://www.w3.org/ns/dcat#creator",
+        "crypto": "http://id.loc.gov/vocabulary/preservation/cryptographicHashFunctions#",
+        "dc": "http://purl.org/dc/elements/1.1/",
+        "dcat": "http://www.w3.org/ns/dcat#",
+        "dct": "http://purl.org/dc/terms/",
+        "dctypes": "http://purl.org/dc/dcmitype/",
+        "description": "http://purl.org/dc/terms/description",
+        "dicom": "http://neurolex.org/wiki/Category:DICOM_term/",
+        "endedAtTime": {
+            "@id": "prov:endedAtTime",
+            "@type": "xsd:dateTime"
+        },
+        "entity": {
+            "@id": "prov:entity",
+            "@type": "@id"
+        },
+        "ethnicity": "http://semanticscience.org/ontology/sio.owl#ethnicity",
+        "familyName": "http://xmlns.com/foaf/0.1/familyName",
+        "file": "http://semanticscience.org/ontology/sio.owl#file",
+        "filename": "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#filename",
+        "foaf": "http://xmlns.com/foaf/0.1/",
+        "freesurfer": "https://surfer.nmr.mgh.harvard.edu/",
+        "fs": "https://surfer.nmr.mgh.harvard.edu/",
+        "fsl": "http://purl.org/nidash/fsl#",
+        "gender": "https://ndar.nih.gov/api/datadictionary/v2/dataelement/gender",
+        "generation": {
+            "@id": "prov:qualifiedGeneration",
+            "@type": "@id"
+        },
+        "givenName": "http://xmlns.com/foaf/0.1/givenName",
+        "hadAcquisitionModality": "http://purl.org/nidash/nidm#hadAcquisitionModality",
+        "hadImageContrastType": "http://purl.org/nidash/nidm#hadImageContrastType",
+        "hadImageUsageType": "http://purl.org/nidash/nidm#hadImageUsageType",
+        "hadPlan": {
+            "@id": "prov:hadPlan",
+            "@type": "@id"
+        },
+        "hadRole": {
+            "@id": "prov:hadRole",
+            "@type": "@id"
+        },
+        "handedness": "http://purl.obolibrary.org/obo/handedness",
+        "hasDatumType": "http://uri.interlex.org/ilx_0738262#",
+        "hasLaterality": "http://uri.interlex.org/ilx_0381387#",
+        "hasMeasurementType": "http://uri.interlex.org/ilx_0381388#",
+        "instrument-based-assessment": "http://neurolog.unice.fr/ontoneurolog/v3.0/instrument.owl#instrument-based-assessment",
+        "isAbout": "http://uri.interlex.org/ilx_0381385#",
+        "isMeasureOf": "http://uri.interlex.org/ilx_0381389#",
+        "license": "http://purl.org/dc/terms/license",
+        "measurement_datum": "http://uri.interlex.org/base/ilx_0738269#",
+        "ncicb": "http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#",
+        "ncit": "http://ncitt.ncit.nih.gov/",
+        "ndar": "https://ndar.nih.gov/api/datadictionary/v2/dataelement/",
+        "nfo": "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#",
+        "nidm": "http://purl.org/nidash/nidm#",
+        "niiri": "http://iri.nidash.org/",
+        "nlx": "http://uri.neuinfo.org/nif/nifstd/",
+        "obo": "http://purl.obolibrary.org/obo/",
+        "onli": "http://neurolog.unice.fr/ontoneurolog/v3.0/instrument.owl#",
+        "owl": "http://www.w3.org/2002/07/owl#",
+        "pato": "http://purl.obolibrary.org/obo/pato#",
+        "prov": "http://www.w3.org/ns/prov#",
+        "race": "http://semanticscience.org/ontology/sio.owl#race",
+        "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+        "records": {
+            "@container": "@type",
+            "@id": "@graph"
+        },
+        "scr": "http://scicrunch.org/resolver/",
+        "sio": "http://semanticscience.org/ontology/sio.owl#",
+        "spm": "http://purl.org/nidash/spm#",
+        "src_subject_id": "https://ndar.nih.gov/api/datadictionary/v2/dataelement/src_subject_id",
+        "startedAtTime": {
+            "@id": "prov:startedAtTime",
+            "@type": "xsd:dateTime"
+        },
+        "title": "http://purl.org/dc/dcmitype/title",
+        "usage": {
+            "@id": "prov:qualifiedUsage",
+            "@type": "@id"
+        },
+        "vc": "http://www.w3.org/2006/vcard/ns#",
+        "wasAttributedTo": {
+            "@id": "prov:wasAttributedTo",
+            "@type": "@id"
+        },
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "xsi": "http://www.w3.org/2001/XMLSchema-instance"
+    },
+    "records": [
+        {
+            "@id": "niiri:07f63ea8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:08031aec-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:07fd685e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:0800b5e0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:0820b868-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07edcb4c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:0814d688-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:07eb2b3a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07ed950a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:080d0246-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:0802a986-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:07eb9ad4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:0816f06c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:07fa6a3c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:0801bf1c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:07f607b2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:0805cb98-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07f8d7c6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:08294280-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:07f73dee-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:07ff30bc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07fe0f66-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:07f3141c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:0811ce2a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:08125426-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:07ffe264-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07febd62-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:08271a82-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:07f0b442-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:0806f11c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08007d28-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:0825865e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08072970-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08054f9c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07f07fa4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:0827c590-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:0816503a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:08290c70-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:08283534-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:0803fab6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08134606-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:0812cee2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:07eeee14-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:07fe485a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07ffa484-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:08286b3a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:07fbb66c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07f67526-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:07fd32a8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:07f6abea-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:07fcfc8e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:080981de-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07eb621c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:08064064-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08202c40-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:08090bdc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07f9dee6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:07f4058e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:07fc5978-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:0822da76-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:081f0b76-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:080467e4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:0804d4b8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:080d89dc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:07f3cd08-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:08249366-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:07eeb8c2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:08051054-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:081291f2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:07e7e812-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:081011e8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:08079f04-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08142a8a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:081146e4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:0810a112-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:07ed2084-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:08220998-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:081ec044-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:0802036e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:07f24ed8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:07e8946a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07fe7fbe-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07f7b404-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:08157a66-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:080a42a4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:0825c0ce-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08210278-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:08016b34-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:081309f2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:0826ad2c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:07ee801e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:07ee0940-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:080dd36a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:07e9eaf4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08149dee-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:08002dbe-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07ecb2d4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:081f9d02-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:08275114-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:07f516cc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:07f2db6e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:0828d6e2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:07e70654-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "nidm:FSStatsCollection"
+            ],
+            "niiri:07e72c9c-8c58-11e9-808b-8c8590aa91df": "15759",
+            "niiri:07e7b112-8c58-11e9-808b-8c8590aa91df": "15987.9",
+            "niiri:07e7e812-8c58-11e9-808b-8c8590aa91df": "21.5398",
+            "niiri:07e823ae-8c58-11e9-808b-8c8590aa91df": "11.3405",
+            "niiri:07e85ba8-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:07e8946a-8c58-11e9-808b-8c8590aa91df": "83.0000",
+            "niiri:07e8cbb0-8c58-11e9-808b-8c8590aa91df": "83.0000",
+            "niiri:07e902d8-8c58-11e9-808b-8c8590aa91df": "881",
+            "niiri:07e93a1e-8c58-11e9-808b-8c8590aa91df": "854.0",
+            "niiri:07e970f6-8c58-11e9-808b-8c8590aa91df": "36.0704",
+            "niiri:07e9a94a-8c58-11e9-808b-8c8590aa91df": "16.0004",
+            "niiri:07e9eaf4-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:07ea39fa-8c58-11e9-808b-8c8590aa91df": "77.0000",
+            "niiri:07ea8108-8c58-11e9-808b-8c8590aa91df": "77.0000",
+            "niiri:07eab86c-8c58-11e9-808b-8c8590aa91df": "8534",
+            "niiri:07eaf304-8c58-11e9-808b-8c8590aa91df": "9040.1",
+            "niiri:07eb2b3a-8c58-11e9-808b-8c8590aa91df": "81.8074",
+            "niiri:07eb621c-8c58-11e9-808b-8c8590aa91df": "6.3803",
+            "niiri:07eb9ad4-8c58-11e9-808b-8c8590aa91df": "29.0000",
+            "niiri:07ebd4fe-8c58-11e9-808b-8c8590aa91df": "99.0000",
+            "niiri:07ec0cee-8c58-11e9-808b-8c8590aa91df": "70.0000",
+            "niiri:07ec448e-8c58-11e9-808b-8c8590aa91df": "36138",
+            "niiri:07ec7bfc-8c58-11e9-808b-8c8590aa91df": "35870.5",
+            "niiri:07ecb2d4-8c58-11e9-808b-8c8590aa91df": "62.9976",
+            "niiri:07ece966-8c58-11e9-808b-8c8590aa91df": "11.1826",
+            "niiri:07ed2084-8c58-11e9-808b-8c8590aa91df": "7.0000",
+            "niiri:07ed5efa-8c58-11e9-808b-8c8590aa91df": "94.0000",
+            "niiri:07ed950a-8c58-11e9-808b-8c8590aa91df": "87.0000",
+            "niiri:07edcb4c-8c58-11e9-808b-8c8590aa91df": "7362",
+            "niiri:07ee0940-8c58-11e9-808b-8c8590aa91df": "7234.6",
+            "niiri:07ee491e-8c58-11e9-808b-8c8590aa91df": "87.5560",
+            "niiri:07ee801e-8c58-11e9-808b-8c8590aa91df": "9.2717",
+            "niiri:07eeb8c2-8c58-11e9-808b-8c8590aa91df": "25.0000",
+            "niiri:07eeee14-8c58-11e9-808b-8c8590aa91df": "110.0000",
+            "niiri:07ef28ca-8c58-11e9-808b-8c8590aa91df": "85.0000",
+            "niiri:07ef6614-8c58-11e9-808b-8c8590aa91df": "2835",
+            "niiri:07efa0ca-8c58-11e9-808b-8c8590aa91df": "2759.1",
+            "niiri:07efda86-8c58-11e9-808b-8c8590aa91df": "79.7436",
+            "niiri:07f015aa-8c58-11e9-808b-8c8590aa91df": "8.8441",
+            "niiri:07f04ab6-8c58-11e9-808b-8c8590aa91df": "47.0000",
+            "niiri:07f07fa4-8c58-11e9-808b-8c8590aa91df": "110.0000",
+            "niiri:07f0b442-8c58-11e9-808b-8c8590aa91df": "63.0000",
+            "niiri:07f0eb06-8c58-11e9-808b-8c8590aa91df": "4642",
+            "niiri:07f12184-8c58-11e9-808b-8c8590aa91df": "4608.9",
+            "niiri:07f15eba-8c58-11e9-808b-8c8590aa91df": "84.1915",
+            "niiri:07f1afd2-8c58-11e9-808b-8c8590aa91df": "6.0713",
+            "niiri:07f1f866-8c58-11e9-808b-8c8590aa91df": "55.0000",
+            "niiri:07f24ed8-8c58-11e9-808b-8c8590aa91df": "108.0000",
+            "niiri:07f29ec4-8c58-11e9-808b-8c8590aa91df": "53.0000",
+            "niiri:07f2db6e-8c58-11e9-808b-8c8590aa91df": "2318",
+            "niiri:07f3141c-8c58-11e9-808b-8c8590aa91df": "2288.1",
+            "niiri:07f38e1a-8c58-11e9-808b-8c8590aa91df": "87.3512",
+            "niiri:07f3cd08-8c58-11e9-808b-8c8590aa91df": "18.3091",
+            "niiri:07f4058e-8c58-11e9-808b-8c8590aa91df": "10.0000",
+            "niiri:07f43c70-8c58-11e9-808b-8c8590aa91df": "111.0000",
+            "niiri:07f47366-8c58-11e9-808b-8c8590aa91df": "101.0000",
+            "niiri:07f4a9da-8c58-11e9-808b-8c8590aa91df": "1241",
+            "niiri:07f4e08a-8c58-11e9-808b-8c8590aa91df": "1285.1",
+            "niiri:07f516cc-8c58-11e9-808b-8c8590aa91df": "27.5995",
+            "niiri:07f55628-8c58-11e9-808b-8c8590aa91df": "13.5391",
+            "niiri:07f598fe-8c58-11e9-808b-8c8590aa91df": "4.0000",
+            "niiri:07f5d058-8c58-11e9-808b-8c8590aa91df": "80.0000",
+            "niiri:07f607b2-8c58-11e9-808b-8c8590aa91df": "76.0000",
+            "niiri:07f63ea8-8c58-11e9-808b-8c8590aa91df": "2670",
+            "niiri:07f67526-8c58-11e9-808b-8c8590aa91df": "2780.5",
+            "niiri:07f6abea-8c58-11e9-808b-8c8590aa91df": "24.1330",
+            "niiri:07f6e24a-8c58-11e9-808b-8c8590aa91df": "10.0015",
+            "niiri:07f73dee-8c58-11e9-808b-8c8590aa91df": "5.0000",
+            "niiri:07f779e4-8c58-11e9-808b-8c8590aa91df": "68.0000",
+            "niiri:07f7b404-8c58-11e9-808b-8c8590aa91df": "63.0000",
+            "niiri:07f7ed48-8c58-11e9-808b-8c8590aa91df": "18012",
+            "niiri:07f82380-8c58-11e9-808b-8c8590aa91df": "18044.1",
+            "niiri:07f85a58-8c58-11e9-808b-8c8590aa91df": "81.4542",
+            "niiri:07f897d4-8c58-11e9-808b-8c8590aa91df": "9.7596",
+            "niiri:07f8d7c6-8c58-11e9-808b-8c8590aa91df": "21.0000",
+            "niiri:07f9101a-8c58-11e9-808b-8c8590aa91df": "103.0000",
+            "niiri:07f94fd0-8c58-11e9-808b-8c8590aa91df": "82.0000",
+            "niiri:07f993f0-8c58-11e9-808b-8c8590aa91df": "3372",
+            "niiri:07f9dee6-8c58-11e9-808b-8c8590aa91df": "3180.2",
+            "niiri:07fa30e4-8c58-11e9-808b-8c8590aa91df": "64.9425",
+            "niiri:07fa6a3c-8c58-11e9-808b-8c8590aa91df": "12.6008",
+            "niiri:07faa15a-8c58-11e9-808b-8c8590aa91df": "12.0000",
+            "niiri:07fad7a6-8c58-11e9-808b-8c8590aa91df": "104.0000",
+            "niiri:07fb0f0a-8c58-11e9-808b-8c8590aa91df": "92.0000",
+            "niiri:07fb47fe-8c58-11e9-808b-8c8590aa91df": "1209",
+            "niiri:07fb7fc6-8c58-11e9-808b-8c8590aa91df": "1210.2",
+            "niiri:07fbb66c-8c58-11e9-808b-8c8590aa91df": "70.9462",
+            "niiri:07fbec4a-8c58-11e9-808b-8c8590aa91df": "6.8928",
+            "niiri:07fc22f0-8c58-11e9-808b-8c8590aa91df": "44.0000",
+            "niiri:07fc5978-8c58-11e9-808b-8c8590aa91df": "91.0000",
+            "niiri:07fc8fa6-8c58-11e9-808b-8c8590aa91df": "47.0000",
+            "niiri:07fcc656-8c58-11e9-808b-8c8590aa91df": "1105",
+            "niiri:07fcfc8e-8c58-11e9-808b-8c8590aa91df": "1075.9",
+            "niiri:07fd32a8-8c58-11e9-808b-8c8590aa91df": "39.0416",
+            "niiri:07fd685e-8c58-11e9-808b-8c8590aa91df": "15.0519",
+            "niiri:07fd9e32-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:07fdd3fc-8c58-11e9-808b-8c8590aa91df": "103.0000",
+            "niiri:07fe0f66-8c58-11e9-808b-8c8590aa91df": "103.0000",
+            "niiri:07fe485a-8c58-11e9-808b-8c8590aa91df": "294",
+            "niiri:07fe7fbe-8c58-11e9-808b-8c8590aa91df": "269.9",
+            "niiri:07febd62-8c58-11e9-808b-8c8590aa91df": "76.9626",
+            "niiri:07fef804-8c58-11e9-808b-8c8590aa91df": "6.7890",
+            "niiri:07ff30bc-8c58-11e9-808b-8c8590aa91df": "47.0000",
+            "niiri:07ff66ae-8c58-11e9-808b-8c8590aa91df": "99.0000",
+            "niiri:07ffa484-8c58-11e9-808b-8c8590aa91df": "52.0000",
+            "niiri:07ffe264-8c58-11e9-808b-8c8590aa91df": "3677",
+            "niiri:08002dbe-8c58-11e9-808b-8c8590aa91df": "3617.3",
+            "niiri:08007d28-8c58-11e9-808b-8c8590aa91df": "90.2744",
+            "niiri:0800b5e0-8c58-11e9-808b-8c8590aa91df": "10.6251",
+            "niiri:0800eee8-8c58-11e9-808b-8c8590aa91df": "28.0000",
+            "niiri:080127a0-8c58-11e9-808b-8c8590aa91df": "107.0000",
+            "niiri:08016b34-8c58-11e9-808b-8c8590aa91df": "79.0000",
+            "niiri:0801bf1c-8c58-11e9-808b-8c8590aa91df": "6",
+            "niiri:0802036e-8c58-11e9-808b-8c8590aa91df": "12.3",
+            "niiri:08023be0-8c58-11e9-808b-8c8590aa91df": "64.3333",
+            "niiri:080272f4-8c58-11e9-808b-8c8590aa91df": "3.2041",
+            "niiri:0802a986-8c58-11e9-808b-8c8590aa91df": "60.0000",
+            "niiri:0802e3ba-8c58-11e9-808b-8c8590aa91df": "69.0000",
+            "niiri:08031aec-8c58-11e9-808b-8c8590aa91df": "9.0000",
+            "niiri:080352aa-8c58-11e9-808b-8c8590aa91df": "1088",
+            "niiri:08038c66-8c58-11e9-808b-8c8590aa91df": "1019.2",
+            "niiri:0803c370-8c58-11e9-808b-8c8590aa91df": "49.5460",
+            "niiri:0803fab6-8c58-11e9-808b-8c8590aa91df": "11.7813",
+            "niiri:0804317a-8c58-11e9-808b-8c8590aa91df": "14.0000",
+            "niiri:080467e4-8c58-11e9-808b-8c8590aa91df": "79.0000",
+            "niiri:08049e26-8c58-11e9-808b-8c8590aa91df": "65.0000",
+            "niiri:0804d4b8-8c58-11e9-808b-8c8590aa91df": "11444",
+            "niiri:08051054-8c58-11e9-808b-8c8590aa91df": "11598.3",
+            "niiri:08054f9c-8c58-11e9-808b-8c8590aa91df": "23.1668",
+            "niiri:08059416-8c58-11e9-808b-8c8590aa91df": "12.7226",
+            "niiri:0805cb98-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:0806055e-8c58-11e9-808b-8c8590aa91df": "90.0000",
+            "niiri:08064064-8c58-11e9-808b-8c8590aa91df": "90.0000",
+            "niiri:08067e62-8c58-11e9-808b-8c8590aa91df": "638",
+            "niiri:0806b85a-8c58-11e9-808b-8c8590aa91df": "663.2",
+            "niiri:0806f11c-8c58-11e9-808b-8c8590aa91df": "38.4984",
+            "niiri:08072970-8c58-11e9-808b-8c8590aa91df": "16.1591",
+            "niiri:080763f4-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:08079f04-8c58-11e9-808b-8c8590aa91df": "83.0000",
+            "niiri:0807d672-8c58-11e9-808b-8c8590aa91df": "83.0000",
+            "niiri:08081722-8c58-11e9-808b-8c8590aa91df": "8710",
+            "niiri:0808771c-8c58-11e9-808b-8c8590aa91df": "9236.1",
+            "niiri:0808c316-8c58-11e9-808b-8c8590aa91df": "85.3256",
+            "niiri:08090bdc-8c58-11e9-808b-8c8590aa91df": "6.5191",
+            "niiri:0809485e-8c58-11e9-808b-8c8590aa91df": "25.0000",
+            "niiri:080981de-8c58-11e9-808b-8c8590aa91df": "104.0000",
+            "niiri:0809b974-8c58-11e9-808b-8c8590aa91df": "79.0000",
+            "niiri:0809f5ec-8c58-11e9-808b-8c8590aa91df": "35197",
+            "niiri:080a42a4-8c58-11e9-808b-8c8590aa91df": "34893.6",
+            "niiri:080a9c54-8c58-11e9-808b-8c8590aa91df": "63.5769",
+            "niiri:080ae9ac-8c58-11e9-808b-8c8590aa91df": "12.2181",
+            "niiri:080b3fe2-8c58-11e9-808b-8c8590aa91df": "5.0000",
+            "niiri:080bb81e-8c58-11e9-808b-8c8590aa91df": "97.0000",
+            "niiri:080c3302-8c58-11e9-808b-8c8590aa91df": "92.0000",
+            "niiri:080c99a0-8c58-11e9-808b-8c8590aa91df": "6525",
+            "niiri:080d0246-8c58-11e9-808b-8c8590aa91df": "6380.6",
+            "niiri:080d89dc-8c58-11e9-808b-8c8590aa91df": "87.6515",
+            "niiri:080dd36a-8c58-11e9-808b-8c8590aa91df": "9.9770",
+            "niiri:080e2004-8c58-11e9-808b-8c8590aa91df": "25.0000",
+            "niiri:080ea434-8c58-11e9-808b-8c8590aa91df": "113.0000",
+            "niiri:080f105e-8c58-11e9-808b-8c8590aa91df": "88.0000",
+            "niiri:080f7044-8c58-11e9-808b-8c8590aa91df": "3097",
+            "niiri:080fc8f0-8c58-11e9-808b-8c8590aa91df": "2967.4",
+            "niiri:081011e8-8c58-11e9-808b-8c8590aa91df": "79.2173",
+            "niiri:08105946-8c58-11e9-808b-8c8590aa91df": "9.1205",
+            "niiri:0810a112-8c58-11e9-808b-8c8590aa91df": "44.0000",
+            "niiri:0810f180-8c58-11e9-808b-8c8590aa91df": "104.0000",
+            "niiri:081146e4-8c58-11e9-808b-8c8590aa91df": "60.0000",
+            "niiri:08118c44-8c58-11e9-808b-8c8590aa91df": "4850",
+            "niiri:0811ce2a-8c58-11e9-808b-8c8590aa91df": "4720.0",
+            "niiri:081213ee-8c58-11e9-808b-8c8590aa91df": "85.8913",
+            "niiri:08125426-8c58-11e9-808b-8c8590aa91df": "6.7045",
+            "niiri:081291f2-8c58-11e9-808b-8c8590aa91df": "47.0000",
+            "niiri:0812cee2-8c58-11e9-808b-8c8590aa91df": "108.0000",
+            "niiri:081309f2-8c58-11e9-808b-8c8590aa91df": "61.0000",
+            "niiri:08134606-8c58-11e9-808b-8c8590aa91df": "2681",
+            "niiri:08138332-8c58-11e9-808b-8c8590aa91df": "2621.5",
+            "niiri:0813bc8a-8c58-11e9-808b-8c8590aa91df": "88.0257",
+            "niiri:0813f434-8c58-11e9-808b-8c8590aa91df": "18.7219",
+            "niiri:08142a8a-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:0814669e-8c58-11e9-808b-8c8590aa91df": "117.0000",
+            "niiri:08149dee-8c58-11e9-808b-8c8590aa91df": "117.0000",
+            "niiri:0814d688-8c58-11e9-808b-8c8590aa91df": "3458",
+            "niiri:08150dba-8c58-11e9-808b-8c8590aa91df": "3255.8",
+            "niiri:08154438-8c58-11e9-808b-8c8590aa91df": "66.4743",
+            "niiri:08157a66-8c58-11e9-808b-8c8590aa91df": "11.2353",
+            "niiri:0815b03a-8c58-11e9-808b-8c8590aa91df": "19.0000",
+            "niiri:0815e582-8c58-11e9-808b-8c8590aa91df": "110.0000",
+            "niiri:08161ae8-8c58-11e9-808b-8c8590aa91df": "91.0000",
+            "niiri:0816503a-8c58-11e9-808b-8c8590aa91df": "1562",
+            "niiri:08168578-8c58-11e9-808b-8c8590aa91df": "1527.5",
+            "niiri:0816bb1a-8c58-11e9-808b-8c8590aa91df": "71.8271",
+            "niiri:0816f06c-8c58-11e9-808b-8c8590aa91df": "8.1385",
+            "niiri:081e70a8-8c58-11e9-808b-8c8590aa91df": "16.0000",
+            "niiri:081ec044-8c58-11e9-808b-8c8590aa91df": "104.0000",
+            "niiri:081f0b76-8c58-11e9-808b-8c8590aa91df": "88.0000",
+            "niiri:081f548c-8c58-11e9-808b-8c8590aa91df": "341",
+            "niiri:081f9d02-8c58-11e9-808b-8c8590aa91df": "316.5",
+            "niiri:081fe578-8c58-11e9-808b-8c8590aa91df": "79.6979",
+            "niiri:08202c40-8c58-11e9-808b-8c8590aa91df": "5.9823",
+            "niiri:0820716e-8c58-11e9-808b-8c8590aa91df": "60.0000",
+            "niiri:0820b868-8c58-11e9-808b-8c8590aa91df": "100.0000",
+            "niiri:08210278-8c58-11e9-808b-8c8590aa91df": "40.0000",
+            "niiri:0821505c-8c58-11e9-808b-8c8590aa91df": "3790",
+            "niiri:0821ae62-8c58-11e9-808b-8c8590aa91df": "3711.3",
+            "niiri:08220998-8c58-11e9-808b-8c8590aa91df": "90.4755",
+            "niiri:0822501a-8c58-11e9-808b-8c8590aa91df": "10.1254",
+            "niiri:082292fa-8c58-11e9-808b-8c8590aa91df": "41.0000",
+            "niiri:0822da76-8c58-11e9-808b-8c8590aa91df": "110.0000",
+            "niiri:08231db0-8c58-11e9-808b-8c8590aa91df": "69.0000",
+            "niiri:08235e4c-8c58-11e9-808b-8c8590aa91df": "7",
+            "niiri:08239cc2-8c58-11e9-808b-8c8590aa91df": "15.0",
+            "niiri:0823dbce-8c58-11e9-808b-8c8590aa91df": "61.0000",
+            "niiri:08241d00-8c58-11e9-808b-8c8590aa91df": "7.4833",
+            "niiri:08245842-8c58-11e9-808b-8c8590aa91df": "53.0000",
+            "niiri:08249366-8c58-11e9-808b-8c8590aa91df": "70.0000",
+            "niiri:0824d056-8c58-11e9-808b-8c8590aa91df": "17.0000",
+            "niiri:08250db4-8c58-11e9-808b-8c8590aa91df": "1176",
+            "niiri:082548c4-8c58-11e9-808b-8c8590aa91df": "1091.3",
+            "niiri:0825865e-8c58-11e9-808b-8c8590aa91df": "49.4600",
+            "niiri:0825c0ce-8c58-11e9-808b-8c8590aa91df": "11.1558",
+            "niiri:0825fc38-8c58-11e9-808b-8c8590aa91df": "17.0000",
+            "niiri:08263856-8c58-11e9-808b-8c8590aa91df": "78.0000",
+            "niiri:08267226-8c58-11e9-808b-8c8590aa91df": "61.0000",
+            "niiri:0826ad2c-8c58-11e9-808b-8c8590aa91df": "0",
+            "niiri:0826e422-8c58-11e9-808b-8c8590aa91df": "0.0",
+            "niiri:08271a82-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:08275114-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:08278a3a-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:0827c590-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:0827fd80-8c58-11e9-808b-8c8590aa91df": "0.0000",
+            "niiri:08283534-8c58-11e9-808b-8c8590aa91df": "184",
+            "niiri:08286b3a-8c58-11e9-808b-8c8590aa91df": "202.3",
+            "niiri:0828a104-8c58-11e9-808b-8c8590aa91df": "86.8859",
+            "niiri:0828d6e2-8c58-11e9-808b-8c8590aa91df": "16.3835",
+            "niiri:08290c70-8c58-11e9-808b-8c8590aa91df": "41.0000",
+            "niiri:08294280-8c58-11e9-808b-8c8590aa91df": "109.0000",
+            "niiri:0829831c-8c58-11e9-808b-8c8590aa91df": "68.0000"
+        },
+        {
+            "@id": "niiri:0829831c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:07e85ba8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07f15eba-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:0809b974-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:0822501a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:0816bb1a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:080352aa-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08263856-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:0825fc38-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:080fc8f0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:08038c66-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:0823dbce-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:0809485e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:0810f180-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:07ebd4fe-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:0828a104-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "optic chiasm white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0000959",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "optic chiasm volume"
+        },
+        {
+            "@id": "niiri:07ef28ca-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:07f47366-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:080f7044-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:0808771c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:08278a3a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:07f4e08a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:07ea39fa-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:0827fd80-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:07fad7a6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:08239cc2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:0826e422-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cavum septum pellucidum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0009857",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cavum septum pellucidum volume"
+        },
+        {
+            "@id": "niiri:0804317a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:07f82380-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:07e823ae-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08023be0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:080c99a0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:07f015aa-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:080e2004-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:080127a0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07f7ed48-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:07f43c70-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:07e7b112-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07ea8108-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07e6c586-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:SoftwareAgent",
+                "prov:Agent"
+            ],
+            "Neuroimaging_Analysis_Software": "https://surfer.nmr.mgh.harvard.edu/"
+        },
+        {
+            "@id": "niiri:08067e62-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07ec7bfc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:0807d672-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:080763f4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:0815e582-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:07fa30e4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:080c3302-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:081213ee-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:07fc8fa6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07fd9e32-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:07f29ec4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:0809f5ec-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:07ed5efa-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:08059416-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:080b3fe2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:07eab86c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:08138332-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:081f548c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:082548c4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:080ea434-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:0821ae62-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07efda86-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:07e93a1e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07fcc656-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:08245842-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:082292fa-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:0803c370-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:07eaf304-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07f38e1a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left pallidum volume"
+        },
+        {
+            "@id": "niiri:07f9101a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:07fb47fe-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07e9a94a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07ec448e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:07e970f6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:080272f4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:0824d056-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:080f105e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right thalamus volume"
+        },
+        {
+            "@id": "niiri:07f897d4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:0813f434-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:08231db0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07f993f0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:07f55628-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:07e8cbb0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:081e70a8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:0814669e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:07fb7fc6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07f04ab6-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:07e72c9c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07efa0ca-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:08161ae8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:07ee491e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left thalamus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001897",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left thalamus volume"
+        },
+        {
+            "@id": "niiri:07f85a58-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:07fdd3fc-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "cerebrum cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001869",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "cerebrum cerebral spinal fluid volume"
+        },
+        {
+            "@id": "niiri:07ef6614-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:08154438-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:080a9c54-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:0800eee8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07ece966-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:080bb81e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:07f1afd2-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:0813bc8a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right pallidum gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006514",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right pallidum volume"
+        },
+        {
+            "@id": "niiri:0806055e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002285",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08150dba-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:07f598fe-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:07fb0f0a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:0806b85a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:08168578-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right amygdala volume"
+        },
+        {
+            "@id": "niiri:07f5d058-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        },
+        {
+            "@id": "niiri:08241d00-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:08081722-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:0820716e-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:081fe578-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07f6e24a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:0815b03a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right hippocampus volume"
+        },
+        {
+            "@id": "niiri:07f779e4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "fourth ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002422",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "fourth ventricle volume"
+        },
+        {
+            "@id": "niiri:08235e4c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right perivascular space volume"
+        },
+        {
+            "@id": "niiri:08105946-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right caudate nucleus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001873",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right caudate nucleus volume"
+        },
+        {
+            "@id": "niiri:07f12184-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0112559#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:07ff66ae-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:0808c316-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738264#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07ec0cee-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left cerebellum white matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002037",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left cerebellum white matter volume"
+        },
+        {
+            "@id": "niiri:07faa15a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left hippocampus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001954",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left hippocampus volume"
+        },
+        {
+            "@id": "niiri:080ae9ac-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right cerebellar cortex gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002129",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right cerebellar cortex volume"
+        },
+        {
+            "@id": "niiri:07f1f866-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:0802e3ba-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left perivascular space blood volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738267#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0014930",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left perivascular space volume"
+        },
+        {
+            "@id": "niiri:0821505c-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right ventral diencephalon gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right ventral diencephalon gray matter volume"
+        },
+        {
+            "@id": "niiri:07f94fd0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "brainstem gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002298",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "brainstem volume"
+        },
+        {
+            "@id": "niiri:07fc22f0-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738266#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07e902d8-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left inferior horn of the lateral ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0006091",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left inferior horn of the lateral ventricle volume"
+        },
+        {
+            "@id": "niiri:07fef804-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left nucleus accumbens gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001882",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left nucleus accumbens volume"
+        },
+        {
+            "@id": "niiri:07f0eb06-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "left putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left putamen volume"
+        },
+        {
+            "@id": "niiri:08049e26-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08267226-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "prov:Entity",
+                "measurement_datum"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738268#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:07fbec4a-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "left amygdala gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0738265#",
+            "hasLaterality": "Left",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001876",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "left amygdala volume"
+        },
+        {
+            "@id": "niiri:07e60290-8c58-11e9-808b-8c8590aa91df",
+            "@type": "prov:Activity",
+            "association": "_:ub29bL121C31",
+            "description": "Freesurfer segmentation statistics",
+            "fs:ColorTable": "/data/apps/freesurfer/6.0/ASegStatsLUT.txt",
+            "fs:ColorTableTimeStamp": "2017/01/18 14:00:02",
+            "fs:ExcludeSegId": "0 2 3 41 42",
+            "fs:Excluding": "Cortical Gray and White Matter",
+            "fs:InVolFile": "mri/norm.mgz",
+            "fs:InVolFileTimeStamp": "2019/02/26 15:58:09",
+            "fs:InVolFrame": "0",
+            "fs:NRows": "45",
+            "fs:NTableCols": "10",
+            "fs:PVVolFile": "mri/norm.mgz",
+            "fs:PVVolFileTimeStamp": "2019/02/26 15:58:09",
+            "fs:SUBJECTS_DIR": "/dfs3/pub/ltaylor2/downs",
+            "fs:SegVolFile": "mri/aseg.mgz",
+            "fs:SegVolFileTimeStamp": "2019/02/27 09:26:53",
+            "fs:Title": "Segmentation Statistics",
+            "fs:VoxelVolume_mm3": "1",
+            "fs:anatomy_type": "volume",
+            "fs:cmdline": "mri_segstats --seg mri/aseg.mgz --sum stats/aseg.stats --pv mri/norm.mgz --empty --brainmask mri/brainmask.mgz --brain-vol-from-seg --excludeid 0 --excl-ctxgmwm --supratent --subcortgray --in mri/norm.mgz --in-intensity-name norm --in-intensity-units MR --etiv --surf-wm-vol --surf-ctx-vol --totalgray --euler --ctab /data/apps/freesurfer/6.0/ASegStatsLUT.txt --subject 7002_20180525_MPRAGE",
+            "fs:cvs_version": "$Id: mri_segstats.c,v 1.121 2016/05/31 17:27:11 greve Exp $",
+            "fs:generating_program": "mri_segstats",
+            "fs:hostname": "compute-7-1.local",
+            "fs:machine": "x86_64",
+            "fs:subjectname": "7002_20180525_MPRAGE",
+            "fs:sysname": "Linux",
+            "fs:user": "ltaylor2",
+            "prov:wasAssociatedWith": {
+                "@id": "niiri:07e6c586-8c58-11e9-808b-8c8590aa91df"
+            },
+            "prov:wasGeneratedBy": {
+                "@id": "niiri:07e70654-8c58-11e9-808b-8c8590aa91df"
+            }
+        },
+        {
+            "@id": "niiri:08250db4-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right choroid plexus gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001886",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right choroid plexus volume"
+        },
+        {
+            "@id": "niiri:08118c44-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "right putamen gray matter volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "Right",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0001874",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "right putamen volume"
+        },
+        {
+            "@id": "niiri:07f4a9da-8c58-11e9-808b-8c8590aa91df",
+            "@type": [
+                "measurement_datum",
+                "prov:Entity"
+            ],
+            "description": "third ventricle cerebral spinal fluid volume",
+            "hasDatumType": "http://uri.interlex.org/base/ilx_0102597#",
+            "hasLaterality": "None",
+            "hasMeasurementType": "http://uri.interlex.org/base/ilx_0105536#",
+            "isAbout": "UBERON:0002286",
+            "isMeasureOf": {
+                "@id": "GrayMatter:"
+            },
+            "rdfs:label": "third ventricle volume"
+        }
+    ]
+}
