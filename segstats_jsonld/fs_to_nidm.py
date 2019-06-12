@@ -590,14 +590,15 @@ def remap2json(xlsxfile,
 
 
 
-def main(argv):
+def main():
 
     import argparse
     parser = argparse.ArgumentParser(prog='fs_to_nidm.py',
                                      description='''This program will load in a aseg.stats file from Freesurfer
                                         , augment the Freesurfer anatomical region designations with common data element
                                         anatomical designations, and save the statistics + region designations out as
-                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))''')
+                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))''',
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('-s', '--subject_dir', dest='subject_dir', type=str, required=True,
                         help='Path to Freesurfer subject directory')
     parser.add_argument('-jmap', '--json_map', dest='json_map', action='store_true', default = False,
@@ -650,4 +651,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main()
