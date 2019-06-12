@@ -10,20 +10,19 @@
 @prefix measurement_datum: <http://uri.interlex.org/base/ilx_0738269#> .
 @prefix nidm: <http://purl.org/nidash/nidm#> .
 @prefix niiri: <http://iri.nidash.org/> .
-@prefix ns1: <http://iri.nidash.org/08> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-ns1:abe38e-8a00-11e9-b722-8c8590aa91df a prov:Activity ;
+niiri:da955ca8-8b91-11e9-a6bd-8c8590aa91df a prov:Activity ;
     dct:description "Freesurfer segmentation statistics"^^xsd:string ;
     prov:qualifiedAssociation [ a prov:Association ;
-            prov:agent ns1:abf72a-8a00-11e9-b722-8c8590aa91df ;
+            prov:agent niiri:da961f26-8b91-11e9-a6bd-8c8590aa91df ;
             prov:hadRole "http://purl.org/nidash/nidm#NIDM_0000164"^^xsd:string ] ;
-    prov:wasAssociatedWith ns1:abf72a-8a00-11e9-b722-8c8590aa91df ;
-    prov:wasGeneratedBy ns1:acdf1e-8a00-11e9-b722-8c8590aa91df ;
+    prov:wasAssociatedWith niiri:da961f26-8b91-11e9-a6bd-8c8590aa91df ;
+    prov:wasGeneratedBy niiri:dac017e0-8b91-11e9-a6bd-8c8590aa91df ;
     fs:ColorTable "/data/apps/freesurfer/6.0/ASegStatsLUT.txt"^^xsd:string ;
     fs:ColorTableTimeStamp "2017/01/18 14:00:02"^^xsd:string ;
     fs:ExcludeSegId "0 2 3 41 42"^^xsd:string ;
@@ -50,7 +49,7 @@ ns1:abe38e-8a00-11e9-b722-8c8590aa91df a prov:Activity ;
     fs:sysname "Linux"^^xsd:string ;
     fs:user "ltaylor2"^^xsd:string .
 
-ns1:ace4f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac04990-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -60,7 +59,7 @@ ns1:ace4f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:acef18-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac0edd2-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -70,7 +69,7 @@ ns1:acef18-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:acf2ba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac12dec-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -80,7 +79,7 @@ ns1:acf2ba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:acf620-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac16c12-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -90,7 +89,7 @@ ns1:acf620-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:acf968-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac1aa60-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -100,7 +99,7 @@ ns1:acf968-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:acfca6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac1ea34-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -110,7 +109,7 @@ ns1:acfca6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:acffe4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac229cc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left lateral ventricle volume"^^xsd:string ;
     dct:description "left lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -120,7 +119,7 @@ ns1:acffe4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad0322-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac26d42-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -130,7 +129,7 @@ ns1:ad0322-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad0674-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac2abea-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -140,7 +139,7 @@ ns1:ad0674-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad09a8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac2e7fe-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -150,7 +149,7 @@ ns1:ad09a8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad0ce6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac325ca-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -160,7 +159,7 @@ ns1:ad0ce6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad102e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac362b0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -170,7 +169,7 @@ ns1:ad102e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ad1362-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac3a07c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -180,7 +179,7 @@ ns1:ad1362-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ad16a0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac3e05a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "left inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -190,7 +189,7 @@ ns1:ad16a0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad19e8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac418ea-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -200,7 +199,7 @@ ns1:ad19e8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad1d44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac45094-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -210,7 +209,7 @@ ns1:ad1d44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad2078-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac486a4-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -220,7 +219,7 @@ ns1:ad2078-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad23b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac4bbec-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -230,7 +229,7 @@ ns1:ad23b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad26fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac4f1c0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -240,7 +239,7 @@ ns1:ad26fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ad2abe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac527bc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -250,7 +249,7 @@ ns1:ad2abe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ad2e56-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac56056-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellum white matter volume"^^xsd:string ;
     dct:description "left cerebellum white matter volume"^^xsd:string ;
@@ -260,7 +259,7 @@ ns1:ad2e56-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad3658-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac59710-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -270,7 +269,7 @@ ns1:ad3658-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad39f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac5e328-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -280,7 +279,7 @@ ns1:ad39f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad3dba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac61d48-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -290,7 +289,7 @@ ns1:ad3dba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad4120-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac65448-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -300,7 +299,7 @@ ns1:ad4120-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad44ae-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac68c7e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -310,7 +309,7 @@ ns1:ad44ae-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ad4800-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac6c248-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -320,7 +319,7 @@ ns1:ad4800-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ad4b98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac6f8b2-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left cerebellar cortex volume"^^xsd:string ;
     dct:description "left cerebellar cortex gray matter volume"^^xsd:string ;
@@ -330,7 +329,7 @@ ns1:ad4b98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad4eea-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac72e7c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -340,7 +339,7 @@ ns1:ad4eea-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad5278-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac764c8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -350,7 +349,7 @@ ns1:ad5278-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad55d4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac79a60-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -360,7 +359,7 @@ ns1:ad55d4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad5962-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac7cfe4-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -370,7 +369,7 @@ ns1:ad5962-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad5cb4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac8055e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -380,7 +379,7 @@ ns1:ad5cb4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ad604c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac83b14-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -390,7 +389,7 @@ ns1:ad604c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ad639e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac8726e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left thalamus volume"^^xsd:string ;
     dct:description "left thalamus gray matter volume"^^xsd:string ;
@@ -400,7 +399,7 @@ ns1:ad639e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad6740-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac8a81a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -410,7 +409,7 @@ ns1:ad6740-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad6ace-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac8ddc6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -420,7 +419,7 @@ ns1:ad6ace-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad6e70-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac913fe-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -430,7 +429,7 @@ ns1:ad6e70-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad737a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac949aa-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -440,7 +439,7 @@ ns1:ad737a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad76ea-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac97fa6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -450,7 +449,7 @@ ns1:ad76ea-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ad7a50-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac9b552-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -460,7 +459,7 @@ ns1:ad7a50-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ad7dc0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac9edd8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left caudate nucleus volume"^^xsd:string ;
     dct:description "left caudate nucleus gray matter volume"^^xsd:string ;
@@ -470,7 +469,7 @@ ns1:ad7dc0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ad8108-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daca2582-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -480,7 +479,7 @@ ns1:ad8108-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ad84b4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daca5bce-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -490,7 +489,7 @@ ns1:ad84b4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ad8ac2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daca9102-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -500,7 +499,7 @@ ns1:ad8ac2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ad9076-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacac5dc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -510,7 +509,7 @@ ns1:ad9076-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ad97c4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacaf872-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -520,7 +519,7 @@ ns1:ad97c4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ada17e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacb2b1c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -530,7 +529,7 @@ ns1:ada17e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ada606-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacb6294-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left putamen volume"^^xsd:string ;
     dct:description "left putamen gray matter volume"^^xsd:string ;
@@ -540,7 +539,7 @@ ns1:ada606-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:adaa02-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacb955c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -550,7 +549,7 @@ ns1:adaa02-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:adad68-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacbc838-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -560,7 +559,7 @@ ns1:adad68-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:adb0f6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacbf9ac-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -570,7 +569,7 @@ ns1:adb0f6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:adb43e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacc2d14-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -580,7 +579,7 @@ ns1:adb43e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:adb7c2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacc68d8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -590,7 +589,7 @@ ns1:adb7c2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:adbb00-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacc9a56-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -600,7 +599,7 @@ ns1:adbb00-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:adbe7a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daccca8a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left pallidum volume"^^xsd:string ;
     dct:description "left pallidum gray matter volume"^^xsd:string ;
@@ -610,7 +609,7 @@ ns1:adbe7a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:adc1fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daccfa3c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -620,7 +619,7 @@ ns1:adc1fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:adc58c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacd2f34-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -630,7 +629,7 @@ ns1:adc58c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:adc8ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacd658a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -640,7 +639,7 @@ ns1:adc8ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:adcc44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacd9848-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -650,7 +649,7 @@ ns1:adcc44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:adcf82-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacdcaca-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -660,7 +659,7 @@ ns1:adcf82-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:add2f2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacdffcc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -670,7 +669,7 @@ ns1:add2f2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:add69e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dace3226-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "third ventricle volume"^^xsd:string ;
     dct:description "third ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -680,7 +679,7 @@ ns1:add69e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:adda22-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dace669c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -690,7 +689,7 @@ ns1:adda22-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:addd60-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dace9964-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -700,7 +699,7 @@ ns1:addd60-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ade0d0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacecc22-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -710,7 +709,7 @@ ns1:ade0d0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ade404-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacf0156-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -720,7 +719,7 @@ ns1:ade404-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ade936-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacf343c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -730,7 +729,7 @@ ns1:ade936-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:adec7e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacf66be-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -740,7 +739,7 @@ ns1:adec7e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:adeff8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacf99ea-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "fourth ventricle volume"^^xsd:string ;
     dct:description "fourth ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -750,7 +749,7 @@ ns1:adeff8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:adf340-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dacfd2e8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -760,7 +759,7 @@ ns1:adf340-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:adf6b0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad005d8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -770,7 +769,7 @@ ns1:adf6b0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:adfa34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad03864-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -780,7 +779,7 @@ ns1:adfa34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:adfdae-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad06b04-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -790,7 +789,7 @@ ns1:adfdae-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae00ec-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad09ae8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -800,7 +799,7 @@ ns1:ae00ec-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae0484-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad0d2ce-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -810,7 +809,7 @@ ns1:ae0484-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae07b8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad102da-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "brainstem volume"^^xsd:string ;
     dct:description "brainstem gray matter volume"^^xsd:string ;
@@ -820,7 +819,7 @@ ns1:ae07b8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae0b3c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad13318-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -830,7 +829,7 @@ ns1:ae0b3c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae0e70-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad16874-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -840,7 +839,7 @@ ns1:ae0e70-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ae121c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad19880-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -850,7 +849,7 @@ ns1:ae121c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ae1550-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad1cad0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -860,7 +859,7 @@ ns1:ae1550-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae18ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad1fae6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -870,7 +869,7 @@ ns1:ae18ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae1c08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad22a8e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -880,7 +879,7 @@ ns1:ae1c08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae1fb4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad25fd6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left hippocampus volume"^^xsd:string ;
     dct:description "left hippocampus gray matter volume"^^xsd:string ;
@@ -890,7 +889,7 @@ ns1:ae1fb4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae2306-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad2935c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -900,7 +899,7 @@ ns1:ae2306-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae268a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad2c7c8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -910,7 +909,7 @@ ns1:ae268a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ae29c8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad2f8d8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -920,7 +919,7 @@ ns1:ae29c8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ae2d38-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad328f8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -930,7 +929,7 @@ ns1:ae2d38-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae30f8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad358be-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -940,7 +939,7 @@ ns1:ae30f8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae3472-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad39478-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -950,7 +949,7 @@ ns1:ae3472-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae37a6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad3c98e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left amygdala volume"^^xsd:string ;
     dct:description "left amygdala gray matter volume"^^xsd:string ;
@@ -960,7 +959,7 @@ ns1:ae37a6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae3b0c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad402f0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -970,7 +969,7 @@ ns1:ae3b0c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae3e40-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad4429c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -980,7 +979,7 @@ ns1:ae3e40-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ae41a6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad49ad0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -990,7 +989,7 @@ ns1:ae41a6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ae4516-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad4e012-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -1000,7 +999,7 @@ ns1:ae4516-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae4886-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad51b90-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -1010,7 +1009,7 @@ ns1:ae4886-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae4bb0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad550ba-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -1020,7 +1019,7 @@ ns1:ae4bb0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae5682-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad59e30-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cerebrum cerebral spinal fluid volume"^^xsd:string ;
     dct:description "cerebrum cerebral spinal fluid volume"^^xsd:string ;
@@ -1030,7 +1029,7 @@ ns1:ae5682-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae5e8e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad5d292-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1040,7 +1039,7 @@ ns1:ae5e8e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae6366-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad60942-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1050,7 +1049,7 @@ ns1:ae6366-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ae674e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad63cbe-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1060,7 +1059,7 @@ ns1:ae674e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ae6bd6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad67008-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1070,7 +1069,7 @@ ns1:ae6bd6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae6f5a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad6a2bc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1080,7 +1079,7 @@ ns1:ae6f5a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae737e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad6d64c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1090,7 +1089,7 @@ ns1:ae737e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae7720-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad70f40-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left nucleus accumbens volume"^^xsd:string ;
     dct:description "left nucleus accumbens gray matter volume"^^xsd:string ;
@@ -1100,7 +1099,7 @@ ns1:ae7720-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae7c02-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad7460e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1110,7 +1109,7 @@ ns1:ae7c02-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae8332-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad77b74-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1120,7 +1119,7 @@ ns1:ae8332-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:ae885a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad7b03a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1130,7 +1129,7 @@ ns1:ae885a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:ae8bfc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad7e438-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1140,7 +1139,7 @@ ns1:ae8bfc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:ae8fb2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad818b8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1150,7 +1149,7 @@ ns1:ae8fb2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:ae932c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad84b12-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1160,7 +1159,7 @@ ns1:ae932c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:ae96ce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad88370-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "left ventral diencephalon gray matter volume"^^xsd:string ;
@@ -1170,7 +1169,7 @@ ns1:ae96ce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:ae9a48-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad8b656-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1180,7 +1179,7 @@ ns1:ae9a48-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:ae9ff2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad8ee96-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1190,7 +1189,7 @@ ns1:ae9ff2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:aea39e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad92474-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1200,7 +1199,7 @@ ns1:aea39e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:aea7fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad957be-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1210,7 +1209,7 @@ ns1:aea7fe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:aeabbe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad98afe-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1220,7 +1219,7 @@ ns1:aeabbe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:aeafec-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad9c046-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1230,7 +1229,7 @@ ns1:aeafec-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:aeb44c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dad9f2fa-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left perivascular space volume"^^xsd:string ;
     dct:description "left perivascular space blood volume"^^xsd:string ;
@@ -1240,7 +1239,7 @@ ns1:aeb44c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:aeb802-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dada2626-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1250,7 +1249,7 @@ ns1:aeb802-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:aebd52-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dada593e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1260,7 +1259,7 @@ ns1:aebd52-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:aec112-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dada8d14-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1270,7 +1269,7 @@ ns1:aec112-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:aec46e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadacc2a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1280,7 +1279,7 @@ ns1:aec46e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:aec806-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadaff9c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1290,7 +1289,7 @@ ns1:aec806-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:aecc34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadb3214-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1300,7 +1299,7 @@ ns1:aecc34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:aed13e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadb64f0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "left choroid plexus volume"^^xsd:string ;
     dct:description "left choroid plexus gray matter volume"^^xsd:string ;
@@ -1310,7 +1309,7 @@ ns1:aed13e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:aed490-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadbab9a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1320,7 +1319,7 @@ ns1:aed490-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:aed846-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadbe312-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1330,7 +1329,7 @@ ns1:aed846-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:aedbca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadc15c6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1340,7 +1339,7 @@ ns1:aedbca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:aedf4e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadc4866-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1350,7 +1349,7 @@ ns1:aedf4e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:aee296-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadc8a4c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1360,7 +1359,7 @@ ns1:aee296-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:aee674-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadcbe2c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1370,7 +1369,7 @@ ns1:aee674-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:aeef52-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadcf25c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right lateral ventricle volume"^^xsd:string ;
     dct:description "right lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1380,7 +1379,7 @@ ns1:aeef52-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:aef448-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadd26b4-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1390,7 +1389,7 @@ ns1:aef448-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:aef7d6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadd5e22-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1400,7 +1399,7 @@ ns1:aef7d6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:aefb78-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadd9234-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1410,7 +1409,7 @@ ns1:aefb78-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:aefeca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daddc808-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1420,7 +1419,7 @@ ns1:aefeca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af024e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daddfeae-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1430,7 +1429,7 @@ ns1:af024e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af0596-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dade3234-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1440,7 +1439,7 @@ ns1:af0596-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af0906-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dade6e20-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right inferior horn of the lateral ventricle volume"^^xsd:string ;
     dct:description "right inferior horn of the lateral ventricle cerebral spinal fluid volume"^^xsd:string ;
@@ -1450,7 +1449,7 @@ ns1:af0906-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af0c94-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadea8f4-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1460,7 +1459,7 @@ ns1:af0c94-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af102c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadedb12-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1470,7 +1469,7 @@ ns1:af102c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af1374-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadf0cd6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1480,7 +1479,7 @@ ns1:af1374-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af1716-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadf449e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1490,7 +1489,7 @@ ns1:af1716-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af1a54-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadf7658-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1500,7 +1499,7 @@ ns1:af1a54-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af1dce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadfaa2e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1510,7 +1509,7 @@ ns1:af1dce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af2152-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dadfe958-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellum white matter volume"^^xsd:string ;
     dct:description "right cerebellum white matter volume"^^xsd:string ;
@@ -1520,7 +1519,7 @@ ns1:af2152-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af24e0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae01dec-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1530,7 +1529,7 @@ ns1:af24e0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af281e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae05960-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1540,7 +1539,7 @@ ns1:af281e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af2b98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae08f70-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1550,7 +1549,7 @@ ns1:af2b98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af2ed6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae0c562-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1560,7 +1559,7 @@ ns1:af2ed6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af3278-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae0fb04-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1570,7 +1569,7 @@ ns1:af3278-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af35ac-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae12e08-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1580,7 +1579,7 @@ ns1:af35ac-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af394e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae16648-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right cerebellar cortex volume"^^xsd:string ;
     dct:description "right cerebellar cortex gray matter volume"^^xsd:string ;
@@ -1590,7 +1589,7 @@ ns1:af394e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af3c8c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae19c44-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1600,7 +1599,7 @@ ns1:af3c8c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af4006-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae1d042-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1610,7 +1609,7 @@ ns1:af4006-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af4420-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae20846-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1620,7 +1619,7 @@ ns1:af4420-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af47b8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae23c94-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1630,7 +1629,7 @@ ns1:af47b8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af4b14-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae27042-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1640,7 +1639,7 @@ ns1:af4b14-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af5028-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae2a472-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1650,7 +1649,7 @@ ns1:af5028-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af53a2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae2da78-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right thalamus volume"^^xsd:string ;
     dct:description "right thalamus gray matter volume"^^xsd:string ;
@@ -1660,7 +1659,7 @@ ns1:af53a2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af573a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae31506-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1670,7 +1669,7 @@ ns1:af573a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af5aa0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae34dc8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1680,7 +1679,7 @@ ns1:af5aa0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af5e2e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae380e0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1690,7 +1689,7 @@ ns1:af5e2e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af6180-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae3b556-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1700,7 +1699,7 @@ ns1:af6180-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af6504-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae3e9c2-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1710,7 +1709,7 @@ ns1:af6504-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af6892-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae41cb2-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1720,7 +1719,7 @@ ns1:af6892-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af6cca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae45d1c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right caudate nucleus volume"^^xsd:string ;
     dct:description "right caudate nucleus gray matter volume"^^xsd:string ;
@@ -1730,7 +1729,7 @@ ns1:af6cca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af7058-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae49e62-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1740,7 +1739,7 @@ ns1:af7058-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af73d2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae4d44a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1750,7 +1749,7 @@ ns1:af73d2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af772e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae50910-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1760,7 +1759,7 @@ ns1:af772e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af7b3e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae53dea-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1770,7 +1769,7 @@ ns1:af7b3e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af7e72-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae5733c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1780,7 +1779,7 @@ ns1:af7e72-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af81e2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae5a820-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1790,7 +1789,7 @@ ns1:af81e2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af8516-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae5df8e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right putamen volume"^^xsd:string ;
     dct:description "right putamen gray matter volume"^^xsd:string ;
@@ -1800,7 +1799,7 @@ ns1:af8516-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:af8890-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae61422-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1810,7 +1809,7 @@ ns1:af8890-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:af8bce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae64dd4-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1820,7 +1819,7 @@ ns1:af8bce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:af8f34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae691b8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1830,7 +1829,7 @@ ns1:af8f34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:af9272-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae6c868-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1840,7 +1839,7 @@ ns1:af9272-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:af9664-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae6fca2-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1850,7 +1849,7 @@ ns1:af9664-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:af99a2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae74d7e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1860,7 +1859,7 @@ ns1:af99a2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:af9d08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae78b90-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right pallidum volume"^^xsd:string ;
     dct:description "right pallidum gray matter volume"^^xsd:string ;
@@ -1870,7 +1869,7 @@ ns1:af9d08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:afa046-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae7ca88-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1880,7 +1879,7 @@ ns1:afa046-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:afa3b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae81c36-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1890,7 +1889,7 @@ ns1:afa3b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:afa730-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae86632-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1900,7 +1899,7 @@ ns1:afa730-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:afaaaa-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae8a4c6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1910,7 +1909,7 @@ ns1:afaaaa-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:afadde-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae8f638-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1920,7 +1919,7 @@ ns1:afadde-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:afb180-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae94110-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1930,7 +1929,7 @@ ns1:afb180-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:afb4f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae9842c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right hippocampus volume"^^xsd:string ;
     dct:description "right hippocampus gray matter volume"^^xsd:string ;
@@ -1940,7 +1939,7 @@ ns1:afb4f0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:afb874-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dae9e232-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -1950,7 +1949,7 @@ ns1:afb874-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:afbba8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daea24d6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -1960,7 +1959,7 @@ ns1:afbba8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:afbf18-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daea5d2a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -1970,7 +1969,7 @@ ns1:afbf18-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:afc288-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daea938a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -1980,7 +1979,7 @@ ns1:afc288-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:afc60c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeac9ae-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -1990,7 +1989,7 @@ ns1:afc60c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:afc94a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeb0126-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -2000,7 +1999,7 @@ ns1:afc94a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:afccba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeb3786-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right amygdala volume"^^xsd:string ;
     dct:description "right amygdala gray matter volume"^^xsd:string ;
@@ -2010,7 +2009,7 @@ ns1:afccba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:afd002-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeb6da0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2020,7 +2019,7 @@ ns1:afd002-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:afd368-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeba3a6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2030,7 +2029,7 @@ ns1:afd368-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:afd69c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daebda2e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2040,7 +2039,7 @@ ns1:afd69c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:afda0c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daec1052-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2050,7 +2049,7 @@ ns1:afda0c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:afdf98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daec463a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2060,7 +2059,7 @@ ns1:afdf98-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:afe312-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daec7c40-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2070,7 +2069,7 @@ ns1:afe312-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:afe646-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daecb21e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right nucleus accumbens volume"^^xsd:string ;
     dct:description "right nucleus accumbens gray matter volume"^^xsd:string ;
@@ -2080,7 +2079,7 @@ ns1:afe646-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:afe9c0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daece86a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2090,7 +2089,7 @@ ns1:afe9c0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:afecfe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daed1e16-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2100,7 +2099,7 @@ ns1:afecfe-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:aff208-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daed543a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2110,7 +2109,7 @@ ns1:aff208-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:aff564-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daed8a2c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2120,7 +2119,7 @@ ns1:aff564-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:aff8d4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daedc01e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2130,7 +2129,7 @@ ns1:aff8d4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:affc08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daedf57a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2140,7 +2139,7 @@ ns1:affc08-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:afff6e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daee2b26-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right ventral diencephalon gray matter volume"^^xsd:string ;
     dct:description "right ventral diencephalon gray matter volume"^^xsd:string ;
@@ -2150,7 +2149,7 @@ ns1:afff6e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:b002b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daee61b8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2160,7 +2159,7 @@ ns1:b002b6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:b00630-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daee9804-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2170,7 +2169,7 @@ ns1:b00630-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:b009a0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daeecdec-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2180,7 +2179,7 @@ ns1:b009a0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:b00d1a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daef0406-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2190,7 +2189,7 @@ ns1:b00d1a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:b0104e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daef39c6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2200,7 +2199,7 @@ ns1:b0104e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:b013c8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daef74ae-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2210,7 +2209,7 @@ ns1:b013c8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:b016fc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daefaa5a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right perivascular space volume"^^xsd:string ;
     dct:description "right perivascular space blood volume"^^xsd:string ;
@@ -2220,7 +2219,7 @@ ns1:b016fc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:b01ad0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daefddb8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2230,7 +2229,7 @@ ns1:b01ad0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:b01fc6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf01c38-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2240,7 +2239,7 @@ ns1:b01fc6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:b0234a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf0528e-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2250,7 +2249,7 @@ ns1:b0234a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:b026ce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf085a6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2260,7 +2259,7 @@ ns1:b026ce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:b02a48-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf0b8e6-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2270,7 +2269,7 @@ ns1:b02a48-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:b030e2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf0f1d0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2280,7 +2279,7 @@ ns1:b030e2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:b034e8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf124fc-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "right choroid plexus volume"^^xsd:string ;
     dct:description "right choroid plexus gray matter volume"^^xsd:string ;
@@ -2290,7 +2289,7 @@ ns1:b034e8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:b039ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf159fe-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2300,7 +2299,7 @@ ns1:b039ca-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:b03d44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf18c1c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2310,7 +2309,7 @@ ns1:b03d44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:b0406e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf1be12-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2320,7 +2319,7 @@ ns1:b0406e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:b043de-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf1fa62-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2330,7 +2329,7 @@ ns1:b043de-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:b0471c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf23f2c-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2340,7 +2339,7 @@ ns1:b0471c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:b04a96-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf273de-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2350,7 +2349,7 @@ ns1:b04a96-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:b04e06-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf2b2e0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "cavum septum pellucidum volume"^^xsd:string ;
     dct:description "cavum septum pellucidum cerebral spinal fluid volume"^^xsd:string ;
@@ -2360,427 +2359,7 @@ ns1:b04e06-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:b051a8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b05522-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b0589c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b05bd0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b05f40-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b06274-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b0660c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b0695e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b06ce2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b0705c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b073d6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b0770a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b07a70-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b07de0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b08164-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b084ac-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b08812-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b08b46-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b08eac-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b091e0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b096c2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b09a14-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b09d8e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b0a0d6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b0a446-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b0a784-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b0ab26-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b0ae64-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b0b210-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b0b8fa-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b0be0e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b0c2be-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b0c7e6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b0ccd2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b0d132-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Left"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b0d484-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b0d8b2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b0dc5e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b0e03c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b0e3c0-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b0e730-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b0eab4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: ""^^xsd:string ;
-    hasLaterality: "Right"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b0eec4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf2f93a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2790,7 +2369,7 @@ ns1:b0eec4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
 
-ns1:b0f216-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf32c66-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2800,7 +2379,7 @@ ns1:b0f216-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
 
-ns1:b0f590-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf37ab8-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2810,7 +2389,7 @@ ns1:b0f590-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
 
-ns1:b0f8c4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf3baa0-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2820,7 +2399,7 @@ ns1:b0f8c4-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
 
-ns1:b0fc34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf4032a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2830,7 +2409,7 @@ ns1:b0fc34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
 
-ns1:b0ff68-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf43b92-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2840,7 +2419,7 @@ ns1:b0ff68-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
 
-ns1:b102d8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:daf4721a-8b91-11e9-a6bd-8c8590aa91df a measurement_datum:,
         prov:Entity ;
     rdfs:label "optic chiasm volume"^^xsd:string ;
     dct:description "optic chiasm white matter volume"^^xsd:string ;
@@ -2850,675 +2429,248 @@ ns1:b102d8-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
     isMeasureOf: GrayMatter: ;
     hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
 
-ns1:b10620-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
+niiri:dac017e0-8b91-11e9-a6bd-8c8590aa91df a nidm:FSStatsCollection,
         prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
+    niiri:dac04990-8b91-11e9-a6bd-8c8590aa91df "15759"^^xsd:string ;
+    niiri:dac0edd2-8b91-11e9-a6bd-8c8590aa91df "15987.9"^^xsd:string ;
+    niiri:dac12dec-8b91-11e9-a6bd-8c8590aa91df "21.5398"^^xsd:string ;
+    niiri:dac16c12-8b91-11e9-a6bd-8c8590aa91df "11.3405"^^xsd:string ;
+    niiri:dac1aa60-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dac1ea34-8b91-11e9-a6bd-8c8590aa91df "83.0000"^^xsd:string ;
+    niiri:dac229cc-8b91-11e9-a6bd-8c8590aa91df "83.0000"^^xsd:string ;
+    niiri:dac26d42-8b91-11e9-a6bd-8c8590aa91df "881"^^xsd:string ;
+    niiri:dac2abea-8b91-11e9-a6bd-8c8590aa91df "854.0"^^xsd:string ;
+    niiri:dac2e7fe-8b91-11e9-a6bd-8c8590aa91df "36.0704"^^xsd:string ;
+    niiri:dac325ca-8b91-11e9-a6bd-8c8590aa91df "16.0004"^^xsd:string ;
+    niiri:dac362b0-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dac3a07c-8b91-11e9-a6bd-8c8590aa91df "77.0000"^^xsd:string ;
+    niiri:dac3e05a-8b91-11e9-a6bd-8c8590aa91df "77.0000"^^xsd:string ;
+    niiri:dac418ea-8b91-11e9-a6bd-8c8590aa91df "8534"^^xsd:string ;
+    niiri:dac45094-8b91-11e9-a6bd-8c8590aa91df "9040.1"^^xsd:string ;
+    niiri:dac486a4-8b91-11e9-a6bd-8c8590aa91df "81.8074"^^xsd:string ;
+    niiri:dac4bbec-8b91-11e9-a6bd-8c8590aa91df "6.3803"^^xsd:string ;
+    niiri:dac4f1c0-8b91-11e9-a6bd-8c8590aa91df "29.0000"^^xsd:string ;
+    niiri:dac527bc-8b91-11e9-a6bd-8c8590aa91df "99.0000"^^xsd:string ;
+    niiri:dac56056-8b91-11e9-a6bd-8c8590aa91df "70.0000"^^xsd:string ;
+    niiri:dac59710-8b91-11e9-a6bd-8c8590aa91df "36138"^^xsd:string ;
+    niiri:dac5e328-8b91-11e9-a6bd-8c8590aa91df "35870.5"^^xsd:string ;
+    niiri:dac61d48-8b91-11e9-a6bd-8c8590aa91df "62.9976"^^xsd:string ;
+    niiri:dac65448-8b91-11e9-a6bd-8c8590aa91df "11.1826"^^xsd:string ;
+    niiri:dac68c7e-8b91-11e9-a6bd-8c8590aa91df "7.0000"^^xsd:string ;
+    niiri:dac6c248-8b91-11e9-a6bd-8c8590aa91df "94.0000"^^xsd:string ;
+    niiri:dac6f8b2-8b91-11e9-a6bd-8c8590aa91df "87.0000"^^xsd:string ;
+    niiri:dac72e7c-8b91-11e9-a6bd-8c8590aa91df "7362"^^xsd:string ;
+    niiri:dac764c8-8b91-11e9-a6bd-8c8590aa91df "7234.6"^^xsd:string ;
+    niiri:dac79a60-8b91-11e9-a6bd-8c8590aa91df "87.5560"^^xsd:string ;
+    niiri:dac7cfe4-8b91-11e9-a6bd-8c8590aa91df "9.2717"^^xsd:string ;
+    niiri:dac8055e-8b91-11e9-a6bd-8c8590aa91df "25.0000"^^xsd:string ;
+    niiri:dac83b14-8b91-11e9-a6bd-8c8590aa91df "110.0000"^^xsd:string ;
+    niiri:dac8726e-8b91-11e9-a6bd-8c8590aa91df "85.0000"^^xsd:string ;
+    niiri:dac8a81a-8b91-11e9-a6bd-8c8590aa91df "2835"^^xsd:string ;
+    niiri:dac8ddc6-8b91-11e9-a6bd-8c8590aa91df "2759.1"^^xsd:string ;
+    niiri:dac913fe-8b91-11e9-a6bd-8c8590aa91df "79.7436"^^xsd:string ;
+    niiri:dac949aa-8b91-11e9-a6bd-8c8590aa91df "8.8441"^^xsd:string ;
+    niiri:dac97fa6-8b91-11e9-a6bd-8c8590aa91df "47.0000"^^xsd:string ;
+    niiri:dac9b552-8b91-11e9-a6bd-8c8590aa91df "110.0000"^^xsd:string ;
+    niiri:dac9edd8-8b91-11e9-a6bd-8c8590aa91df "63.0000"^^xsd:string ;
+    niiri:daca2582-8b91-11e9-a6bd-8c8590aa91df "4642"^^xsd:string ;
+    niiri:daca5bce-8b91-11e9-a6bd-8c8590aa91df "4608.9"^^xsd:string ;
+    niiri:daca9102-8b91-11e9-a6bd-8c8590aa91df "84.1915"^^xsd:string ;
+    niiri:dacac5dc-8b91-11e9-a6bd-8c8590aa91df "6.0713"^^xsd:string ;
+    niiri:dacaf872-8b91-11e9-a6bd-8c8590aa91df "55.0000"^^xsd:string ;
+    niiri:dacb2b1c-8b91-11e9-a6bd-8c8590aa91df "108.0000"^^xsd:string ;
+    niiri:dacb6294-8b91-11e9-a6bd-8c8590aa91df "53.0000"^^xsd:string ;
+    niiri:dacb955c-8b91-11e9-a6bd-8c8590aa91df "2318"^^xsd:string ;
+    niiri:dacbc838-8b91-11e9-a6bd-8c8590aa91df "2288.1"^^xsd:string ;
+    niiri:dacbf9ac-8b91-11e9-a6bd-8c8590aa91df "87.3512"^^xsd:string ;
+    niiri:dacc2d14-8b91-11e9-a6bd-8c8590aa91df "18.3091"^^xsd:string ;
+    niiri:dacc68d8-8b91-11e9-a6bd-8c8590aa91df "10.0000"^^xsd:string ;
+    niiri:dacc9a56-8b91-11e9-a6bd-8c8590aa91df "111.0000"^^xsd:string ;
+    niiri:daccca8a-8b91-11e9-a6bd-8c8590aa91df "101.0000"^^xsd:string ;
+    niiri:daccfa3c-8b91-11e9-a6bd-8c8590aa91df "1241"^^xsd:string ;
+    niiri:dacd2f34-8b91-11e9-a6bd-8c8590aa91df "1285.1"^^xsd:string ;
+    niiri:dacd658a-8b91-11e9-a6bd-8c8590aa91df "27.5995"^^xsd:string ;
+    niiri:dacd9848-8b91-11e9-a6bd-8c8590aa91df "13.5391"^^xsd:string ;
+    niiri:dacdcaca-8b91-11e9-a6bd-8c8590aa91df "4.0000"^^xsd:string ;
+    niiri:dacdffcc-8b91-11e9-a6bd-8c8590aa91df "80.0000"^^xsd:string ;
+    niiri:dace3226-8b91-11e9-a6bd-8c8590aa91df "76.0000"^^xsd:string ;
+    niiri:dace669c-8b91-11e9-a6bd-8c8590aa91df "2670"^^xsd:string ;
+    niiri:dace9964-8b91-11e9-a6bd-8c8590aa91df "2780.5"^^xsd:string ;
+    niiri:dacecc22-8b91-11e9-a6bd-8c8590aa91df "24.1330"^^xsd:string ;
+    niiri:dacf0156-8b91-11e9-a6bd-8c8590aa91df "10.0015"^^xsd:string ;
+    niiri:dacf343c-8b91-11e9-a6bd-8c8590aa91df "5.0000"^^xsd:string ;
+    niiri:dacf66be-8b91-11e9-a6bd-8c8590aa91df "68.0000"^^xsd:string ;
+    niiri:dacf99ea-8b91-11e9-a6bd-8c8590aa91df "63.0000"^^xsd:string ;
+    niiri:dacfd2e8-8b91-11e9-a6bd-8c8590aa91df "18012"^^xsd:string ;
+    niiri:dad005d8-8b91-11e9-a6bd-8c8590aa91df "18044.1"^^xsd:string ;
+    niiri:dad03864-8b91-11e9-a6bd-8c8590aa91df "81.4542"^^xsd:string ;
+    niiri:dad06b04-8b91-11e9-a6bd-8c8590aa91df "9.7596"^^xsd:string ;
+    niiri:dad09ae8-8b91-11e9-a6bd-8c8590aa91df "21.0000"^^xsd:string ;
+    niiri:dad0d2ce-8b91-11e9-a6bd-8c8590aa91df "103.0000"^^xsd:string ;
+    niiri:dad102da-8b91-11e9-a6bd-8c8590aa91df "82.0000"^^xsd:string ;
+    niiri:dad13318-8b91-11e9-a6bd-8c8590aa91df "3372"^^xsd:string ;
+    niiri:dad16874-8b91-11e9-a6bd-8c8590aa91df "3180.2"^^xsd:string ;
+    niiri:dad19880-8b91-11e9-a6bd-8c8590aa91df "64.9425"^^xsd:string ;
+    niiri:dad1cad0-8b91-11e9-a6bd-8c8590aa91df "12.6008"^^xsd:string ;
+    niiri:dad1fae6-8b91-11e9-a6bd-8c8590aa91df "12.0000"^^xsd:string ;
+    niiri:dad22a8e-8b91-11e9-a6bd-8c8590aa91df "104.0000"^^xsd:string ;
+    niiri:dad25fd6-8b91-11e9-a6bd-8c8590aa91df "92.0000"^^xsd:string ;
+    niiri:dad2935c-8b91-11e9-a6bd-8c8590aa91df "1209"^^xsd:string ;
+    niiri:dad2c7c8-8b91-11e9-a6bd-8c8590aa91df "1210.2"^^xsd:string ;
+    niiri:dad2f8d8-8b91-11e9-a6bd-8c8590aa91df "70.9462"^^xsd:string ;
+    niiri:dad328f8-8b91-11e9-a6bd-8c8590aa91df "6.8928"^^xsd:string ;
+    niiri:dad358be-8b91-11e9-a6bd-8c8590aa91df "44.0000"^^xsd:string ;
+    niiri:dad39478-8b91-11e9-a6bd-8c8590aa91df "91.0000"^^xsd:string ;
+    niiri:dad3c98e-8b91-11e9-a6bd-8c8590aa91df "47.0000"^^xsd:string ;
+    niiri:dad402f0-8b91-11e9-a6bd-8c8590aa91df "1105"^^xsd:string ;
+    niiri:dad4429c-8b91-11e9-a6bd-8c8590aa91df "1075.9"^^xsd:string ;
+    niiri:dad49ad0-8b91-11e9-a6bd-8c8590aa91df "39.0416"^^xsd:string ;
+    niiri:dad4e012-8b91-11e9-a6bd-8c8590aa91df "15.0519"^^xsd:string ;
+    niiri:dad51b90-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dad550ba-8b91-11e9-a6bd-8c8590aa91df "103.0000"^^xsd:string ;
+    niiri:dad59e30-8b91-11e9-a6bd-8c8590aa91df "103.0000"^^xsd:string ;
+    niiri:dad5d292-8b91-11e9-a6bd-8c8590aa91df "294"^^xsd:string ;
+    niiri:dad60942-8b91-11e9-a6bd-8c8590aa91df "269.9"^^xsd:string ;
+    niiri:dad63cbe-8b91-11e9-a6bd-8c8590aa91df "76.9626"^^xsd:string ;
+    niiri:dad67008-8b91-11e9-a6bd-8c8590aa91df "6.7890"^^xsd:string ;
+    niiri:dad6a2bc-8b91-11e9-a6bd-8c8590aa91df "47.0000"^^xsd:string ;
+    niiri:dad6d64c-8b91-11e9-a6bd-8c8590aa91df "99.0000"^^xsd:string ;
+    niiri:dad70f40-8b91-11e9-a6bd-8c8590aa91df "52.0000"^^xsd:string ;
+    niiri:dad7460e-8b91-11e9-a6bd-8c8590aa91df "3677"^^xsd:string ;
+    niiri:dad77b74-8b91-11e9-a6bd-8c8590aa91df "3617.3"^^xsd:string ;
+    niiri:dad7b03a-8b91-11e9-a6bd-8c8590aa91df "90.2744"^^xsd:string ;
+    niiri:dad7e438-8b91-11e9-a6bd-8c8590aa91df "10.6251"^^xsd:string ;
+    niiri:dad818b8-8b91-11e9-a6bd-8c8590aa91df "28.0000"^^xsd:string ;
+    niiri:dad84b12-8b91-11e9-a6bd-8c8590aa91df "107.0000"^^xsd:string ;
+    niiri:dad88370-8b91-11e9-a6bd-8c8590aa91df "79.0000"^^xsd:string ;
+    niiri:dad8b656-8b91-11e9-a6bd-8c8590aa91df "6"^^xsd:string ;
+    niiri:dad8ee96-8b91-11e9-a6bd-8c8590aa91df "12.3"^^xsd:string ;
+    niiri:dad92474-8b91-11e9-a6bd-8c8590aa91df "64.3333"^^xsd:string ;
+    niiri:dad957be-8b91-11e9-a6bd-8c8590aa91df "3.2041"^^xsd:string ;
+    niiri:dad98afe-8b91-11e9-a6bd-8c8590aa91df "60.0000"^^xsd:string ;
+    niiri:dad9c046-8b91-11e9-a6bd-8c8590aa91df "69.0000"^^xsd:string ;
+    niiri:dad9f2fa-8b91-11e9-a6bd-8c8590aa91df "9.0000"^^xsd:string ;
+    niiri:dada2626-8b91-11e9-a6bd-8c8590aa91df "1088"^^xsd:string ;
+    niiri:dada593e-8b91-11e9-a6bd-8c8590aa91df "1019.2"^^xsd:string ;
+    niiri:dada8d14-8b91-11e9-a6bd-8c8590aa91df "49.5460"^^xsd:string ;
+    niiri:dadacc2a-8b91-11e9-a6bd-8c8590aa91df "11.7813"^^xsd:string ;
+    niiri:dadaff9c-8b91-11e9-a6bd-8c8590aa91df "14.0000"^^xsd:string ;
+    niiri:dadb3214-8b91-11e9-a6bd-8c8590aa91df "79.0000"^^xsd:string ;
+    niiri:dadb64f0-8b91-11e9-a6bd-8c8590aa91df "65.0000"^^xsd:string ;
+    niiri:dadbab9a-8b91-11e9-a6bd-8c8590aa91df "11444"^^xsd:string ;
+    niiri:dadbe312-8b91-11e9-a6bd-8c8590aa91df "11598.3"^^xsd:string ;
+    niiri:dadc15c6-8b91-11e9-a6bd-8c8590aa91df "23.1668"^^xsd:string ;
+    niiri:dadc4866-8b91-11e9-a6bd-8c8590aa91df "12.7226"^^xsd:string ;
+    niiri:dadc8a4c-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dadcbe2c-8b91-11e9-a6bd-8c8590aa91df "90.0000"^^xsd:string ;
+    niiri:dadcf25c-8b91-11e9-a6bd-8c8590aa91df "90.0000"^^xsd:string ;
+    niiri:dadd26b4-8b91-11e9-a6bd-8c8590aa91df "638"^^xsd:string ;
+    niiri:dadd5e22-8b91-11e9-a6bd-8c8590aa91df "663.2"^^xsd:string ;
+    niiri:dadd9234-8b91-11e9-a6bd-8c8590aa91df "38.4984"^^xsd:string ;
+    niiri:daddc808-8b91-11e9-a6bd-8c8590aa91df "16.1591"^^xsd:string ;
+    niiri:daddfeae-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dade3234-8b91-11e9-a6bd-8c8590aa91df "83.0000"^^xsd:string ;
+    niiri:dade6e20-8b91-11e9-a6bd-8c8590aa91df "83.0000"^^xsd:string ;
+    niiri:dadea8f4-8b91-11e9-a6bd-8c8590aa91df "8710"^^xsd:string ;
+    niiri:dadedb12-8b91-11e9-a6bd-8c8590aa91df "9236.1"^^xsd:string ;
+    niiri:dadf0cd6-8b91-11e9-a6bd-8c8590aa91df "85.3256"^^xsd:string ;
+    niiri:dadf449e-8b91-11e9-a6bd-8c8590aa91df "6.5191"^^xsd:string ;
+    niiri:dadf7658-8b91-11e9-a6bd-8c8590aa91df "25.0000"^^xsd:string ;
+    niiri:dadfaa2e-8b91-11e9-a6bd-8c8590aa91df "104.0000"^^xsd:string ;
+    niiri:dadfe958-8b91-11e9-a6bd-8c8590aa91df "79.0000"^^xsd:string ;
+    niiri:dae01dec-8b91-11e9-a6bd-8c8590aa91df "35197"^^xsd:string ;
+    niiri:dae05960-8b91-11e9-a6bd-8c8590aa91df "34893.6"^^xsd:string ;
+    niiri:dae08f70-8b91-11e9-a6bd-8c8590aa91df "63.5769"^^xsd:string ;
+    niiri:dae0c562-8b91-11e9-a6bd-8c8590aa91df "12.2181"^^xsd:string ;
+    niiri:dae0fb04-8b91-11e9-a6bd-8c8590aa91df "5.0000"^^xsd:string ;
+    niiri:dae12e08-8b91-11e9-a6bd-8c8590aa91df "97.0000"^^xsd:string ;
+    niiri:dae16648-8b91-11e9-a6bd-8c8590aa91df "92.0000"^^xsd:string ;
+    niiri:dae19c44-8b91-11e9-a6bd-8c8590aa91df "6525"^^xsd:string ;
+    niiri:dae1d042-8b91-11e9-a6bd-8c8590aa91df "6380.6"^^xsd:string ;
+    niiri:dae20846-8b91-11e9-a6bd-8c8590aa91df "87.6515"^^xsd:string ;
+    niiri:dae23c94-8b91-11e9-a6bd-8c8590aa91df "9.9770"^^xsd:string ;
+    niiri:dae27042-8b91-11e9-a6bd-8c8590aa91df "25.0000"^^xsd:string ;
+    niiri:dae2a472-8b91-11e9-a6bd-8c8590aa91df "113.0000"^^xsd:string ;
+    niiri:dae2da78-8b91-11e9-a6bd-8c8590aa91df "88.0000"^^xsd:string ;
+    niiri:dae31506-8b91-11e9-a6bd-8c8590aa91df "3097"^^xsd:string ;
+    niiri:dae34dc8-8b91-11e9-a6bd-8c8590aa91df "2967.4"^^xsd:string ;
+    niiri:dae380e0-8b91-11e9-a6bd-8c8590aa91df "79.2173"^^xsd:string ;
+    niiri:dae3b556-8b91-11e9-a6bd-8c8590aa91df "9.1205"^^xsd:string ;
+    niiri:dae3e9c2-8b91-11e9-a6bd-8c8590aa91df "44.0000"^^xsd:string ;
+    niiri:dae41cb2-8b91-11e9-a6bd-8c8590aa91df "104.0000"^^xsd:string ;
+    niiri:dae45d1c-8b91-11e9-a6bd-8c8590aa91df "60.0000"^^xsd:string ;
+    niiri:dae49e62-8b91-11e9-a6bd-8c8590aa91df "4850"^^xsd:string ;
+    niiri:dae4d44a-8b91-11e9-a6bd-8c8590aa91df "4720.0"^^xsd:string ;
+    niiri:dae50910-8b91-11e9-a6bd-8c8590aa91df "85.8913"^^xsd:string ;
+    niiri:dae53dea-8b91-11e9-a6bd-8c8590aa91df "6.7045"^^xsd:string ;
+    niiri:dae5733c-8b91-11e9-a6bd-8c8590aa91df "47.0000"^^xsd:string ;
+    niiri:dae5a820-8b91-11e9-a6bd-8c8590aa91df "108.0000"^^xsd:string ;
+    niiri:dae5df8e-8b91-11e9-a6bd-8c8590aa91df "61.0000"^^xsd:string ;
+    niiri:dae61422-8b91-11e9-a6bd-8c8590aa91df "2681"^^xsd:string ;
+    niiri:dae64dd4-8b91-11e9-a6bd-8c8590aa91df "2621.5"^^xsd:string ;
+    niiri:dae691b8-8b91-11e9-a6bd-8c8590aa91df "88.0257"^^xsd:string ;
+    niiri:dae6c868-8b91-11e9-a6bd-8c8590aa91df "18.7219"^^xsd:string ;
+    niiri:dae6fca2-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:dae74d7e-8b91-11e9-a6bd-8c8590aa91df "117.0000"^^xsd:string ;
+    niiri:dae78b90-8b91-11e9-a6bd-8c8590aa91df "117.0000"^^xsd:string ;
+    niiri:dae7ca88-8b91-11e9-a6bd-8c8590aa91df "3458"^^xsd:string ;
+    niiri:dae81c36-8b91-11e9-a6bd-8c8590aa91df "3255.8"^^xsd:string ;
+    niiri:dae86632-8b91-11e9-a6bd-8c8590aa91df "66.4743"^^xsd:string ;
+    niiri:dae8a4c6-8b91-11e9-a6bd-8c8590aa91df "11.2353"^^xsd:string ;
+    niiri:dae8f638-8b91-11e9-a6bd-8c8590aa91df "19.0000"^^xsd:string ;
+    niiri:dae94110-8b91-11e9-a6bd-8c8590aa91df "110.0000"^^xsd:string ;
+    niiri:dae9842c-8b91-11e9-a6bd-8c8590aa91df "91.0000"^^xsd:string ;
+    niiri:dae9e232-8b91-11e9-a6bd-8c8590aa91df "1562"^^xsd:string ;
+    niiri:daea24d6-8b91-11e9-a6bd-8c8590aa91df "1527.5"^^xsd:string ;
+    niiri:daea5d2a-8b91-11e9-a6bd-8c8590aa91df "71.8271"^^xsd:string ;
+    niiri:daea938a-8b91-11e9-a6bd-8c8590aa91df "8.1385"^^xsd:string ;
+    niiri:daeac9ae-8b91-11e9-a6bd-8c8590aa91df "16.0000"^^xsd:string ;
+    niiri:daeb0126-8b91-11e9-a6bd-8c8590aa91df "104.0000"^^xsd:string ;
+    niiri:daeb3786-8b91-11e9-a6bd-8c8590aa91df "88.0000"^^xsd:string ;
+    niiri:daeb6da0-8b91-11e9-a6bd-8c8590aa91df "341"^^xsd:string ;
+    niiri:daeba3a6-8b91-11e9-a6bd-8c8590aa91df "316.5"^^xsd:string ;
+    niiri:daebda2e-8b91-11e9-a6bd-8c8590aa91df "79.6979"^^xsd:string ;
+    niiri:daec1052-8b91-11e9-a6bd-8c8590aa91df "5.9823"^^xsd:string ;
+    niiri:daec463a-8b91-11e9-a6bd-8c8590aa91df "60.0000"^^xsd:string ;
+    niiri:daec7c40-8b91-11e9-a6bd-8c8590aa91df "100.0000"^^xsd:string ;
+    niiri:daecb21e-8b91-11e9-a6bd-8c8590aa91df "40.0000"^^xsd:string ;
+    niiri:daece86a-8b91-11e9-a6bd-8c8590aa91df "3790"^^xsd:string ;
+    niiri:daed1e16-8b91-11e9-a6bd-8c8590aa91df "3711.3"^^xsd:string ;
+    niiri:daed543a-8b91-11e9-a6bd-8c8590aa91df "90.4755"^^xsd:string ;
+    niiri:daed8a2c-8b91-11e9-a6bd-8c8590aa91df "10.1254"^^xsd:string ;
+    niiri:daedc01e-8b91-11e9-a6bd-8c8590aa91df "41.0000"^^xsd:string ;
+    niiri:daedf57a-8b91-11e9-a6bd-8c8590aa91df "110.0000"^^xsd:string ;
+    niiri:daee2b26-8b91-11e9-a6bd-8c8590aa91df "69.0000"^^xsd:string ;
+    niiri:daee61b8-8b91-11e9-a6bd-8c8590aa91df "7"^^xsd:string ;
+    niiri:daee9804-8b91-11e9-a6bd-8c8590aa91df "15.0"^^xsd:string ;
+    niiri:daeecdec-8b91-11e9-a6bd-8c8590aa91df "61.0000"^^xsd:string ;
+    niiri:daef0406-8b91-11e9-a6bd-8c8590aa91df "7.4833"^^xsd:string ;
+    niiri:daef39c6-8b91-11e9-a6bd-8c8590aa91df "53.0000"^^xsd:string ;
+    niiri:daef74ae-8b91-11e9-a6bd-8c8590aa91df "70.0000"^^xsd:string ;
+    niiri:daefaa5a-8b91-11e9-a6bd-8c8590aa91df "17.0000"^^xsd:string ;
+    niiri:daefddb8-8b91-11e9-a6bd-8c8590aa91df "1176"^^xsd:string ;
+    niiri:daf01c38-8b91-11e9-a6bd-8c8590aa91df "1091.3"^^xsd:string ;
+    niiri:daf0528e-8b91-11e9-a6bd-8c8590aa91df "49.4600"^^xsd:string ;
+    niiri:daf085a6-8b91-11e9-a6bd-8c8590aa91df "11.1558"^^xsd:string ;
+    niiri:daf0b8e6-8b91-11e9-a6bd-8c8590aa91df "17.0000"^^xsd:string ;
+    niiri:daf0f1d0-8b91-11e9-a6bd-8c8590aa91df "78.0000"^^xsd:string ;
+    niiri:daf124fc-8b91-11e9-a6bd-8c8590aa91df "61.0000"^^xsd:string ;
+    niiri:daf159fe-8b91-11e9-a6bd-8c8590aa91df "0"^^xsd:string ;
+    niiri:daf18c1c-8b91-11e9-a6bd-8c8590aa91df "0.0"^^xsd:string ;
+    niiri:daf1be12-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:daf1fa62-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:daf23f2c-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:daf273de-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:daf2b2e0-8b91-11e9-a6bd-8c8590aa91df "0.0000"^^xsd:string ;
+    niiri:daf2f93a-8b91-11e9-a6bd-8c8590aa91df "184"^^xsd:string ;
+    niiri:daf32c66-8b91-11e9-a6bd-8c8590aa91df "202.3"^^xsd:string ;
+    niiri:daf37ab8-8b91-11e9-a6bd-8c8590aa91df "86.8859"^^xsd:string ;
+    niiri:daf3baa0-8b91-11e9-a6bd-8c8590aa91df "16.3835"^^xsd:string ;
+    niiri:daf4032a-8b91-11e9-a6bd-8c8590aa91df "41.0000"^^xsd:string ;
+    niiri:daf43b92-8b91-11e9-a6bd-8c8590aa91df "109.0000"^^xsd:string ;
+    niiri:daf4721a-8b91-11e9-a6bd-8c8590aa91df "68.0000"^^xsd:string .
 
-ns1:b10986-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b10e22-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b111ba-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b114ee-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b1185e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b11b88-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b11f0c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b1224a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b125ce-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b12902-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b12c72-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b12fa6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b1330c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b13654-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b139f6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b13da2-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b1501c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b15396-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b1572e-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b15a76-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b15dfa-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b16142-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b16520-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b16872-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b16bf6-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b16f34-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b172ae-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:b175ec-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0102597#"^^xsd:string .
-
-ns1:b1797a-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0112559#"^^xsd:string .
-
-ns1:b17d44-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738264#"^^xsd:string .
-
-ns1:b180be-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738265#"^^xsd:string .
-
-ns1:b183fc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738266#"^^xsd:string .
-
-ns1:b1876c-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738267#"^^xsd:string .
-
-ns1:b18adc-8a00-11e9-b722-8c8590aa91df a measurement_datum:,
-        prov:Entity ;
-    rdfs:label ""^^xsd:string ;
-    dct:description "NA"^^xsd:string ;
-    isAbout: "UBERON:0002336"^^xsd:string ;
-    hasLaterality: "None"^^xsd:string ;
-    hasMeasurementType: "http://uri.interlex.org/base/ilx_0105536#"^^xsd:string ;
-    isMeasureOf: GrayMatter: ;
-    hasDatumType: "http://uri.interlex.org/base/ilx_0738268#"^^xsd:string .
-
-ns1:acdf1e-8a00-11e9-b722-8c8590aa91df a nidm:FSStatsCollection,
-        prov:Entity ;
-    ns1:ace4f0-8a00-11e9-b722-8c8590aa91df "15759"^^xsd:string ;
-    ns1:acef18-8a00-11e9-b722-8c8590aa91df "15987.9"^^xsd:string ;
-    ns1:acf2ba-8a00-11e9-b722-8c8590aa91df "21.5398"^^xsd:string ;
-    ns1:acf620-8a00-11e9-b722-8c8590aa91df "11.3405"^^xsd:string ;
-    ns1:acf968-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:acfca6-8a00-11e9-b722-8c8590aa91df "83.0000"^^xsd:string ;
-    ns1:acffe4-8a00-11e9-b722-8c8590aa91df "83.0000"^^xsd:string ;
-    ns1:ad0322-8a00-11e9-b722-8c8590aa91df "881"^^xsd:string ;
-    ns1:ad0674-8a00-11e9-b722-8c8590aa91df "854.0"^^xsd:string ;
-    ns1:ad09a8-8a00-11e9-b722-8c8590aa91df "36.0704"^^xsd:string ;
-    ns1:ad0ce6-8a00-11e9-b722-8c8590aa91df "16.0004"^^xsd:string ;
-    ns1:ad102e-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:ad1362-8a00-11e9-b722-8c8590aa91df "77.0000"^^xsd:string ;
-    ns1:ad16a0-8a00-11e9-b722-8c8590aa91df "77.0000"^^xsd:string ;
-    ns1:ad19e8-8a00-11e9-b722-8c8590aa91df "8534"^^xsd:string ;
-    ns1:ad1d44-8a00-11e9-b722-8c8590aa91df "9040.1"^^xsd:string ;
-    ns1:ad2078-8a00-11e9-b722-8c8590aa91df "81.8074"^^xsd:string ;
-    ns1:ad23b6-8a00-11e9-b722-8c8590aa91df "6.3803"^^xsd:string ;
-    ns1:ad26fe-8a00-11e9-b722-8c8590aa91df "29.0000"^^xsd:string ;
-    ns1:ad2abe-8a00-11e9-b722-8c8590aa91df "99.0000"^^xsd:string ;
-    ns1:ad2e56-8a00-11e9-b722-8c8590aa91df "70.0000"^^xsd:string ;
-    ns1:ad3658-8a00-11e9-b722-8c8590aa91df "36138"^^xsd:string ;
-    ns1:ad39f0-8a00-11e9-b722-8c8590aa91df "35870.5"^^xsd:string ;
-    ns1:ad3dba-8a00-11e9-b722-8c8590aa91df "62.9976"^^xsd:string ;
-    ns1:ad4120-8a00-11e9-b722-8c8590aa91df "11.1826"^^xsd:string ;
-    ns1:ad44ae-8a00-11e9-b722-8c8590aa91df "7.0000"^^xsd:string ;
-    ns1:ad4800-8a00-11e9-b722-8c8590aa91df "94.0000"^^xsd:string ;
-    ns1:ad4b98-8a00-11e9-b722-8c8590aa91df "87.0000"^^xsd:string ;
-    ns1:ad4eea-8a00-11e9-b722-8c8590aa91df "7362"^^xsd:string ;
-    ns1:ad5278-8a00-11e9-b722-8c8590aa91df "7234.6"^^xsd:string ;
-    ns1:ad55d4-8a00-11e9-b722-8c8590aa91df "87.5560"^^xsd:string ;
-    ns1:ad5962-8a00-11e9-b722-8c8590aa91df "9.2717"^^xsd:string ;
-    ns1:ad5cb4-8a00-11e9-b722-8c8590aa91df "25.0000"^^xsd:string ;
-    ns1:ad604c-8a00-11e9-b722-8c8590aa91df "110.0000"^^xsd:string ;
-    ns1:ad639e-8a00-11e9-b722-8c8590aa91df "85.0000"^^xsd:string ;
-    ns1:ad6740-8a00-11e9-b722-8c8590aa91df "2835"^^xsd:string ;
-    ns1:ad6ace-8a00-11e9-b722-8c8590aa91df "2759.1"^^xsd:string ;
-    ns1:ad6e70-8a00-11e9-b722-8c8590aa91df "79.7436"^^xsd:string ;
-    ns1:ad737a-8a00-11e9-b722-8c8590aa91df "8.8441"^^xsd:string ;
-    ns1:ad76ea-8a00-11e9-b722-8c8590aa91df "47.0000"^^xsd:string ;
-    ns1:ad7a50-8a00-11e9-b722-8c8590aa91df "110.0000"^^xsd:string ;
-    ns1:ad7dc0-8a00-11e9-b722-8c8590aa91df "63.0000"^^xsd:string ;
-    ns1:ad8108-8a00-11e9-b722-8c8590aa91df "4642"^^xsd:string ;
-    ns1:ad84b4-8a00-11e9-b722-8c8590aa91df "4608.9"^^xsd:string ;
-    ns1:ad8ac2-8a00-11e9-b722-8c8590aa91df "84.1915"^^xsd:string ;
-    ns1:ad9076-8a00-11e9-b722-8c8590aa91df "6.0713"^^xsd:string ;
-    ns1:ad97c4-8a00-11e9-b722-8c8590aa91df "55.0000"^^xsd:string ;
-    ns1:ada17e-8a00-11e9-b722-8c8590aa91df "108.0000"^^xsd:string ;
-    ns1:ada606-8a00-11e9-b722-8c8590aa91df "53.0000"^^xsd:string ;
-    ns1:adaa02-8a00-11e9-b722-8c8590aa91df "2318"^^xsd:string ;
-    ns1:adad68-8a00-11e9-b722-8c8590aa91df "2288.1"^^xsd:string ;
-    ns1:adb0f6-8a00-11e9-b722-8c8590aa91df "87.3512"^^xsd:string ;
-    ns1:adb43e-8a00-11e9-b722-8c8590aa91df "18.3091"^^xsd:string ;
-    ns1:adb7c2-8a00-11e9-b722-8c8590aa91df "10.0000"^^xsd:string ;
-    ns1:adbb00-8a00-11e9-b722-8c8590aa91df "111.0000"^^xsd:string ;
-    ns1:adbe7a-8a00-11e9-b722-8c8590aa91df "101.0000"^^xsd:string ;
-    ns1:adc1fe-8a00-11e9-b722-8c8590aa91df "1241"^^xsd:string ;
-    ns1:adc58c-8a00-11e9-b722-8c8590aa91df "1285.1"^^xsd:string ;
-    ns1:adc8ca-8a00-11e9-b722-8c8590aa91df "27.5995"^^xsd:string ;
-    ns1:adcc44-8a00-11e9-b722-8c8590aa91df "13.5391"^^xsd:string ;
-    ns1:adcf82-8a00-11e9-b722-8c8590aa91df "4.0000"^^xsd:string ;
-    ns1:add2f2-8a00-11e9-b722-8c8590aa91df "80.0000"^^xsd:string ;
-    ns1:add69e-8a00-11e9-b722-8c8590aa91df "76.0000"^^xsd:string ;
-    ns1:adda22-8a00-11e9-b722-8c8590aa91df "2670"^^xsd:string ;
-    ns1:addd60-8a00-11e9-b722-8c8590aa91df "2780.5"^^xsd:string ;
-    ns1:ade0d0-8a00-11e9-b722-8c8590aa91df "24.1330"^^xsd:string ;
-    ns1:ade404-8a00-11e9-b722-8c8590aa91df "10.0015"^^xsd:string ;
-    ns1:ade936-8a00-11e9-b722-8c8590aa91df "5.0000"^^xsd:string ;
-    ns1:adec7e-8a00-11e9-b722-8c8590aa91df "68.0000"^^xsd:string ;
-    ns1:adeff8-8a00-11e9-b722-8c8590aa91df "63.0000"^^xsd:string ;
-    ns1:adf340-8a00-11e9-b722-8c8590aa91df "18012"^^xsd:string ;
-    ns1:adf6b0-8a00-11e9-b722-8c8590aa91df "18044.1"^^xsd:string ;
-    ns1:adfa34-8a00-11e9-b722-8c8590aa91df "81.4542"^^xsd:string ;
-    ns1:adfdae-8a00-11e9-b722-8c8590aa91df "9.7596"^^xsd:string ;
-    ns1:ae00ec-8a00-11e9-b722-8c8590aa91df "21.0000"^^xsd:string ;
-    ns1:ae0484-8a00-11e9-b722-8c8590aa91df "103.0000"^^xsd:string ;
-    ns1:ae07b8-8a00-11e9-b722-8c8590aa91df "82.0000"^^xsd:string ;
-    ns1:ae0b3c-8a00-11e9-b722-8c8590aa91df "3372"^^xsd:string ;
-    ns1:ae0e70-8a00-11e9-b722-8c8590aa91df "3180.2"^^xsd:string ;
-    ns1:ae121c-8a00-11e9-b722-8c8590aa91df "64.9425"^^xsd:string ;
-    ns1:ae1550-8a00-11e9-b722-8c8590aa91df "12.6008"^^xsd:string ;
-    ns1:ae18ca-8a00-11e9-b722-8c8590aa91df "12.0000"^^xsd:string ;
-    ns1:ae1c08-8a00-11e9-b722-8c8590aa91df "104.0000"^^xsd:string ;
-    ns1:ae1fb4-8a00-11e9-b722-8c8590aa91df "92.0000"^^xsd:string ;
-    ns1:ae2306-8a00-11e9-b722-8c8590aa91df "1209"^^xsd:string ;
-    ns1:ae268a-8a00-11e9-b722-8c8590aa91df "1210.2"^^xsd:string ;
-    ns1:ae29c8-8a00-11e9-b722-8c8590aa91df "70.9462"^^xsd:string ;
-    ns1:ae2d38-8a00-11e9-b722-8c8590aa91df "6.8928"^^xsd:string ;
-    ns1:ae30f8-8a00-11e9-b722-8c8590aa91df "44.0000"^^xsd:string ;
-    ns1:ae3472-8a00-11e9-b722-8c8590aa91df "91.0000"^^xsd:string ;
-    ns1:ae37a6-8a00-11e9-b722-8c8590aa91df "47.0000"^^xsd:string ;
-    ns1:ae3b0c-8a00-11e9-b722-8c8590aa91df "1105"^^xsd:string ;
-    ns1:ae3e40-8a00-11e9-b722-8c8590aa91df "1075.9"^^xsd:string ;
-    ns1:ae41a6-8a00-11e9-b722-8c8590aa91df "39.0416"^^xsd:string ;
-    ns1:ae4516-8a00-11e9-b722-8c8590aa91df "15.0519"^^xsd:string ;
-    ns1:ae4886-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:ae4bb0-8a00-11e9-b722-8c8590aa91df "103.0000"^^xsd:string ;
-    ns1:ae5682-8a00-11e9-b722-8c8590aa91df "103.0000"^^xsd:string ;
-    ns1:ae5e8e-8a00-11e9-b722-8c8590aa91df "294"^^xsd:string ;
-    ns1:ae6366-8a00-11e9-b722-8c8590aa91df "269.9"^^xsd:string ;
-    ns1:ae674e-8a00-11e9-b722-8c8590aa91df "76.9626"^^xsd:string ;
-    ns1:ae6bd6-8a00-11e9-b722-8c8590aa91df "6.7890"^^xsd:string ;
-    ns1:ae6f5a-8a00-11e9-b722-8c8590aa91df "47.0000"^^xsd:string ;
-    ns1:ae737e-8a00-11e9-b722-8c8590aa91df "99.0000"^^xsd:string ;
-    ns1:ae7720-8a00-11e9-b722-8c8590aa91df "52.0000"^^xsd:string ;
-    ns1:ae7c02-8a00-11e9-b722-8c8590aa91df "3677"^^xsd:string ;
-    ns1:ae8332-8a00-11e9-b722-8c8590aa91df "3617.3"^^xsd:string ;
-    ns1:ae885a-8a00-11e9-b722-8c8590aa91df "90.2744"^^xsd:string ;
-    ns1:ae8bfc-8a00-11e9-b722-8c8590aa91df "10.6251"^^xsd:string ;
-    ns1:ae8fb2-8a00-11e9-b722-8c8590aa91df "28.0000"^^xsd:string ;
-    ns1:ae932c-8a00-11e9-b722-8c8590aa91df "107.0000"^^xsd:string ;
-    ns1:ae96ce-8a00-11e9-b722-8c8590aa91df "79.0000"^^xsd:string ;
-    ns1:ae9a48-8a00-11e9-b722-8c8590aa91df "6"^^xsd:string ;
-    ns1:ae9ff2-8a00-11e9-b722-8c8590aa91df "12.3"^^xsd:string ;
-    ns1:aea39e-8a00-11e9-b722-8c8590aa91df "64.3333"^^xsd:string ;
-    ns1:aea7fe-8a00-11e9-b722-8c8590aa91df "3.2041"^^xsd:string ;
-    ns1:aeabbe-8a00-11e9-b722-8c8590aa91df "60.0000"^^xsd:string ;
-    ns1:aeafec-8a00-11e9-b722-8c8590aa91df "69.0000"^^xsd:string ;
-    ns1:aeb44c-8a00-11e9-b722-8c8590aa91df "9.0000"^^xsd:string ;
-    ns1:aeb802-8a00-11e9-b722-8c8590aa91df "1088"^^xsd:string ;
-    ns1:aebd52-8a00-11e9-b722-8c8590aa91df "1019.2"^^xsd:string ;
-    ns1:aec112-8a00-11e9-b722-8c8590aa91df "49.5460"^^xsd:string ;
-    ns1:aec46e-8a00-11e9-b722-8c8590aa91df "11.7813"^^xsd:string ;
-    ns1:aec806-8a00-11e9-b722-8c8590aa91df "14.0000"^^xsd:string ;
-    ns1:aecc34-8a00-11e9-b722-8c8590aa91df "79.0000"^^xsd:string ;
-    ns1:aed13e-8a00-11e9-b722-8c8590aa91df "65.0000"^^xsd:string ;
-    ns1:aed490-8a00-11e9-b722-8c8590aa91df "11444"^^xsd:string ;
-    ns1:aed846-8a00-11e9-b722-8c8590aa91df "11598.3"^^xsd:string ;
-    ns1:aedbca-8a00-11e9-b722-8c8590aa91df "23.1668"^^xsd:string ;
-    ns1:aedf4e-8a00-11e9-b722-8c8590aa91df "12.7226"^^xsd:string ;
-    ns1:aee296-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:aee674-8a00-11e9-b722-8c8590aa91df "90.0000"^^xsd:string ;
-    ns1:aeef52-8a00-11e9-b722-8c8590aa91df "90.0000"^^xsd:string ;
-    ns1:aef448-8a00-11e9-b722-8c8590aa91df "638"^^xsd:string ;
-    ns1:aef7d6-8a00-11e9-b722-8c8590aa91df "663.2"^^xsd:string ;
-    ns1:aefb78-8a00-11e9-b722-8c8590aa91df "38.4984"^^xsd:string ;
-    ns1:aefeca-8a00-11e9-b722-8c8590aa91df "16.1591"^^xsd:string ;
-    ns1:af024e-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:af0596-8a00-11e9-b722-8c8590aa91df "83.0000"^^xsd:string ;
-    ns1:af0906-8a00-11e9-b722-8c8590aa91df "83.0000"^^xsd:string ;
-    ns1:af0c94-8a00-11e9-b722-8c8590aa91df "8710"^^xsd:string ;
-    ns1:af102c-8a00-11e9-b722-8c8590aa91df "9236.1"^^xsd:string ;
-    ns1:af1374-8a00-11e9-b722-8c8590aa91df "85.3256"^^xsd:string ;
-    ns1:af1716-8a00-11e9-b722-8c8590aa91df "6.5191"^^xsd:string ;
-    ns1:af1a54-8a00-11e9-b722-8c8590aa91df "25.0000"^^xsd:string ;
-    ns1:af1dce-8a00-11e9-b722-8c8590aa91df "104.0000"^^xsd:string ;
-    ns1:af2152-8a00-11e9-b722-8c8590aa91df "79.0000"^^xsd:string ;
-    ns1:af24e0-8a00-11e9-b722-8c8590aa91df "35197"^^xsd:string ;
-    ns1:af281e-8a00-11e9-b722-8c8590aa91df "34893.6"^^xsd:string ;
-    ns1:af2b98-8a00-11e9-b722-8c8590aa91df "63.5769"^^xsd:string ;
-    ns1:af2ed6-8a00-11e9-b722-8c8590aa91df "12.2181"^^xsd:string ;
-    ns1:af3278-8a00-11e9-b722-8c8590aa91df "5.0000"^^xsd:string ;
-    ns1:af35ac-8a00-11e9-b722-8c8590aa91df "97.0000"^^xsd:string ;
-    ns1:af394e-8a00-11e9-b722-8c8590aa91df "92.0000"^^xsd:string ;
-    ns1:af3c8c-8a00-11e9-b722-8c8590aa91df "6525"^^xsd:string ;
-    ns1:af4006-8a00-11e9-b722-8c8590aa91df "6380.6"^^xsd:string ;
-    ns1:af4420-8a00-11e9-b722-8c8590aa91df "87.6515"^^xsd:string ;
-    ns1:af47b8-8a00-11e9-b722-8c8590aa91df "9.9770"^^xsd:string ;
-    ns1:af4b14-8a00-11e9-b722-8c8590aa91df "25.0000"^^xsd:string ;
-    ns1:af5028-8a00-11e9-b722-8c8590aa91df "113.0000"^^xsd:string ;
-    ns1:af53a2-8a00-11e9-b722-8c8590aa91df "88.0000"^^xsd:string ;
-    ns1:af573a-8a00-11e9-b722-8c8590aa91df "3097"^^xsd:string ;
-    ns1:af5aa0-8a00-11e9-b722-8c8590aa91df "2967.4"^^xsd:string ;
-    ns1:af5e2e-8a00-11e9-b722-8c8590aa91df "79.2173"^^xsd:string ;
-    ns1:af6180-8a00-11e9-b722-8c8590aa91df "9.1205"^^xsd:string ;
-    ns1:af6504-8a00-11e9-b722-8c8590aa91df "44.0000"^^xsd:string ;
-    ns1:af6892-8a00-11e9-b722-8c8590aa91df "104.0000"^^xsd:string ;
-    ns1:af6cca-8a00-11e9-b722-8c8590aa91df "60.0000"^^xsd:string ;
-    ns1:af7058-8a00-11e9-b722-8c8590aa91df "4850"^^xsd:string ;
-    ns1:af73d2-8a00-11e9-b722-8c8590aa91df "4720.0"^^xsd:string ;
-    ns1:af772e-8a00-11e9-b722-8c8590aa91df "85.8913"^^xsd:string ;
-    ns1:af7b3e-8a00-11e9-b722-8c8590aa91df "6.7045"^^xsd:string ;
-    ns1:af7e72-8a00-11e9-b722-8c8590aa91df "47.0000"^^xsd:string ;
-    ns1:af81e2-8a00-11e9-b722-8c8590aa91df "108.0000"^^xsd:string ;
-    ns1:af8516-8a00-11e9-b722-8c8590aa91df "61.0000"^^xsd:string ;
-    ns1:af8890-8a00-11e9-b722-8c8590aa91df "2681"^^xsd:string ;
-    ns1:af8bce-8a00-11e9-b722-8c8590aa91df "2621.5"^^xsd:string ;
-    ns1:af8f34-8a00-11e9-b722-8c8590aa91df "88.0257"^^xsd:string ;
-    ns1:af9272-8a00-11e9-b722-8c8590aa91df "18.7219"^^xsd:string ;
-    ns1:af9664-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:af99a2-8a00-11e9-b722-8c8590aa91df "117.0000"^^xsd:string ;
-    ns1:af9d08-8a00-11e9-b722-8c8590aa91df "117.0000"^^xsd:string ;
-    ns1:afa046-8a00-11e9-b722-8c8590aa91df "3458"^^xsd:string ;
-    ns1:afa3b6-8a00-11e9-b722-8c8590aa91df "3255.8"^^xsd:string ;
-    ns1:afa730-8a00-11e9-b722-8c8590aa91df "66.4743"^^xsd:string ;
-    ns1:afaaaa-8a00-11e9-b722-8c8590aa91df "11.2353"^^xsd:string ;
-    ns1:afadde-8a00-11e9-b722-8c8590aa91df "19.0000"^^xsd:string ;
-    ns1:afb180-8a00-11e9-b722-8c8590aa91df "110.0000"^^xsd:string ;
-    ns1:afb4f0-8a00-11e9-b722-8c8590aa91df "91.0000"^^xsd:string ;
-    ns1:afb874-8a00-11e9-b722-8c8590aa91df "1562"^^xsd:string ;
-    ns1:afbba8-8a00-11e9-b722-8c8590aa91df "1527.5"^^xsd:string ;
-    ns1:afbf18-8a00-11e9-b722-8c8590aa91df "71.8271"^^xsd:string ;
-    ns1:afc288-8a00-11e9-b722-8c8590aa91df "8.1385"^^xsd:string ;
-    ns1:afc60c-8a00-11e9-b722-8c8590aa91df "16.0000"^^xsd:string ;
-    ns1:afc94a-8a00-11e9-b722-8c8590aa91df "104.0000"^^xsd:string ;
-    ns1:afccba-8a00-11e9-b722-8c8590aa91df "88.0000"^^xsd:string ;
-    ns1:afd002-8a00-11e9-b722-8c8590aa91df "341"^^xsd:string ;
-    ns1:afd368-8a00-11e9-b722-8c8590aa91df "316.5"^^xsd:string ;
-    ns1:afd69c-8a00-11e9-b722-8c8590aa91df "79.6979"^^xsd:string ;
-    ns1:afda0c-8a00-11e9-b722-8c8590aa91df "5.9823"^^xsd:string ;
-    ns1:afdf98-8a00-11e9-b722-8c8590aa91df "60.0000"^^xsd:string ;
-    ns1:afe312-8a00-11e9-b722-8c8590aa91df "100.0000"^^xsd:string ;
-    ns1:afe646-8a00-11e9-b722-8c8590aa91df "40.0000"^^xsd:string ;
-    ns1:afe9c0-8a00-11e9-b722-8c8590aa91df "3790"^^xsd:string ;
-    ns1:afecfe-8a00-11e9-b722-8c8590aa91df "3711.3"^^xsd:string ;
-    ns1:aff208-8a00-11e9-b722-8c8590aa91df "90.4755"^^xsd:string ;
-    ns1:aff564-8a00-11e9-b722-8c8590aa91df "10.1254"^^xsd:string ;
-    ns1:aff8d4-8a00-11e9-b722-8c8590aa91df "41.0000"^^xsd:string ;
-    ns1:affc08-8a00-11e9-b722-8c8590aa91df "110.0000"^^xsd:string ;
-    ns1:afff6e-8a00-11e9-b722-8c8590aa91df "69.0000"^^xsd:string ;
-    ns1:b002b6-8a00-11e9-b722-8c8590aa91df "7"^^xsd:string ;
-    ns1:b00630-8a00-11e9-b722-8c8590aa91df "15.0"^^xsd:string ;
-    ns1:b009a0-8a00-11e9-b722-8c8590aa91df "61.0000"^^xsd:string ;
-    ns1:b00d1a-8a00-11e9-b722-8c8590aa91df "7.4833"^^xsd:string ;
-    ns1:b0104e-8a00-11e9-b722-8c8590aa91df "53.0000"^^xsd:string ;
-    ns1:b013c8-8a00-11e9-b722-8c8590aa91df "70.0000"^^xsd:string ;
-    ns1:b016fc-8a00-11e9-b722-8c8590aa91df "17.0000"^^xsd:string ;
-    ns1:b01ad0-8a00-11e9-b722-8c8590aa91df "1176"^^xsd:string ;
-    ns1:b01fc6-8a00-11e9-b722-8c8590aa91df "1091.3"^^xsd:string ;
-    ns1:b0234a-8a00-11e9-b722-8c8590aa91df "49.4600"^^xsd:string ;
-    ns1:b026ce-8a00-11e9-b722-8c8590aa91df "11.1558"^^xsd:string ;
-    ns1:b02a48-8a00-11e9-b722-8c8590aa91df "17.0000"^^xsd:string ;
-    ns1:b030e2-8a00-11e9-b722-8c8590aa91df "78.0000"^^xsd:string ;
-    ns1:b034e8-8a00-11e9-b722-8c8590aa91df "61.0000"^^xsd:string ;
-    ns1:b039ca-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b03d44-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b0406e-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b043de-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0471c-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b04a96-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b04e06-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b051a8-8a00-11e9-b722-8c8590aa91df "1055"^^xsd:string ;
-    ns1:b05522-8a00-11e9-b722-8c8590aa91df "995.3"^^xsd:string ;
-    ns1:b0589c-8a00-11e9-b722-8c8590aa91df "68.9280"^^xsd:string ;
-    ns1:b05bd0-8a00-11e9-b722-8c8590aa91df "13.0290"^^xsd:string ;
-    ns1:b05f40-8a00-11e9-b722-8c8590aa91df "10.0000"^^xsd:string ;
-    ns1:b06274-8a00-11e9-b722-8c8590aa91df "110.0000"^^xsd:string ;
-    ns1:b0660c-8a00-11e9-b722-8c8590aa91df "100.0000"^^xsd:string ;
-    ns1:b0695e-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b06ce2-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b0705c-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b073d6-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0770a-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b07a70-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b07de0-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b08164-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b084ac-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b08812-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b08b46-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b08eac-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b091e0-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b096c2-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b09a14-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b09d8e-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b0a0d6-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0a446-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0a784-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0ab26-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0ae64-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0b210-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b0b8fa-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b0be0e-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0c2be-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0c7e6-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0ccd2-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0d132-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0d484-8a00-11e9-b722-8c8590aa91df "0"^^xsd:string ;
-    ns1:b0d8b2-8a00-11e9-b722-8c8590aa91df "0.0"^^xsd:string ;
-    ns1:b0dc5e-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0e03c-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0e3c0-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0e730-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0eab4-8a00-11e9-b722-8c8590aa91df "0.0000"^^xsd:string ;
-    ns1:b0eec4-8a00-11e9-b722-8c8590aa91df "184"^^xsd:string ;
-    ns1:b0f216-8a00-11e9-b722-8c8590aa91df "202.3"^^xsd:string ;
-    ns1:b0f590-8a00-11e9-b722-8c8590aa91df "86.8859"^^xsd:string ;
-    ns1:b0f8c4-8a00-11e9-b722-8c8590aa91df "16.3835"^^xsd:string ;
-    ns1:b0fc34-8a00-11e9-b722-8c8590aa91df "41.0000"^^xsd:string ;
-    ns1:b0ff68-8a00-11e9-b722-8c8590aa91df "109.0000"^^xsd:string ;
-    ns1:b102d8-8a00-11e9-b722-8c8590aa91df "68.0000"^^xsd:string ;
-    ns1:b10620-8a00-11e9-b722-8c8590aa91df "1153"^^xsd:string ;
-    ns1:b10986-8a00-11e9-b722-8c8590aa91df "1093.2"^^xsd:string ;
-    ns1:b10e22-8a00-11e9-b722-8c8590aa91df "99.1544"^^xsd:string ;
-    ns1:b111ba-8a00-11e9-b722-8c8590aa91df "13.1805"^^xsd:string ;
-    ns1:b114ee-8a00-11e9-b722-8c8590aa91df "39.0000"^^xsd:string ;
-    ns1:b1185e-8a00-11e9-b722-8c8590aa91df "114.0000"^^xsd:string ;
-    ns1:b11b88-8a00-11e9-b722-8c8590aa91df "75.0000"^^xsd:string ;
-    ns1:b11f0c-8a00-11e9-b722-8c8590aa91df "588"^^xsd:string ;
-    ns1:b1224a-8a00-11e9-b722-8c8590aa91df "500.3"^^xsd:string ;
-    ns1:b125ce-8a00-11e9-b722-8c8590aa91df "91.1412"^^xsd:string ;
-    ns1:b12902-8a00-11e9-b722-8c8590aa91df "22.0740"^^xsd:string ;
-    ns1:b12c72-8a00-11e9-b722-8c8590aa91df "14.0000"^^xsd:string ;
-    ns1:b12fa6-8a00-11e9-b722-8c8590aa91df "115.0000"^^xsd:string ;
-    ns1:b1330c-8a00-11e9-b722-8c8590aa91df "101.0000"^^xsd:string ;
-    ns1:b13654-8a00-11e9-b722-8c8590aa91df "681"^^xsd:string ;
-    ns1:b139f6-8a00-11e9-b722-8c8590aa91df "627.9"^^xsd:string ;
-    ns1:b13da2-8a00-11e9-b722-8c8590aa91df "91.2805"^^xsd:string ;
-    ns1:b1501c-8a00-11e9-b722-8c8590aa91df "20.3916"^^xsd:string ;
-    ns1:b15396-8a00-11e9-b722-8c8590aa91df "12.0000"^^xsd:string ;
-    ns1:b1572e-8a00-11e9-b722-8c8590aa91df "119.0000"^^xsd:string ;
-    ns1:b15a76-8a00-11e9-b722-8c8590aa91df "107.0000"^^xsd:string ;
-    ns1:b15dfa-8a00-11e9-b722-8c8590aa91df "493"^^xsd:string ;
-    ns1:b16142-8a00-11e9-b722-8c8590aa91df "448.8"^^xsd:string ;
-    ns1:b16520-8a00-11e9-b722-8c8590aa91df "97.7323"^^xsd:string ;
-    ns1:b16872-8a00-11e9-b722-8c8590aa91df "19.0743"^^xsd:string ;
-    ns1:b16bf6-8a00-11e9-b722-8c8590aa91df "12.0000"^^xsd:string ;
-    ns1:b16f34-8a00-11e9-b722-8c8590aa91df "124.0000"^^xsd:string ;
-    ns1:b172ae-8a00-11e9-b722-8c8590aa91df "112.0000"^^xsd:string ;
-    ns1:b175ec-8a00-11e9-b722-8c8590aa91df "1524"^^xsd:string ;
-    ns1:b1797a-8a00-11e9-b722-8c8590aa91df "1431.8"^^xsd:string ;
-    ns1:b17d44-8a00-11e9-b722-8c8590aa91df "96.6713"^^xsd:string ;
-    ns1:b180be-8a00-11e9-b722-8c8590aa91df "19.2027"^^xsd:string ;
-    ns1:b183fc-8a00-11e9-b722-8c8590aa91df "22.0000"^^xsd:string ;
-    ns1:b1876c-8a00-11e9-b722-8c8590aa91df "129.0000"^^xsd:string ;
-    ns1:b18adc-8a00-11e9-b722-8c8590aa91df "107.0000"^^xsd:string .
-
-ns1:abf72a-8a00-11e9-b722-8c8590aa91df a prov:Agent,
+niiri:da961f26-8b91-11e9-a6bd-8c8590aa91df a prov:Agent,
         prov:SoftwareAgent ;
     nidm:NIDM_0000164 "https://surfer.nmr.mgh.harvard.edu/"^^xsd:string .
 
