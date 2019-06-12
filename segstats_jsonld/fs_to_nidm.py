@@ -271,10 +271,10 @@ def read_stats(filename):
     return header, tableinfo, measures
 
 
-
 def remap2json(xlsxfile,
                fs_stat_file,
                outfile = None,
+               noscrape = False
                ):
     """
     TODO insightful docstring
@@ -284,6 +284,7 @@ def remap2json(xlsxfile,
     xslxfile: path to xslx file with ReproNimCDEs
     typeoffile: one of [segstats, ...]
     outfilename: name for resulting json to be written to
+    npscrape: Boolean. If True, no interlex scraping for definitions is returned
     :return:
 
     (xslx file to be found (under development):
@@ -305,43 +306,67 @@ def remap2json(xlsxfile,
     mapping = pd.read_excel(xls, 'Subcortical Volumes', header=[0,1])
     corticals = pd.read_excel(xls, 'Cortical Structures', header=[0,1])
 
+    def test_connection():
+        """helper function to test whether an internet connection exists.
+        Used for preventing timeout errors when scraping interlex."""
+        import socket
+        remote_server = 'www.google.com'  # TODO: maybe improve for China
+        try:
+            # does the host name resolve?
+            host = socket.gethostbyname(remote_server)
+            # can we establish a connection to the host name?
+            con = socket.create_connection((host, 80), 2)
+            return True
+        except:
+            print("Can't connect to a server...")
+            pass
+        return False
+    # check whether we have an internet connection
+    has_connection = test_connection()
 
-    #mapping = pd.read_excel(xslxfile, header=[0,1])
-    # rename the URIs so that they resolve, scrape definition
-    definition_anat = []
-    print("""
-        Scraping anatomical definitions from interlex. This might take a few minutes,
-        depending on your internet connection.
-        """)
-    for i, row in mapping.iterrows():
-        if row['Federated DE']['URI'] is not np.nan:
-            # this fixes the ilx link to resolve to scicrunch
-            url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
-            r = requests.get(url)
-            file = io.StringIO(r.text)
-            lines = file.readlines()
-            for line in lines:
-                if 'definition' in line[:14]:
-                    definition_anat.append(line.split('"')[1])
-        else:
-            definition_anat.append('NA')
+    if not noscrape:
+        # rename the URIs so that they resolve, scrape definition
+        definition_anat = []
+        print("""
+            Scraping anatomical definitions from interlex. This might take a few minutes,
+            depending on your internet connection.
+            """)
+        for i, row in mapping.iterrows():
+            if row['Federated DE']['URI'] is not np.nan:
+                # this fixes the ilx link to resolve to scicrunch
+                url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
+                r = requests.get(url)
+                file = io.StringIO(r.text)
+                lines = file.readlines()
+                for line in lines:
+                    if 'definition' in line[:14]:
+                        definition_anat.append(line.split('"')[1])
+            else:
+                definition_anat.append('NA')
 
-    definition_cort = []
-    for i, row in corticals.iterrows():
-        if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
-            url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
-            r = requests.get(url)
-            file = io.StringIO(r.text)
-            lines = file.readlines()
-            for line in lines:
-                if 'definition' in line[:14]:
-                    definition_cort.append(line.split('"')[1])
-                    break
-                elif line == lines[-1]:
-                    # some structures do not have definitions yet, append empty strings
-                    definition_cort.append("")
-        else:
-            definition_cort.append('NA')
+        definition_cort = []
+        for i, row in corticals.iterrows():
+            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
+                url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
+                r = requests.get(url)
+                file = io.StringIO(r.text)
+                lines = file.readlines()
+                for line in lines:
+                    if 'definition' in line[:14]:
+                        definition_cort.append(line.split('"')[1])
+                        break
+                    elif line == lines[-1]:
+                        # some structures do not have definitions yet, append empty strings
+                        definition_cort.append("")
+            else:
+                definition_cort.append('NA')
+    elif noscrape or not has_connection:
+        # if we can't or don't want scrape, append NA and print a warning? # TODO: is that sensible?
+        print("""
+        Interlex definition of anatomical concepts will NOT be performed. If you did not
+        specify this behaviour, this could be due to a missing internet connection""")
+        definition_anat = [""] * len(mapping)
+        definition_cort = [""] * len(corticals)
 
     mapping['definition'] = definition_anat
     corticals['definition'] = definition_cort
@@ -506,8 +531,6 @@ def remap2json(xlsxfile,
             json.dump(biggie, f, indent=4)
 
     return [header, tableinfo, measures,biggie]
-
-
 
 
 def main(argv):
