@@ -327,7 +327,7 @@ def remap2json(xlsxfile,
     # check whether we have an internet connection
     has_connection = test_connection()
 
-    if not noscrape:
+    if not noscrape and has_connection:
         # rename the URIs so that they resolve, scrape definition
         definition_anat = []
         print("""
