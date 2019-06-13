@@ -271,6 +271,23 @@ def read_stats(filename):
     return header, tableinfo, measures
 
 
+def test_connection(remote=False):
+    """helper function to test whether an internet connection exists.
+    Used for preventing timeout errors when scraping interlex."""
+    import socket
+    remote_server = 'www.google.com' if not remote else remote # TODO: maybe improve for China
+    try:
+        # does the host name resolve?
+        host = socket.gethostbyname(remote_server)
+        # can we establish a connection to the host name?
+        con = socket.create_connection((host, 80), 2)
+        return True
+    except:
+        print("Can't connect to a server...")
+        pass
+    return False
+
+
 def remap2json(xlsxfile,
                fs_stat_file,
                outfile = None,
@@ -300,27 +317,13 @@ def remap2json(xlsxfile,
     import pandas as pd
     import numpy as np
     import xlrd
+    import socket
 
     # read in the xlxs file
     xls = pd.ExcelFile(xlsxfile)
     mapping = pd.read_excel(xls, 'Subcortical Volumes', header=[0,1])
     corticals = pd.read_excel(xls, 'Cortical Structures', header=[0,1])
 
-    def test_connection():
-        """helper function to test whether an internet connection exists.
-        Used for preventing timeout errors when scraping interlex."""
-        import socket
-        remote_server = 'www.google.com'  # TODO: maybe improve for China
-        try:
-            # does the host name resolve?
-            host = socket.gethostbyname(remote_server)
-            # can we establish a connection to the host name?
-            con = socket.create_connection((host, 80), 2)
-            return True
-        except:
-            print("Can't connect to a server...")
-            pass
-        return False
     # check whether we have an internet connection
     has_connection = test_connection()
 
