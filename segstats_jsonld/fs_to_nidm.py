@@ -505,7 +505,7 @@ def remap2json(xlsxfile,
         with open(outfile, 'w') as f:
             json.dump(biggie, f, indent=4)
 
-    return [header, tableinfo, measures,biggie]
+    return [header, tableinfo, measures, biggie]
 
 
 
