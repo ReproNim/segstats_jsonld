@@ -338,12 +338,17 @@ def remap2json(xlsxfile,
             if row['Federated DE']['URI'] is not np.nan:
                 # this fixes the ilx link to resolve to scicrunch
                 url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
-                r = requests.get(url)
-                file = io.StringIO(r.text)
-                lines = file.readlines()
-                for line in lines:
-                    if 'definition' in line[:14]:
-                        definition_anat.append(line.split('"')[1])
+                try:
+                    r = requests.get(url)
+                    file = io.StringIO(r.text)
+                    lines = file.readlines()
+                    for line in lines:
+                        if 'definition' in line[:14]:
+                            definition_anat.append(line.split('"')[1])
+                except socket.timeout:
+                    print('caught a timeout, appending "" to definitions')
+                    definition_anat.append("")
+
             else:
                 definition_anat.append('NA')
 
