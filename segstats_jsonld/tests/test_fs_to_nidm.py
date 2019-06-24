@@ -23,3 +23,25 @@ def test_remap2json():
                 for k, v in biggie[d][key].items():
                     if k == 'definition':
                         assert v == ""
+
+    # check whether scraping works
+    if s.test_connection():
+        for examplefile in [aparc_example, asag_example]:
+            header, tableinfo, measures, biggie = s.remap2json(xlsx_file,
+                                                               examplefile,
+                                                               noscrape=False
+                                                                   )
+            for d in ['Anatomy', 'Measures']:
+                for key, value in biggie[d].items():
+                    for k, v in biggie[d][key].items():
+                        if k == 'definition':
+                            assert v != np.nan
+
+            # check the correct definitions are retrieved for some example terms
+            if examplefile == aparc_example:
+                assert biggie['Anatomy']['Left-Lateral-Ventricle']['definition'] == \
+                    'left lateral ventricle cerebral spinal fluid volume'
+                assert biggie['Measures']['SurfArea']['measureOf'] == 'http://uri.interlex.org/base/ilx_0738271#'
+
+            elif examplefile == asag_example:
+                assert biggie['Measures']['NVoxels']['measureOf'] == 'http://uri.interlex.org/base/ilx_0105536#'
