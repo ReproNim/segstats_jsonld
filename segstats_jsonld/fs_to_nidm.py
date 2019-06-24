@@ -541,7 +541,7 @@ def remap2json(xlsxfile,
     return [header, tableinfo, measures, biggie]
 
 
-def main(argv):
+def main():
 
     import argparse
     parser = argparse.ArgumentParser(prog='fs_to_nidm.py',
@@ -603,4 +603,4 @@ def main(argv):
 
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main()
