@@ -627,6 +627,15 @@ def remap2json(xlsxfile,
     if outfile:
         with open(outfile, 'w') as f:
             json.dump(biggie, f, indent=4)
+    # if no outfile is provided, we can update the existing file or create one
+    else:
+        if json_file:
+            with open(json_file, 'w') as f:
+                json.dump(biggie, f, indent=4)
+        else:
+            datapath = mapping_data.__path__._path[0] + '/'
+            with open(join(datapath, 'jsonmap.json'), 'w') as f:
+                json.dump(biggie, f, indent=4)
 
     return [header, tableinfo, measures, biggie]
 
