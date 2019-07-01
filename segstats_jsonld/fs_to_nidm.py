@@ -58,7 +58,7 @@ from rdflib import RDFS
 import sys
 import json
 
-
+from segstats_jsonld import mapping_data
 
 def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
@@ -290,22 +290,34 @@ def test_connection(remote=False):
 
 def remap2json(xlsxfile,
                fs_stat_file,
+               json_file = None,
                outfile = None,
-               noscrape = False
+               noscrape = False,
+               force_update = False,
                ):
     """
-    TODO insightful docstring
-
-    Query ReproNimCDEs and Freesurfer stat files, return json mapping
+    Mapper to associate Freesurfer stats terms with interlex definitions.
+    Based on Freesurfer stat files (aseg.stats or aparc.stats), this function
+    will query ReproNimCDEs (currently an xslx file under development found at
+    https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g/edit#gid=1737769619)
+    to return a return json mapping from the Freesurfer anatomical and statistical
+    terms to appropriate Interlex IRIs. For improved human-readability,
+    should an internet connection exist, it will scrape definitions for terms from
+    interlex (disable with noscrape = True).
+    To speed up the generation of such a mapper, either if a base-remapper already
+    exists in 'segstats_jsonld/mapping_data/jsonmap.json' or if supplied an
+    already existing .json mapping file, the function will only check
+    for yet missing terms in the stats file, and update if necessary.
 
     xslxfile: path to xslx file with ReproNimCDEs
-    typeoffile: one of [segstats, ...]
+    fs_stat_file: Freesurfer results file, either aseg.stats or aparc.stats
+    json_file: Existing json remap file from previous runs of this function ("base-remapper")
     outfilename: name for resulting json to be written to
-    npscrape: Boolean. If True, no interlex scraping for definitions is returned
+    noscrape: Boolean. If True, no interlex scraping for definitions is returned
+    force_update: Boolean. If True, a remapper is build from scratch even if a base remapper
+                  (json_file) already exists
     :return:
 
-    (xslx file to be found (under development):
-    https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g/edit#gid=1737769619
     example:
     jsonmap = remap2json(xslxfile='ReproNimCDEs.xlsx',
                          fs_stat_file='aseg.stats)
@@ -324,58 +336,133 @@ def remap2json(xlsxfile,
     mapping = pd.read_excel(xls, 'Subcortical Volumes', header=[0,1])
     corticals = pd.read_excel(xls, 'Cortical Structures', header=[0,1])
 
+    if not json_file:
+        # creating a mapper and scraping definitions from the web is time-consuming.
+        # Ideally, we want to do this only once. Therefore, we generate a base-remapper
+        # that we take in as a default, and only update the definitions if none exists yet.
+        try:
+            with open ('segstats_jsonld/mapping_data/jsonmap.json') as j:
+                mapper = json.load(j)
+            print('Found a base-remapper. To speed up the generation of the .json'
+                  'mapping file, I will use the existing one and update it, if possible')
+            json_file = 'segstats_jsonld/mapping_data/jsonmap.json'
+        except OSError as e:
+            print("Could not find any base-remapper. Will generate one.")
+
+    if json_file:
+        # if we have a user-supplied json mapper, check whats inside and only append new stuff
+        # if necessary, update the file.
+        with open(json_file) as j:
+            mapper = json.load(j)
+
     # check whether we have an internet connection
     has_connection = test_connection()
 
     if not noscrape and has_connection:
-        # rename the URIs so that they resolve, scrape definition
+        # if not existing in json mapper, rename the URIs so that they resolve, scrape definition
         definition_anat = []
         print("""
             Scraping anatomical definitions from interlex. This might take a few minutes,
             depending on your internet connection.
             """)
+        get_info = True
         for i, row in mapping.iterrows():
-            if row['Federated DE']['URI'] is not np.nan:
-                # this fixes the ilx link to resolve to scicrunch
-                url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
-                try:
+            if json_file:
+                if row['Atlas Segmentation Label'].values[0] in mapper['Anatomy'].keys():
+                    # the term already exists in the mapper, lets check whether it has a definition
+                    get_info = False
+                    if mapper["Anatomy"][row['Atlas Segmentation Label'].values[0]]["definition"] == 'NA':
+                        # there is no definition yet, lets try to get it
+                        get_info = True
+                        print('Checking for yet missing definition of label', row['Atlas Segmentation Label'].values[0])
+                    else:
+                        if not force_update:
+                            # append existing definition
+                            definition_anat.append(mapper["Anatomy"][row['Atlas Segmentation Label'].values[0]]["definition"])
+            if force_update:
+                # override if we really want to check the definitions again
+                get_info = True
+            if get_info:
+                print('getting info for', row['Atlas Segmentation Label'].values[0])
+                # get info only if json mapper does not exist yet
+                if row['Federated DE']['URI'] is not np.nan:
+                    # this fixes the ilx link to resolve to scicrunch
+                    url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
+                    try:
+                        r = requests.get(url)
+                        file = io.StringIO(r.text)
+                        lines = file.readlines()
+                        for line in lines:
+                            if 'definition' in line[:14]:
+                                definition_anat.append(line.split('"')[1])
+                    except socket.timeout:
+                        print('caught a timeout, appending "" to definitions')
+                        definition_anat.append("")
+
+                else:
+                    definition_anat.append('NA')
+
+        definition_cort = []
+        for i, row in corticals.iterrows():
+            if json_file:
+                if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'] in mapper['Anatomy'].keys():
+                    # the term already exists in the mapper, lets check whether it has a definition
+                    get_info = False
+                    if mapper["Anatomy"][row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]["definition"] == 'NA':
+                        # there is no definition yet, lets try to get it
+                        get_info = True
+                        print('Checking for yet missing definition of label', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
+                    else:
+                        # append existing definition
+                        if not force_update:
+                            definition_cort.append(
+                            mapper["Anatomy"][row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]["definition"])
+            if force_update:
+                get_info = True
+            if get_info:
+                print('getting info for', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
+                if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
+                    url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
                     r = requests.get(url)
                     file = io.StringIO(r.text)
                     lines = file.readlines()
                     for line in lines:
                         if 'definition' in line[:14]:
-                            definition_anat.append(line.split('"')[1])
-                except socket.timeout:
-                    print('caught a timeout, appending "" to definitions')
-                    definition_anat.append("")
+                            definition_cort.append(line.split('"')[1])
+                            break
+                        elif line == lines[-1]:
+                            # some structures do not have definitions yet, append empty strings
+                            definition_cort.append("")
+                else:
+                    definition_cort.append('NA')
 
-            else:
-                definition_anat.append('NA')
-
-        definition_cort = []
-        for i, row in corticals.iterrows():
-            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
-                url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
-                r = requests.get(url)
-                file = io.StringIO(r.text)
-                lines = file.readlines()
-                for line in lines:
-                    if 'definition' in line[:14]:
-                        definition_cort.append(line.split('"')[1])
-                        break
-                    elif line == lines[-1]:
-                        # some structures do not have definitions yet, append empty strings
-                        definition_cort.append("")
-            else:
-                definition_cort.append('NA')
     elif noscrape or not has_connection:
         # if we can't or don't want scrape, append NA and print a warning? # TODO: is that sensible?
         print("""
         Interlex definition of anatomical concepts will NOT be performed. If you did not
         specify this behaviour, this could be due to a missing internet connection""")
-        definition_anat = [""] * len(mapping)
-        definition_cort = [""] * len(corticals)
+        if not json_file:
+            # no definitions at all
+            definition_anat = [""] * len(mapping)
+            definition_cort = [""] * len(corticals)
+        else:
+            # append existing definitions from json
+            if 'Left-Lateral-Ventricle' in mapper['Anatomy'].keys():
+                definition_anat = [
+                    mapper['Anatomy'][r['Atlas Segmentation Label'].values[0]]['definition'] \
+                    for (i, r) in mapping.iterrows()
+                    ]
+                definition_anat = np.asarray(definition_anat)
+            if 'bankssts' in mapper['Anatomy'].keys():
+                definition_cort = [
+                    mapper['Anatomy'][r['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]['definition'] \
+                    for (i, r) in corticals.iterrows()
+                    ]
+                definition_cort = np.asarray(definition_cort)
 
+    assert len(definition_cort) == len(corticals)
+    assert len(definition_anat) == len(mapping)
+    # append the definitions
     mapping['definition'] = definition_anat
     corticals['definition'] = definition_cort
     print("""Done collecting definitions.""")
@@ -402,10 +489,13 @@ def remap2json(xlsxfile,
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] is not np.nan else ""
         isAbout = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
+        # TODO: The Laterality of the terms in aparc files is undefined yet. I think that should change
+        hasLaterality = "undefined"
         l = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan else ""
         d[label] = {"url": url,
                     "isAbout": isAbout,
+                    "hasLaterality": hasLaterality,
                     "definition": row['definition'][0],
                     "label": l
                     }
@@ -537,6 +627,15 @@ def remap2json(xlsxfile,
     if outfile:
         with open(outfile, 'w') as f:
             json.dump(biggie, f, indent=4)
+    # if no outfile is provided, we can update the existing file or create one
+    else:
+        if json_file:
+            with open(json_file, 'w') as f:
+                json.dump(biggie, f, indent=4)
+        else:
+            datapath = mapping_data.__path__._path[0] + '/'
+            with open(join(datapath, 'jsonmap.json'), 'w') as f:
+                json.dump(biggie, f, indent=4)
 
     return [header, tableinfo, measures, biggie]
 
@@ -555,7 +654,7 @@ def main():
     parser.add_argument('-jmap', '--json_map', dest='json_map', action='store_true', default = False,
                         help='If provided, json information will be used instead of scraping InterLex')
     parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
-                        help='Output directory')
+                        help='Output directory', required=True)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
     parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
@@ -563,15 +662,16 @@ def main():
 
     args = parser.parse_args()
 
-
+    # WIP: trying to find a way to reference data in module. This does not feel kosher but works
+    datapath = mapping_data.__path__._path[0] + '/'
     #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
-    #files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
-    files=['aseg.stats']
+    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    #files=['aseg.stats']
     for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
             #read in json_map
-            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(dirname(realpath(sys.argv[0])),'mapping_data','ReproNimCDEs.xlsx'),
+            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(datapath,'ReproNimCDEs.xlsx'),
                                  fs_stat_file=os.path.join(args.subject_dir,"stats",stats_file))
 
 
