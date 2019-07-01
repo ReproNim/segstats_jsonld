@@ -294,18 +294,28 @@ def remap2json(xlsxfile,
                noscrape = False
                ):
     """
-    TODO insightful docstring
-
-    Query ReproNimCDEs and Freesurfer stat files, return json mapping
+    Mapper to associate Freesurfer stats terms with interlex definitions.
+    Based on Freesurfer stat files (aseg.stats or aparc.stats), this function
+    will query ReproNimCDEs (currently an xslx file under development found at
+    https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g/edit#gid=1737769619)
+    to return a return json mapping from the Freesurfer anatomical and statistical
+    terms to appropriate Interlex IRIs. For improved human-readability,
+    should an internet connection exist, it will scrape definitions for terms from
+    interlex (disable with noscrape = True).
+    To speed up the generation of such a mapper, either if a base-remapper already
+    exists in 'segstats_jsonld/mapping_data/jsonmap.json' or if supplied an
+    already existing .json mapping file, the function will only check
+    for yet missing terms in the stats file, and update if necessary.
 
     xslxfile: path to xslx file with ReproNimCDEs
-    typeoffile: one of [segstats, ...]
+    fs_stat_file: Freesurfer results file, either aseg.stats or aparc.stats
+    json_file: Existing json remap file from previous runs of this function ("base-remapper")
     outfilename: name for resulting json to be written to
-    npscrape: Boolean. If True, no interlex scraping for definitions is returned
+    noscrape: Boolean. If True, no interlex scraping for definitions is returned
+    force_update: Boolean. If True, a remapper is build from scratch even if a base remapper
+                  (json_file) already exists
     :return:
 
-    (xslx file to be found (under development):
-    https://docs.google.com/spreadsheets/d/1VcpNj1deZ7dF8XM6yXt5VWCNVVQkCnV9Y48wvMFYw0g/edit#gid=1737769619
     example:
     jsonmap = remap2json(xslxfile='ReproNimCDEs.xlsx',
                          fs_stat_file='aseg.stats)
