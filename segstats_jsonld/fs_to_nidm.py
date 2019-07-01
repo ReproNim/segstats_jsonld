@@ -290,8 +290,10 @@ def test_connection(remote=False):
 
 def remap2json(xlsxfile,
                fs_stat_file,
+               json_file = None,
                outfile = None,
-               noscrape = False
+               noscrape = False,
+               force_update = False,
                ):
     """
     Mapper to associate Freesurfer stats terms with interlex definitions.
