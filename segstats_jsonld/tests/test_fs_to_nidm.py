@@ -66,3 +66,10 @@ def test_remap2json():
     # parsing this will fail if json is not valid
     with open(join(testdatap, 'tmpjson.json'), 'r') as j:
         json.load(j)
+
+
+def test_test_connection():
+    """ smoke test to see whether this function tests internet connection"""
+
+    # trying to ping a non-existing server should fail
+    assert s.test_connection('albseirhnerjgel.com') == False
