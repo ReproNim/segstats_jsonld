@@ -654,7 +654,7 @@ def main():
     parser.add_argument('-jmap', '--json_map', dest='json_map', action='store_true', default = False,
                         help='If provided, json information will be used instead of scraping InterLex')
     parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
-                        help='Output directory')
+                        help='Output directory', required=True)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
     parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
