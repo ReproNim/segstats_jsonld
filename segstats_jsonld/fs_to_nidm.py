@@ -665,8 +665,8 @@ def main():
     # WIP: trying to find a way to reference data in module. This does not feel kosher but works
     datapath = mapping_data.__path__._path[0] + '/'
     #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
-    #files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
-    files=['aseg.stats']
+    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+    #files=['aseg.stats']
     for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
