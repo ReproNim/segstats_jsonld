@@ -336,6 +336,25 @@ def remap2json(xlsxfile,
     mapping = pd.read_excel(xls, 'Subcortical Volumes', header=[0,1])
     corticals = pd.read_excel(xls, 'Cortical Structures', header=[0,1])
 
+    if not json_file:
+        # creating a mapper and scraping definitions from the web is time-consuming.
+        # Ideally, we want to do this only once. Therefore, we generate a base-remapper
+        # that we take in as a default, and only update the definitions if none exists yet.
+        try:
+            with open ('segstats_jsonld/mapping_data/jsonmap.json') as j:
+                mapper = json.load(j)
+            print('Found a base-remapper. To speed up the generation of the .json'
+                  'mapping file, I will use the existing one and update it, if possible')
+            json_file = 'segstats_jsonld/mapping_data/jsonmap.json'
+        except OSError as e:
+            print("Could not find any base-remapper. Will generate one.")
+
+    if json_file:
+        # if we have a user-supplied json mapper, check whats inside and only append new stuff
+        # if necessary, update the file.
+        with open(json_file) as j:
+            mapper = json.load(j)
+
     # check whether we have an internet connection
     has_connection = test_connection()
 
