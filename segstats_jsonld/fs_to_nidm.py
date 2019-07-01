@@ -489,10 +489,13 @@ def remap2json(xlsxfile,
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] is not np.nan else ""
         isAbout = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
+        # TODO: The Laterality of the terms in aparc files is undefined yet. I think that should change
+        hasLaterality = "undefined"
         l = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan else ""
         d[label] = {"url": url,
                     "isAbout": isAbout,
+                    "hasLaterality": hasLaterality,
                     "definition": row['definition'][0],
                     "label": l
                     }
