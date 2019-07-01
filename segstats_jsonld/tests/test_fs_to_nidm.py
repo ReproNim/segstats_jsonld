@@ -25,6 +25,9 @@ def test_remap2json():
                                                              examplefile,
                                                              noscrape=True
                                                              )
+        # check that we have the overall keys assigned
+        assert "Anatomy" in biggie.keys()
+        assert "Measures" in biggie.keys()
         # assert that definitions are not assigned if there is no base-mapper
         if exists(join(datapath, 'jsonmap.json')):
             # TODO
@@ -38,6 +41,7 @@ def test_remap2json():
                             assert v == ""
 
     # smoke test whether scraping works
+    # TODO: This takes very long, will have to think of sth faster
     if s.test_connection():
         for examplefile in [aparc_example, asag_example]:
             header, tableinfo, measures, biggie = s.remap2json(xlsx_file,
