@@ -359,54 +359,110 @@ def remap2json(xlsxfile,
     has_connection = test_connection()
 
     if not noscrape and has_connection:
-        # rename the URIs so that they resolve, scrape definition
+        # if not existing in json mapper, rename the URIs so that they resolve, scrape definition
         definition_anat = []
         print("""
             Scraping anatomical definitions from interlex. This might take a few minutes,
             depending on your internet connection.
             """)
+        get_info = True
         for i, row in mapping.iterrows():
-            if row['Federated DE']['URI'] is not np.nan:
-                # this fixes the ilx link to resolve to scicrunch
-                url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
-                try:
+            if json_file:
+                if row['Atlas Segmentation Label'].values[0] in mapper['Anatomy'].keys():
+                    # the term already exists in the mapper, lets check whether it has a definition
+                    get_info = False
+                    if mapper["Anatomy"][row['Atlas Segmentation Label'].values[0]]["definition"] == 'NA':
+                        # there is no definition yet, lets try to get it
+                        get_info = True
+                        print('Checking for yet missing definition of label', row['Atlas Segmentation Label'].values[0])
+                    else:
+                        if not force_update:
+                            # append existing definition
+                            definition_anat.append(mapper["Anatomy"][row['Atlas Segmentation Label'].values[0]]["definition"])
+            if force_update:
+                # override if we really want to check the definitions again
+                get_info = True
+            if get_info:
+                print('getting info for', row['Atlas Segmentation Label'].values[0])
+                # get info only if json mapper does not exist yet
+                if row['Federated DE']['URI'] is not np.nan:
+                    # this fixes the ilx link to resolve to scicrunch
+                    url = 'ilx_'.join(row['Federated DE']['URI'].split('ILX:')) + '.ttl'
+                    try:
+                        r = requests.get(url)
+                        file = io.StringIO(r.text)
+                        lines = file.readlines()
+                        for line in lines:
+                            if 'definition' in line[:14]:
+                                definition_anat.append(line.split('"')[1])
+                    except socket.timeout:
+                        print('caught a timeout, appending "" to definitions')
+                        definition_anat.append("")
+
+                else:
+                    definition_anat.append('NA')
+
+        definition_cort = []
+        for i, row in corticals.iterrows():
+            if json_file:
+                if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'] in mapper['Anatomy'].keys():
+                    # the term already exists in the mapper, lets check whether it has a definition
+                    get_info = False
+                    if mapper["Anatomy"][row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]["definition"] == 'NA':
+                        # there is no definition yet, lets try to get it
+                        get_info = True
+                        print('Checking for yet missing definition of label', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
+                    else:
+                        # append existing definition
+                        if not force_update:
+                            definition_cort.append(
+                            mapper["Anatomy"][row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]["definition"])
+            if force_update:
+                get_info = True
+            if get_info:
+                print('getting info for', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
+                if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
+                    url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
                     r = requests.get(url)
                     file = io.StringIO(r.text)
                     lines = file.readlines()
                     for line in lines:
                         if 'definition' in line[:14]:
-                            definition_anat.append(line.split('"')[1])
-                except socket.timeout:
-                    print('caught a timeout, appending "" to definitions')
-                    definition_anat.append("")
+                            definition_cort.append(line.split('"')[1])
+                            break
+                        elif line == lines[-1]:
+                            # some structures do not have definitions yet, append empty strings
+                            definition_cort.append("")
+                else:
+                    definition_cort.append('NA')
 
-            else:
-                definition_anat.append('NA')
-
-        definition_cort = []
-        for i, row in corticals.iterrows():
-            if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
-                url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
-                r = requests.get(url)
-                file = io.StringIO(r.text)
-                lines = file.readlines()
-                for line in lines:
-                    if 'definition' in line[:14]:
-                        definition_cort.append(line.split('"')[1])
-                        break
-                    elif line == lines[-1]:
-                        # some structures do not have definitions yet, append empty strings
-                        definition_cort.append("")
-            else:
-                definition_cort.append('NA')
     elif noscrape or not has_connection:
         # if we can't or don't want scrape, append NA and print a warning? # TODO: is that sensible?
         print("""
         Interlex definition of anatomical concepts will NOT be performed. If you did not
         specify this behaviour, this could be due to a missing internet connection""")
-        definition_anat = [""] * len(mapping)
-        definition_cort = [""] * len(corticals)
+        if not json_file:
+            # no definitions at all
+            definition_anat = [""] * len(mapping)
+            definition_cort = [""] * len(corticals)
+        else:
+            # append existing definitions from json
+            if 'Left-Lateral-Ventricle' in mapper['Anatomy'].keys():
+                definition_anat = [
+                    mapper['Anatomy'][r['Atlas Segmentation Label'].values[0]]['definition'] \
+                    for (i, r) in mapping.iterrows()
+                    ]
+                definition_anat = np.asarray(definition_anat)
+            if 'bankssts' in mapper['Anatomy'].keys():
+                definition_cort = [
+                    mapper['Anatomy'][r['APARC Structures - Assuming Cortical Areas (not sulci)']['Label']]['definition'] \
+                    for (i, r) in corticals.iterrows()
+                    ]
+                definition_cort = np.asarray(definition_cort)
 
+    assert len(definition_cort) == len(corticals)
+    assert len(definition_anat) == len(mapping)
+    # append the definitions
     mapping['definition'] = definition_anat
     corticals['definition'] = definition_cort
     print("""Done collecting definitions.""")
