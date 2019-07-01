@@ -58,7 +58,7 @@ from rdflib import RDFS
 import sys
 import json
 
-
+from segstats_jsonld import mapping_data
 
 def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
@@ -563,7 +563,8 @@ def main():
 
     args = parser.parse_args()
 
-
+    # WIP: trying to find a way to reference data in module. This does not feel kosher but works
+    datapath = mapping_data.__path__._path[0] + '/'
     #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
     #files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
     files=['aseg.stats']
@@ -571,7 +572,7 @@ def main():
         if basename(stats_file) in files:
             #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
             #read in json_map
-            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(dirname(realpath(sys.argv[0])),'mapping_data','ReproNimCDEs.xlsx'),
+            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(datapath,'ReproNimCDEs.xlsx'),
                                  fs_stat_file=os.path.join(args.subject_dir,"stats",stats_file))
 
 
