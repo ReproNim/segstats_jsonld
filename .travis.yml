@@ -10,19 +10,19 @@ env:
     global:
         - COVERAGE=coverage
 
+#command to install dependencies
 install:
     - pip install -r requirements.txt
     - pip install -U codecov
     - pip install pytest-cov
-
+#command to run tests
 script:
-    -PATH=$PWD/tools/coverage-bin:$PATH
-     python -m pytest -s -v --cov=segstats_jsonld/ --cov-report=xml:coverage.xml
-    # upload reports
+    - PATH=$PWD/tools/coverage-bin:$PATH
+      python -m pytest -s -v --cov=segstats_jsonld/ --cov-report=xml:coverage.xml
+    # upload my python reports
     - bash <(curl -s https://codecov.io/bash) -cF python
     - codecov
 
 after success:
     - coverage combine -a /tmp/.coverage-entrypoints-*
     - codecov
-
