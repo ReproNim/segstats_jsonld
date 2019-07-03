@@ -1,0 +1,28 @@
+language: python
+python:
+    - "3.5"
+    - "3.6"
+
+os:
+    - linux
+
+env:
+    global:
+        - COVERAGE=coverage
+
+install:
+    - pip install -r requirements.txt
+    - pip install -U codecov
+    - pip install pytest-cov
+
+script:
+    -PATH=$PWD/tools/coverage-bin:$PATH
+     python -m pytest -s -v --cov=segstats_jsonld/ --cov-report=xml:coverage.xml
+    # upload reports
+    - bash <(curl -s https://codecov.io/bash) -cF python
+    - codecov
+
+after success:
+    - coverage combine -a /tmp/.coverage-entrypoints-*
+    - codecov
+
