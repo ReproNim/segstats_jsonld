@@ -12,7 +12,7 @@ Python and structural neuroimaging experience.  If one has experience with [rdfl
 - David Keator
 - Adina Wagner
 - Jeffrey Grethe
-- Satra Gosh
+- Satra Ghosh
 - David Kennedy
 - JB Poline
 
