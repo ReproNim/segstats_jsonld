@@ -225,11 +225,6 @@ def read_stats(filename):
     measures = []
     rowmeasures = []
 
-    # see if filename is in fact a URL and if so handle it differently from a file
-    url = url_validator(filename)
-
-
-
     with open(filename, 'rt') as fp:
         lines = fp.readlines()
         for line in lines:
