@@ -43,22 +43,33 @@ from prov.model import Namespace as provNamespace
 
 # standard library
 from pickle import dumps
-from datetime import datetime as dt
-import hashlib
 import os
-from os.path import join,basename,splitext,dirname,realpath
-import pwd
+from os.path import join,basename,splitext,isfile
 from socket import getfqdn
-import uuid
 import glob
 
 import prov.model as prov
-import rdflib
-from rdflib import RDFS
-import sys
 import json
+import urllib.request as ur
+from urllib.parse import urlparse
+
+import tempfile
 
 from segstats_jsonld import mapping_data
+
+
+def url_validator(url):
+    '''
+    Tests whether url is a valide url
+    :param url: url to test
+    :return: True for valid url else False
+    '''
+    try:
+        result = urlparse(url)
+        return all([result.scheme, result.netloc, result.path])
+
+    except:
+        return False
 
 def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None):
     '''
@@ -213,6 +224,12 @@ def read_stats(filename):
     tableinfo = {}
     measures = []
     rowmeasures = []
+
+    # see if filename is in fact a URL and if so handle it differently from a file
+    url = url_validator(filename)
+
+
+
     with open(filename, 'rt') as fp:
         lines = fp.readlines()
         for line in lines:
@@ -649,9 +666,20 @@ def main():
                                         anatomical designations, and save the statistics + region designations out as
                                         NIDM serializations (i.e. TURTLE, JSON-LD RDF))''',
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('-s', '--subject_dir', dest='subject_dir', type=str, required=True,
+    #DBK: added mutually exclusive arguments to support pulling a named stats file (e.g. aseg.stats) as a URL such as
+    #data hosted in an amazon bucket or from a mounted filesystem where you don't have access to the original
+    #subjects directory.
+
+    group = parser.add_mutually_exclusive_group(required=True)
+
+    group.add_argument('-s', '--subject_dir', dest='subject_dir', type=str,
                         help='Path to Freesurfer subject directory')
-    parser.add_argument('-jmap', '--json_map', dest='json_map', action='store_true', default = False,
+    group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer'
+                            'stats file. Note, currently supported is aseg.stats, lh/rh.aparc.stats')
+    parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='If a path to a URL or a stats file'
+                            'is supplied via the -f/--seg_file parameters then -subjid parameter must be set with'
+                            'the subject identifier to be used in the NIDM files')
+    parser.add_argument('-jmap', '--json_map', dest='json_map', default = False,
                         help='If provided, json information will be used instead of scraping InterLex')
     parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
                         help='Output directory', required=True)
@@ -659,48 +687,154 @@ def main():
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
     parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
                         help='Optional NIDM file to add segmentation data to.')
-
     args = parser.parse_args()
+
+    # test whether user supplied stats file directly and if so they the subject id must also be supplied so we
+    # know which subject the stats file is for
+    if args.segfile and (args.subjid is None):
+        parser.error("-f/--seg_file requires -subjid/--subjid to be set!")
+
+
+    #if user supplied json mapping file
+    if args.json_map is not False:
+        # read json_map into json map structure
+        with open(args.json_map) as json_file:
+            json_map = json.load(json_file)
 
     # WIP: trying to find a way to reference data in module. This does not feel kosher but works
     datapath = mapping_data.__path__._path[0] + '/'
-    #WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
-    files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
-    #files=['aseg.stats']
-    for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
-        if basename(stats_file) in files:
-            #[header, tableinfo, measures] = read_stats(os.path.join(args.subject_dir,"stats",stats_file))
-            #read in json_map
-            [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(datapath,'ReproNimCDEs.xlsx'),
+    # WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
+    supported_files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
+
+    # if we set -s or --subject_dir as paramemter on command line...
+    if args.subject_dir is not None:
+
+        # files=['aseg.stats']
+        for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
+            if basename(stats_file) in supported_files:
+                #if user added -jmap parameter
+                if args.json_map is not False:
+                    #read in stats file
+                    [header,tableinfo, measures] = read_stats(stats_file)
+                else:
+                    # online scraping of InterLex for anatomy CDEs and stats file reading
+                    [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(datapath,'ReproNimCDEs.xlsx'),
                                  fs_stat_file=os.path.join(args.subject_dir,"stats",stats_file))
 
 
-            #for measures we need to create NIDM structures using anatomy mappings
-            #If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
-            if args.nidm_file is None:
+                # for measures we need to create NIDM structures using anatomy mappings
+                # If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
+                if args.nidm_file is None:
 
-                print("Creating NIDM file...")
-                #If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
+                    print("Creating NIDM file...")
+                    # If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
 
-                #create an empty NIDM graph
-                nidmdoc = Core()
+                    # create an empty NIDM graph
+                    nidmdoc = Core()
 
-                #print(nidmdoc.serializeTurtle())
+                    # print(nidmdoc.serializeTurtle())
 
-                #WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
+                    # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+                    add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
 
-                #serialize NIDM file
-                if args.jsonld is not False:
-                    with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
-                        print("Writing NIDM file...")
-                        f.write(nidmdoc.serializeJSONLD())
-                else:
-                    with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
-                        print("Writing NIDM file...")
-                        f.write(nidmdoc.serializeTurtle())
+                    #serialize NIDM file
+                    if args.jsonld is not False:
+                        with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
+                            print("Writing NIDM file...")
+                            f.write(nidmdoc.serializeJSONLD())
+                    else:
+                        with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
+                            print("Writing NIDM file...")
+                            f.write(nidmdoc.serializeTurtle())
 
-                nidmdoc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
+                    nidmdoc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
+
+    # else if the user didn't set subject_dir on command line then they must have set a segmentation file directly
+    elif args.segfile is not None:
+
+        # here we're supporting amazon bucket-style file URLs where the expectation is the last parameter of the
+        # see if we have a valid url
+        url = url_validator(args.segfile)
+        # if user supplied a url as a segfile
+        if url is not False:
+
+            # check to see if the supplied segfile is in supported_files
+            if not any(ext in args.segfile for ext in supported_files):
+                print("ERROR! Only Freesurfer stats files currently supported are: \n")
+                print(supported_files)
+                print("You supplied to following URL which must contain the string from one of the supported files: %s " %args.segfile)
+                exit()
+
+            #open url and get file
+            opener = ur.urlopen(args.segfile)
+            #try to open the url and get the pointed to file
+            try:
+
+                # write temporary file to disk and use for stats
+                temp = tempfile.NamedTemporaryFile(delete=False)
+                temp.write(opener.read())
+                temp.close()
+                stats_file = temp.name
+            except:
+                print("ERROR! Can't open url: %s" %args.segfile)
+                exit()
+
+            # since all of the above worked, all we need to do is set the output file name to be the
+            # args.subjid + "_" + [everything after the last / in the supplied URL]
+            url_parts = urlparse(args.segfile)
+            path_parts = url_parts[2].rpartition('/')
+            output_filename = args.subjid + "_" + splitext(path_parts[2])[0]
+
+        # else this must be a path to a stats file
+        else:
+            if isfile(args.segfile):
+                stats_file = args.segfile
+                # set outputfilename to be the args.subjid + "_" + args.segfile
+                output_filename = args.subjid + "_" + splitext(basename(args.segfile))[0]
+            else:
+                print("ERROR! Can't open stats file: %s " %args.segfile)
+                exit()
+
+
+
+
+        #if user added -jmap parameter
+        if args.json_map is not False:
+            #read in stats file
+                [header,tableinfo, measures] = read_stats(stats_file)
+        else:
+            # online scraping of InterLex for anatomy CDEs and stats file reading
+                [header, tableinfo, measures,json_map] = remap2json(xlsxfile=join(datapath,'ReproNimCDEs.xlsx'),
+                                 fs_stat_file=stats_file)
+
+
+        # for measures we need to create NIDM structures using anatomy mappings
+        # If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
+        if args.nidm_file is None:
+
+            print("Creating NIDM file...")
+            # If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
+
+            # create an empty NIDM graph
+            nidmdoc = Core()
+
+            # print(nidmdoc.serializeTurtle())
+
+            # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+            add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
+
+            #serialize NIDM file
+            if args.jsonld is not False:
+                with open(join(args.output_dir,output_filename +'.json'),'w') as f:
+                    print("Writing NIDM file...")
+                    f.write(nidmdoc.serializeJSONLD())
+            else:
+                with open(join(args.output_dir,output_filename + '.ttl'),'w') as f:
+                    print("Writing NIDM file...")
+                    f.write(nidmdoc.serializeTurtle())
+
+            nidmdoc.save_DotGraph(join(args.output_dir,output_filename + ".pdf"), format="pdf")
+
 
 
 if __name__ == "__main__":
