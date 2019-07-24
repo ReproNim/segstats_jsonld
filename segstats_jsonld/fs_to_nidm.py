@@ -38,7 +38,8 @@
 from nidm.core import Constants
 from nidm.experiment.Core import getUUID
 from nidm.experiment.Core import Core
-from prov.model import QualifiedName,PROV_ROLE, ProvDocument, PROV_ATTR_USED_ENTITY
+from prov.model import QualifiedName,PROV_ROLE, ProvDocument, PROV_ATTR_USED_ENTITY,PROV_ACTIVITY,PROV_AGENT,PROV_ROLE
+
 from prov.model import Namespace as provNamespace
 
 # standard library
@@ -52,6 +53,10 @@ import prov.model as prov
 import json
 import urllib.request as ur
 from urllib.parse import urlparse
+
+from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode
+
+
 
 import tempfile
 
@@ -71,7 +76,7 @@ def url_validator(url):
     except:
         return False
 
-def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None):
+def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=None, root_act=None, nidm_graph=None,subjid=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
     NIDM-E file for the matching subject ID
@@ -94,7 +99,6 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
         first_row=True
 
         #for each of the header items create a dictionary where namespaces are freesurfer
-        #software_activity = nidmdoc.graph.activity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
         software_activity = nidmdoc.graph.activity(niiri[getUUID()],other_attributes={Constants.NIDM_PROJECT_DESCRIPTION:"Freesurfer segmentation statistics"})
         for key,value in header.items():
             software_activity.add_attributes({QualifiedName(provNamespace("fs",Constants.FREESURFER),key):value})
@@ -107,6 +111,8 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
         #create qualified association with brain volume computation activity
         nidmdoc.graph.association(activity=software_activity,agent=software_agent,other_attributes={PROV_ROLE:Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE})
         nidmdoc.graph.wasAssociatedWith(activity=software_activity,agent=software_agent)
+
+
 
         #print(nidmdoc.serializeTurtle())
 
@@ -158,13 +164,118 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
                         datum_entity.add_attributes({region_entity.identifier:items['value']})
 
+    #else we're adding data to an existing NIDM file and attaching it to a specific subject identifier
+    else:
+
+            #search for prov:agent with this subject id
+
+            #find subject ids and sessions in NIDM document
+            query = """
+                    PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
+                    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX prov:<http://www.w3.org/ns/prov#>
+                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+                    select distinct ?agent
+                    where {
+
+                        ?agent rdf:type prov:Agent ;
+                        ndar:src_subject_id \"%s\"^^xsd:string .
+
+                    }""" % subjid
+            #print(query)
+            qres = nidm_graph.query(query)
+            for row in qres:
+                print('Found subject ID: %s in NIDM file (agent: %s)' %(subjid,row[0]))
+
+                #associate the brain volume data with this subject id but here we can't make a link between an acquisition
+                #entity representing the T1w image because the Freesurfer *.stats file doesn't have the provenance information
+                #to verify a specific image was used for these segmentations
+
+                #for each of the header items create a dictionary where namespaces are freesurfer
+                niiri=Namespace("http://iri.nidash.org/")
+                nidm_graph.bind("nirri",niiri)
+
+                software_activity = niiri[getUUID()]
+                nidm_graph.add((software_activity,RDF.type,Constants.PROV['Activity']))
+                nidm_graph.add((software_activity,Constants.DCT["description"],Literal("Freesurfer segmentation statistics")))
+                fs = Namespace(Constants.FREESURFER)
+
+                for key,value in header.items():
+                    nidm_graph.add((software_activity,fs[key],Literal(value)))
+
+                #create software agent and associate with software activity
+                #software_agent = nidmdoc.graph.agent(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
+                software_agent = niiri[getUUID()]
+                nidm_graph.add((software_agent,RDF.type,Constants.PROV['Agent']))
+                neuro_soft=Namespace(Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE)
+                nidm_graph.add((software_agent,Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE,URIRef(Constants.FREESURFER)))
+                nidm_graph.add((software_agent,RDF.type,Constants.PROV["SoftwareAgent"]))
+                association_bnode = BNode()
+                nidm_graph.add((software_activity,Constants.PROV['qualifiedAssociation'],association_bnode))
+                nidm_graph.add((association_bnode,RDF.type,Constants.PROV['Agent']))
+                nidm_graph.add((association_bnode,Constants.PROV['hadRole'],Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE))
+                nidm_graph.add((association_bnode,Constants.PROV['wasAssociatedWith'],software_agent))
+
+                #add freesurfer data
+                datum_entity=niiri[getUUID()]
+                nidm_graph.add((datum_entity, RDF.type, Constants.PROV['Entity']))
+                nidm_graph.add((datum_entity,RDF.type,Constants.NIDM["FSStatsCollection"]))
+                nidm_graph.add((datum_entity, Constants.PROV['wasGeneratedBy'], software_activity))
+
+                #iterate over measure dictionary where measures are the lines in the FS stats files which start with '# Measure' and
+                #the whole table at the bottom of the FS stats file that starts with '# ColHeaders
+                for measures in measure:
+
+                    #check if we have a CDE mapping for the anatomical structure referenced in the FS stats file
+                    if measures["structure"] in json_map['Anatomy']:
+
+                        #for the various fields in the FS stats file row starting with '# Measure'...
+                        for items in measures["items"]:
+                            # if the
+                            if items['name'] in json_map['Measures'].keys():
+
+                                if not json_map['Anatomy'][measures["structure"]]['label']:
+                                    continue
+                                #region_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
+                                region_entity=niiri[getUUID()]
+                                measurement_datum = Namespace("http://uri.interlex.org/base/ilx_0738269#")
+                                nidm_graph.bind("measurement_datum",measurement_datum)
+
+                                nidm_graph.add((region_entity,RDF.type,Constants.PROV['Entity']))
+                                nidm_graph.add((region_entity,RDF.type,URIRef(measurement_datum)))
+
+                                #construct the custom CDEs to describe measurements of the various brain regions
+                                isAbout = Namespace("http://uri.interlex.org/ilx_0381385#")
+                                nidm_graph.bind("isAbout",isAbout)
+                                hasLaterality = Namespace("http://uri.interlex.org/ilx_0381387#")
+                                nidm_graph.bind("hasLaterality",hasLaterality)
+                                isMeasureOf = Namespace("http://uri.interlex.org/ilx_0381389#")
+                                nidm_graph.bind("isMeasureOf",isMeasureOf)
+                                GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
+                                nidm_graph.bind("GrayMatter",GrayMatter)
+                                nidm_graph.add((region_entity,URIRef(isAbout),Literal(json_map['Anatomy'][measures["structure"]]['isAbout'])))
+                                nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
+                                nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
+                                nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
+                                nidm_graph.add((region_entity,Constants.RDFS['label'],Literal(json_map['Anatomy'][measures["structure"]]['label'])))
+
+                                hasMeasurementType = Namespace("http://uri.interlex.org/ilx_0381388#")
+                                nidm_graph.bind("hasMeasurementType",hasMeasurementType)
+                                hasDatumType = Namespace("http://uri.interlex.org/ilx_0738262#")
+                                nidm_graph.bind("hasDatumType",hasDatumType)
+                                nidm_graph.add((region_entity,URIRef(hasMeasurementType),Literal(json_map['Measures'][items['name']]["measureOf"])))
+                                nidm_graph.add((region_entity,URIRef(hasDatumType),Literal(json_map['Measures'][items['name']]["datumType"])))
+
+                                #create prefixes for measurement_datum objects for easy reading
+                                #nidm_graph.bind(Core.safe_string(Core,string=json_map['Anatomy'][measures["structure"]]['label']),region_entity)
+
+                                nidm_graph.add((datum_entity,URIRef(region_entity),Literal(items['value'])))
 
 
 
+            nidm_graph.serialize(destination="/Users/dbkeator/Downloads/test.ttl",format='turtle')
 
-
-            #key is
-            #print(measures)
 
 
 
@@ -680,7 +791,7 @@ def main():
                         help='Output directory', required=True)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
-    parser.add_argument('--n','--nidm', dest='nidm_file', type=str, required=False,
+    parser.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,
                         help='Optional NIDM file to add segmentation data to.')
     args = parser.parse_args()
 
@@ -701,7 +812,7 @@ def main():
     # WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
     supported_files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
 
-    # if we set -s or --subject_dir as paramemter on command line...
+    # if we set -s or --subject_dir as parameter on command line...
     if args.subject_dir is not None:
 
         # files=['aseg.stats']
@@ -815,9 +926,15 @@ def main():
 
             # print(nidmdoc.serializeTurtle())
 
-            # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-            add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
+            #if user chose to use a URL or path directly to the *.stats file then we also need to add an agent for
+            #the subject ID...
+            if args.segfile is not None:
+                # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
 
+            else:
+                # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
+                add_seg_data(nidmdoc=nidmdoc,measure=measures,header=header, json_map=json_map)
             #serialize NIDM file
             if args.jsonld is not False:
                 with open(join(args.output_dir,output_filename +'.json'),'w') as f:
@@ -829,6 +946,18 @@ def main():
                     f.write(nidmdoc.serializeTurtle())
 
             nidmdoc.save_DotGraph(join(args.output_dir,output_filename + ".pdf"), format="pdf")
+        # we adding these data to an existing NIDM file
+        else:
+            #read in NIDM file with rdflib
+            rdf_graph = Graph()
+            rdf_graph_parse = rdf_graph.parse(args.nidm_file,format=util.guess_format(args.nidm_file))
+
+            #search for prov:agent with this subject id
+            #associate the brain volume data with this subject id but here we can't make a link between an acquisition
+            #entity representing the T1w image because the Freesurfer *.stats file doesn't have the provenance information
+            #to verify a specific image was used for these segmentations
+            add_seg_data(nidmdoc=rdf_graph_parse,measure=measures,header=header,json_map=json_map,nidm_graph=rdf_graph_parse,subjid=args.subjid)
+
 
 
 
