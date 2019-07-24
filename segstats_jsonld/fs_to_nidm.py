@@ -274,7 +274,6 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
 
 
-            nidm_graph.serialize(destination="/Users/dbkeator/Downloads/test.ttl",format='turtle')
 
 
 
@@ -945,7 +944,7 @@ def main():
                     print("Writing NIDM file...")
                     f.write(nidmdoc.serializeTurtle())
 
-            nidmdoc.save_DotGraph(join(args.output_dir,output_filename + ".pdf"), format="pdf")
+            #nidmdoc.save_DotGraph(join(args.output_dir,output_filename + ".pdf"), format="pdf")
         # we adding these data to an existing NIDM file
         else:
             #read in NIDM file with rdflib
@@ -957,6 +956,16 @@ def main():
             #entity representing the T1w image because the Freesurfer *.stats file doesn't have the provenance information
             #to verify a specific image was used for these segmentations
             add_seg_data(nidmdoc=rdf_graph_parse,measure=measures,header=header,json_map=json_map,nidm_graph=rdf_graph_parse,subjid=args.subjid)
+
+            #serialize NIDM file
+            if args.jsonld is not False:
+                print("Writing NIDM file...")
+                rdf_graph_parse.serialize(destination=join(args.output_dir,output_filename + '.json'),format='json-ld')
+
+            else:
+                print("Writing NIDM file...")
+                rdf_graph_parse.serialize(destination=join(args.output_dir,output_filename + '.ttl'),format='turtle')
+
 
 
 
