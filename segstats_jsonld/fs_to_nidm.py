@@ -958,13 +958,12 @@ def main():
             add_seg_data(nidmdoc=rdf_graph_parse,measure=measures,header=header,json_map=json_map,nidm_graph=rdf_graph_parse,subjid=args.subjid)
 
             #serialize NIDM file
-            if args.jsonld is not False:
-                print("Writing NIDM file...")
-                rdf_graph_parse.serialize(destination=join(args.output_dir,output_filename + '.json'),format='json-ld')
+            #if args.jsonld is not False:
+            #    print("Writing NIDM file...")
+            #    rdf_graph_parse.serialize(destination=join(args.output_dir,output_filename + '.json'),format='json-ld')
 
-            else:
-                print("Writing NIDM file...")
-                rdf_graph_parse.serialize(destination=join(args.output_dir,output_filename + '.ttl'),format='turtle')
+            print("Writing NIDM file...")
+            rdf_graph_parse.serialize(destination=args.nidm_file,format='turtle')
 
 
 
