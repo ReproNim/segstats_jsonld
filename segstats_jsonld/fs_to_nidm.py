@@ -873,11 +873,12 @@ def main():
                 print("You supplied to following URL which must contain the string from one of the supported files: %s " %args.segfile)
                 exit()
 
-            #open url and get file
-            opener = ur.urlopen(args.segfile)
+
+
             #try to open the url and get the pointed to file
             try:
-
+                #open url and get file
+                opener = ur.urlopen(args.segfile)
                 # write temporary file to disk and use for stats
                 temp = tempfile.NamedTemporaryFile(delete=False)
                 temp.write(opener.read())
