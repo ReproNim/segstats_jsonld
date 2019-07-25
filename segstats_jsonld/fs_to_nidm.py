@@ -60,6 +60,7 @@ from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode
 
 import tempfile
 
+
 from segstats_jsonld import mapping_data
 
 
@@ -807,7 +808,9 @@ def main():
             json_map = json.load(json_file)
 
     # WIP: trying to find a way to reference data in module. This does not feel kosher but works
-    datapath = mapping_data.__path__._path[0] + '/'
+    #datapath = mapping_data.__path__._path[0] + '/'
+    # changed by DBK
+    datapath = mapping_data.__path__[0] + '/'
     # WIP: For right now we're only converting aseg.stats but ultimately we'll want to do this for all stats files
     supported_files=['aseg.stats','lh.aparc.stats','rh.aparc.stats']
 
