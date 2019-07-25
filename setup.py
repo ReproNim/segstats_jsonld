@@ -41,7 +41,7 @@ setup(
     packages=PACKAGES,
     install_requires=[
         'numpy',
-        'pandas'
+        'pandas',
     ], # Add requirements as necessary
     extras_require={
         'devel-docs': [
