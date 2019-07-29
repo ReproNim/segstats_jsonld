@@ -218,6 +218,14 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                 nidm_graph.add((association_bnode,Constants.PROV['hadRole'],Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE))
                 nidm_graph.add((association_bnode,Constants.PROV['wasAssociatedWith'],software_agent))
 
+                #create a blank node and qualified association with prov:Agent for participant
+                #row[0]
+                association_bnode = BNode()
+                nidm_graph.add((software_activity,Constants.PROV['qualifiedAssociation'],association_bnode))
+                nidm_graph.add((association_bnode,RDF.type,Constants.PROV['Agent']))
+                nidm_graph.add((association_bnode,Constants.PROV['hadRole'],Constants.SIO["Subject"]))
+                nidm_graph.add((association_bnode,Constants.PROV['wasAssociatedWith'],row[0]))
+
                 #add freesurfer data
                 datum_entity=niiri[getUUID()]
                 nidm_graph.add((datum_entity, RDF.type, Constants.PROV['Entity']))
@@ -598,10 +606,18 @@ def remap2json(xlsxfile,
         isAbout = row['Structure']['Preferred'] if row['Structure']['Preferred'] is not np.nan else ""
         hasLaterality = row['Laterality']['ILX:0106135'] if row['Laterality']['ILX:0106135'] is not np.nan else ""
         l = row['Federated DE']['Name'] if row['Federated DE']['Name'] is not np.nan else ""
+        # WIP: Added by DBK because I can't change the Name column or really edit the ReproNimCDEs.xlsx file at all
+        # with my version of Excel (version 16.27 on Mac) without it mangling column B which is an IF statement
+        # something to do with Excel so here I'm forcing the removal of "left" | "right" | "volume" from the Names
+        l=l.replace('left','')
+        l=l.replace('right','')
+        l=l.replace('volume','').strip()
         d[label] = {"url": url,
                     "isAbout": isAbout,
                     "hasLaterality": hasLaterality,
-                    "definition": row['definition'][0],
+                    # WIP: Added by DBK, see comment above...
+                    # "definition": row['definition'][0],
+                    "definition": row['definition'][0].replace('left','').replace('right','').replace('volume','').strip(),
                     "label": l
                     }
     print("Done. Creating json mapping from cortical structures...")
@@ -756,7 +772,7 @@ def remap2json(xlsxfile,
             with open(json_file, 'w') as f:
                 json.dump(biggie, f, indent=4)
         else:
-            datapath = mapping_data.__path__._path[0] + '/'
+            datapath = mapping_data.__path__[0] + '/'
             with open(join(datapath, 'jsonmap.json'), 'w') as f:
                 json.dump(biggie, f, indent=4)
 
