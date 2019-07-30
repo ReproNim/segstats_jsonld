@@ -197,6 +197,8 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                 niiri=Namespace("http://iri.nidash.org/")
                 nidm_graph.bind("nirri",niiri)
 
+
+
                 software_activity = niiri[getUUID()]
                 nidm_graph.add((software_activity,RDF.type,Constants.PROV['Activity']))
                 nidm_graph.add((software_activity,Constants.DCT["description"],Literal("Freesurfer segmentation statistics")))
@@ -247,34 +249,83 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 if not json_map['Anatomy'][measures["structure"]]['label']:
                                     continue
                                 #region_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={prov.PROV_TYPE:
-                                region_entity=niiri[getUUID()]
-                                measurement_datum = Namespace("http://uri.interlex.org/base/ilx_0738269#")
-                                nidm_graph.bind("measurement_datum",measurement_datum)
 
-                                nidm_graph.add((region_entity,RDF.type,Constants.PROV['Entity']))
-                                nidm_graph.add((region_entity,RDF.type,URIRef(measurement_datum)))
 
-                                #construct the custom CDEs to describe measurements of the various brain regions
-                                isAbout = Namespace("http://uri.interlex.org/ilx_0381385#")
-                                nidm_graph.bind("isAbout",isAbout)
-                                hasLaterality = Namespace("http://uri.interlex.org/ilx_0381387#")
-                                nidm_graph.bind("hasLaterality",hasLaterality)
-                                isMeasureOf = Namespace("http://uri.interlex.org/ilx_0381389#")
-                                nidm_graph.bind("isMeasureOf",isMeasureOf)
-                                GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
-                                nidm_graph.bind("GrayMatter",GrayMatter)
-                                nidm_graph.add((region_entity,URIRef(isAbout),Literal(json_map['Anatomy'][measures["structure"]]['isAbout'])))
-                                nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
-                                nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
-                                nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
-                                nidm_graph.add((region_entity,Constants.RDFS['label'],Literal(json_map['Anatomy'][measures["structure"]]['label'])))
+                                # here we're adding measurement_datum entities.  Let's check to see if we already
+                                # have appropriate ones in the NIDM file.  If we do then we can just link to those
+                                # entities
 
-                                hasMeasurementType = Namespace("http://uri.interlex.org/ilx_0381388#")
-                                nidm_graph.bind("hasMeasurementType",hasMeasurementType)
-                                hasDatumType = Namespace("http://uri.interlex.org/ilx_0738262#")
-                                nidm_graph.bind("hasDatumType",hasDatumType)
-                                nidm_graph.add((region_entity,URIRef(hasMeasurementType),Literal(json_map['Measures'][items['name']]["measureOf"])))
-                                nidm_graph.add((region_entity,URIRef(hasDatumType),Literal(json_map['Measures'][items['name']]["datumType"])))
+                                query = """
+                                    PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
+                                    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                                    PREFIX hasDatumType: <http://uri.interlex.org/ilx_0738262#>
+                                    PREFIX hasLaterality: <http://uri.interlex.org/ilx_0381387#>
+                                    PREFIX hasMeasurementType: <http://uri.interlex.org/ilx_0381388#>
+                                    PREFIX iq_measure: <https://github.com/dbkeator/nidm-local-terms/issues/60>
+                                    PREFIX isAbout: <http://uri.interlex.org/ilx_0381385#>
+                                    PREFIX isMeasureOf: <http://uri.interlex.org/ilx_0381389#>
+                                    PREFIX measurement_datum: <http://uri.interlex.org/base/ilx_0738269#>
+
+                                    select distinct ?region_entity
+                                    where {
+
+                                        ?region_entity rdf:type measurement_datum: ;
+                                            rdfs:label \"%s\" ;
+                                            hasDatumType: <%s> ;
+                                            isAbout: \"%s\" ;
+                                            hasLaterality: \"%s\" ;
+                                            hasMeasurementType: <%s> .
+                                        } """ %(json_map['Anatomy'][measures["structure"]]['label'],
+                                                json_map['Measures'][items['name']]["datumType"],
+                                                json_map['Anatomy'][measures["structure"]]['isAbout'],
+                                                json_map['Anatomy'][measures["structure"]]['hasLaterality'],
+                                                json_map['Measures'][items['name']]["measureOf"])
+                                # execute query
+                                print("searching for existing measurement datum for structure: %s"
+                                      % json_map['Anatomy'][measures["structure"]]['label'])
+                                qres = nidm_graph.query(query)
+
+                                # check if we have an entity reference returned.  If so, use it else create the entity
+                                # needed.
+                                if len(qres) >= 1:
+                                    # found one or more unique measurement datum so use the first one since they
+                                    # are all identical and not sure why they are replicated
+                                    print("measurement datum entity found: %s" %row[0])
+                                    region_entity=row[0]
+
+                                else:
+                                    # nothing found so create
+                                    print("measurement datum entity not found, creating...")
+                                    region_entity=niiri[getUUID()]
+                                    measurement_datum = Namespace("http://uri.interlex.org/base/ilx_0738269#")
+                                    nidm_graph.bind("measurement_datum",measurement_datum)
+
+                                    nidm_graph.add((region_entity,RDF.type,Constants.PROV['Entity']))
+                                    nidm_graph.add((region_entity,RDF.type,URIRef(measurement_datum)))
+
+                                    #construct the custom CDEs to describe measurements of the various brain regions
+                                    isAbout = Namespace("http://uri.interlex.org/ilx_0381385#")
+                                    nidm_graph.bind("isAbout",isAbout)
+                                    hasLaterality = Namespace("http://uri.interlex.org/ilx_0381387#")
+                                    nidm_graph.bind("hasLaterality",hasLaterality)
+                                    isMeasureOf = Namespace("http://uri.interlex.org/ilx_0381389#")
+                                    nidm_graph.bind("isMeasureOf",isMeasureOf)
+                                    GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
+                                    nidm_graph.bind("GrayMatter",GrayMatter)
+                                    nidm_graph.add((region_entity,URIRef(isAbout),Literal(json_map['Anatomy'][measures["structure"]]['isAbout'])))
+                                    nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
+                                    nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
+                                    nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
+                                    nidm_graph.add((region_entity,Constants.RDFS['label'],Literal(json_map['Anatomy'][measures["structure"]]['label'])))
+
+                                    hasMeasurementType = Namespace("http://uri.interlex.org/ilx_0381388#")
+                                    nidm_graph.bind("hasMeasurementType",hasMeasurementType)
+                                    hasDatumType = Namespace("http://uri.interlex.org/ilx_0738262#")
+                                    nidm_graph.bind("hasDatumType",hasDatumType)
+                                    nidm_graph.add((region_entity,URIRef(hasMeasurementType),URIRef(json_map['Measures'][items['name']]["measureOf"])))
+                                    nidm_graph.add((region_entity,URIRef(hasDatumType),URIRef(json_map['Measures'][items['name']]["datumType"])))
 
                                 #create prefixes for measurement_datum objects for easy reading
                                 #nidm_graph.bind(Core.safe_string(Core,string=json_map['Anatomy'][measures["structure"]]['label']),region_entity)
@@ -758,7 +809,6 @@ def remap2json(xlsxfile,
                                         "measureOf":'TODO',
                                         "datumType": 'http://uri.interlex.org/base/ilx_0738268#' #range
                                         }
-    print("Done.")
     # join anatomical and measures dictionaries
     biggie = {'Anatomy': d,
               'Measures': d2}
