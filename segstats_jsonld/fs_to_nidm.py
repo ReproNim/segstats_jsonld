@@ -195,7 +195,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
                 #for each of the header items create a dictionary where namespaces are freesurfer
                 niiri=Namespace("http://iri.nidash.org/")
-                nidm_graph.bind("nirri",niiri)
+                nidm_graph.bind("niiri",niiri)
 
 
 
@@ -285,6 +285,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 # execute query
                                 # print("searching for existing measurement datum for structure: %s"
                                 #      % json_map['Anatomy'][measures["structure"]]['label'])
+                                # print(query)
                                 qres = nidm_graph.query(query)
 
                                 # check if we have an entity reference returned.  If so, use it else create the entity
@@ -292,13 +293,15 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 if len(qres) >= 1:
                                     # found one or more unique measurement datum so use the first one since they
                                     # are all identical and not sure why they are replicated
-                                    # print("measurement datum entity found: %s" %row[0])
-                                    region_entity=row[0]
+                                    for row in qres:
+                                        # print("measurement datum entity found: %s" %row)
+                                        # parse url
+                                        region_entity=URIRef(niiri[str(row[0]).rsplit('/',1)[1]])
 
                                 else:
                                     # nothing found so create
                                     # print("measurement datum entity not found, creating...")
-                                    region_entity=niiri[getUUID()]
+                                    region_entity=URIRef(niiri[getUUID()])
                                     measurement_datum = Namespace("http://uri.interlex.org/base/ilx_0738269#")
                                     nidm_graph.bind("measurement_datum",measurement_datum)
 
@@ -330,7 +333,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 #create prefixes for measurement_datum objects for easy reading
                                 #nidm_graph.bind(Core.safe_string(Core,string=json_map['Anatomy'][measures["structure"]]['label']),region_entity)
 
-                                nidm_graph.add((datum_entity,URIRef(region_entity),Literal(items['value'])))
+                                nidm_graph.add((datum_entity,region_entity,Literal(items['value'])))
 
 
 
@@ -565,7 +568,7 @@ def remap2json(xlsxfile,
                 # override if we really want to check the definitions again
                 get_info = True
             if get_info:
-                print('getting info for', row['Atlas Segmentation Label'].values[0])
+                # print('getting info for', row['Atlas Segmentation Label'].values[0])
                 # get info only if json mapper does not exist yet
                 if row['Federated DE']['URI'] is not np.nan:
                     # this fixes the ilx link to resolve to scicrunch
@@ -602,7 +605,7 @@ def remap2json(xlsxfile,
             if force_update:
                 get_info = True
             if get_info:
-                print('getting info for', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
+                # print('getting info for', row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'])
                 if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan:
                     url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] + '.ttl'
                     r = requests.get(url)
