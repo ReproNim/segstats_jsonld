@@ -283,8 +283,8 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                                 json_map['Anatomy'][measures["structure"]]['hasLaterality'],
                                                 json_map['Measures'][items['name']]["measureOf"])
                                 # execute query
-                                print("searching for existing measurement datum for structure: %s"
-                                      % json_map['Anatomy'][measures["structure"]]['label'])
+                                # print("searching for existing measurement datum for structure: %s"
+                                #      % json_map['Anatomy'][measures["structure"]]['label'])
                                 qres = nidm_graph.query(query)
 
                                 # check if we have an entity reference returned.  If so, use it else create the entity
@@ -292,12 +292,12 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 if len(qres) >= 1:
                                     # found one or more unique measurement datum so use the first one since they
                                     # are all identical and not sure why they are replicated
-                                    print("measurement datum entity found: %s" %row[0])
+                                    # print("measurement datum entity found: %s" %row[0])
                                     region_entity=row[0]
 
                                 else:
                                     # nothing found so create
-                                    print("measurement datum entity not found, creating...")
+                                    # print("measurement datum entity not found, creating...")
                                     region_entity=niiri[getUUID()]
                                     measurement_datum = Namespace("http://uri.interlex.org/base/ilx_0738269#")
                                     nidm_graph.bind("measurement_datum",measurement_datum)
