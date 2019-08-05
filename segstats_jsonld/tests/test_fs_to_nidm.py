@@ -1,14 +1,13 @@
 import pytest
 import json
 import numpy as np
-from os.path import join, exists
+from os.path import join, exists, abspath
 from .. import mapping_data
 from . import testdata
 from .. import fs_to_nidm as s
 
-
-datapath = mapping_data.__path__._path[0] + '/'
-testdatap = testdata.__path__._path[0] + '/'
+datapath = mapping_data.__path__[0] + '/'
+testdatap = abspath('segstats_jsonld/tests/testdata/')
 
 def test_remap2json():
     """
