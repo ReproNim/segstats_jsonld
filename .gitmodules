@@ -1,0 +1,3 @@
+[submodule "nidm-jsonld"]
+	path = nidm-jsonld
+	url = https://github.com/satra/nidm-jsonld.git
