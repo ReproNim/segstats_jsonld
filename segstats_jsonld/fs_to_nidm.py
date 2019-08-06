@@ -490,7 +490,7 @@ def remap2json(xlsxfile,
     should an internet connection exist, it will scrape definitions for terms from
     interlex (disable with noscrape = True).
     To speed up the generation of such a mapper, either if a base-remapper already
-    exists in 'segstats_jsonld/mapping_data/jsonmap.json' or if supplied an
+    exists in 'segstats_jsonld/mapping_data/freesurfermap.json' or if supplied an
     already existing .json mapping file, the function will only check
     for yet missing terms in the stats file, and update if necessary.
 
@@ -504,8 +504,8 @@ def remap2json(xlsxfile,
     :return:
 
     example:
-    jsonmap = remap2json(xslxfile='ReproNimCDEs.xlsx',
-                         fs_stat_file='aseg.stats)
+    freesurfermap = remap2json(xslxfile='ReproNimCDEs.xlsx',
+                               fs_stat_file='aseg.stats)
 
     """
     import io
@@ -526,11 +526,11 @@ def remap2json(xlsxfile,
         # Ideally, we want to do this only once. Therefore, we generate a base-remapper
         # that we take in as a default, and only update the definitions if none exists yet.
         try:
-            with open ('segstats_jsonld/mapping_data/jsonmap.json') as j:
+            with open ('segstats_jsonld/mapping_data/freesurfermap.json') as j:
                 mapper = json.load(j)
             print('Found a base-remapper. To speed up the generation of the .json'
                   'mapping file, I will use the existing one and update it, if possible')
-            json_file = 'segstats_jsonld/mapping_data/jsonmap.json'
+            json_file = 'segstats_jsonld/mapping_data/freesurfermap.json'
         except OSError as e:
             print("Could not find any base-remapper. Will generate one.")
 
@@ -683,7 +683,7 @@ def remap2json(xlsxfile,
         isAbout = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
         # TODO: The Laterality of the terms in aparc files is undefined yet. I think that should change
-        hasLaterality = "undefined"
+        hasLaterality = ""
         l = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Interlex Label'] is not np.nan else ""
         d[label] = {"url": url,
@@ -826,7 +826,7 @@ def remap2json(xlsxfile,
                 json.dump(biggie, f, indent=4)
         else:
             datapath = mapping_data.__path__[0] + '/'
-            with open(join(datapath, 'jsonmap.json'), 'w') as f:
+            with open(join(datapath, 'freesurfermap.json'), 'w') as f:
                 json.dump(biggie, f, indent=4)
 
     return [header, tableinfo, measures, biggie]
