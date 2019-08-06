@@ -336,6 +336,26 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 nidm_graph.add((datum_entity,region_entity,Literal(items['value'])))
 
 
+def read_buildstamp(subdir):
+    """
+    if provided with a freesurfer subject directory, check whether the build_stamp.txt file
+    exists, and if so, extract the freesurfer version.
+    :param subdir: path to subject directory, e.g. args.subject_dir
+    """
+    if os.path.exists(subdir):
+        try:
+            with open(subdir + '/scripts/build-stamp.txt', 'r') as f:
+                freesurfer_version = f.readlines()[0]
+        # except a FileNotFound error
+        except OSError as e:
+            freesurfer_version = input(
+                """
+                Could not find a build timestamp in the supplied subject directory.
+                The used freesurfer version can not be extracted. Please enter the
+                version of freesurfer you are using, if available: """
+                or "")
+    return freesurfer_version
+
 
 
 
@@ -885,7 +905,8 @@ def main():
 
     # if we set -s or --subject_dir as parameter on command line...
     if args.subject_dir is not None:
-
+        # get the freesurfer version for later use
+        freesurfer_version = read_buildstamp(args.subject_dir)
         # files=['aseg.stats']
         for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
             if basename(stats_file) in supported_files:
