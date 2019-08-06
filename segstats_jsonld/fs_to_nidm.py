@@ -348,11 +348,12 @@ def read_buildstamp(subdir):
                 freesurfer_version = f.readlines()[0]
         # except a FileNotFound error
         except OSError as e:
-            print("""
+            freesurfer_version = input(
+                """
                 Could not find a build timestamp in the supplied subject directory.
-                The used freesurfer version can not be extracted.
-                """)
-            freesurfer_version = ""
+                The used freesurfer version can not be extracted. Please enter the
+                version of freesurfer you are using, if available: """
+                or "")
     return freesurfer_version
 
 
