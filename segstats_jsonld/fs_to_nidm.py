@@ -352,7 +352,7 @@ def read_buildstamp(subdir):
                 Could not find a build timestamp in the supplied subject directory.
                 The used freesurfer version can not be extracted.
                 """)
-
+            freesurfer_version = ""
     return freesurfer_version
 
 
