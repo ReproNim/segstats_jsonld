@@ -57,7 +57,7 @@ def test_remap2json():
             # check the correct definitions are retrieved for some example terms
             if examplefile == aparc_example:
                 assert biggie['Anatomy']['Left-Lateral-Ventricle']['definition'] == \
-                    'left lateral ventricle cerebral spinal fluid volume'
+                    'lateral ventricle cerebral spinal fluid'
                 assert biggie['Measures']['SurfArea']['measureOf'] == 'http://uri.interlex.org/base/ilx_0738271#'
 
             elif examplefile == asag_example:
