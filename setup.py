@@ -43,6 +43,7 @@ setup(
         'numpy',
         'pandas',
     ], # Add requirements as necessary
+    include_package_data=True,
     extras_require={
         'devel-docs': [
             # for converting README.md -> .rst for long description
