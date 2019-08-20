@@ -127,7 +127,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
         #datum_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
         datum_entity=nidmdoc.graph.entity(niiri[getUUID()],other_attributes={
                     prov.PROV_TYPE:QualifiedName(provNamespace("nidm","http://purl.org/nidash/nidm#"),"FSStatsCollection")})
-        nidmdoc.graph.wasGeneratedBy(software_activity,datum_entity)
+        nidmdoc.graph.wasGeneratedBy(datum_entity,software_activity)
 
         #iterate over measure dictionary where measures are the lines in the FS stats files which start with '# Measure' and
         #the whole table at the bottom of the FS stats file that starts with '# ColHeaders
