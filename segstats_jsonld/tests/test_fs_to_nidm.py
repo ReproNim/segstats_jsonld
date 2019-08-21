@@ -58,10 +58,10 @@ def test_remap2json():
             if examplefile == aparc_example:
                 assert biggie['Anatomy']['Left-Lateral-Ventricle']['definition'] == \
                     'lateral ventricle cerebral spinal fluid'
-                assert biggie['Measures']['SurfArea']['measureOf'] == 'http://uri.interlex.org/base/ilx_0738271#'
+                assert biggie['Measures']['SurfArea']['measureOf'] == 'http://uri.interlex.org/base/ilx_0738271'
 
             elif examplefile == asag_example:
-                assert biggie['Measures']['NVoxels']['measureOf'] == 'http://uri.interlex.org/base/ilx_0105536#'
+                assert biggie['Measures']['NVoxels']['measureOf'] == 'http://uri.interlex.org/base/ilx_0105536'
 
     # check whether we save valid json
     with open(join(testdatap, 'tmpjson.json'), 'w') as f:
