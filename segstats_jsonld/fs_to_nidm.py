@@ -729,108 +729,108 @@ def remap2json(xlsxfile,
                         # iterate over the list of dicts in items
                         if dic['name'] == 'normMean':
                             d2['normMean'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264'
                                         }
                         if dic['name'] == 'normStdDev':
                             d2['normStdDev'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265'
                                         }
                         if dic['name'] == 'normMax':
                             d2['normMax'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267'
                                         }
                         if dic['name'] == 'NVoxels':
                             d2['NVoxels'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597'
                                         }
                         if dic['name'] == 'Volume_mm3':
                             d2['Volume_mm3'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0112559#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0112559'
                                         }
                         if dic['name'] == 'normMin':
                             d2['normMin'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266'
                                          }
                         if dic['name'] == 'normRange':
                             d2['normRange'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536#',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268#'
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268'
                                         }
                         if dic['name'] == 'NumVert':
                             d2['NumVert'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738270#', #vertex
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597#' # count
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738270', #vertex
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0102597' # count
                                         }
                         if dic['name'] == 'SurfArea':
                             d2['SurfArea'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738271#', #surface
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0100885#' #area
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738271', #surface
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0100885' #area
                                         }
                         if dic['name'] == 'GrayVol':
                             d2['GrayVol'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0104768#', # gray matter
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0104768', # gray matter
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'ThickAvg':
                             d2['ThickAvg'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689#', #thickness
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#' #mean
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
                                         }
                         if dic['name'] == 'ThickStd':
                             d2['ThickStd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689#', #thickness
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#' #stddev
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0111689', #thickness
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
                                         }
                         if dic['name'] == 'MeanCurv':
                             d2['MeanCurv'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738272#', #mean curvature
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738272', #mean curvature
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'GausCurv':
                             d2['GausCurv'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738273#', #gaussian curvature
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738273', #gaussian curvature
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'FoldInd':
                             d2['FoldInd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738274#', #foldind
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738274', #foldind
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'CurvInd':
                             d2['CurvInd'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738275#', #curvind
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276#' #scalar
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0738275', #curvind
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'nuMean':
                             d2['nuMean'] = {
                                         "measureOf": 'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264#' #mean
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738264' #mean
                                         }
                         if dic['name'] == 'nuStdDev':
                             d2['nuStdDev'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265#' #stddev
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738265' #stddev
                                         }
                         if dic['name'] == 'nuMin':
                             d2['nuMin'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266#' #min
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738266' #min
                                         }
                         if dic['name'] == 'nuMax':
                             d2['nuMax'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267#' #max
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738267' #max
                                         }
                         if dic['name'] == 'nuRange':
                             d2['nuRange'] = {
                                         "measureOf":'TODO',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268#' #range
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738268' #range
                                         }
     # join anatomical and measures dictionaries
     biggie = {'Anatomy': d,
