@@ -149,7 +149,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 })
 
                         #construct the custom CDEs to describe measurements of the various brain regions
-                        region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):json_map['Anatomy'][measures["structure"]]['isAbout'],
+                        region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):URIRef(json_map['Anatomy'][measures["structure"]]['isAbout']),
                                     QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
                                     Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
                                     QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
@@ -274,7 +274,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                         ?region_entity rdf:type measurement_datum: ;
                                             rdfs:label \"%s\" ;
                                             hasDatumType: <%s> ;
-                                            isAbout: \"%s\" ;
+                                            isAbout: <%s> ;
                                             hasLaterality: \"%s\" ;
                                             hasMeasurementType: <%s> .
                                         } """ %(json_map['Anatomy'][measures["structure"]]['label'],
@@ -317,7 +317,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                     nidm_graph.bind("isMeasureOf",isMeasureOf)
                                     GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
                                     nidm_graph.bind("GrayMatter",GrayMatter)
-                                    nidm_graph.add((region_entity,URIRef(isAbout),Literal(json_map['Anatomy'][measures["structure"]]['isAbout'])))
+                                    nidm_graph.add((region_entity,URIRef(isAbout),URIRef(json_map['Anatomy'][measures["structure"]]['isAbout'])))
                                     nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
                                     nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
                                     nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
