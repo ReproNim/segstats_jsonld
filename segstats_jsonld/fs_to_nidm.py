@@ -117,11 +117,11 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
         #print(nidmdoc.serializeTurtle())
 
-        with open('measure.json', 'w') as fp:
-            json.dump(measure, fp)
+        # with open('measure.json', 'w') as fp:
+        #    json.dump(measure, fp)
 
-        with open('json_map.json', 'w') as fp:
-            json.dump(json_map, fp)
+        # with open('json_map.json', 'w') as fp:
+        #    json.dump(json_map, fp)
 
 
         #datum_entity=nidmdoc.graph.entity(QualifiedName(provNamespace("niiri",Constants.NIIRI),getUUID()),other_attributes={
@@ -149,19 +149,62 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                 })
 
                         #construct the custom CDEs to describe measurements of the various brain regions
-                        region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):URIRef(json_map['Anatomy'][measures["structure"]]['isAbout']),
-                                    QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
-                                    Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
-                                    QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
-                                    "http://uri.interlex.org/ilx_0104768#"),""),
-                                    QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']})
+                        # region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):URIRef(json_map['Anatomy'][measures["structure"]]['isAbout']),
+                        #            QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality'],
+                        #            Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition'],
+                        #            QualifiedName(provNamespace("isMeasureOf","http://uri.interlex.org/ilx_0381389#"),""):QualifiedName(provNamespace("GrayMatter",
+                        #            "http://uri.interlex.org/ilx_0104768#"),""),
+                        #            QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']})
+
+                        # DBK: removed isMeasureOf because it's statically coded and not correct for many cases
+                        # get scheme+domain from isAbout url
+
+                        # if hasLaterality isn't empty then store as an attribute
+                        if json_map['Anatomy'][measures["structure"]]['hasLaterality'] != "":
+                            region_entity.add_attributes({QualifiedName(provNamespace("hasLaterality","http://uri.interlex.org/ilx_0381387#"),""):json_map['Anatomy'][measures["structure"]]['hasLaterality']})
+
+                        # if definition isn't empty then store as an attribute
+                        if json_map['Anatomy'][measures["structure"]]['definition'] != "":
+                            region_entity.add_attributes({Constants.NIDM_PROJECT_DESCRIPTION:json_map['Anatomy'][measures["structure"]]['definition']})
+
+                        # if label isn't empty then store as an attribute
+                        if json_map['Anatomy'][measures["structure"]]['label'] != "":
+                             region_entity.add_attributes({QualifiedName(provNamespace("rdfs","http://www.w3.org/2000/01/rdf-schema#"),"label"):json_map['Anatomy'][measures["structure"]]['label']})
+
+                        # if isAbout isn't empty then store as an attribute
+                        if json_map['Anatomy'][measures["structure"]]['isAbout'] != "" :
+                            isabout_parts = json_map['Anatomy'][measures["structure"]]['isAbout'].rsplit('/',1)
+                            obo = prov.Namespace("obo",isabout_parts[0])
+                            region_entity.add_attributes({QualifiedName(provNamespace("isAbout","http://uri.interlex.org/ilx_0381385#"),""):obo[isabout_parts[1]]})
+
 
                             #QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/ilx_0381384#"),""):json_map['Anatomy'][measures["structure"]]['units'],
                             #print("%s:%s" %(key,value))
 
-                        region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
-                                json_map['Measures'][items['name']]["measureOf"], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
-                                json_map['Measures'][items['name']]["datumType"]})
+                        # DBK: Added to convert measureOf and datumType URLs to qnames
+                        measureOf_parts = json_map['Measures'][items['name']]["measureOf"].rsplit('/',1)
+                        datumType_parts = json_map['Measures'][items['name']]["datumType"].rsplit('/',1)
+
+                        # if both measureOf and datumType have the same scheme+domain then set a "ilk" prefix for that
+                        if measureOf_parts[0] == datumType_parts[0]:
+                            ilk = prov.Namespace("ilk",measureOf_parts[0])
+                            region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
+                                ilk[measureOf_parts[1]], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
+                                ilk[datumType_parts[1]]})
+                        # if not then we'll add 2 separate prefixes
+                        else:
+                            measureOf = prov.Namespace("measureOf",measureOf_parts[0])
+                            datumType = prov.Namespace("datumType",datumType_parts[0])
+                            region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
+                                measureOf[measureOf_parts[1]], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
+                                datumType[datumType_parts[1]]})
+
+
+                        # region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
+                        #        json_map['Measures'][items['name']]["measureOf"], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
+                        #        json_map['Measures'][items['name']]["datumType"]})
+
+
 
                         datum_entity.add_attributes({region_entity.identifier:items['value']})
 
@@ -313,22 +356,54 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                     nidm_graph.bind("isAbout",isAbout)
                                     hasLaterality = Namespace("http://uri.interlex.org/ilx_0381387#")
                                     nidm_graph.bind("hasLaterality",hasLaterality)
-                                    isMeasureOf = Namespace("http://uri.interlex.org/ilx_0381389#")
-                                    nidm_graph.bind("isMeasureOf",isMeasureOf)
-                                    GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
-                                    nidm_graph.bind("GrayMatter",GrayMatter)
                                     nidm_graph.add((region_entity,URIRef(isAbout),URIRef(json_map['Anatomy'][measures["structure"]]['isAbout'])))
-                                    nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
-                                    nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
-                                    nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
-                                    nidm_graph.add((region_entity,Constants.RDFS['label'],Literal(json_map['Anatomy'][measures["structure"]]['label'])))
+                                    # if hasLaterality isn't empty then store as an attribute
+                                    if json_map['Anatomy'][measures["structure"]]['hasLaterality'] != "":
+                                        nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
+                                    # if definition isn't empty then store as an attribute
+                                    if json_map['Anatomy'][measures["structure"]]['definition'] != "":
+                                        nidm_graph.add((region_entity,Constants.DCT["description"],Literal(json_map['Anatomy'][measures["structure"]]['definition'])))
+
+                                    # DBK: removed isMeasureOf because it's statically coded and not correct for many cases
+                                    # isMeasureOf = Namespace("http://uri.interlex.org/ilx_0381389#")
+                                    # nidm_graph.bind("isMeasureOf",isMeasureOf)
+                                    # GrayMatter = Namespace("http://uri.interlex.org/ilx_0104768#")
+                                    # nidm_graph.bind("GrayMatter",GrayMatter)
+                                    # nidm_graph.add((region_entity,URIRef(isMeasureOf),URIRef(GrayMatter)))
+
+                                    # if label isn't empty then store as an attribute
+                                    if json_map['Anatomy'][measures["structure"]]['label'] != "":
+                                        nidm_graph.add((region_entity,Constants.RDFS['label'],Literal(json_map['Anatomy'][measures["structure"]]['label'])))
 
                                     hasMeasurementType = Namespace("http://uri.interlex.org/ilx_0381388#")
                                     nidm_graph.bind("hasMeasurementType",hasMeasurementType)
                                     hasDatumType = Namespace("http://uri.interlex.org/ilx_0738262#")
                                     nidm_graph.bind("hasDatumType",hasDatumType)
-                                    nidm_graph.add((region_entity,URIRef(hasMeasurementType),URIRef(json_map['Measures'][items['name']]["measureOf"])))
-                                    nidm_graph.add((region_entity,URIRef(hasDatumType),URIRef(json_map['Measures'][items['name']]["datumType"])))
+
+                                     # DBK: Added to convert measureOf and datumType URLs to qnames
+                                    measureOf_parts = json_map['Measures'][items['name']]["measureOf"].rsplit('/',1)
+                                    datumType_parts = json_map['Measures'][items['name']]["datumType"].rsplit('/',1)
+
+                                    # if both measureOf and datumType have the same scheme+domain then set a "ilk" prefix for that
+                                    if measureOf_parts[0] == datumType_parts[0]:
+                                        ilk = Namespace(measureOf_parts[0])
+                                        nidm_graph.bind("ilk",ilk)
+                                        nidm_graph.add((region_entity,URIRef(hasMeasurementType),ilk[measureOf_parts[1]]))
+                                        nidm_graph.add((region_entity,URIRef(hasDatumType),ilk[datumType_parts[1]]))
+
+                                    # if not then we'll add 2 separate prefixes
+                                    else:
+                                        measureOf = Namespace(measureOf_parts[0])
+                                        nidm_graph.bind("measureOf",measureOf)
+                                        datumType = Namespace(datumType_parts[0])
+                                        nidm_graph.bind("datumType",datumType)
+
+                                        region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
+                                            measureOf[measureOf_parts[1]], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
+                                            datumType[datumType_parts[1]]})
+
+                                    # nidm_graph.add((region_entity,URIRef(hasMeasurementType),URIRef(json_map['Measures'][items['name']]["measureOf"])))
+                                    # nidm_graph.add((region_entity,URIRef(hasDatumType),URIRef(json_map['Measures'][items['name']]["datumType"])))
 
                                 #create prefixes for measurement_datum objects for easy reading
                                 #nidm_graph.bind(Core.safe_string(Core,string=json_map['Anatomy'][measures["structure"]]['label']),region_entity)

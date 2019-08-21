@@ -822,32 +822,32 @@
     },
     "Measures": {
         "NVoxels": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0102597#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0102597"
         },
         "Volume_mm3": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0112559#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0112559"
         },
         "normMean": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0738264#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0738264"
         },
         "normStdDev": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0738265#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0738265"
         },
         "normMin": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0738266#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0738266"
         },
         "normMax": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0738267#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0738267"
         },
         "normRange": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536#",
-            "datumType": "http://uri.interlex.org/base/ilx_0738268#"
+            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
+            "datumType": "http://uri.interlex.org/base/ilx_0738268"
         }
     }
 }
