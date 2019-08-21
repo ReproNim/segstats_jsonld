@@ -356,7 +356,14 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                     nidm_graph.bind("isAbout",isAbout)
                                     hasLaterality = Namespace("http://uri.interlex.org/ilx_0381387#")
                                     nidm_graph.bind("hasLaterality",hasLaterality)
-                                    nidm_graph.add((region_entity,URIRef(isAbout),URIRef(json_map['Anatomy'][measures["structure"]]['isAbout'])))
+
+                                    # if isAbout isn't empty then store as an attribute
+                                    if json_map['Anatomy'][measures["structure"]]['isAbout'] != "":
+                                        isabout_parts = json_map['Anatomy'][measures["structure"]]['isAbout'].rsplit('/',1)
+                                        obo = Namespace(isabout_parts[0])
+                                        nidm_graph.bind("obo",obo)
+                                        nidm_graph.add((region_entity,URIRef(isAbout),obo[isabout_parts[1]]))
+
                                     # if hasLaterality isn't empty then store as an attribute
                                     if json_map['Anatomy'][measures["structure"]]['hasLaterality'] != "":
                                         nidm_graph.add((region_entity,URIRef(hasLaterality),Literal(json_map['Anatomy'][measures["structure"]]['hasLaterality'])))
