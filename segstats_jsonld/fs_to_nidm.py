@@ -677,7 +677,11 @@ def remap2json(xlsxfile,
         # store missing values as empty strings, not NaNs that json can't parse
         label = row['Atlas Segmentation Label'].values[0] if row['Atlas Segmentation Label'].values[0] is not np.nan else ""
         url = row['Structure']['URI'] if row['Structure']['URI'] is not np.nan else ""
-        isAbout = row['Structure']['Preferred'] if row['Structure']['Preferred'] is not np.nan else ""
+        # the UBERON ID is currently listed as a string (e.g. UBERON:0014930) in the Excel file, we want
+        # an URI such as http://purl.obolibrary.org/obo/UBERON_0014930
+        # TODO: is the base URL correct here? (is it static and can be hardcoded?)
+        isAbout = 'http://purl.obolibrary.org/obo/' + row['Structure']['Preferred'].replace(':', '_') \
+            if row['Structure']['Preferred'] is not np.nan else ""
         hasLaterality = row['Laterality']['ILX:0106135'] if row['Laterality']['ILX:0106135'] is not np.nan else ""
         l = row['Federated DE']['Name'] if row['Federated DE']['Name'] is not np.nan else ""
         # WIP: Added by DBK because I can't change the Name column or really edit the ReproNimCDEs.xlsx file at all
@@ -700,7 +704,7 @@ def remap2json(xlsxfile,
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Label'] is not np.nan else ""
         url = row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['URI'] is not np.nan else ""
-        isAbout = row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'] \
+        isAbout = 'http://purl.obolibrary.org/obo/' + row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred'].replace(':', '_') \
             if row['APARC Structures - Assuming Cortical Areas (not sulci)']['Preferred']  is not np.nan else ""
         # TODO: The Laterality of the terms in aparc files is undefined yet. I think that should change
         hasLaterality = ""
