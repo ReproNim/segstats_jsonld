@@ -827,7 +827,7 @@
         },
         "Volume_mm3": {
             "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0112559"
+            "datumType": "http://uri.interlex.org/base/ilx_0738276"
         },
         "normMean": {
             "measureOf": "http://uri.interlex.org/base/ilx_0105536",

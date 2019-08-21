@@ -836,7 +836,7 @@ def remap2json(xlsxfile,
                         if dic['name'] == 'Volume_mm3':
                             d2['Volume_mm3'] = {
                                         "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
-                                        "datumType": 'http://uri.interlex.org/base/ilx_0112559'
+                                        "datumType": 'http://uri.interlex.org/base/ilx_0738276'
                                         }
                         if dic['name'] == 'normMin':
                             d2['normMin'] = {
