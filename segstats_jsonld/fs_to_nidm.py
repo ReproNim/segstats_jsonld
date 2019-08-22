@@ -830,12 +830,12 @@ def remap2json(xlsxfile,
                                         }
                         if dic['name'] == 'NVoxels':
                             d2['NVoxels'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0112568',
                                         "datumType": 'http://uri.interlex.org/base/ilx_0102597'
                                         }
                         if dic['name'] == 'Volume_mm3':
                             d2['Volume_mm3'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0105536',
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0112559',
                                         "datumType": 'http://uri.interlex.org/base/ilx_0738276'
                                         }
                         if dic['name'] == 'normMin':
@@ -860,7 +860,7 @@ def remap2json(xlsxfile,
                                         }
                         if dic['name'] == 'GrayVol':
                             d2['GrayVol'] = {
-                                        "measureOf": 'http://uri.interlex.org/base/ilx_0104768', # gray matter
+                                        "measureOf": 'http://uri.interlex.org/base/ilx_0112559', # volume
                                         "datumType": 'http://uri.interlex.org/base/ilx_0738276' #scalar
                                         }
                         if dic['name'] == 'ThickAvg':
