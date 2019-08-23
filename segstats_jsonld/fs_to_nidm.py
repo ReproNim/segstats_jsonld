@@ -202,7 +202,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                         # if this measure has a unit then use it
                         if "hasUnit" in  json_map['Measures'][items['name']]:
                             unit_parts = json_map['Measures'][items['name']]["hasUnit"].rsplit('/',1)
-                            region_entity.add_attributes({QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/base/ilx_0112181"),""):ilk[unit_parts[1]]})
+                            region_entity.add_attributes({QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/base/ilx_0112181"),""):json_map['Measures'][items['name']]["hasUnit"]})
 
                         # region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
                         #        json_map['Measures'][items['name']]["measureOf"], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
@@ -421,9 +421,8 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                     # nidm_graph.add((region_entity,URIRef(hasDatumType),URIRef(json_map['Measures'][items['name']]["datumType"])))
 
                                     # if this measure has a unit then use it
-                                    if "hasUnit" in  json_map['Measures'][items['name']]:
-                                        unit_parts = json_map['Measures'][items['name']]["hasUnit"].rsplit('/',1)
-                                        nidm_graph.add((region_entity,URIRef(hasUnit),ilk[unit_parts[1]]))
+                                    if "hasUnit" in json_map['Measures'][items['name']]:
+                                        nidm_graph.add((region_entity,URIRef(hasUnit),Literal(json_map['Measures'][items['name']]["hasUnit"])))
 
 
 
@@ -847,13 +846,13 @@ def remap2json(xlsxfile,
                             d2['NVoxels'] = {
                                         "measureOf": 'http://uri.interlex.org/base/ilx_0112568',
                                         "datumType": 'http://uri.interlex.org/base/ilx_0102597',
-                                        "hasUnit": 'http://uri.interlex.org/base/ilx_0112568'
+                                        "hasUnit": 'voxel'
                                         }
                         if dic['name'] == 'Volume_mm3':
                             d2['Volume_mm3'] = {
                                         "measureOf": 'http://uri.interlex.org/base/ilx_0112559',
                                         "datumType": 'http://uri.interlex.org/base/ilx_0738276',
-                                        "hasUnit": 'http://uri.interlex.org/base/ilx_0381383'
+                                        "hasUnit": 'mm^3'
                                         }
                         if dic['name'] == 'normMin':
                             d2['normMin'] = {
