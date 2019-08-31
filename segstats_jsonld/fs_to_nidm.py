@@ -187,14 +187,14 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
                         # if both measureOf and datumType have the same scheme+domain then set a "ilk" prefix for that
                         if measureOf_parts[0] == datumType_parts[0]:
-                            ilk = prov.Namespace("ilk",measureOf_parts[0])
+                            ilk = prov.Namespace("ilk",measureOf_parts[0] + '/')
                             region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
                                 ilk[measureOf_parts[1]], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
                                 ilk[datumType_parts[1]]})
                         # if not then we'll add 2 separate prefixes
                         else:
-                            measureOf = prov.Namespace("measureOf",measureOf_parts[0])
-                            datumType = prov.Namespace("datumType",datumType_parts[0])
+                            measureOf = prov.Namespace("measureOf",measureOf_parts[0] + '/')
+                            datumType = prov.Namespace("datumType",datumType_parts[0] + '/')
                             region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
                                 measureOf[measureOf_parts[1]], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
                                 datumType[datumType_parts[1]]})
@@ -202,7 +202,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                         # if this measure has a unit then use it
                         if "hasUnit" in  json_map['Measures'][items['name']]:
                             unit_parts = json_map['Measures'][items['name']]["hasUnit"].rsplit('/',1)
-                            region_entity.add_attributes({QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/base/ilx_0112181"),""):json_map['Measures'][items['name']]["hasUnit"]})
+                            region_entity.add_attributes({QualifiedName(provNamespace("hasUnit","http://uri.interlex.org/base/ilx_0112181#"),""):json_map['Measures'][items['name']]["hasUnit"]})
 
                         # region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):
                         #        json_map['Measures'][items['name']]["measureOf"], QualifiedName(provNamespace("hasDatumType","http://uri.interlex.org/ilx_0738262#"),""):
@@ -392,7 +392,7 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
                                     nidm_graph.bind("hasMeasurementType",hasMeasurementType)
                                     hasDatumType = Namespace("http://uri.interlex.org/ilx_0738262#")
                                     nidm_graph.bind("hasDatumType",hasDatumType)
-                                    hasUnit = Namespace("http://uri.interlex.org/base/ilx_0112181")
+                                    hasUnit = Namespace("http://uri.interlex.org/base/ilx_0112181#")
                                     nidm_graph.bind("hasUnit",hasUnit)
 
                                      # DBK: Added to convert measureOf and datumType URLs to qnames
@@ -401,16 +401,16 @@ def add_seg_data(nidmdoc, measure, header, json_map, png_file=None, output_file=
 
                                     # if both measureOf and datumType have the same scheme+domain then set a "ilk" prefix for that
                                     if measureOf_parts[0] == datumType_parts[0]:
-                                        ilk = Namespace(measureOf_parts[0])
+                                        ilk = Namespace(measureOf_parts[0] + '/')
                                         nidm_graph.bind("ilk",ilk)
                                         nidm_graph.add((region_entity,URIRef(hasMeasurementType),ilk[measureOf_parts[1]]))
                                         nidm_graph.add((region_entity,URIRef(hasDatumType),ilk[datumType_parts[1]]))
 
                                     # if not then we'll add 2 separate prefixes
                                     else:
-                                        measureOf = Namespace(measureOf_parts[0])
+                                        measureOf = Namespace(measureOf_parts[0] + '/')
                                         nidm_graph.bind("measureOf",measureOf)
-                                        datumType = Namespace(datumType_parts[0])
+                                        datumType = Namespace(datumType_parts[0] + '/')
                                         nidm_graph.bind("datumType",datumType)
 
                                         region_entity.add_attributes({QualifiedName(provNamespace("hasMeasurementType","http://uri.interlex.org/ilx_0381388#"),""):

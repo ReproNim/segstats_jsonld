@@ -822,12 +822,14 @@
     },
     "Measures": {
         "NVoxels": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0102597"
+            "measureOf": "http://uri.interlex.org/base/ilx_0112568",
+            "datumType": "http://uri.interlex.org/base/ilx_0102597",
+            "hasUnit": "voxel"
         },
         "Volume_mm3": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738276"
+            "measureOf": "http://uri.interlex.org/base/ilx_0112559",
+            "datumType": "http://uri.interlex.org/base/ilx_0738276",
+            "hasUnit": "mm^3"
         },
         "normMean": {
             "measureOf": "http://uri.interlex.org/base/ilx_0105536",
