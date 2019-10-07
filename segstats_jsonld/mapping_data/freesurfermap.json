@@ -255,42 +255,6 @@
     "5th-Ventricle": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0009857"
     },
-    "BA1_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA1_exvivo>",
-      "isAbout": "<UNKNOWN - BA1_exvivo>"
-    },
-    "BA2_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA2_exvivo>",
-      "isAbout": "<UNKNOWN - BA2_exvivo>"
-    },
-    "BA3a_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA3a_exvivo>",
-      "isAbout": "<UNKNOWN - BA3a_exvivo>"
-    },
-    "BA3b_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA3b_exvivo>",
-      "isAbout": "<UNKNOWN - BA3b_exvivo>"
-    },
-    "BA44_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA44_exvivo>",
-      "isAbout": "<UNKNOWN - BA44_exvivo>"
-    },
-    "BA45_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA45_exvivo>",
-      "isAbout": "<UNKNOWN - BA45_exvivo>"
-    },
-    "BA4a_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA4a_exvivo>",
-      "isAbout": "<UNKNOWN - BA4a_exvivo>"
-    },
-    "BA4p_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA4p_exvivo>",
-      "isAbout": "<UNKNOWN - BA4p_exvivo>"
-    },
-    "BA6_exvivo": {
-      "hasLaterality": "<UNKNOWN - BA6_exvivo>",
-      "isAbout": "<UNKNOWN - BA6_exvivo>"
-    },
     "Brain-Stem": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002298"
     },
@@ -338,170 +302,6 @@
     "EstimatedTotalIntraCranialVol": {
       "hasLaterality": "<UNKNOWN - EstimatedTotalIntraCranialVol>",
       "isAbout": "<UNKNOWN - EstimatedTotalIntraCranialVol>"
-    },
-    "G&S_cingul-Ant": {
-      "hasLaterality": "<UNKNOWN - G&S_cingul-Ant>",
-      "isAbout": "<UNKNOWN - G&S_cingul-Ant>"
-    },
-    "G&S_cingul-Mid-Ant": {
-      "hasLaterality": "<UNKNOWN - G&S_cingul-Mid-Ant>",
-      "isAbout": "<UNKNOWN - G&S_cingul-Mid-Ant>"
-    },
-    "G&S_cingul-Mid-Post": {
-      "hasLaterality": "<UNKNOWN - G&S_cingul-Mid-Post>",
-      "isAbout": "<UNKNOWN - G&S_cingul-Mid-Post>"
-    },
-    "G&S_frontomargin": {
-      "hasLaterality": "<UNKNOWN - G&S_frontomargin>",
-      "isAbout": "<UNKNOWN - G&S_frontomargin>"
-    },
-    "G&S_occipital_inf": {
-      "hasLaterality": "<UNKNOWN - G&S_occipital_inf>",
-      "isAbout": "<UNKNOWN - G&S_occipital_inf>"
-    },
-    "G&S_paracentral": {
-      "hasLaterality": "<UNKNOWN - G&S_paracentral>",
-      "isAbout": "<UNKNOWN - G&S_paracentral>"
-    },
-    "G&S_subcentral": {
-      "hasLaterality": "<UNKNOWN - G&S_subcentral>",
-      "isAbout": "<UNKNOWN - G&S_subcentral>"
-    },
-    "G&S_transv_frontopol": {
-      "hasLaterality": "<UNKNOWN - G&S_transv_frontopol>",
-      "isAbout": "<UNKNOWN - G&S_transv_frontopol>"
-    },
-    "G_Ins_lg&S_cent_ins": {
-      "hasLaterality": "<UNKNOWN - G_Ins_lg&S_cent_ins>",
-      "isAbout": "<UNKNOWN - G_Ins_lg&S_cent_ins>"
-    },
-    "G_cingul-Post-dorsal": {
-      "hasLaterality": "<UNKNOWN - G_cingul-Post-dorsal>",
-      "isAbout": "<UNKNOWN - G_cingul-Post-dorsal>"
-    },
-    "G_cingul-Post-ventral": {
-      "hasLaterality": "<UNKNOWN - G_cingul-Post-ventral>",
-      "isAbout": "<UNKNOWN - G_cingul-Post-ventral>"
-    },
-    "G_cuneus": {
-      "hasLaterality": "<UNKNOWN - G_cuneus>",
-      "isAbout": "<UNKNOWN - G_cuneus>"
-    },
-    "G_front_inf-Opercular": {
-      "hasLaterality": "<UNKNOWN - G_front_inf-Opercular>",
-      "isAbout": "<UNKNOWN - G_front_inf-Opercular>"
-    },
-    "G_front_inf-Orbital": {
-      "hasLaterality": "<UNKNOWN - G_front_inf-Orbital>",
-      "isAbout": "<UNKNOWN - G_front_inf-Orbital>"
-    },
-    "G_front_inf-Triangul": {
-      "hasLaterality": "<UNKNOWN - G_front_inf-Triangul>",
-      "isAbout": "<UNKNOWN - G_front_inf-Triangul>"
-    },
-    "G_front_middle": {
-      "hasLaterality": "<UNKNOWN - G_front_middle>",
-      "isAbout": "<UNKNOWN - G_front_middle>"
-    },
-    "G_front_sup": {
-      "hasLaterality": "<UNKNOWN - G_front_sup>",
-      "isAbout": "<UNKNOWN - G_front_sup>"
-    },
-    "G_insular_short": {
-      "hasLaterality": "<UNKNOWN - G_insular_short>",
-      "isAbout": "<UNKNOWN - G_insular_short>"
-    },
-    "G_oc-temp_lat-fusifor": {
-      "hasLaterality": "<UNKNOWN - G_oc-temp_lat-fusifor>",
-      "isAbout": "<UNKNOWN - G_oc-temp_lat-fusifor>"
-    },
-    "G_oc-temp_med-Lingual": {
-      "hasLaterality": "<UNKNOWN - G_oc-temp_med-Lingual>",
-      "isAbout": "<UNKNOWN - G_oc-temp_med-Lingual>"
-    },
-    "G_oc-temp_med-Parahip": {
-      "hasLaterality": "<UNKNOWN - G_oc-temp_med-Parahip>",
-      "isAbout": "<UNKNOWN - G_oc-temp_med-Parahip>"
-    },
-    "G_occipital_middle": {
-      "hasLaterality": "<UNKNOWN - G_occipital_middle>",
-      "isAbout": "<UNKNOWN - G_occipital_middle>"
-    },
-    "G_occipital_sup": {
-      "hasLaterality": "<UNKNOWN - G_occipital_sup>",
-      "isAbout": "<UNKNOWN - G_occipital_sup>"
-    },
-    "G_orbital": {
-      "hasLaterality": "<UNKNOWN - G_orbital>",
-      "isAbout": "<UNKNOWN - G_orbital>"
-    },
-    "G_pariet_inf-Angular": {
-      "hasLaterality": "<UNKNOWN - G_pariet_inf-Angular>",
-      "isAbout": "<UNKNOWN - G_pariet_inf-Angular>"
-    },
-    "G_pariet_inf-Supramar": {
-      "hasLaterality": "<UNKNOWN - G_pariet_inf-Supramar>",
-      "isAbout": "<UNKNOWN - G_pariet_inf-Supramar>"
-    },
-    "G_parietal_sup": {
-      "hasLaterality": "<UNKNOWN - G_parietal_sup>",
-      "isAbout": "<UNKNOWN - G_parietal_sup>"
-    },
-    "G_postcentral": {
-      "hasLaterality": "<UNKNOWN - G_postcentral>",
-      "isAbout": "<UNKNOWN - G_postcentral>"
-    },
-    "G_precentral": {
-      "hasLaterality": "<UNKNOWN - G_precentral>",
-      "isAbout": "<UNKNOWN - G_precentral>"
-    },
-    "G_precuneus": {
-      "hasLaterality": "<UNKNOWN - G_precuneus>",
-      "isAbout": "<UNKNOWN - G_precuneus>"
-    },
-    "G_rectus": {
-      "hasLaterality": "<UNKNOWN - G_rectus>",
-      "isAbout": "<UNKNOWN - G_rectus>"
-    },
-    "G_subcallosal": {
-      "hasLaterality": "<UNKNOWN - G_subcallosal>",
-      "isAbout": "<UNKNOWN - G_subcallosal>"
-    },
-    "G_temp_sup-G_T_transv": {
-      "hasLaterality": "<UNKNOWN - G_temp_sup-G_T_transv>",
-      "isAbout": "<UNKNOWN - G_temp_sup-G_T_transv>"
-    },
-    "G_temp_sup-Lateral": {
-      "hasLaterality": "<UNKNOWN - G_temp_sup-Lateral>",
-      "isAbout": "<UNKNOWN - G_temp_sup-Lateral>"
-    },
-    "G_temp_sup-Plan_polar": {
-      "hasLaterality": "<UNKNOWN - G_temp_sup-Plan_polar>",
-      "isAbout": "<UNKNOWN - G_temp_sup-Plan_polar>"
-    },
-    "G_temp_sup-Plan_tempo": {
-      "hasLaterality": "<UNKNOWN - G_temp_sup-Plan_tempo>",
-      "isAbout": "<UNKNOWN - G_temp_sup-Plan_tempo>"
-    },
-    "G_temporal_inf": {
-      "hasLaterality": "<UNKNOWN - G_temporal_inf>",
-      "isAbout": "<UNKNOWN - G_temporal_inf>"
-    },
-    "G_temporal_middle": {
-      "hasLaterality": "<UNKNOWN - G_temporal_middle>",
-      "isAbout": "<UNKNOWN - G_temporal_middle>"
-    },
-    "Lat_Fis-ant-Horizont": {
-      "hasLaterality": "<UNKNOWN - Lat_Fis-ant-Horizont>",
-      "isAbout": "<UNKNOWN - Lat_Fis-ant-Horizont>"
-    },
-    "Lat_Fis-ant-Vertical": {
-      "hasLaterality": "<UNKNOWN - Lat_Fis-ant-Vertical>",
-      "isAbout": "<UNKNOWN - Lat_Fis-ant-Vertical>"
-    },
-    "Lat_Fis-post": {
-      "hasLaterality": "<UNKNOWN - Lat_Fis-post>",
-      "isAbout": "<UNKNOWN - Lat_Fis-post>"
     },
     "Left-Accumbens-area": {
       "hasLaterality": "Left",
@@ -571,10 +371,6 @@
       "hasLaterality": "Left",
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930"
     },
-    "MT_exvivo": {
-      "hasLaterality": "<UNKNOWN - MT_exvivo>",
-      "isAbout": "<UNKNOWN - MT_exvivo>"
-    },
     "Mask": {
       "hasLaterality": "<UNKNOWN - Mask>",
       "isAbout": "<UNKNOWN - Mask>"
@@ -585,14 +381,6 @@
     },
     "Optic-Chiasm": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000959"
-    },
-    "Pole_occipital": {
-      "hasLaterality": "<UNKNOWN - Pole_occipital>",
-      "isAbout": "<UNKNOWN - Pole_occipital>"
-    },
-    "Pole_temporal": {
-      "hasLaterality": "<UNKNOWN - Pole_temporal>",
-      "isAbout": "<UNKNOWN - Pole_temporal>"
     },
     "Right-Accumbens-area": {
       "hasLaterality": "Right",
@@ -662,130 +450,6 @@
       "hasLaterality": "Right",
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930"
     },
-    "S_calcarine": {
-      "hasLaterality": "<UNKNOWN - S_calcarine>",
-      "isAbout": "<UNKNOWN - S_calcarine>"
-    },
-    "S_central": {
-      "hasLaterality": "<UNKNOWN - S_central>",
-      "isAbout": "<UNKNOWN - S_central>"
-    },
-    "S_cingul-Marginalis": {
-      "hasLaterality": "<UNKNOWN - S_cingul-Marginalis>",
-      "isAbout": "<UNKNOWN - S_cingul-Marginalis>"
-    },
-    "S_circular_insula_ant": {
-      "hasLaterality": "<UNKNOWN - S_circular_insula_ant>",
-      "isAbout": "<UNKNOWN - S_circular_insula_ant>"
-    },
-    "S_circular_insula_inf": {
-      "hasLaterality": "<UNKNOWN - S_circular_insula_inf>",
-      "isAbout": "<UNKNOWN - S_circular_insula_inf>"
-    },
-    "S_circular_insula_sup": {
-      "hasLaterality": "<UNKNOWN - S_circular_insula_sup>",
-      "isAbout": "<UNKNOWN - S_circular_insula_sup>"
-    },
-    "S_collat_transv_ant": {
-      "hasLaterality": "<UNKNOWN - S_collat_transv_ant>",
-      "isAbout": "<UNKNOWN - S_collat_transv_ant>"
-    },
-    "S_collat_transv_post": {
-      "hasLaterality": "<UNKNOWN - S_collat_transv_post>",
-      "isAbout": "<UNKNOWN - S_collat_transv_post>"
-    },
-    "S_front_inf": {
-      "hasLaterality": "<UNKNOWN - S_front_inf>",
-      "isAbout": "<UNKNOWN - S_front_inf>"
-    },
-    "S_front_middle": {
-      "hasLaterality": "<UNKNOWN - S_front_middle>",
-      "isAbout": "<UNKNOWN - S_front_middle>"
-    },
-    "S_front_sup": {
-      "hasLaterality": "<UNKNOWN - S_front_sup>",
-      "isAbout": "<UNKNOWN - S_front_sup>"
-    },
-    "S_interm_prim-Jensen": {
-      "hasLaterality": "<UNKNOWN - S_interm_prim-Jensen>",
-      "isAbout": "<UNKNOWN - S_interm_prim-Jensen>"
-    },
-    "S_intrapariet&P_trans": {
-      "hasLaterality": "<UNKNOWN - S_intrapariet&P_trans>",
-      "isAbout": "<UNKNOWN - S_intrapariet&P_trans>"
-    },
-    "S_oc-temp_lat": {
-      "hasLaterality": "<UNKNOWN - S_oc-temp_lat>",
-      "isAbout": "<UNKNOWN - S_oc-temp_lat>"
-    },
-    "S_oc-temp_med&Lingual": {
-      "hasLaterality": "<UNKNOWN - S_oc-temp_med&Lingual>",
-      "isAbout": "<UNKNOWN - S_oc-temp_med&Lingual>"
-    },
-    "S_oc_middle&Lunatus": {
-      "hasLaterality": "<UNKNOWN - S_oc_middle&Lunatus>",
-      "isAbout": "<UNKNOWN - S_oc_middle&Lunatus>"
-    },
-    "S_oc_sup&transversal": {
-      "hasLaterality": "<UNKNOWN - S_oc_sup&transversal>",
-      "isAbout": "<UNKNOWN - S_oc_sup&transversal>"
-    },
-    "S_occipital_ant": {
-      "hasLaterality": "<UNKNOWN - S_occipital_ant>",
-      "isAbout": "<UNKNOWN - S_occipital_ant>"
-    },
-    "S_orbital-H_Shaped": {
-      "hasLaterality": "<UNKNOWN - S_orbital-H_Shaped>",
-      "isAbout": "<UNKNOWN - S_orbital-H_Shaped>"
-    },
-    "S_orbital_lateral": {
-      "hasLaterality": "<UNKNOWN - S_orbital_lateral>",
-      "isAbout": "<UNKNOWN - S_orbital_lateral>"
-    },
-    "S_orbital_med-olfact": {
-      "hasLaterality": "<UNKNOWN - S_orbital_med-olfact>",
-      "isAbout": "<UNKNOWN - S_orbital_med-olfact>"
-    },
-    "S_parieto_occipital": {
-      "hasLaterality": "<UNKNOWN - S_parieto_occipital>",
-      "isAbout": "<UNKNOWN - S_parieto_occipital>"
-    },
-    "S_pericallosal": {
-      "hasLaterality": "<UNKNOWN - S_pericallosal>",
-      "isAbout": "<UNKNOWN - S_pericallosal>"
-    },
-    "S_postcentral": {
-      "hasLaterality": "<UNKNOWN - S_postcentral>",
-      "isAbout": "<UNKNOWN - S_postcentral>"
-    },
-    "S_precentral-inf-part": {
-      "hasLaterality": "<UNKNOWN - S_precentral-inf-part>",
-      "isAbout": "<UNKNOWN - S_precentral-inf-part>"
-    },
-    "S_precentral-sup-part": {
-      "hasLaterality": "<UNKNOWN - S_precentral-sup-part>",
-      "isAbout": "<UNKNOWN - S_precentral-sup-part>"
-    },
-    "S_suborbital": {
-      "hasLaterality": "<UNKNOWN - S_suborbital>",
-      "isAbout": "<UNKNOWN - S_suborbital>"
-    },
-    "S_subparietal": {
-      "hasLaterality": "<UNKNOWN - S_subparietal>",
-      "isAbout": "<UNKNOWN - S_subparietal>"
-    },
-    "S_temporal_inf": {
-      "hasLaterality": "<UNKNOWN - S_temporal_inf>",
-      "isAbout": "<UNKNOWN - S_temporal_inf>"
-    },
-    "S_temporal_sup": {
-      "hasLaterality": "<UNKNOWN - S_temporal_sup>",
-      "isAbout": "<UNKNOWN - S_temporal_sup>"
-    },
-    "S_temporal_transverse": {
-      "hasLaterality": "<UNKNOWN - S_temporal_transverse>",
-      "isAbout": "<UNKNOWN - S_temporal_transverse>"
-    },
     "SubCortGray": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
@@ -807,14 +471,6 @@
     "TotalGray": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
-    "V1_exvivo": {
-      "hasLaterality": "<UNKNOWN - V1_exvivo>",
-      "isAbout": "<UNKNOWN - V1_exvivo>"
-    },
-    "V2_exvivo": {
-      "hasLaterality": "<UNKNOWN - V2_exvivo>",
-      "isAbout": "<UNKNOWN - V2_exvivo>"
-    },
     "VentricleChoroidVol": {
       "hasLaterality": "<UNKNOWN - VentricleChoroidVol>",
       "isAbout": "<UNKNOWN - VentricleChoroidVol>"
@@ -822,61 +478,493 @@
     "WM-hypointensities": {
       "isAbout": "<UNKNOWN>"
     },
-    "bankssts": {
-      "hasLaterality": "<UNKNOWN - bankssts>",
-      "isAbout": "<UNKNOWN - bankssts>"
+    "lh-BA1_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA1_exvivo>"
     },
-    "caudalanteriorcingulate": {
-      "hasLaterality": "<UNKNOWN - caudalanteriorcingulate>",
-      "isAbout": "<UNKNOWN - caudalanteriorcingulate>"
+    "lh-BA2_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA2_exvivo>"
     },
-    "caudalmiddlefrontal": {
-      "hasLaterality": "<UNKNOWN - caudalmiddlefrontal>",
-      "isAbout": "<UNKNOWN - caudalmiddlefrontal>"
+    "lh-BA3a_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA3a_exvivo>"
     },
-    "cuneus": {
-      "hasLaterality": "<UNKNOWN - cuneus>",
-      "isAbout": "<UNKNOWN - cuneus>"
+    "lh-BA3b_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA3b_exvivo>"
     },
-    "entorhinal": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN - entorhinal>"
+    "lh-BA44_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA44_exvivo>"
     },
-    "entorhinal_exvivo": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN - entorhinal_exvivo>"
+    "lh-BA45_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA45_exvivo>"
     },
-    "frontalpole": {
-      "hasLaterality": "<UNKNOWN - frontalpole>",
-      "isAbout": "<UNKNOWN - frontalpole>"
+    "lh-BA4a_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA4a_exvivo>"
     },
-    "fusiform": {
-      "hasLaterality": "<UNKNOWN - fusiform>",
-      "isAbout": "<UNKNOWN - fusiform>"
+    "lh-BA4p_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA4p_exvivo>"
     },
-    "inferiorparietal": {
-      "hasLaterality": "<UNKNOWN - inferiorparietal>",
-      "isAbout": "<UNKNOWN - inferiorparietal>"
+    "lh-BA6_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-BA6_exvivo>"
     },
-    "inferiortemporal": {
-      "hasLaterality": "<UNKNOWN - inferiortemporal>",
-      "isAbout": "<UNKNOWN - inferiortemporal>"
+    "lh-G&S_cingul-Ant": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_cingul-Ant>"
     },
-    "insula": {
-      "hasLaterality": "<UNKNOWN - insula>",
-      "isAbout": "<UNKNOWN - insula>"
+    "lh-G&S_cingul-Mid-Ant": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_cingul-Mid-Ant>"
     },
-    "isthmuscingulate": {
-      "hasLaterality": "<UNKNOWN - isthmuscingulate>",
-      "isAbout": "<UNKNOWN - isthmuscingulate>"
+    "lh-G&S_cingul-Mid-Post": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_cingul-Mid-Post>"
     },
-    "lateraloccipital": {
-      "hasLaterality": "<UNKNOWN - lateraloccipital>",
-      "isAbout": "<UNKNOWN - lateraloccipital>"
+    "lh-G&S_frontomargin": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_frontomargin>"
     },
-    "lateralorbitofrontal": {
-      "hasLaterality": "<UNKNOWN - lateralorbitofrontal>",
-      "isAbout": "<UNKNOWN - lateralorbitofrontal>"
+    "lh-G&S_occipital_inf": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_occipital_inf>"
+    },
+    "lh-G&S_paracentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_paracentral>"
+    },
+    "lh-G&S_subcentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_subcentral>"
+    },
+    "lh-G&S_transv_frontopol": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G&S_transv_frontopol>"
+    },
+    "lh-G_Ins_lg&S_cent_ins": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_Ins_lg&S_cent_ins>"
+    },
+    "lh-G_cingul-Post-dorsal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_cingul-Post-dorsal>"
+    },
+    "lh-G_cingul-Post-ventral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_cingul-Post-ventral>"
+    },
+    "lh-G_cuneus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_cuneus>"
+    },
+    "lh-G_front_inf-Opercular": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_front_inf-Opercular>"
+    },
+    "lh-G_front_inf-Orbital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_front_inf-Orbital>"
+    },
+    "lh-G_front_inf-Triangul": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_front_inf-Triangul>"
+    },
+    "lh-G_front_middle": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_front_middle>"
+    },
+    "lh-G_front_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_front_sup>"
+    },
+    "lh-G_insular_short": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_insular_short>"
+    },
+    "lh-G_oc-temp_lat-fusifor": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_oc-temp_lat-fusifor>"
+    },
+    "lh-G_oc-temp_med-Lingual": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_oc-temp_med-Lingual>"
+    },
+    "lh-G_oc-temp_med-Parahip": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_oc-temp_med-Parahip>"
+    },
+    "lh-G_occipital_middle": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_occipital_middle>"
+    },
+    "lh-G_occipital_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_occipital_sup>"
+    },
+    "lh-G_orbital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_orbital>"
+    },
+    "lh-G_pariet_inf-Angular": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_pariet_inf-Angular>"
+    },
+    "lh-G_pariet_inf-Supramar": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_pariet_inf-Supramar>"
+    },
+    "lh-G_parietal_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_parietal_sup>"
+    },
+    "lh-G_postcentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_postcentral>"
+    },
+    "lh-G_precentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_precentral>"
+    },
+    "lh-G_precuneus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_precuneus>"
+    },
+    "lh-G_rectus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_rectus>"
+    },
+    "lh-G_subcallosal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_subcallosal>"
+    },
+    "lh-G_temp_sup-G_T_transv": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temp_sup-G_T_transv>"
+    },
+    "lh-G_temp_sup-Lateral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temp_sup-Lateral>"
+    },
+    "lh-G_temp_sup-Plan_polar": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temp_sup-Plan_polar>"
+    },
+    "lh-G_temp_sup-Plan_tempo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temp_sup-Plan_tempo>"
+    },
+    "lh-G_temporal_inf": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temporal_inf>"
+    },
+    "lh-G_temporal_middle": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-G_temporal_middle>"
+    },
+    "lh-Lat_Fis-ant-Horizont": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-Lat_Fis-ant-Horizont>"
+    },
+    "lh-Lat_Fis-ant-Vertical": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-Lat_Fis-ant-Vertical>"
+    },
+    "lh-Lat_Fis-post": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-Lat_Fis-post>"
+    },
+    "lh-MT_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-MT_exvivo>"
+    },
+    "lh-Pole_occipital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-Pole_occipital>"
+    },
+    "lh-Pole_temporal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-Pole_temporal>"
+    },
+    "lh-S_calcarine": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_calcarine>"
+    },
+    "lh-S_central": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_central>"
+    },
+    "lh-S_cingul-Marginalis": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_cingul-Marginalis>"
+    },
+    "lh-S_circular_insula_ant": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_circular_insula_ant>"
+    },
+    "lh-S_circular_insula_inf": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_circular_insula_inf>"
+    },
+    "lh-S_circular_insula_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_circular_insula_sup>"
+    },
+    "lh-S_collat_transv_ant": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_collat_transv_ant>"
+    },
+    "lh-S_collat_transv_post": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_collat_transv_post>"
+    },
+    "lh-S_front_inf": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_front_inf>"
+    },
+    "lh-S_front_middle": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_front_middle>"
+    },
+    "lh-S_front_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_front_sup>"
+    },
+    "lh-S_interm_prim-Jensen": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_interm_prim-Jensen>"
+    },
+    "lh-S_intrapariet&P_trans": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_intrapariet&P_trans>"
+    },
+    "lh-S_oc-temp_lat": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_oc-temp_lat>"
+    },
+    "lh-S_oc-temp_med&Lingual": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_oc-temp_med&Lingual>"
+    },
+    "lh-S_oc_middle&Lunatus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_oc_middle&Lunatus>"
+    },
+    "lh-S_oc_sup&transversal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_oc_sup&transversal>"
+    },
+    "lh-S_occipital_ant": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_occipital_ant>"
+    },
+    "lh-S_orbital-H_Shaped": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_orbital-H_Shaped>"
+    },
+    "lh-S_orbital_lateral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_orbital_lateral>"
+    },
+    "lh-S_orbital_med-olfact": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_orbital_med-olfact>"
+    },
+    "lh-S_parieto_occipital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_parieto_occipital>"
+    },
+    "lh-S_pericallosal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_pericallosal>"
+    },
+    "lh-S_postcentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_postcentral>"
+    },
+    "lh-S_precentral-inf-part": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_precentral-inf-part>"
+    },
+    "lh-S_precentral-sup-part": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_precentral-sup-part>"
+    },
+    "lh-S_suborbital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_suborbital>"
+    },
+    "lh-S_subparietal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_subparietal>"
+    },
+    "lh-S_temporal_inf": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_temporal_inf>"
+    },
+    "lh-S_temporal_sup": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_temporal_sup>"
+    },
+    "lh-S_temporal_transverse": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-S_temporal_transverse>"
+    },
+    "lh-V1_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-V1_exvivo>"
+    },
+    "lh-V2_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-V2_exvivo>"
+    },
+    "lh-bankssts": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-bankssts>"
+    },
+    "lh-caudalanteriorcingulate": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-caudalanteriorcingulate>"
+    },
+    "lh-caudalmiddlefrontal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-caudalmiddlefrontal>"
+    },
+    "lh-cuneus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-cuneus>"
+    },
+    "lh-entorhinal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-entorhinal>"
+    },
+    "lh-entorhinal_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-entorhinal_exvivo>"
+    },
+    "lh-frontalpole": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-frontalpole>"
+    },
+    "lh-fusiform": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-fusiform>"
+    },
+    "lh-inferiorparietal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-inferiorparietal>"
+    },
+    "lh-inferiortemporal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-inferiortemporal>"
+    },
+    "lh-insula": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-insula>"
+    },
+    "lh-isthmuscingulate": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-isthmuscingulate>"
+    },
+    "lh-lateraloccipital": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-lateraloccipital>"
+    },
+    "lh-lateralorbitofrontal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-lateralorbitofrontal>"
+    },
+    "lh-lingual": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-lingual>"
+    },
+    "lh-medialorbitofrontal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-medialorbitofrontal>"
+    },
+    "lh-middletemporal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-middletemporal>"
+    },
+    "lh-paracentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-paracentral>"
+    },
+    "lh-parahippocampal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-parahippocampal>"
+    },
+    "lh-parsopercularis": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-parsopercularis>"
+    },
+    "lh-parsorbitalis": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-parsorbitalis>"
+    },
+    "lh-parstriangularis": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-parstriangularis>"
+    },
+    "lh-pericalcarine": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-pericalcarine>"
+    },
+    "lh-perirhinal_exvivo": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-perirhinal_exvivo>"
+    },
+    "lh-postcentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-postcentral>"
+    },
+    "lh-posteriorcingulate": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-posteriorcingulate>"
+    },
+    "lh-precentral": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-precentral>"
+    },
+    "lh-precuneus": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-precuneus>"
+    },
+    "lh-rostralanteriorcingulate": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-rostralanteriorcingulate>"
+    },
+    "lh-rostralmiddlefrontal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-rostralmiddlefrontal>"
+    },
+    "lh-superiorfrontal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-superiorfrontal>"
+    },
+    "lh-superiorparietal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-superiorparietal>"
+    },
+    "lh-superiortemporal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-superiortemporal>"
+    },
+    "lh-supramarginal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-supramarginal>"
+    },
+    "lh-temporalpole": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-temporalpole>"
+    },
+    "lh-transversetemporal": {
+      "hasLaterality": "Left",
+      "isAbout": "<UNKNOWN - lh-transversetemporal>"
     },
     "lhCerebralWhiteMatter": {
       "hasLaterality": "Left",
@@ -890,64 +978,496 @@
       "hasLaterality": "Left",
       "isAbout": "<UNKNOWN - lhSurfaceHoles>"
     },
-    "lingual": {
-      "hasLaterality": "<UNKNOWN - lingual>",
-      "isAbout": "<UNKNOWN - lingual>"
-    },
-    "medialorbitofrontal": {
-      "hasLaterality": "<UNKNOWN - medialorbitofrontal>",
-      "isAbout": "<UNKNOWN - medialorbitofrontal>"
-    },
-    "middletemporal": {
-      "hasLaterality": "<UNKNOWN - middletemporal>",
-      "isAbout": "<UNKNOWN - middletemporal>"
-    },
     "non-WM-hypointensities": {
       "isAbout": "<UNKNOWN>"
     },
-    "paracentral": {
-      "hasLaterality": "<UNKNOWN - paracentral>",
-      "isAbout": "<UNKNOWN - paracentral>"
-    },
-    "parahippocampal": {
-      "hasLaterality": "<UNKNOWN - parahippocampal>",
-      "isAbout": "<UNKNOWN - parahippocampal>"
-    },
-    "parsopercularis": {
-      "hasLaterality": "<UNKNOWN - parsopercularis>",
-      "isAbout": "<UNKNOWN - parsopercularis>"
-    },
-    "parsorbitalis": {
-      "hasLaterality": "<UNKNOWN - parsorbitalis>",
-      "isAbout": "<UNKNOWN - parsorbitalis>"
-    },
-    "parstriangularis": {
-      "hasLaterality": "<UNKNOWN - parstriangularis>",
-      "isAbout": "<UNKNOWN - parstriangularis>"
-    },
-    "pericalcarine": {
-      "hasLaterality": "<UNKNOWN - pericalcarine>",
-      "isAbout": "<UNKNOWN - pericalcarine>"
-    },
-    "perirhinal_exvivo": {
+    "rh-BA1_exvivo": {
       "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN - perirhinal_exvivo>"
+      "isAbout": "<UNKNOWN - rh-BA1_exvivo>"
     },
-    "postcentral": {
-      "hasLaterality": "<UNKNOWN - postcentral>",
-      "isAbout": "<UNKNOWN - postcentral>"
+    "rh-BA2_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA2_exvivo>"
     },
-    "posteriorcingulate": {
-      "hasLaterality": "<UNKNOWN - posteriorcingulate>",
-      "isAbout": "<UNKNOWN - posteriorcingulate>"
+    "rh-BA3a_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA3a_exvivo>"
     },
-    "precentral": {
-      "hasLaterality": "<UNKNOWN - precentral>",
-      "isAbout": "<UNKNOWN - precentral>"
+    "rh-BA3b_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA3b_exvivo>"
     },
-    "precuneus": {
-      "hasLaterality": "<UNKNOWN - precuneus>",
-      "isAbout": "<UNKNOWN - precuneus>"
+    "rh-BA44_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA44_exvivo>"
+    },
+    "rh-BA45_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA45_exvivo>"
+    },
+    "rh-BA4a_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA4a_exvivo>"
+    },
+    "rh-BA4p_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA4p_exvivo>"
+    },
+    "rh-BA6_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-BA6_exvivo>"
+    },
+    "rh-G&S_cingul-Ant": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_cingul-Ant>"
+    },
+    "rh-G&S_cingul-Mid-Ant": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_cingul-Mid-Ant>"
+    },
+    "rh-G&S_cingul-Mid-Post": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_cingul-Mid-Post>"
+    },
+    "rh-G&S_frontomargin": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_frontomargin>"
+    },
+    "rh-G&S_occipital_inf": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_occipital_inf>"
+    },
+    "rh-G&S_paracentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_paracentral>"
+    },
+    "rh-G&S_subcentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_subcentral>"
+    },
+    "rh-G&S_transv_frontopol": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G&S_transv_frontopol>"
+    },
+    "rh-G_Ins_lg&S_cent_ins": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_Ins_lg&S_cent_ins>"
+    },
+    "rh-G_cingul-Post-dorsal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_cingul-Post-dorsal>"
+    },
+    "rh-G_cingul-Post-ventral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_cingul-Post-ventral>"
+    },
+    "rh-G_cuneus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_cuneus>"
+    },
+    "rh-G_front_inf-Opercular": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_front_inf-Opercular>"
+    },
+    "rh-G_front_inf-Orbital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_front_inf-Orbital>"
+    },
+    "rh-G_front_inf-Triangul": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_front_inf-Triangul>"
+    },
+    "rh-G_front_middle": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_front_middle>"
+    },
+    "rh-G_front_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_front_sup>"
+    },
+    "rh-G_insular_short": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_insular_short>"
+    },
+    "rh-G_oc-temp_lat-fusifor": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_oc-temp_lat-fusifor>"
+    },
+    "rh-G_oc-temp_med-Lingual": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_oc-temp_med-Lingual>"
+    },
+    "rh-G_oc-temp_med-Parahip": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_oc-temp_med-Parahip>"
+    },
+    "rh-G_occipital_middle": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_occipital_middle>"
+    },
+    "rh-G_occipital_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_occipital_sup>"
+    },
+    "rh-G_orbital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_orbital>"
+    },
+    "rh-G_pariet_inf-Angular": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_pariet_inf-Angular>"
+    },
+    "rh-G_pariet_inf-Supramar": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_pariet_inf-Supramar>"
+    },
+    "rh-G_parietal_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_parietal_sup>"
+    },
+    "rh-G_postcentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_postcentral>"
+    },
+    "rh-G_precentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_precentral>"
+    },
+    "rh-G_precuneus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_precuneus>"
+    },
+    "rh-G_rectus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_rectus>"
+    },
+    "rh-G_subcallosal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_subcallosal>"
+    },
+    "rh-G_temp_sup-G_T_transv": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temp_sup-G_T_transv>"
+    },
+    "rh-G_temp_sup-Lateral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temp_sup-Lateral>"
+    },
+    "rh-G_temp_sup-Plan_polar": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temp_sup-Plan_polar>"
+    },
+    "rh-G_temp_sup-Plan_tempo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temp_sup-Plan_tempo>"
+    },
+    "rh-G_temporal_inf": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temporal_inf>"
+    },
+    "rh-G_temporal_middle": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-G_temporal_middle>"
+    },
+    "rh-Lat_Fis-ant-Horizont": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-Lat_Fis-ant-Horizont>"
+    },
+    "rh-Lat_Fis-ant-Vertical": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-Lat_Fis-ant-Vertical>"
+    },
+    "rh-Lat_Fis-post": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-Lat_Fis-post>"
+    },
+    "rh-MT_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-MT_exvivo>"
+    },
+    "rh-Pole_occipital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-Pole_occipital>"
+    },
+    "rh-Pole_temporal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-Pole_temporal>"
+    },
+    "rh-S_calcarine": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_calcarine>"
+    },
+    "rh-S_central": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_central>"
+    },
+    "rh-S_cingul-Marginalis": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_cingul-Marginalis>"
+    },
+    "rh-S_circular_insula_ant": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_circular_insula_ant>"
+    },
+    "rh-S_circular_insula_inf": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_circular_insula_inf>"
+    },
+    "rh-S_circular_insula_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_circular_insula_sup>"
+    },
+    "rh-S_collat_transv_ant": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_collat_transv_ant>"
+    },
+    "rh-S_collat_transv_post": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_collat_transv_post>"
+    },
+    "rh-S_front_inf": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_front_inf>"
+    },
+    "rh-S_front_middle": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_front_middle>"
+    },
+    "rh-S_front_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_front_sup>"
+    },
+    "rh-S_interm_prim-Jensen": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_interm_prim-Jensen>"
+    },
+    "rh-S_intrapariet&P_trans": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_intrapariet&P_trans>"
+    },
+    "rh-S_oc-temp_lat": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_oc-temp_lat>"
+    },
+    "rh-S_oc-temp_med&Lingual": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_oc-temp_med&Lingual>"
+    },
+    "rh-S_oc_middle&Lunatus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_oc_middle&Lunatus>"
+    },
+    "rh-S_oc_sup&transversal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_oc_sup&transversal>"
+    },
+    "rh-S_occipital_ant": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_occipital_ant>"
+    },
+    "rh-S_orbital-H_Shaped": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_orbital-H_Shaped>"
+    },
+    "rh-S_orbital_lateral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_orbital_lateral>"
+    },
+    "rh-S_orbital_med-olfact": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_orbital_med-olfact>"
+    },
+    "rh-S_parieto_occipital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_parieto_occipital>"
+    },
+    "rh-S_pericallosal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_pericallosal>"
+    },
+    "rh-S_postcentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_postcentral>"
+    },
+    "rh-S_precentral-inf-part": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_precentral-inf-part>"
+    },
+    "rh-S_precentral-sup-part": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_precentral-sup-part>"
+    },
+    "rh-S_suborbital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_suborbital>"
+    },
+    "rh-S_subparietal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_subparietal>"
+    },
+    "rh-S_temporal_inf": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_temporal_inf>"
+    },
+    "rh-S_temporal_sup": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_temporal_sup>"
+    },
+    "rh-S_temporal_transverse": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-S_temporal_transverse>"
+    },
+    "rh-V1_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-V1_exvivo>"
+    },
+    "rh-V2_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-V2_exvivo>"
+    },
+    "rh-bankssts": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-bankssts>"
+    },
+    "rh-caudalanteriorcingulate": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-caudalanteriorcingulate>"
+    },
+    "rh-caudalmiddlefrontal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-caudalmiddlefrontal>"
+    },
+    "rh-cuneus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-cuneus>"
+    },
+    "rh-entorhinal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-entorhinal>"
+    },
+    "rh-entorhinal_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-entorhinal_exvivo>"
+    },
+    "rh-frontalpole": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-frontalpole>"
+    },
+    "rh-fusiform": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-fusiform>"
+    },
+    "rh-inferiorparietal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-inferiorparietal>"
+    },
+    "rh-inferiortemporal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-inferiortemporal>"
+    },
+    "rh-insula": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-insula>"
+    },
+    "rh-isthmuscingulate": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-isthmuscingulate>"
+    },
+    "rh-lateraloccipital": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-lateraloccipital>"
+    },
+    "rh-lateralorbitofrontal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-lateralorbitofrontal>"
+    },
+    "rh-lingual": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-lingual>"
+    },
+    "rh-medialorbitofrontal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-medialorbitofrontal>"
+    },
+    "rh-middletemporal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-middletemporal>"
+    },
+    "rh-paracentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-paracentral>"
+    },
+    "rh-parahippocampal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-parahippocampal>"
+    },
+    "rh-parsopercularis": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-parsopercularis>"
+    },
+    "rh-parsorbitalis": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-parsorbitalis>"
+    },
+    "rh-parstriangularis": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-parstriangularis>"
+    },
+    "rh-pericalcarine": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-pericalcarine>"
+    },
+    "rh-perirhinal_exvivo": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-perirhinal_exvivo>"
+    },
+    "rh-postcentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-postcentral>"
+    },
+    "rh-posteriorcingulate": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-posteriorcingulate>"
+    },
+    "rh-precentral": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-precentral>"
+    },
+    "rh-precuneus": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-precuneus>"
+    },
+    "rh-rostralanteriorcingulate": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-rostralanteriorcingulate>"
+    },
+    "rh-rostralmiddlefrontal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-rostralmiddlefrontal>"
+    },
+    "rh-superiorfrontal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-superiorfrontal>"
+    },
+    "rh-superiorparietal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-superiorparietal>"
+    },
+    "rh-superiortemporal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-superiortemporal>"
+    },
+    "rh-supramarginal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-supramarginal>"
+    },
+    "rh-temporalpole": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-temporalpole>"
+    },
+    "rh-transversetemporal": {
+      "hasLaterality": "Right",
+      "isAbout": "<UNKNOWN - rh-transversetemporal>"
     },
     "rhCerebralWhiteMatter": {
       "hasLaterality": "Right",
@@ -960,38 +1480,6 @@
     "rhSurfaceHoles": {
       "hasLaterality": "Right",
       "isAbout": "<UNKNOWN - rhSurfaceHoles>"
-    },
-    "rostralanteriorcingulate": {
-      "hasLaterality": "<UNKNOWN - rostralanteriorcingulate>",
-      "isAbout": "<UNKNOWN - rostralanteriorcingulate>"
-    },
-    "rostralmiddlefrontal": {
-      "hasLaterality": "<UNKNOWN - rostralmiddlefrontal>",
-      "isAbout": "<UNKNOWN - rostralmiddlefrontal>"
-    },
-    "superiorfrontal": {
-      "hasLaterality": "<UNKNOWN - superiorfrontal>",
-      "isAbout": "<UNKNOWN - superiorfrontal>"
-    },
-    "superiorparietal": {
-      "hasLaterality": "<UNKNOWN - superiorparietal>",
-      "isAbout": "<UNKNOWN - superiorparietal>"
-    },
-    "superiortemporal": {
-      "hasLaterality": "<UNKNOWN - superiortemporal>",
-      "isAbout": "<UNKNOWN - superiortemporal>"
-    },
-    "supramarginal": {
-      "hasLaterality": "<UNKNOWN - supramarginal>",
-      "isAbout": "<UNKNOWN - supramarginal>"
-    },
-    "temporalpole": {
-      "hasLaterality": "<UNKNOWN - temporalpole>",
-      "isAbout": "<UNKNOWN - temporalpole>"
-    },
-    "transversetemporal": {
-      "hasLaterality": "<UNKNOWN - transversetemporal>",
-      "isAbout": "<UNKNOWN - transversetemporal>"
     },
     "unknown": {
       "hasLaterality": "<UNKNOWN - unknown>",

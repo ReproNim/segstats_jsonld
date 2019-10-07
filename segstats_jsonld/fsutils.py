@@ -63,7 +63,14 @@ def read_stats(filename):
             #read values
             row = line.split()
             values = {}
-            structure_template = {'structure': row[struct_idx-1],
+            prefix = ''
+            if 'lh.' in filename.name:
+                prefix = 'lh-'
+            if 'rh.' in filename.name:
+                prefix = 'rh-'
+            if row[struct_idx-1].lower() == 'unknown':
+                prefix = ''
+            structure_template = {'structure': prefix + row[struct_idx-1],
                                   'source': 'Table'}
             for idx, value in enumerate(row):
                 if idx + 1 == struct_idx or tableinfo[idx + 1]['ColHeader'] == 'Index':
