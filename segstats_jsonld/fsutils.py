@@ -187,8 +187,7 @@ def get_normative_structures(structure):
             uberon = uberon.replace('UBERON:', 'http://purl.obolibrary.org/obo/UBERON_')
             normative['isAbout'] = uberon
         laterality = df[('Laterality', 'ILX:0106135')].iloc[idx]
-        if laterality in ['Left', 'Right']:
-            normative['hasLaterality'] = laterality
+        normative['hasLaterality'] = laterality
     else:
         normative['isAbout'] = f'<UNKNOWN - {structure}>'
     if normative['hasLaterality'] is None:
@@ -198,6 +197,8 @@ def get_normative_structures(structure):
             normative['hasLaterality'] = 'Right'
         else:
             normative['hasLaterality'] = f'<UNKNOWN - {structure}>'
+    if normative['hasLaterality'] == 'None':
+        normative['hasLaterality'] = None
     return {k:v for k, v in normative.items() if v is not None}
 
 
@@ -268,8 +269,8 @@ def create_fs_mapper(s, m, measures=None, map_file=None):
                 niirimap['niiriMap'][niiri_key] = 'x' + uuid.uuid4().hex
 
     with open(map_file, 'w') as fp:
-        json.dump(fs_map, fp, indent=2)
+        json.dump(fs_map, fp, indent=2, sort_keys=True)
     with open(niiri_file, 'w') as fp:
-        json.dump(niirimap, fp, indent=2)
+        json.dump(niirimap, fp, indent=2, sort_keys=True)
 
     return fs_map, niirimap
