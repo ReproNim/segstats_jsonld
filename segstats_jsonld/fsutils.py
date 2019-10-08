@@ -64,9 +64,9 @@ def read_stats(filename):
             row = line.split()
             values = {}
             prefix = ''
-            if 'lh.' in filename.name:
+            if 'lh.' in str(filename):
                 prefix = 'lh-'
-            if 'rh.' in filename.name:
+            if 'rh.' in str(filename):
                 prefix = 'rh-'
             if row[struct_idx-1].lower() == 'unknown':
                 prefix = ''
