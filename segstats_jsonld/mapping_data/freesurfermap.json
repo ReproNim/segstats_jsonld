@@ -173,7 +173,6 @@
       "isAbout": "<UNKNOWN - BrainSegNotVentSurf>"
     },
     "BrainSegVol-to-eTIV": {
-      "hasLaterality": "<UNKNOWN - BrainSegVol-to-eTIV>",
       "isAbout": "<UNKNOWN - BrainSegVol-to-eTIV>"
     },
     "CC_Anterior": {
@@ -201,7 +200,7 @@
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
     },
     "EstimatedTotalIntraCranialVol": {
-      "isAbout": "http://purl.obolibrary.org/obo/NCIT_C84351"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0013411"
     },
     "Left-Accumbens-area": {
       "hasLaterality": "Left",
@@ -265,7 +264,7 @@
     },
     "Left-vessel": {
       "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
     },
     "Mask": {
       "hasLaterality": "<UNKNOWN - Mask>",
@@ -340,7 +339,7 @@
     },
     "Right-vessel": {
       "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
     },
     "SubCortGray": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
@@ -349,7 +348,6 @@
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869"
     },
     "SupraTentorialNotVent": {
-      "hasLaterality": "<UNKNOWN - SupraTentorialNotVent>",
       "isAbout": "<UNKNOWN - SupraTentorialNotVent>"
     },
     "SupraTentorialNotVentVox": {
@@ -357,11 +355,10 @@
       "isAbout": "<UNKNOWN - SupraTentorialNotVentVox>"
     },
     "SurfaceHoles": {
-      "hasLaterality": "<UNKNOWN - SurfaceHoles>",
       "isAbout": "<UNKNOWN - SurfaceHoles>"
     },
     "TotalGray": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0005401"
     },
     "VentricleChoroidVol": {
       "hasLaterality": "<UNKNOWN - VentricleChoroidVol>",
