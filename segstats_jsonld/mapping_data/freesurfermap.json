@@ -162,8 +162,7 @@
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002298"
     },
     "BrainSeg": {
-      "hasLaterality": "<UNKNOWN - BrainSeg>",
-      "isAbout": "<UNKNOWN - BrainSeg>"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegNotVent": {
       "hasLaterality": "<UNKNOWN - BrainSegNotVent>",
@@ -193,18 +192,16 @@
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
     },
     "CSF": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001359"
     },
     "CerebralWhiteMatter": {
-      "hasLaterality": "<UNKNOWN - CerebralWhiteMatter>",
-      "isAbout": "<UNKNOWN - CerebralWhiteMatter>"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002437"
     },
     "Cortex": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
     },
     "EstimatedTotalIntraCranialVol": {
-      "hasLaterality": "<UNKNOWN - EstimatedTotalIntraCranialVol>",
-      "isAbout": "<UNKNOWN - EstimatedTotalIntraCranialVol>"
+      "isAbout": "http://purl.obolibrary.org/obo/NCIT_C84351"
     },
     "Left-Accumbens-area": {
       "hasLaterality": "Left",
@@ -224,7 +221,7 @@
     },
     "Left-Cerebellum-White-Matter": {
       "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002037"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002317"
     },
     "Left-Hippocampus": {
       "hasLaterality": "Left",
