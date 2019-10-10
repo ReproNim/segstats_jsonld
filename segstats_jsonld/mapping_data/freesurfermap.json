@@ -165,30 +165,28 @@
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegNotVent": {
-      "hasLaterality": "<UNKNOWN - BrainSegNotVent>",
-      "isAbout": "<UNKNOWN - BrainSegNotVent>"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegNotVentSurf": {
-      "hasLaterality": "<UNKNOWN - BrainSegNotVentSurf>",
-      "isAbout": "<UNKNOWN - BrainSegNotVentSurf>"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegVol-to-eTIV": {
       "isAbout": "<UNKNOWN - BrainSegVol-to-eTIV>"
     },
     "CC_Anterior": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015599"
     },
     "CC_Central": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
     },
     "CC_Mid_Anterior": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
+      "isAbout": "CUSTOM: Mid Anterior segment of corpus callosum"
     },
     "CC_Mid_Posterior": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
+      "isAbout": "CUSTOM: Mid posterior segment of corpus callosum"
     },
     "CC_Posterior": {
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015708"
     },
     "CSF": {
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001359"
@@ -248,11 +246,11 @@
     },
     "Left-VentralDC": {
       "hasLaterality": "Left",
-      "isAbout": "<UNKNOWN>"
+      "isAbout": "CUSTOM: it was 'invented' by CMA. Something like: Ventral Diencephalon contains the hypothalamus, basal forebrain, and sublenticular extended amygdala (SLEA), as well as a large portion of ventral tegmentum. See also https://doi.org/10.1016/j.biopsych.2008.01.018"
     },
     "Left-WM-hypointensities": {
       "hasLaterality": "Left",
-      "isAbout": "<UNKNOWN>"
+      "isAbout": "CUSTOM: Region of hypointense signal in the white matter"
     },
     "Left-choroid-plexus": {
       "hasLaterality": "Left",
@@ -260,7 +258,7 @@
     },
     "Left-non-WM-hypointensities": {
       "hasLaterality": "Left",
-      "isAbout": "<UNKNOWN>"
+      "isAbout": "CUSTOM: Region of hypointense signal in regions other than white matter"
     },
     "Left-vessel": {
       "hasLaterality": "Left",
@@ -351,7 +349,6 @@
       "isAbout": "<UNKNOWN - SupraTentorialNotVent>"
     },
     "SupraTentorialNotVentVox": {
-      "hasLaterality": "<UNKNOWN - SupraTentorialNotVentVox>",
       "isAbout": "<UNKNOWN - SupraTentorialNotVentVox>"
     },
     "SurfaceHoles": {
