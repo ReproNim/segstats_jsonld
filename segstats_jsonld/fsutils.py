@@ -32,6 +32,7 @@ def get_segid(filename, structure):
     """
     structure = structure.replace("&", "_and_")
     filename = str(filename)
+    label = structure
     if "lh" in filename:
         hemi = "lh"
     if "rh" in filename:
@@ -55,7 +56,7 @@ def get_segid(filename, structure):
                 if len(vals) > 2 and vals[1] == label:
                     return int(vals[0])
     except UnboundLocalError:
-        print(f"{filename}-{structure}")
+        print(f"{filename} - {structure}")
         raise
     return None
 
@@ -75,6 +76,8 @@ def make_label(info):
             label.append(val)
     if not ("unitless" in info["unit"] or "NA" in info["unit"]):
         label.append(f"({info['unit']})")
+    if len(label) > 1 and label[0] in label[1]:
+        label = label[1:]
     return " ".join(label)
 
 
@@ -152,10 +155,10 @@ def read_stats(filename, error_on_new_key=True):
             row = line.split()
             segid = None
             hemi = None
-            if "lh." in str(filename):
+            if "lh." in str(filename) or "Left" in row[struct_idx - 1]:
                 hemi = "Left"
                 segid = get_segid(filename, row[struct_idx - 1])
-            if "rh." in str(filename):
+            if "rh." in str(filename) or "Right" in row[struct_idx - 1]:
                 hemi = "Right"
                 segid = get_segid(filename, row[struct_idx - 1])
             if row[struct_idx - 1].lower() == "unknown":
@@ -179,7 +182,7 @@ def read_stats(filename, error_on_new_key=True):
                         structure_id=segid,
                         label=make_label(
                             dict(
-                                tructure=row[struct_idx - 1],
+                                structure=row[struct_idx - 1],
                                 hemi=hemi or None,
                                 measure=tableinfo[idx + 1]["ColHeader"],
                                 unit=tableinfo[idx + 1]["Units"],
@@ -189,7 +192,9 @@ def read_stats(filename, error_on_new_key=True):
                             [
                                 val
                                 for val in [
-                                    hemi or "",
+                                    hemi
+                                    if hemi and hemi not in row[struct_idx - 1]
+                                    else "",
                                     row[struct_idx - 1],
                                     tableinfo[idx + 1]["FieldName"],
                                     "in",
