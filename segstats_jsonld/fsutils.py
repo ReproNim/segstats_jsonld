@@ -11,8 +11,9 @@ import uuid
 import rdflib as rl
 from requests import get
 
-FStuple = namedtuple("FS", ["structure", "hemi", "measure", "unit"])
+FS = namedtuple("FS", ["structure", "hemi", "measure", "unit"])
 cde_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfer-cdes.json"
+map_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfermap.json"
 lut_file = Path(os.path.dirname(__file__)) / "mapping_data" / "FreeSurferColorLUT.txt"
 prefix = {
     "@context": {
@@ -21,6 +22,7 @@ prefix = {
         "fs": "repronim:fs_",
     }
 }
+fs_uri = "http://terms.repronim.org/fs_"
 
 
 def get_segid(filename, structure):
@@ -61,13 +63,6 @@ def get_segid(filename, structure):
     return None
 
 
-def strtonumber(instr):
-    if "." in instr:
-        return float(instr)
-    else:
-        return int(instr)
-
-
 def make_label(info):
     label = []
     for key in ["hemi", "structure", "measure"]:
@@ -92,6 +87,7 @@ def read_stats(filename, error_on_new_key=True):
         fs_cde = json.load(fp)
     with open(filename, "rt") as fp:
         lines = fp.readlines()
+    updated = False
     for line in lines:
         if line == line[0]:
             continue
@@ -116,7 +112,7 @@ def read_stats(filename, error_on_new_key=True):
                     hemi = "Left"
                 if fields[0].startswith("rh"):
                     hemi = "Right"
-                fskey = FStuple(
+                fskey = FS(
                     structure=fields[0], hemi=hemi, measure=fields[1], unit=fields[4]
                 )
                 if str(fskey) not in fs_cde:
@@ -129,13 +125,12 @@ def read_stats(filename, error_on_new_key=True):
                         key_source="Header",
                     )
                     fs_cde[str(fskey)] = extra_info
+                    updated = True
                     if error_on_new_key:
                         raise ValueError(
                             f"Your file ({filename}) is adding a new key: {fskey}."
                         )
-                measures.append(
-                    (f'fs:{fs_cde[str(fskey)]["id"]}', strtonumber(fields[3]))
-                )
+                measures.append((f'{fs_cde[str(fskey)]["id"]}', fields[3]))
             elif tag == "ColHeaders":
                 if len(fields) != len(tableinfo):
                     for idx, fieldname in enumerate(fields[1:]):
@@ -169,7 +164,7 @@ def read_stats(filename, error_on_new_key=True):
                 if tableinfo[idx + 1]["ColHeader"] == "SegId":
                     segid = int(value)
                     continue
-                fskey = FStuple(
+                fskey = FS(
                     structure=row[struct_idx - 1],
                     hemi=hemi,
                     measure=tableinfo[idx + 1]["ColHeader"],
@@ -206,31 +201,38 @@ def read_stats(filename, error_on_new_key=True):
                         key_source="Table",
                     )
                     fs_cde[str(fskey)] = extra_info
+                    updated = True
                     if error_on_new_key:
                         raise ValueError(
                             f"Your file ({filename}) is adding a new key: {fskey}."
                         )
-                measures.append((f'fs:{fs_cde[str(fskey)]["id"]}', strtonumber(value)))
-    with open(cde_file, "w") as fp:
-        json.dump(fs_cde, fp, indent=2)
-    return measures, header, tableinfo
+                measures.append((f'{fs_cde[str(fskey)]["id"]}', value))
+    if updated:
+        with open(cde_file, "w") as fp:
+            json.dump(fs_cde, fp, indent=2)
+    return measures, header
 
 
 def collate_fs_items(freesurfer_stats_dir, error_on_new_key=True):
+    """Collect values from all stats files
+
+    :param freesurfer_stats_dir: string - Freesurfer stats directory
+    :param error_on_new_key: bool - Raise error if a new key is found
+    :return: list - A list of tuples (values, header information)
+    """
     result = []
     for fl in Path(freesurfer_stats_dir).glob("*.stats"):
         if "curv" in str(fl):
             print(f"skipping {fl}")
             continue
         print(f"reading {fl}")
-        m, h, t = read_stats(fl, error_on_new_key=error_on_new_key)
-        result.append((fl, m, h, t))
+        m, h = read_stats(fl, error_on_new_key=error_on_new_key)
+        result.append((fl, m, h))
     return result
 
 
 def get_normative_measure(measure):
     normative = {"measureOf": None, "datumType": None, "hasUnit": None}
-    fs_uri = "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/"
     if "Ratio" in measure[1]:
         normative["measureOf"] = fs_uri + measure[0]
         normative["datumType"] = "http://purl.obolibrary.org/obo/STATO_0000184"
@@ -373,30 +375,57 @@ def get_label(url):
     return label
 
 
-def create_fs_mapper(s, m, measures=None, map_file=None):
+def create_fs_mapper():
     """Create FreeSurfer to ReproNim mapping information
-
-    >>> from segstats_jsonld.fsutils import collate_fs_items, create_fs_mapper
-    >>> s, m, ms = collate_fs_items('/software/work/test_mb/out/freesurfer_subjects/satra/stats/')
-    >>> fs_map = create_fs_mapper(s, m, ms)
     """
-
-    if map_file is None:
-        map_file = (
-            Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfermap.json"
-        )
 
     with open(map_file, "r") as fp:
         fs_map = json.load(fp)
 
-    niiri_file = map_file.parent / "freesurfer-niiri.json"
-    with open(niiri_file, "r") as fp:
-        niirimap = json.load(fp)
+    with open(cde_file, "r") as fp:
+        fs_cde = json.load(fp)
 
-    # fs_map = {'Structures': {}, 'Measures': {}}
-    # niirimap = {'fs2commonMap': {}, 'niiriMap': {}}
+    structures = set()
+    measures = set()
+    for key in fs_cde:
+        if key == "count":
+            continue
+        key_tuple = eval(key)
+        structures.add(key_tuple.structure)
+        measures.add(key_tuple.measure)
 
     measure_mapper = fs_map["Measures"]
+    newmap = {}
+    for key, val in measure_mapper.items():
+        key = eval(key)
+        val["fsunit"] = key[1]
+        newmap[key[0]] = val
+    fs_map["Measures"] = newmap
+
+    structure_mapper = fs_map["Structures"]
+    newmap = {}
+    for key, val in structure_mapper.items():
+        hemiless_key = (
+            key.replace("lh", "")
+            .replace("rh", "")
+            .replace("Left-", "")
+            .replace("Right-", "")
+            .replace("lh-", "")
+            .replace("rh-", "")
+            .replace("lh_", "")
+            .replace("rh_", "")
+        )
+        if hemiless_key not in newmap:
+            newmap[hemiless_key] = dict(isAbout=[val["isAbout"]], fskey=[key])
+        else:
+            if val["isAbout"] not in newmap[hemiless_key]["isAbout"]:
+                newmap[hemiless_key]["isAbout"].append(val["isAbout"])
+            newmap[hemiless_key]["fskey"].append(key)
+    fs_map["Structures"] = newmap
+    return fs_map
+
+
+"""
     cache = {}
     for ms in sorted(m):
         if str((ms[0], ms[2])) not in measure_mapper:
@@ -451,3 +480,4 @@ def create_fs_mapper(s, m, measures=None, map_file=None):
         json.dump(niirimap, fp, indent=2, sort_keys=True)
 
     return fs_map, niirimap
+"""
