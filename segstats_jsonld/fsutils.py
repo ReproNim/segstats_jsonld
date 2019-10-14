@@ -22,7 +22,7 @@ prefix = {
         "fs": "repronim:fs_",
     }
 }
-fs_uri = "http://terms.repronim.org/fs_"
+fs_uri = "fs:"
 
 
 def get_segid(filename, structure):
@@ -120,8 +120,8 @@ def read_stats(filename, error_on_new_key=True):
                     extra_info = dict(
                         id=f"{fs_cde['count']:0>6d}",
                         structure_id=None,
-                        label=make_label(dict(measure=fields[1], unit=fields[4])),
-                        description=" ".join((fields[2], "in", fields[4])),
+                        label=make_label(dict(measure=fields[2], unit=fields[4])),
+                        description=" ".join((fields[2], "(" + fields[4] + ")")),
                         key_source="Header",
                     )
                     fs_cde[str(fskey)] = extra_info
@@ -192,8 +192,7 @@ def read_stats(filename, error_on_new_key=True):
                                     else "",
                                     row[struct_idx - 1],
                                     tableinfo[idx + 1]["FieldName"],
-                                    "in",
-                                    tableinfo[idx + 1]["Units"],
+                                    "(" + tableinfo[idx + 1]["Units"] + ")",
                                 ]
                                 if val
                             ]
@@ -375,6 +374,19 @@ def get_label(url):
     return label
 
 
+def hemiless(key):
+    return (
+        key.replace("-lh-", "-")
+        .replace("-rh-", "-")
+        .replace("_lh_", "-")
+        .replace("_rh_", "-")
+        .replace("rh", "")
+        .replace("lh", "")
+        .replace("Left-", "")
+        .replace("Right-", "")
+    )
+
+
 def create_fs_mapper():
     """Create FreeSurfer to ReproNim mapping information
     """
@@ -385,99 +397,86 @@ def create_fs_mapper():
     with open(cde_file, "r") as fp:
         fs_cde = json.load(fp)
 
-    structures = set()
-    measures = set()
+    mmap = fs_map["Measures"]
+    if "('SegId', 'NA')" in mmap:
+        del mmap["('SegId', 'NA')"]
+
     for key in fs_cde:
         if key == "count":
             continue
         key_tuple = eval(key)
-        structures.add(key_tuple.structure)
-        measures.add(key_tuple.measure)
+        if key_tuple.measure in mmap:
+            continue
+        # Deal with measures
+        old_key = str((key_tuple.measure, key_tuple.unit))
+        if old_key in mmap:
+            value = mmap[old_key]
+            value["fsunit"] = key_tuple.unit
+            del mmap[old_key]
+            mmap[key_tuple.measure] = value
+        if key_tuple.measure not in mmap:
+            mmap[key_tuple.measure] = get_normative_measure(
+                (key_tuple.measure, fs_cde[key]["description"], key_tuple.unit)
+            )
+            mmap[key_tuple.measure]["fsunit"] = key_tuple.unit
 
-    measure_mapper = fs_map["Measures"]
-    newmap = {}
-    for key, val in measure_mapper.items():
-        key = eval(key)
-        val["fsunit"] = key[1]
-        newmap[key[0]] = val
-    fs_map["Measures"] = newmap
+    for key in mmap:
+        for subkey, value in mmap[key].items():
+            if value.startswith("https://surfer.nmr.mgh.harvard.edu/fswiki/terms/"):
+                mmap[key][subkey] = mmap[key][subkey].replace(
+                    "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/", "fs:"
+                )
 
-    structure_mapper = fs_map["Structures"]
-    newmap = {}
-    for key, val in structure_mapper.items():
-        hemiless_key = (
-            key.replace("lh", "")
-            .replace("rh", "")
-            .replace("Left-", "")
-            .replace("Right-", "")
-            .replace("lh-", "")
-            .replace("rh-", "")
-            .replace("lh_", "")
-            .replace("rh_", "")
-        )
-        if hemiless_key not in newmap:
-            newmap[hemiless_key] = dict(isAbout=[val["isAbout"]], fskey=[key])
-        else:
-            if val["isAbout"] not in newmap[hemiless_key]["isAbout"]:
-                newmap[hemiless_key]["isAbout"].append(val["isAbout"])
-            newmap[hemiless_key]["fskey"].append(key)
-    fs_map["Structures"] = newmap
-    return fs_map
-
-
-"""
-    cache = {}
-    for ms in sorted(m):
-        if str((ms[0], ms[2])) not in measure_mapper:
-            measure_mapper[str((ms[0], ms[2]))] = get_normative_measure(ms)
-        if "mlabel" not in measure_mapper[str((ms[0], ms[2]))]:
-            url = measure_mapper[str((ms[0], ms[2]))]["measureOf"]
-            if "UNKNOWN" in url:
-                continue
-            label = cache[url] if url in cache else get_label(url)
-            cache[url] = label
-            measure_mapper[str((ms[0], ms[2]))]["mlabel"] = label
-        if "dlabel" not in measure_mapper[str((ms[0], ms[2]))]:
-            url = measure_mapper[str((ms[0], ms[2]))]["datumType"]
-            if "UNKNOWN" in url:
-                continue
-            label = cache[url] if url in cache else get_label(url)
-            cache[url] = label
-            measure_mapper[str((ms[0], ms[2]))]["dlabel"] = label
-
-    structure_mapper = fs_map["Structures"]
-    cache = {}
-    for st in sorted(s):
-        if str(st) not in structure_mapper:
-            structure_mapper[str(st)] = get_normative_structures(st)
-        if "label" not in structure_mapper[str(st)]:
-            url = structure_mapper[str(st)]["isAbout"]
-            if "UNKNOWN" in url:
-                continue
-            if url in cache:
-                label = cache[url]
+    smap = fs_map["Structures"]
+    for key in fs_cde:
+        if key == "count":
+            continue
+        key_tuple = eval(key)
+        # Deal with structures
+        hkey = hemiless(key_tuple.structure)
+        # take care of older keys
+        if key_tuple.structure in smap and "fskey" not in smap[key_tuple.structure]:
+            value = smap[key_tuple.structure]
+            del smap[key_tuple.structure]
+            if hkey not in smap:
+                smap[hkey] = dict(
+                    isAbout=value["isAbout"]
+                    if value["isAbout"] and "UNKNOWN" not in value["isAbout"]
+                    else None,
+                    fskey=[key_tuple.structure],
+                )
             else:
-                query = "SELECT ?label WHERE { <%s> rdfs:label ?label . }" % url
-                print(query)
-                g = rl.Graph()
-                g.parse(url, format="xml")
-                label = str(g.query(query).bindings.pop()["label"])
-                cache[url] = label
-            if "hasLaterality" in structure_mapper[str(st)]:
-                label = " ".join([structure_mapper[str(st)]["hasLaterality"], label])
-            structure_mapper[str(st)]["label"] = label
+                if "fskey" not in smap[hkey]:
+                    smap[hkey]["fskey"] = [hkey]
+                if "hasLaterality" in smap[hkey]:
+                    del smap[hkey]["hasLaterality"]
+                if "UNKNOWN" not in value["isAbout"]:
+                    if smap[hkey]["isAbout"] is not None:
+                        assert smap[hkey]["isAbout"] == value["isAbout"]
+                    smap[hkey]["isAbout"] = value["isAbout"]
+                if key_tuple.structure not in smap[hkey]["fskey"]:
+                    smap[hkey]["fskey"].append(key_tuple.structure)
+        # add new keys
+        if hkey in smap:
+            if smap[hkey]["isAbout"] is not None and (
+                "UNKNOWN" not in smap[hkey]["isAbout"]
+                and "CUSTOM" not in smap[hkey]["isAbout"]
+            ):
+                fs_cde[key]["isAbout"] = smap[hkey]["isAbout"]
+            if key_tuple.structure not in smap[hkey]["fskey"]:
+                smap[hkey]["fskey"].append(key_tuple.structure)
+        else:
+            smap[hkey] = dict(isAbout=None, fskey=[])
 
-    if measures is not None:
-        for row in measures:
-            niiri_key = get_niiri_index(fs_map, row[0], row[1], row[2])
-            niirimap["fs2commonMap"][str((row[0], row[1], row[2]))] = niiri_key
-            if niiri_key not in niirimap["niiriMap"]:
-                niirimap["niiriMap"][niiri_key] = "x" + uuid.uuid4().hex
+        if mmap[key_tuple.measure]["measureOf"] is not None:
+            fs_cde[key].update(**mmap[key_tuple.measure])
 
     with open(map_file, "w") as fp:
-        json.dump(fs_map, fp, indent=2, sort_keys=True)
-    with open(niiri_file, "w") as fp:
-        json.dump(niirimap, fp, indent=2, sort_keys=True)
+        json.dump(fs_map, fp, sort_keys=True, indent=2)
+        fp.write("\n")
 
-    return fs_map, niirimap
-"""
+    with open(cde_file, "w") as fp:
+        json.dump(fs_cde, fp, indent=2)
+        fp.write("\n")
+
+    return fs_map, fs_cde

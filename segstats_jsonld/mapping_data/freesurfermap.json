@@ -1,395 +1,1560 @@
 {
   "Measures": {
-    "('BrainSegVol', 'mm^3')": {
+    "Area_mm2": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "BrainSegVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('BrainSegVol-to-eTIV', 'unitless')": {
+    "BrainSegVol-to-eTIV": {
       "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
-      "measureOf": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/BrainSegVol-to-eTIV"
+      "fsunit": "unitless",
+      "measureOf": "fs:BrainSegVol-to-eTIV"
     },
-    "('BrainSegVolNotVent', 'mm^3')": {
+    "BrainSegVolNotVent": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('BrainSegVolNotVentSurf', 'mm^3')": {
+    "BrainSegVolNotVentSurf": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('CerebralWhiteMatterVol', 'mm^3')": {
+    "CerebralWhiteMatterVol": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('CortexVol', 'mm^3')": {
+    "CortexVol": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('MaskVol', 'mm^3')": {
+    "CurvInd": {
+      "datumType": "http://purl.obolibrary.org/obo/NCIT_C25390",
+      "fsunit": "unitless",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "FoldInd": {
+      "datumType": "http://purl.obolibrary.org/obo/NCIT_C25390",
+      "fsunit": "unitless",
+      "measureOf": "fs:folding"
+    },
+    "GausCurv": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^-2",
+      "hasUnit": "mm^-2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "GrayVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('MaskVol-to-eTIV', 'unitless')": {
+    "MaskVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "MaskVol-to-eTIV": {
       "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
-      "measureOf": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MaskVol-to-eTIV"
+      "fsunit": "unitless",
+      "measureOf": "fs:MaskVol-to-eTIV"
     },
-    "('NVoxels', 'unitless')": {
+    "Max": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738267",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "Mean": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "MeanCurv": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^-1",
+      "hasUnit": "mm^-1",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "MeanThickness": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "Min": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738266",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "NVertices": {
       "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "vertex",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "NVoxels": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
       "hasUnit": "voxel",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('SegId', 'NA')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "measureOf": "http://uri.interlex.org/base/ilx_0100965"
-    },
-    "('SubCortGrayVol', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('SupraTentorialVol', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('SupraTentorialVolNotVent', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('SupraTentorialVolNotVentVox', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('SurfaceHoles', 'unitless')": {
+    "NumVert": {
       "datumType": "http://uri.interlex.org/base/ilx_0102597",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/defect-hole",
+      "fsunit": "unitless",
+      "hasUnit": "vertex",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('TotalGrayVol', 'mm^3')": {
+    "PialSurfArea": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
     },
-    "('VentricleChoroidVol', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('Volume_mm3', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('eTIV', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('lhCerebralWhiteMatterVol', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('lhCortexVol', 'mm^3')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738276",
-      "hasUnit": "mm^3",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('lhSurfaceHoles', 'unitless')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0102597",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/defect-hole",
-      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
-    },
-    "('normMax', 'MR')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738267",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MR",
-      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
-    },
-    "('normMean', 'MR')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738264",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MR",
-      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
-    },
-    "('normMin', 'MR')": {
-      "datumType": "http://uri.interlex.org/base/ilx_0738266",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MR",
-      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
-    },
-    "('normRange', 'MR')": {
+    "Range": {
       "datumType": "http://uri.interlex.org/base/ilx_0738268",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MR",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
       "measureOf": "http://uri.interlex.org/base/ilx_0738276"
     },
-    "('normStdDev', 'MR')": {
+    "SNR": {
+      "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
+      "fsunit": "none",
+      "measureOf": "fs:unknown Intensity SNR (none)"
+    },
+    "StdDev": {
       "datumType": "http://uri.interlex.org/base/ilx_0738265",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/MR",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
       "measureOf": "http://uri.interlex.org/base/ilx_0738276"
     },
-    "('rhCerebralWhiteMatterVol', 'mm^3')": {
+    "SubCortGrayVol": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('rhCortexVol', 'mm^3')": {
+    "SupraTentorialVol": {
       "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
       "hasUnit": "mm^3",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     },
-    "('rhSurfaceHoles', 'unitless')": {
+    "SupraTentorialVolNotVent": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SupraTentorialVolNotVentVox": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SurfArea": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "SurfaceHoles": {
       "datumType": "http://uri.interlex.org/base/ilx_0102597",
-      "hasUnit": "https://surfer.nmr.mgh.harvard.edu/fswiki/terms/defect-hole",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "ThickAvg": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "ThickStd": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738265",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "TotalGrayVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "VentricleChoroidVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "Volume_mm3": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "WhiteSurfArea": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "eTIV": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhCerebralWhiteMatterVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhCortexVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhSurfaceHoles": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "normMax": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738267",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normMean": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normMin": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738266",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normRange": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738268",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normStdDev": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738265",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "rhCerebralWhiteMatterVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "rhCortexVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "rhSurfaceHoles": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
       "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     }
   },
   "Structures": {
     "3rd-Ventricle": {
+      "fskey": [
+        "3rd-Ventricle"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002286"
     },
     "4th-Ventricle": {
+      "fskey": [
+        "4th-Ventricle"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002422"
     },
     "5th-Ventricle": {
+      "fskey": [
+        "5th-Ventricle"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0009857"
     },
+    "Accumbens-area": {
+      "fskey": [
+        "Left-Accumbens-area",
+        "Right-Accumbens-area"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882"
+    },
+    "Amygdala": {
+      "fskey": [
+        "Left-Amygdala",
+        "Right-Amygdala"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876"
+    },
+    "BA1_exvivo": {
+      "fskey": [
+        "BA1_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA2_exvivo": {
+      "fskey": [
+        "BA2_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA3a_exvivo": {
+      "fskey": [
+        "BA3a_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA3b_exvivo": {
+      "fskey": [
+        "BA3b_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA44_exvivo": {
+      "fskey": [
+        "BA44_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA45_exvivo": {
+      "fskey": [
+        "BA45_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA4a_exvivo": {
+      "fskey": [
+        "BA4a_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA4p_exvivo": {
+      "fskey": [
+        "BA4p_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA6_exvivo": {
+      "fskey": [
+        "BA6_exvivo"
+      ],
+      "isAbout": null
+    },
     "Brain-Stem": {
+      "fskey": [
+        "Brain-Stem"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002298"
     },
     "BrainSeg": {
+      "fskey": [
+        "BrainSeg"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegNotVent": {
+      "fskey": [
+        "BrainSegNotVent"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegNotVentSurf": {
+      "fskey": [
+        "BrainSegNotVentSurf"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "BrainSegVol-to-eTIV": {
-      "isAbout": "<UNKNOWN - BrainSegVol-to-eTIV>"
+      "fskey": [
+        "BrainSegVol-to-eTIV"
+      ],
+      "isAbout": null
     },
     "CC_Anterior": {
+      "fskey": [
+        "CC_Anterior"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015599"
     },
     "CC_Central": {
+      "fskey": [
+        "CC_Central"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
     },
     "CC_Mid_Anterior": {
+      "fskey": [
+        "CC_Mid_Anterior"
+      ],
       "isAbout": "CUSTOM: Mid Anterior segment of corpus callosum"
     },
     "CC_Mid_Posterior": {
+      "fskey": [
+        "CC_Mid_Posterior"
+      ],
       "isAbout": "CUSTOM: Mid posterior segment of corpus callosum"
     },
     "CC_Posterior": {
+      "fskey": [
+        "CC_Posterior"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015708"
     },
     "CSF": {
+      "fskey": [
+        "CSF"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001359"
     },
+    "Caudate": {
+      "fskey": [
+        "Left-Caudate",
+        "Right-Caudate"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873"
+    },
+    "Cerebellum-Cortex": {
+      "fskey": [
+        "Left-Cerebellum-Cortex",
+        "Right-Cerebellum-Cortex"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129"
+    },
+    "Cerebellum-White-Matter": {
+      "fskey": [
+        "Left-Cerebellum-White-Matter",
+        "Right-Cerebellum-White-Matter"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002317"
+    },
     "CerebralWhiteMatter": {
+      "fskey": [
+        "CerebralWhiteMatter",
+        "lhCerebralWhiteMatter",
+        "rhCerebralWhiteMatter"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002437"
     },
     "Cortex": {
+      "fskey": [
+        "Cortex",
+        "lhCortex",
+        "rhCortex"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
     },
     "EstimatedTotalIntraCranialVol": {
+      "fskey": [
+        "EstimatedTotalIntraCranialVol"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0013411"
     },
-    "Left-Accumbens-area": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882"
+    "G&S_cingul-Ant": {
+      "fskey": [
+        "G&S_cingul-Ant"
+      ],
+      "isAbout": null
     },
-    "Left-Amygdala": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876"
+    "G&S_cingul-Mid-Ant": {
+      "fskey": [
+        "G&S_cingul-Mid-Ant"
+      ],
+      "isAbout": null
     },
-    "Left-Caudate": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873"
+    "G&S_cingul-Mid-Post": {
+      "fskey": [
+        "G&S_cingul-Mid-Post"
+      ],
+      "isAbout": null
     },
-    "Left-Cerebellum-Cortex": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129"
+    "G&S_frontomargin": {
+      "fskey": [
+        "G&S_frontomargin"
+      ],
+      "isAbout": null
     },
-    "Left-Cerebellum-White-Matter": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002317"
+    "G&S_occipital_inf": {
+      "fskey": [
+        "G&S_occipital_inf"
+      ],
+      "isAbout": null
     },
-    "Left-Hippocampus": {
-      "hasLaterality": "Left",
+    "G&S_paracentral": {
+      "fskey": [
+        "G&S_paracentral"
+      ],
+      "isAbout": null
+    },
+    "G&S_subcentral": {
+      "fskey": [
+        "G&S_subcentral"
+      ],
+      "isAbout": null
+    },
+    "G&S_transv_frontopol": {
+      "fskey": [
+        "G&S_transv_frontopol"
+      ],
+      "isAbout": null
+    },
+    "G_Ins_lg&S_cent_ins": {
+      "fskey": [
+        "G_Ins_lg&S_cent_ins"
+      ],
+      "isAbout": null
+    },
+    "G_cingul-Post-dorsal": {
+      "fskey": [
+        "G_cingul-Post-dorsal"
+      ],
+      "isAbout": null
+    },
+    "G_cingul-Post-ventral": {
+      "fskey": [
+        "G_cingul-Post-ventral"
+      ],
+      "isAbout": null
+    },
+    "G_cuneus": {
+      "fskey": [
+        "G_cuneus"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Opercular": {
+      "fskey": [
+        "G_front_inf-Opercular"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Orbital": {
+      "fskey": [
+        "G_front_inf-Orbital"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Triangul": {
+      "fskey": [
+        "G_front_inf-Triangul"
+      ],
+      "isAbout": null
+    },
+    "G_front_middle": {
+      "fskey": [
+        "G_front_middle"
+      ],
+      "isAbout": null
+    },
+    "G_front_sup": {
+      "fskey": [
+        "G_front_sup"
+      ],
+      "isAbout": null
+    },
+    "G_insular_short": {
+      "fskey": [
+        "G_insular_short"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_lat-fusifor": {
+      "fskey": [
+        "G_oc-temp_lat-fusifor"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_med-Lingual": {
+      "fskey": [
+        "G_oc-temp_med-Lingual"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_med-Parahip": {
+      "fskey": [
+        "G_oc-temp_med-Parahip"
+      ],
+      "isAbout": null
+    },
+    "G_occipital_middle": {
+      "fskey": [
+        "G_occipital_middle"
+      ],
+      "isAbout": null
+    },
+    "G_occipital_sup": {
+      "fskey": [
+        "G_occipital_sup"
+      ],
+      "isAbout": null
+    },
+    "G_orbital": {
+      "fskey": [
+        "G_orbital"
+      ],
+      "isAbout": null
+    },
+    "G_pariet_inf-Angular": {
+      "fskey": [
+        "G_pariet_inf-Angular"
+      ],
+      "isAbout": null
+    },
+    "G_pariet_inf-Supramar": {
+      "fskey": [
+        "G_pariet_inf-Supramar"
+      ],
+      "isAbout": null
+    },
+    "G_parietal_sup": {
+      "fskey": [
+        "G_parietal_sup"
+      ],
+      "isAbout": null
+    },
+    "G_postcentral": {
+      "fskey": [
+        "G_postcentral"
+      ],
+      "isAbout": null
+    },
+    "G_precentral": {
+      "fskey": [
+        "G_precentral"
+      ],
+      "isAbout": null
+    },
+    "G_precuneus": {
+      "fskey": [
+        "G_precuneus"
+      ],
+      "isAbout": null
+    },
+    "G_rectus": {
+      "fskey": [
+        "G_rectus"
+      ],
+      "isAbout": null
+    },
+    "G_subcallosal": {
+      "fskey": [
+        "G_subcallosal"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-G_T_transv": {
+      "fskey": [
+        "G_temp_sup-G_T_transv"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Lateral": {
+      "fskey": [
+        "G_temp_sup-Lateral"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Plan_polar": {
+      "fskey": [
+        "G_temp_sup-Plan_polar"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Plan_tempo": {
+      "fskey": [
+        "G_temp_sup-Plan_tempo"
+      ],
+      "isAbout": null
+    },
+    "G_temporal_inf": {
+      "fskey": [
+        "G_temporal_inf"
+      ],
+      "isAbout": null
+    },
+    "G_temporal_middle": {
+      "fskey": [
+        "G_temporal_middle"
+      ],
+      "isAbout": null
+    },
+    "Hippocampus": {
+      "fskey": [
+        "Left-Hippocampus",
+        "Right-Hippocampus"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954"
     },
-    "Left-Inf-Lat-Vent": {
-      "hasLaterality": "Left",
+    "Inf-Lat-Vent": {
+      "fskey": [
+        "Left-Inf-Lat-Vent",
+        "Right-Inf-Lat-Vent"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006091"
     },
-    "Left-Lateral-Ventricle": {
-      "hasLaterality": "Left",
+    "Lat_Fis-ant-Horizont": {
+      "fskey": [
+        "Lat_Fis-ant-Horizont"
+      ],
+      "isAbout": null
+    },
+    "Lat_Fis-ant-Vertical": {
+      "fskey": [
+        "Lat_Fis-ant-Vertical"
+      ],
+      "isAbout": null
+    },
+    "Lat_Fis-post": {
+      "fskey": [
+        "Lat_Fis-post"
+      ],
+      "isAbout": null
+    },
+    "Lateral-Ventricle": {
+      "fskey": [
+        "Left-Lateral-Ventricle",
+        "Right-Lateral-Ventricle"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002285"
     },
-    "Left-Pallidum": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514"
-    },
-    "Left-Putamen": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874"
-    },
-    "Left-Thalamus-Proper": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897"
-    },
-    "Left-VentralDC": {
-      "hasLaterality": "Left",
-      "isAbout": "CUSTOM: it was 'invented' by CMA. Something like: Ventral Diencephalon contains the hypothalamus, basal forebrain, and sublenticular extended amygdala (SLEA), as well as a large portion of ventral tegmentum. See also https://doi.org/10.1016/j.biopsych.2008.01.018"
-    },
-    "Left-WM-hypointensities": {
-      "hasLaterality": "Left",
-      "isAbout": "CUSTOM: Region of hypointense signal in the white matter"
-    },
-    "Left-choroid-plexus": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886"
-    },
-    "Left-non-WM-hypointensities": {
-      "hasLaterality": "Left",
-      "isAbout": "CUSTOM: Region of hypointense signal in regions other than white matter"
-    },
-    "Left-vessel": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
+    "MT_exvivo": {
+      "fskey": [
+        "MT_exvivo"
+      ],
+      "isAbout": null
     },
     "Mask": {
-      "hasLaterality": "<UNKNOWN - Mask>",
-      "isAbout": "<UNKNOWN - Mask>"
+      "fskey": [
+        "Mask"
+      ],
+      "isAbout": null
     },
     "MaskVol-to-eTIV": {
-      "hasLaterality": "<UNKNOWN - MaskVol-to-eTIV>",
-      "isAbout": "<UNKNOWN - MaskVol-to-eTIV>"
+      "fskey": [
+        "MaskVol-to-eTIV"
+      ],
+      "isAbout": null
     },
     "Optic-Chiasm": {
+      "fskey": [
+        "Optic-Chiasm"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000959"
     },
-    "Right-Accumbens-area": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882"
-    },
-    "Right-Amygdala": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876"
-    },
-    "Right-Caudate": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873"
-    },
-    "Right-Cerebellum-Cortex": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129"
-    },
-    "Right-Cerebellum-White-Matter": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002317"
-    },
-    "Right-Hippocampus": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954"
-    },
-    "Right-Inf-Lat-Vent": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006091"
-    },
-    "Right-Lateral-Ventricle": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002285"
-    },
-    "Right-Pallidum": {
-      "hasLaterality": "Right",
+    "Pallidum": {
+      "fskey": [
+        "Left-Pallidum",
+        "Right-Pallidum"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514"
     },
-    "Right-Putamen": {
-      "hasLaterality": "Right",
+    "Pole_occipital": {
+      "fskey": [
+        "Pole_occipital"
+      ],
+      "isAbout": null
+    },
+    "Pole_temporal": {
+      "fskey": [
+        "Pole_temporal"
+      ],
+      "isAbout": null
+    },
+    "Putamen": {
+      "fskey": [
+        "Left-Putamen",
+        "Right-Putamen"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874"
     },
-    "Right-Thalamus-Proper": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897"
+    "S_calcarine": {
+      "fskey": [
+        "S_calcarine"
+      ],
+      "isAbout": null
     },
-    "Right-VentralDC": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN>"
+    "S_central": {
+      "fskey": [
+        "S_central"
+      ],
+      "isAbout": null
     },
-    "Right-WM-hypointensities": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN>"
+    "S_cingul-Marginalis": {
+      "fskey": [
+        "S_cingul-Marginalis"
+      ],
+      "isAbout": null
     },
-    "Right-choroid-plexus": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886"
+    "S_circular_insula_ant": {
+      "fskey": [
+        "S_circular_insula_ant"
+      ],
+      "isAbout": null
     },
-    "Right-non-WM-hypointensities": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN>"
+    "S_circular_insula_inf": {
+      "fskey": [
+        "S_circular_insula_inf"
+      ],
+      "isAbout": null
     },
-    "Right-vessel": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
+    "S_circular_insula_sup": {
+      "fskey": [
+        "S_circular_insula_sup"
+      ],
+      "isAbout": null
+    },
+    "S_collat_transv_ant": {
+      "fskey": [
+        "S_collat_transv_ant"
+      ],
+      "isAbout": null
+    },
+    "S_collat_transv_post": {
+      "fskey": [
+        "S_collat_transv_post"
+      ],
+      "isAbout": null
+    },
+    "S_front_inf": {
+      "fskey": [
+        "S_front_inf"
+      ],
+      "isAbout": null
+    },
+    "S_front_middle": {
+      "fskey": [
+        "S_front_middle"
+      ],
+      "isAbout": null
+    },
+    "S_front_sup": {
+      "fskey": [
+        "S_front_sup"
+      ],
+      "isAbout": null
+    },
+    "S_interm_prim-Jensen": {
+      "fskey": [
+        "S_interm_prim-Jensen"
+      ],
+      "isAbout": null
+    },
+    "S_intrapariet&P_trans": {
+      "fskey": [
+        "S_intrapariet&P_trans"
+      ],
+      "isAbout": null
+    },
+    "S_oc-temp_lat": {
+      "fskey": [
+        "S_oc-temp_lat"
+      ],
+      "isAbout": null
+    },
+    "S_oc-temp_med&Lingual": {
+      "fskey": [
+        "S_oc-temp_med&Lingual"
+      ],
+      "isAbout": null
+    },
+    "S_oc_middle&Lunatus": {
+      "fskey": [
+        "S_oc_middle&Lunatus"
+      ],
+      "isAbout": null
+    },
+    "S_oc_sup&transversal": {
+      "fskey": [
+        "S_oc_sup&transversal"
+      ],
+      "isAbout": null
+    },
+    "S_occipital_ant": {
+      "fskey": [
+        "S_occipital_ant"
+      ],
+      "isAbout": null
+    },
+    "S_orbital-H_Shaped": {
+      "fskey": [
+        "S_orbital-H_Shaped"
+      ],
+      "isAbout": null
+    },
+    "S_orbital_lateral": {
+      "fskey": [
+        "S_orbital_lateral"
+      ],
+      "isAbout": null
+    },
+    "S_orbital_med-olfact": {
+      "fskey": [
+        "S_orbital_med-olfact"
+      ],
+      "isAbout": null
+    },
+    "S_parieto_occipital": {
+      "fskey": [
+        "S_parieto_occipital"
+      ],
+      "isAbout": null
+    },
+    "S_pericallosal": {
+      "fskey": [
+        "S_pericallosal"
+      ],
+      "isAbout": null
+    },
+    "S_postcentral": {
+      "fskey": [
+        "S_postcentral"
+      ],
+      "isAbout": null
+    },
+    "S_precentral-inf-part": {
+      "fskey": [
+        "S_precentral-inf-part"
+      ],
+      "isAbout": null
+    },
+    "S_precentral-sup-part": {
+      "fskey": [
+        "S_precentral-sup-part"
+      ],
+      "isAbout": null
+    },
+    "S_suborbital": {
+      "fskey": [
+        "S_suborbital"
+      ],
+      "isAbout": null
+    },
+    "S_subparietal": {
+      "fskey": [
+        "S_subparietal"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_inf": {
+      "fskey": [
+        "S_temporal_inf"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_sup": {
+      "fskey": [
+        "S_temporal_sup"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_transverse": {
+      "fskey": [
+        "S_temporal_transverse"
+      ],
+      "isAbout": null
     },
     "SubCortGray": {
+      "fskey": [
+        "SubCortGray"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
     },
     "SupraTentorial": {
+      "fskey": [
+        "SupraTentorial"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869"
     },
     "SupraTentorialNotVent": {
-      "isAbout": "<UNKNOWN - SupraTentorialNotVent>"
+      "fskey": [
+        "SupraTentorialNotVent"
+      ],
+      "isAbout": null
     },
     "SupraTentorialNotVentVox": {
-      "isAbout": "<UNKNOWN - SupraTentorialNotVentVox>"
+      "fskey": [
+        "SupraTentorialNotVentVox"
+      ],
+      "isAbout": null
     },
     "SurfaceHoles": {
+      "fskey": [
+        "SurfaceHoles",
+        "lhSurfaceHoles",
+        "rhSurfaceHoles"
+      ],
       "isAbout": "<UNKNOWN - SurfaceHoles>"
     },
+    "Thalamus-Proper": {
+      "fskey": [
+        "Left-Thalamus-Proper",
+        "Right-Thalamus-Proper"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897"
+    },
     "TotalGray": {
+      "fskey": [
+        "TotalGray"
+      ],
       "isAbout": "http://purl.obolibrary.org/obo/UBERON_0005401"
     },
+    "UnsegmentedWhiteMatter": {
+      "fskey": [
+        "Left-UnsegmentedWhiteMatter",
+        "Right-UnsegmentedWhiteMatter"
+      ],
+      "isAbout": null
+    },
+    "V1_exvivo": {
+      "fskey": [
+        "V1_exvivo"
+      ],
+      "isAbout": null
+    },
+    "V2_exvivo": {
+      "fskey": [
+        "V2_exvivo"
+      ],
+      "isAbout": null
+    },
+    "VentralDC": {
+      "fskey": [
+        "Left-VentralDC",
+        "Right-VentralDC"
+      ],
+      "isAbout": "CUSTOM: it was 'invented' by CMA. Something like: Ventral Diencephalon contains the hypothalamus, basal forebrain, and sublenticular extended amygdala (SLEA), as well as a large portion of ventral tegmentum. See also https://doi.org/10.1016/j.biopsych.2008.01.018"
+    },
     "VentricleChoroidVol": {
-      "hasLaterality": "<UNKNOWN - VentricleChoroidVol>",
-      "isAbout": "<UNKNOWN - VentricleChoroidVol>"
+      "fskey": [
+        "VentricleChoroidVol"
+      ],
+      "isAbout": null
     },
     "WM-hypointensities": {
-      "isAbout": "<UNKNOWN>"
+      "fskey": [
+        "WM-hypointensities",
+        "Left-WM-hypointensities",
+        "Right-WM-hypointensities"
+      ],
+      "isAbout": "CUSTOM: Region of hypointense signal in the white matter"
     },
-    "lhCerebralWhiteMatter": {
-      "hasLaterality": "Left",
-      "isAbout": "<UNKNOWN - lhCerebralWhiteMatter>"
+    "bankssts": {
+      "fskey": [
+        "bankssts"
+      ],
+      "isAbout": null
     },
-    "lhCortex": {
-      "hasLaterality": "Left",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
+    "caudalanteriorcingulate": {
+      "fskey": [
+        "caudalanteriorcingulate"
+      ],
+      "isAbout": null
     },
-    "lhSurfaceHoles": {
-      "hasLaterality": "Left",
-      "isAbout": "<UNKNOWN - lhSurfaceHoles>"
+    "caudalmiddlefrontal": {
+      "fskey": [
+        "caudalmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "choroid-plexus": {
+      "fskey": [
+        "Left-choroid-plexus",
+        "Right-choroid-plexus"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886"
+    },
+    "cuneus": {
+      "fskey": [
+        "cuneus"
+      ],
+      "isAbout": null
+    },
+    "entoinal": {
+      "fskey": [
+        "entorhinal"
+      ],
+      "isAbout": null
+    },
+    "entoinal_exvivo": {
+      "fskey": [
+        "entorhinal_exvivo"
+      ],
+      "isAbout": null
+    },
+    "frontalpole": {
+      "fskey": [
+        "frontalpole"
+      ],
+      "isAbout": null
+    },
+    "fusiform": {
+      "fskey": [
+        "fusiform"
+      ],
+      "isAbout": null
+    },
+    "inferiorparietal": {
+      "fskey": [
+        "inferiorparietal"
+      ],
+      "isAbout": null
+    },
+    "inferiortemporal": {
+      "fskey": [
+        "inferiortemporal"
+      ],
+      "isAbout": null
+    },
+    "insula": {
+      "fskey": [
+        "insula"
+      ],
+      "isAbout": null
+    },
+    "isthmuscingulate": {
+      "fskey": [
+        "isthmuscingulate"
+      ],
+      "isAbout": null
+    },
+    "lateraloccipital": {
+      "fskey": [
+        "lateraloccipital"
+      ],
+      "isAbout": null
+    },
+    "lateralorbitofrontal": {
+      "fskey": [
+        "lateralorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "lingual": {
+      "fskey": [
+        "lingual"
+      ],
+      "isAbout": null
+    },
+    "medialorbitofrontal": {
+      "fskey": [
+        "medialorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "middletemporal": {
+      "fskey": [
+        "middletemporal"
+      ],
+      "isAbout": null
     },
     "non-WM-hypointensities": {
-      "isAbout": "<UNKNOWN>"
+      "fskey": [
+        "non-WM-hypointensities",
+        "Left-non-WM-hypointensities",
+        "Right-non-WM-hypointensities"
+      ],
+      "isAbout": "CUSTOM: Region of hypointense signal in regions other than white matter"
     },
-    "rhCerebralWhiteMatter": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN - rhCerebralWhiteMatter>"
+    "paracentral": {
+      "fskey": [
+        "paracentral"
+      ],
+      "isAbout": null
     },
-    "rhCortex": {
-      "hasLaterality": "Right",
-      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
+    "parahippocampal": {
+      "fskey": [
+        "parahippocampal"
+      ],
+      "isAbout": null
     },
-    "rhSurfaceHoles": {
-      "hasLaterality": "Right",
-      "isAbout": "<UNKNOWN - rhSurfaceHoles>"
+    "parsopercularis": {
+      "fskey": [
+        "parsopercularis"
+      ],
+      "isAbout": null
+    },
+    "parsorbitalis": {
+      "fskey": [
+        "parsorbitalis"
+      ],
+      "isAbout": null
+    },
+    "parstriangularis": {
+      "fskey": [
+        "parstriangularis"
+      ],
+      "isAbout": null
+    },
+    "pericalcarine": {
+      "fskey": [
+        "pericalcarine"
+      ],
+      "isAbout": null
+    },
+    "periinal_exvivo": {
+      "fskey": [
+        "perirhinal_exvivo"
+      ],
+      "isAbout": null
+    },
+    "postcentral": {
+      "fskey": [
+        "postcentral"
+      ],
+      "isAbout": null
+    },
+    "posteriorcingulate": {
+      "fskey": [
+        "posteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "precentral": {
+      "fskey": [
+        "precentral"
+      ],
+      "isAbout": null
+    },
+    "precuneus": {
+      "fskey": [
+        "precuneus"
+      ],
+      "isAbout": null
+    },
+    "rostralanteriorcingulate": {
+      "fskey": [
+        "rostralanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "rostralmiddlefrontal": {
+      "fskey": [
+        "rostralmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "superiorfrontal": {
+      "fskey": [
+        "superiorfrontal"
+      ],
+      "isAbout": null
+    },
+    "superiorparietal": {
+      "fskey": [
+        "superiorparietal"
+      ],
+      "isAbout": null
+    },
+    "superiortemporal": {
+      "fskey": [
+        "superiortemporal"
+      ],
+      "isAbout": null
+    },
+    "supramarginal": {
+      "fskey": [
+        "supramarginal"
+      ],
+      "isAbout": null
+    },
+    "temporalpole": {
+      "fskey": [
+        "temporalpole"
+      ],
+      "isAbout": null
+    },
+    "transversetemporal": {
+      "fskey": [
+        "transversetemporal"
+      ],
+      "isAbout": null
+    },
+    "unknown": {
+      "fskey": [
+        "unknown"
+      ],
+      "isAbout": null
+    },
+    "vessel": {
+      "fskey": [
+        "Left-vessel",
+        "Right-vessel"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
+    },
+    "wm-bankssts": {
+      "fskey": [
+        "wm-lh-bankssts",
+        "wm-rh-bankssts"
+      ],
+      "isAbout": null
+    },
+    "wm-caudalanteriorcingulate": {
+      "fskey": [
+        "wm-lh-caudalanteriorcingulate",
+        "wm-rh-caudalanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-caudalmiddlefrontal": {
+      "fskey": [
+        "wm-lh-caudalmiddlefrontal",
+        "wm-rh-caudalmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-cuneus": {
+      "fskey": [
+        "wm-lh-cuneus",
+        "wm-rh-cuneus"
+      ],
+      "isAbout": null
+    },
+    "wm-entoinal": {
+      "fskey": [
+        "wm-lh-entorhinal",
+        "wm-rh-entorhinal"
+      ],
+      "isAbout": null
+    },
+    "wm-frontalpole": {
+      "fskey": [
+        "wm-lh-frontalpole",
+        "wm-rh-frontalpole"
+      ],
+      "isAbout": null
+    },
+    "wm-fusiform": {
+      "fskey": [
+        "wm-lh-fusiform",
+        "wm-rh-fusiform"
+      ],
+      "isAbout": null
+    },
+    "wm-inferiorparietal": {
+      "fskey": [
+        "wm-lh-inferiorparietal",
+        "wm-rh-inferiorparietal"
+      ],
+      "isAbout": null
+    },
+    "wm-inferiortemporal": {
+      "fskey": [
+        "wm-lh-inferiortemporal",
+        "wm-rh-inferiortemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-insula": {
+      "fskey": [
+        "wm-lh-insula",
+        "wm-rh-insula"
+      ],
+      "isAbout": null
+    },
+    "wm-isthmuscingulate": {
+      "fskey": [
+        "wm-lh-isthmuscingulate",
+        "wm-rh-isthmuscingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-lateraloccipital": {
+      "fskey": [
+        "wm-lh-lateraloccipital",
+        "wm-rh-lateraloccipital"
+      ],
+      "isAbout": null
+    },
+    "wm-lateralorbitofrontal": {
+      "fskey": [
+        "wm-lh-lateralorbitofrontal",
+        "wm-rh-lateralorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-lingual": {
+      "fskey": [
+        "wm-lh-lingual",
+        "wm-rh-lingual"
+      ],
+      "isAbout": null
+    },
+    "wm-medialorbitofrontal": {
+      "fskey": [
+        "wm-lh-medialorbitofrontal",
+        "wm-rh-medialorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-middletemporal": {
+      "fskey": [
+        "wm-lh-middletemporal",
+        "wm-rh-middletemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-paracentral": {
+      "fskey": [
+        "wm-lh-paracentral",
+        "wm-rh-paracentral"
+      ],
+      "isAbout": null
+    },
+    "wm-parahippocampal": {
+      "fskey": [
+        "wm-lh-parahippocampal",
+        "wm-rh-parahippocampal"
+      ],
+      "isAbout": null
+    },
+    "wm-parsopercularis": {
+      "fskey": [
+        "wm-lh-parsopercularis",
+        "wm-rh-parsopercularis"
+      ],
+      "isAbout": null
+    },
+    "wm-parsorbitalis": {
+      "fskey": [
+        "wm-lh-parsorbitalis",
+        "wm-rh-parsorbitalis"
+      ],
+      "isAbout": null
+    },
+    "wm-parstriangularis": {
+      "fskey": [
+        "wm-lh-parstriangularis",
+        "wm-rh-parstriangularis"
+      ],
+      "isAbout": null
+    },
+    "wm-pericalcarine": {
+      "fskey": [
+        "wm-lh-pericalcarine",
+        "wm-rh-pericalcarine"
+      ],
+      "isAbout": null
+    },
+    "wm-postcentral": {
+      "fskey": [
+        "wm-lh-postcentral",
+        "wm-rh-postcentral"
+      ],
+      "isAbout": null
+    },
+    "wm-posteriorcingulate": {
+      "fskey": [
+        "wm-lh-posteriorcingulate",
+        "wm-rh-posteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-precentral": {
+      "fskey": [
+        "wm-lh-precentral",
+        "wm-rh-precentral"
+      ],
+      "isAbout": null
+    },
+    "wm-precuneus": {
+      "fskey": [
+        "wm-lh-precuneus",
+        "wm-rh-precuneus"
+      ],
+      "isAbout": null
+    },
+    "wm-rostralanteriorcingulate": {
+      "fskey": [
+        "wm-lh-rostralanteriorcingulate",
+        "wm-rh-rostralanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-rostralmiddlefrontal": {
+      "fskey": [
+        "wm-lh-rostralmiddlefrontal",
+        "wm-rh-rostralmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiorfrontal": {
+      "fskey": [
+        "wm-lh-superiorfrontal",
+        "wm-rh-superiorfrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiorparietal": {
+      "fskey": [
+        "wm-lh-superiorparietal",
+        "wm-rh-superiorparietal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiortemporal": {
+      "fskey": [
+        "wm-lh-superiortemporal",
+        "wm-rh-superiortemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-supramarginal": {
+      "fskey": [
+        "wm-lh-supramarginal",
+        "wm-rh-supramarginal"
+      ],
+      "isAbout": null
+    },
+    "wm-temporalpole": {
+      "fskey": [
+        "wm-lh-temporalpole",
+        "wm-rh-temporalpole"
+      ],
+      "isAbout": null
+    },
+    "wm-transversetemporal": {
+      "fskey": [
+        "wm-lh-transversetemporal",
+        "wm-rh-transversetemporal"
+      ],
+      "isAbout": null
     }
   }
 }
