@@ -480,3 +480,81 @@ def create_fs_mapper():
         fp.write("\n")
 
     return fs_map, fs_cde
+
+
+def create_cde_graph(restrict_to=None):
+    """Create an RDFLIB graph with the FreeSurfer CDEs
+
+    Any CDE that has a mapping will be mapped
+    """
+    with open(cde_file, "r") as fp:
+        fs_cde = json.load(fp)
+    from nidm.core import Constants
+
+    fs = Constants.FREESURFER
+    nidm = Constants.NIDM
+
+    g = rl.Graph()
+    g.bind("fs", fs)
+    g.bind("nidm", nidm)
+
+    for key, value in fs_cde.items():
+        if key == "count":
+            continue
+        if restrict_to is not None:
+            if value["id"] not in restrict_to:
+                continue
+        for subkey, item in value.items():
+            if subkey == "id":
+                fsid = "fs_" + item
+                g.add((fs[fsid], rl.RDF.type, fs["DataElement"]))
+                continue
+            if item is None or "unknown" in str(item):
+                continue
+            if isinstance(item, str) and item.startswith("fs:"):
+                item = fs[item.replace("fs:", "")]
+            if subkey in ["isAbout", "datumType", "measureOf"]:
+                g.add((fs[fsid], nidm[subkey], rl.URIRef(item)))
+            else:
+                if isinstance(item, rl.URIRef):
+                    g.add((fs[fsid], fs[subkey], item))
+                else:
+                    g.add((fs[fsid], fs[subkey], rl.Literal(item)))
+        key_tuple = eval(key)
+        for subkey, item in key_tuple._asdict().items():
+            if item is None:
+                continue
+            if subkey == "hemi":
+                g.add((fs[fsid], nidm["hasLaterality"], rl.Literal(item)))
+            else:
+                g.add((fs[fsid], fs[subkey], rl.Literal(item)))
+    return g
+
+
+def convert_stats_to_nidm(stats):
+    """Convert a stats record into a NIDM entity
+
+    Returns the entity and the prov document
+    """
+    from nidm.core import Constants
+    from nidm.experiment.Core import getUUID
+    import prov
+
+    fs = prov.model.Namespace("fs", str(Constants.FREESURFER))
+    niiri = prov.model.Namespace("niiri", str(Constants.NIIRI))
+    nidm = prov.model.Namespace("nidm", "http://purl.org/nidash/nidm#")
+    doc = prov.model.ProvDocument()
+    e = doc.entity(identifier=niiri[getUUID()])
+    e.add_asserted_type(nidm["FSStatsCollection"])
+    e.add_attributes(
+        {
+            fs["fs_" + val[0]]: prov.model.Literal(
+                val[1],
+                datatype=prov.model.XSD["float"]
+                if "." in val[1]
+                else prov.model.XSD["integer"],
+            )
+            for val in stats
+        }
+    )
+    return e, doc
