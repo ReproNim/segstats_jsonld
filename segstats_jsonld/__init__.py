@@ -12,6 +12,6 @@ __version__ = '0.0.1'
 
 # do imports of all of the functions that should be available here
 from .fs_to_nidm import (remap2json,
-                         read_stats,
                          safe_encode,
                          add_seg_data)
+from .fsutils import read_stats

@@ -1,855 +1,1560 @@
 {
-    "Anatomy": {
-        "Left-Lateral-Ventricle": {
-            "url": "http://uri.interlex.org/ILX:0106125",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002285",
-            "hasLaterality": "Left",
-            "definition": "lateral ventricle cerebral spinal fluid",
-            "label": "lateral ventricle"
-        },
-        "Left-Inf-Lat-Vent": {
-            "url": "http://uri.interlex.org/ILX:0105444",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006091",
-            "hasLaterality": "Left",
-            "definition": "inferior horn of the lateral ventricle cerebral spinal fluid",
-            "label": "inferior horn of the lateral ventricle"
-        },
-        "Left-Cerebellum-White-Matter": {
-            "url": "http://uri.interlex.org/ILX:0101963",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002037",
-            "hasLaterality": "Left",
-            "definition": "cerebellum white matter",
-            "label": "cerebellum white matter"
-        },
-        "Left-Cerebellum-Cortex": {
-            "url": "http://uri.interlex.org/ILX:0101946",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129",
-            "hasLaterality": "Left",
-            "definition": "cerebellar cortex gray matter",
-            "label": "cerebellar cortex"
-        },
-        "Left-Thalamus-Proper": {
-            "url": "http://uri.interlex.org/ILX:0111657",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897",
-            "hasLaterality": "Left",
-            "definition": "thalamus gray matter",
-            "label": "thalamus"
-        },
-        "Left-Caudate": {
-            "url": "http://uri.interlex.org/ILX:0101734",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873",
-            "hasLaterality": "Left",
-            "definition": "caudate nucleus gray matter",
-            "label": "caudate nucleus"
-        },
-        "Left-Putamen": {
-            "url": "http://uri.interlex.org/ILX:0109549",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874",
-            "hasLaterality": "Left",
-            "definition": "putamen gray matter",
-            "label": "putamen"
-        },
-        "Left-Pallidum": {
-            "url": "http://uri.interlex.org/ILX:0381379",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514",
-            "hasLaterality": "Left",
-            "definition": "pallidum gray matter",
-            "label": "pallidum"
-        },
-        "3rd-Ventricle": {
-            "url": "http://uri.interlex.org/ILX:0111707",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002286",
-            "hasLaterality": "None",
-            "definition": "third ventricle cerebral spinal fluid",
-            "label": "third ventricle"
-        },
-        "4th-Ventricle": {
-            "url": "http://uri.interlex.org/ILX:0104381",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002422",
-            "hasLaterality": "None",
-            "definition": "fourth ventricle cerebral spinal fluid",
-            "label": "fourth ventricle"
-        },
-        "Brain-Stem": {
-            "url": "http://uri.interlex.org/ILX:0101444",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002298",
-            "hasLaterality": "None",
-            "definition": "brainstem gray matter",
-            "label": "brainstem"
-        },
-        "Left-Hippocampus": {
-            "url": "http://uri.interlex.org/ILX:0105021",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954",
-            "hasLaterality": "Left",
-            "definition": "hippocampus gray matter",
-            "label": "hippocampus"
-        },
-        "Left-Amygdala": {
-            "url": "http://uri.interlex.org/ILX:0100573",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876",
-            "hasLaterality": "Left",
-            "definition": "amygdala gray matter",
-            "label": "amygdala"
-        },
-        "CSF": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "None",
-            "definition": "cerebrum cerebral spinal fluid",
-            "label": "cerebrum cerebral spinal fluid"
-        },
-        "Left-Accumbens-area": {
-            "url": "http://uri.interlex.org/ILX:0107736",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882",
-            "hasLaterality": "Left",
-            "definition": "nucleus accumbens gray matter",
-            "label": "nucleus accumbens"
-        },
-        "Left-VentralDC": {
-            "url": "http://uri.interlex.org/ILX:0112300",
-            "isAbout": "",
-            "hasLaterality": "Left",
-            "definition": "ventral diencephalon gray matter",
-            "label": "ventral diencephalon gray matter"
-        },
-        "Left-vessel": {
-            "url": "http://uri.interlex.org/ILX:0381378",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930",
-            "hasLaterality": "Left",
-            "definition": "perivascular space blood",
-            "label": "perivascular space"
-        },
-        "Left-choroid-plexus": {
-            "url": "http://uri.interlex.org/ILX:0102142",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886",
-            "hasLaterality": "Left",
-            "definition": "choroid plexus gray matter",
-            "label": "choroid plexus"
-        },
-        "Right-Lateral-Ventricle": {
-            "url": "http://uri.interlex.org/ILX:0106125",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002285",
-            "hasLaterality": "Right",
-            "definition": "lateral ventricle cerebral spinal fluid",
-            "label": "lateral ventricle"
-        },
-        "Right-Inf-Lat-Vent": {
-            "url": "http://uri.interlex.org/ILX:0105444",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006091",
-            "hasLaterality": "Right",
-            "definition": "inferior horn of the lateral ventricle cerebral spinal fluid",
-            "label": "inferior horn of the lateral ventricle"
-        },
-        "Right-Cerebellum-White-Matter": {
-            "url": "http://uri.interlex.org/ILX:0101963",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002037",
-            "hasLaterality": "Right",
-            "definition": "cerebellum white matter",
-            "label": "cerebellum white matter"
-        },
-        "Right-Cerebellum-Cortex": {
-            "url": "http://uri.interlex.org/ILX:0101946",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129",
-            "hasLaterality": "Right",
-            "definition": "cerebellar cortex gray matter",
-            "label": "cerebellar cortex"
-        },
-        "Right-Thalamus-Proper": {
-            "url": "http://uri.interlex.org/ILX:0111657",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897",
-            "hasLaterality": "Right",
-            "definition": "thalamus gray matter",
-            "label": "thalamus"
-        },
-        "Right-Caudate": {
-            "url": "http://uri.interlex.org/ILX:0101734",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873",
-            "hasLaterality": "Right",
-            "definition": "caudate nucleus gray matter",
-            "label": "caudate nucleus"
-        },
-        "Right-Putamen": {
-            "url": "http://uri.interlex.org/ILX:0109549",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874",
-            "hasLaterality": "Right",
-            "definition": "putamen gray matter",
-            "label": "putamen"
-        },
-        "Right-Pallidum": {
-            "url": "http://uri.interlex.org/ILX:0381379",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514",
-            "hasLaterality": "Right",
-            "definition": "pallidum gray matter",
-            "label": "pallidum"
-        },
-        "Right-Hippocampus": {
-            "url": "http://uri.interlex.org/ILX:0105021",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954",
-            "hasLaterality": "Right",
-            "definition": "hippocampus gray matter",
-            "label": "hippocampus"
-        },
-        "Right-Amygdala": {
-            "url": "http://uri.interlex.org/ILX:0100573",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876",
-            "hasLaterality": "Right",
-            "definition": "amygdala gray matter",
-            "label": "amygdala"
-        },
-        "Right-Accumbens-area": {
-            "url": "http://uri.interlex.org/ILX:0107736",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882",
-            "hasLaterality": "Right",
-            "definition": "nucleus accumbens gray matter",
-            "label": "nucleus accumbens"
-        },
-        "Right-VentralDC": {
-            "url": "http://uri.interlex.org/ILX:0112300",
-            "isAbout": "",
-            "hasLaterality": "Right",
-            "definition": "ventral diencephalon gray matter",
-            "label": "ventral diencephalon gray matter"
-        },
-        "Right-vessel": {
-            "url": "http://uri.interlex.org/ILX:0381378",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930",
-            "hasLaterality": "Right",
-            "definition": "perivascular space blood",
-            "label": "perivascular space"
-        },
-        "Right-choroid-plexus": {
-            "url": "http://uri.interlex.org/ILX:0102142",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886",
-            "hasLaterality": "Right",
-            "definition": "choroid plexus gray matter",
-            "label": "choroid plexus"
-        },
-        "5th-Ventricle": {
-            "url": "http://uri.interlex.org/ILX:0381380",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0009857",
-            "hasLaterality": "None",
-            "definition": "cavum septum pellucidum cerebral spinal fluid",
-            "label": "cavum septum pellucidum"
-        },
-        "WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "Left-WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Left",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Right",
-            "definition": "NA",
-            "label": ""
-        },
-        "non-WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "Left-non-WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Left",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-non-WM-hypointensities": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Right",
-            "definition": "NA",
-            "label": ""
-        },
-        "Optic-Chiasm": {
-            "url": "http://uri.interlex.org/ILX:0108069",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000959",
-            "hasLaterality": "None",
-            "definition": "optic chiasm white matter",
-            "label": "optic chiasm"
-        },
-        "CC_Posterior": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "CC_Mid_Posterior": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "CC_Central": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "CC_Mid_Anterior": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "CC_Anterior": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "lhCortexVol": {
-            "url": "http://uri.interlex.org/ILX:0101978",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
-            "hasLaterality": "Left",
-            "definition": "cerebral cortex gray matter",
-            "label": "cerebral cortex"
-        },
-        "rhCortexVol": {
-            "url": "http://uri.interlex.org/ILX:0101978",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
-            "hasLaterality": "Right",
-            "definition": "cerebral cortex gray matter",
-            "label": "cerebral cortex"
-        },
-        "CortexVol": {
-            "url": "http://uri.interlex.org/ILX:0101978",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
-            "hasLaterality": "None",
-            "definition": "cerebral cortex gray matter",
-            "label": "cerebral cortex"
-        },
-        "lhCorticalWhiteMatterVol": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Left",
-            "definition": "cerebrum white matter",
-            "label": "cerebrum white matter"
-        },
-        "rhCorticalWhiteMatterVol": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Right",
-            "definition": "cerebrum white matter",
-            "label": "cerebrum white matter"
-        },
-        "CorticalWhiteMatterVol": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "None",
-            "definition": "cerebrum white matter",
-            "label": "cerebrum white matter"
-        },
-        "SubCortGrayVol": {
-            "url": "http://uri.interlex.org/ILX:0101431",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955",
-            "hasLaterality": "None",
-            "definition": "part of brain gray matter",
-            "label": "sub-cortical gray matter"
-        },
-        "TotalGrayVol": {
-            "url": "http://uri.interlex.org/ILX:0101431",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955",
-            "hasLaterality": "None",
-            "definition": "brain gray matter",
-            "label": "brain gray matter"
-        },
-        "SupraTentorialVol": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "None",
-            "definition": "cerebrum tissue",
-            "label": "cerebrum tissue"
-        },
-        "IntraCranialVol": {
-            "url": "http://uri.interlex.org/ILX:0381382",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0003128",
-            "hasLaterality": "None",
-            "definition": "within cranium tissue",
-            "label": "intra-cranium"
-        },
-        "Left-Cerebral-Exterior": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Left",
-            "definition": "NA",
-            "label": ""
-        },
-        "Left-Cerebral-White-Matter": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Left",
-            "definition": "cerebrum white matter",
-            "label": "cerebrum white matter"
-        },
-        "Left-Cerebral-Cortex": {
-            "url": "http://uri.interlex.org/ILX:0101978",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
-            "hasLaterality": "Left",
-            "definition": "cerebral cortex gray matter",
-            "label": "cerebral cortex"
-        },
-        "Left-Cerebellum-Exterior": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "",
-            "definition": "NA",
-            "label": ""
-        },
-        "Left-Thalamus": {
-            "url": "http://uri.interlex.org/ILX:0111657",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897",
-            "hasLaterality": "Left",
-            "definition": "thalamus gray matter",
-            "label": "thalamus"
-        },
-        "Left-Insula": {
-            "url": "http://uri.interlex.org/ILX:0105519",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002022",
-            "hasLaterality": "Left",
-            "definition": "insula gray matter",
-            "label": "insula"
-        },
-        "Left-Operculum": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Left",
-            "definition": "NA",
-            "label": ""
-        },
-        "Left-Lesion": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Left",
-            "definition": "cerebrum lesion",
-            "label": "cerebrum lesion"
-        },
-        "Left-Substantia-Nigra": {
-            "url": "http://uri.interlex.org/ILX:0111214",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002038",
-            "hasLaterality": "Left",
-            "definition": "substantia nigra gray matter",
-            "label": "substantia nigra"
-        },
-        "Right-Cerebral-Exterior": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-Cerebral-White-Matter": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Right",
-            "definition": "cerebrum white matter",
-            "label": "cerebrum white matter"
-        },
-        "Right-Cerebral-Cortex": {
-            "url": "http://uri.interlex.org/ILX:0101978",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
-            "hasLaterality": "Right",
-            "definition": "cerebral cortex gray matter",
-            "label": "cerebral cortex"
-        },
-        "Right-Cerebellum-Exterior": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-Thalamus": {
-            "url": "http://uri.interlex.org/ILX:0111657",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897",
-            "hasLaterality": "Right",
-            "definition": "thalamus gray matter",
-            "label": "thalamus"
-        },
-        "Right-Insula": {
-            "url": "http://uri.interlex.org/ILX:0105519",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002022",
-            "hasLaterality": "Right",
-            "definition": "insula gray matter",
-            "label": "insula"
-        },
-        "Right-Operculum": {
-            "url": "",
-            "isAbout": "",
-            "hasLaterality": "Right",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-Lesion": {
-            "url": "http://uri.interlex.org/ILX:0102003",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869",
-            "hasLaterality": "Right",
-            "definition": "cerebrum lesion",
-            "label": "cerebrum lesion"
-        },
-        "Right-Substantia-Nigra": {
-            "url": "http://uri.interlex.org/ILX:0111214",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002038",
-            "hasLaterality": "Right",
-            "definition": "substantia nigra gray matter",
-            "label": "substantia nigra"
-        },
-        "Left-Amygdala-Anterior": {
-            "url": "http://uri.interlex.org/ILX:0100573",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876",
-            "hasLaterality": "Left",
-            "definition": "NA",
-            "label": ""
-        },
-        "Right-Amygdala-Anterior": {
-            "url": "http://uri.interlex.org/ILX:0100573",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876",
-            "hasLaterality": "Right",
-            "definition": "NA",
-            "label": ""
-        },
-        "Dura": {
-            "url": "http://uri.interlex.org/ILX:0103596",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002363",
-            "hasLaterality": "None",
-            "definition": "dura mater tissue",
-            "label": "dura mater tissue"
-        },
-        "Corpus-Callosum": {
-            "url": "http://uri.interlex.org/ILX:0102562",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336",
-            "hasLaterality": "None",
-            "definition": "corpus callosum white matter",
-            "label": "corpus callosum"
-        },
-        "Right-Vessel": {
-            "url": "http://uri.interlex.org/ILX:0381378",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0014930",
-            "hasLaterality": "Right",
-            "definition": "perivascular space blood",
-            "label": "perivascular space"
-        },
-        "Left-Basal-Forebrain": {
-            "url": "http://uri.interlex.org/ILX:0101101",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002743",
-            "hasLaterality": "Left",
-            "definition": "basal forebrain gray matter",
-            "label": "basal forebrain gray matter"
-        },
-        "Right-Basal-Forebrain": {
-            "url": "http://uri.interlex.org/ILX:0101101",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002743",
-            "hasLaterality": "Right",
-            "definition": "basal forebrain gray matter",
-            "label": "basal forebrain gray matter"
-        },
-        "cerebellar vermal lobules I-V": {
-            "url": "http://uri.interlex.org/ILX:0112407",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0004720",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "cerebellar vermal lobules VI-VII": {
-            "url": "http://uri.interlex.org/ILX:0112407",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0004720",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "cerebellar vermal lobules VIII-X": {
-            "url": "http://uri.interlex.org/ILX:0112407",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0004720",
-            "hasLaterality": "None",
-            "definition": "NA",
-            "label": ""
-        },
-        "bankssts": {
-            "url": "http://uri.interlex.org/base/ilx_0101088",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0028622",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe, lateral aspect.  The rostral boundary is the superior temporal gyrus and the caudal boundary the middle temporal gyrus.  Within the FreeSurfer definition, this reflects primarily the posterior aspect of the superior temporal sulcus (Christine Fennema-Notestine).",
-            "label": "Banks of superior temporal sulcus"
-        },
-        "caudalanteriorcingulate ": {
-            "url": "http://uri.interlex.org/base/ilx_0101709",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0028715",
-            "hasLaterality": "",
-            "definition": "Component of the cingulate cortex.  The rostral boundary was the first appearance of the genu of the corpus callosum whereas the caudal boundary was established as the first appearance of the mammillary bodies. The medial boundary was the medial aspect of the cortex. The supero-lateral boundary was the superior frontal gyrus whereas the infero-lateral boundary was the corpus callosum (Christine Fennema-Notestine).",
-            "label": "Caudal anterior cingulate cortex"
-        },
-        "caudalmiddlefrontal": {
-            "url": "http://uri.interlex.org/base/ilx_0101718",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006445",
-            "hasLaterality": "",
-            "definition": "Component of the middl frontal gyrus.  The rostral boundary of the middle frontal gyrus was the rostral extent of the middle frontal gyrus whereas the caudal boundary was the precentral gyrus. The medial and lateral boundaries were designated as the superior frontal sulcus and the inferior frontal sulcus respectively (Christine Fennema-Notestine).",
-            "label": "Caudal middle frontal gyrus"
-        },
-        "cuneus": {
-            "url": "http://uri.interlex.org/base/ilx_0102674",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006092",
-            "hasLaterality": "",
-            "definition": "Component of the occipital lobe.  The rostral boundary was the first coronal slice above the calcarine sulcus where the cuneus cortex becomes visible whereas the caudal boundary was the last slice where the calcarine sulcus was visualized. The medial boundary was the most medial portion of the occipital and parietal cortices. The superio-lateral boundary was the parieto-occipital fissure whereas the inferolateral boundary was the pericalcarine cortex (Christine Fennema-Notestine).",
-            "label": "Cuneus cortex "
-        },
-        "entorhinal": {
-            "url": "http://uri.interlex.org/base/ilx_0103859",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002728",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe on the mesial surface.  The rostral and caudal boundaries of the entorhinal cortex are the rostral end of the collateral sulcus and the caudal end of the amygdala respectively.  The medial boundary is the medial aspect of the temporal lobe and the lateral boundary is the collateral sulcus. (DK)",
-            "label": "Entorhinal cortex"
-        },
-        "fusiform": {
-            "url": "http://uri.interlex.org/base/ilx_0104491",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002766",
-            "hasLaterality": "",
-            "definition": "",
-            "label": "Fusiform gyrus"
-        },
-        "inferiorparietal": {
-            "url": "http://uri.interlex.org/base/ilx_0105452",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006088",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The inferior parietal cortex label includes the inferior parietal gyrus and the angular gyrus and lies inferior to the superior parietal gyrus. The rostral and caudal boundaries were the supramarginal gyrus and the parieto-occipital incisure respectively. The medial and lateral boundaries were the superior parietal gyrus and the middle temporal gyrus respectively (Christine Fennema-Notestine).",
-            "label": "Inferior parietal cortex"
-        },
-        "inferiortemporal": {
-            "url": "http://uri.interlex.org/base/ilx_0105463",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002751",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe, lateral aspect.  The rostral boundary is the rostral extent of the inferior temporal sulcus whereas the caudal boundary is designated as the temporo-occipital incisure on the cortical surface. The occipitotemporal sulcus is the medial boundary and the inferior temporal sulcus is the lateral boundary (Christine Fennema-Notestine).",
-            "label": "Inferior temporal gyrus"
-        },
-        "isthmuscingulate": {
-            "url": "http://uri.interlex.org/base/ilx_0728891",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0027061",
-            "hasLaterality": "",
-            "definition": "",
-            "label": "isthmus of cingulate cortex"
-        },
-        "lateraloccipital": {
-            "url": "http://uri.interlex.org/base/ilx_0106080",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006114",
-            "hasLaterality": "",
-            "definition": "Component of the occipital lobe.  The rostral and caudal boundaries of the lateral occipital cortex were the superior parietal gyrus and as the last visible portion of occipital cortex respectively. The medial and lateral boundaries were the cuneus/pericalcarine cortex and the inferior temporal/inferior parietal gyri respectively (Christine Fennema-Notestine).",
-            "label": "Lateral occipital cortex"
-        },
-        "lateralorbitofrontal": {
-            "url": "http://uri.interlex.org/base/ilx_0106083",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0022716",
-            "hasLaterality": "",
-            "definition": "Component of the orbtial frontal cortex The rostral boundary is the first slice where the lateral orbital gyrus is apparent with the frontomarginal sulcus whereas the caudal boundary is the disappearance of the lateral orbital gyrus. The medial and lateral boundaries are the midpoint of the olfactory sulcus and the lateral bank of the lateral orbital sulcus and/or the circular insular sulcus respectively (Christine Fennema-Notestine).",
-            "label": "Lateral orbital frontal cortex"
-        },
-        "lingual": {
-            "url": "http://uri.interlex.org/base/ilx_0106278",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002943",
-            "hasLaterality": "",
-            "definition": "Component of the occipital lobe.  The rostral boundary of the lingual gyrus was the posterior extent of the parahippocampal gyrus whereas the caudal boundary was the most posterior coronal slice where the gyrus could be visualized. The medial and lateral boundaries were the medial portion of the temporal and occipital cortices and the medial bank of the collateral sulcus respectively (Christine Fennema-Notestine).",
-            "label": "Lingual gyrus"
-        },
-        "medialorbitofrontal": {
-            "url": "http://uri.interlex.org/base/ilx_0106672",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0022352",
-            "hasLaterality": "",
-            "definition": "Component of the orbtial frontal cortex.  The rostral boundary is the first slice where the medial orbital gyrus became visible whereas the caudal boundary is the disappearance of the medial orbital gyrus/gyrus rectus. The medial and lateral boundaries are the cingulate cortex on the u2018inflatedu2019 surface and the medial bank of the superior frontal gyrus (or the cingulate gyrus when visible) respectively (Christine Fennema-Notestine).",
-            "label": "Medial orbital frontal cortex "
-        },
-        "middletemporal": {
-            "url": "http://uri.interlex.org/base/ilx_0106967",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002771",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe, lateral aspect.  The rostral boundary  is the rostral extent of the superior temporal sulcus whereas the caudal boundary is the temporo-occipital incisure on the cortical surface. The superior temporal sulcus is the medial boundary and the inferior temporal sulcus is the lateral boundary (Christine Fennema-Notestine).",
-            "label": "Middle temporal gyrus"
-        },
-        "parahippocampal": {
-            "url": "http://uri.interlex.org/base/ilx_0108441",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002973",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe on the mesial surface, posterior to the entorhinal cortex. The rostral and caudal boundaries are the posterior end of the netorhinal cortex and the caudal portion of the hippocampus, respectively.  The medial boudnary is designated as the medial aspect off the temporal lobe and the lateral boundary is the collateral sulcus (Christine Fennema-Notestine).",
-            "label": "Parahippocampal gyrus "
-        },
-        "paracentral": {
-            "url": "http://uri.interlex.org/base/ilx_0737027",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0007190",
-            "hasLaterality": "",
-            "definition": "",
-            "label": "paracentral gyrus"
-        },
-        "parsopercularis": {
-            "url": "http://uri.interlex.org/base/ilx_0108057",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002980",
-            "hasLaterality": "",
-            "definition": "Component of the inferior frontal gyrus.defined as the first gyrus from the precentral gyrus.",
-            "label": "Opercular part of inferior frontal gyrus"
-        },
-        "parsorbitalis": {
-            "url": "http://uri.interlex.org/base/ilx_0108113",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002624",
-            "hasLaterality": "",
-            "definition": "Component of the inferior frontal gyrus.defined as the first gyrus from the precentral gyrus.the remainder of the inferior frontal gyrus once the pars opercularis and triangularis have been defined (Christine Fennema-Notestine)., NeuroNames",
-            "label": "Orbital part of inferior frontal gyrus"
-        },
-        "parstriangularis": {
-            "url": "http://uri.interlex.org/base/ilx_0111954",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002629",
-            "hasLaterality": "",
-            "definition": "Component of the inferior frontal gyrus.defined as the second gyrus from the precentral gyrus (Christine Fennema-Notestine).",
-            "label": "Triangular part of inferior frontal gyrus"
-        },
-        "pericalcarine": {
-            "url": "http://uri.interlex.org/base/ilx_0108719",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0022534",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The rostral boundary of the pericalcarine cortex was the first appearance of the calcarine sulcus whereas the caudal boundary was the most posterior coronal slice where the calcarine sulcus was visualized. The medial and lateral boundaries were the medial portion of the temporal and occipital cortices and the inferomedial end of the calcarine sulcus respectively (Christine Fennema-Notestine).",
-            "label": "Pericalcarine cortex"
-        },
-        "postcentral": {
-            "url": "http://uri.interlex.org/base/ilx_0109070",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002581",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The appearance and disappearance of the central sulcus were the rostral and caudal boundaries of the postcentral gyrus respectively.  The medial and lateral boundaries were the lateral bank of the precentral gyrus and the lateral fissure and/or the medial bank of the superior parietal gyrus respectively (Christine Fennema-Notestine).",
-            "label": "Postcentral gyrus"
-        },
-        "posteriorcingulate": {
-            "url": "http://uri.interlex.org/base/ilx_0109087",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0022353",
-            "hasLaterality": "",
-            "definition": "Component of the cingulate cortex. The rostral and caudal extent were the caudal anterior and the isthmus divisions of the cingulate cortex respectively. The medial and lateral boundaries were the corpus callosum and as the superior frontal gyrus and/or paracentral lobule respectively (Christine Fennema-Notestine).",
-            "label": "Posterior cingulate cortex"
-        },
-        "precentral": {
-            "url": "http://uri.interlex.org/base/ilx_0109193",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002703",
-            "hasLaterality": "",
-            "definition": "Component of the frontal lobe.  The appearance and disappearance of the central sulcus is the rostral and caudal boundaries of the precentral gyrus respectively. The medial boundary is specific frontal gyri (superior, middle and inferior) whereas the lateral boundary is the medial bank of the central sulcus (Christine Fennema-Notestine).",
-            "label": "Precentral gyrus"
-        },
-        "precuneus": {
-            "url": "http://uri.interlex.org/base/ilx_0109199",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006093",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The rostral boundary was the posterior extent of the paracentral lobule whereas the caudal boundary was the lingual gyrus. The medial and lateral boundaries were the parieto-occipital fissure and the superior parietal gyrus respectively (Christine Fennema-Notestine).",
-            "label": "Precuneus cortex"
-        },
-        "rostralanteriorcingulate": {
-            "url": "http://uri.interlex.org/base/ilx_0110204",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0022438",
-            "hasLaterality": "",
-            "definition": "Component of the cingulate cortex.  The rostral boundary was the first appearance of the cingulate sulcus (inferior to the superior frontal sulcus) whereas the caudal boundary was the first appearance of the genu of the corpus callosum. The medial boundary was the medial aspect of the cortex. The supero-lateral boundary was the superior frontal gyrus whereas the infero-lateral boundary was defined as the medial division of the orbitofrontal gyrus (Christine Fennema-Notestine).",
-            "label": "Rostral anterior cingulate cortex"
-        },
-        "rostralmiddlefrontal": {
-            "url": "http://uri.interlex.org/base/ilx_0110215",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006446",
-            "hasLaterality": "",
-            "definition": "Component of the middl frontal gyrus  The rostral boundary is the first appearance of the superior frontal sulcus whereas the caudal boundary is the middle frontal gyrus. The medial and lateral boundaries are the superior frontal sulcus and the inferior frontal sulcus respectively (Christine Fennema-Notestine).",
-            "label": "Rostral middle frontal gyrus"
-        },
-        "superiorfrontal": {
-            "url": "http://uri.interlex.org/base/ilx_0111304",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002661",
-            "hasLaterality": "",
-            "definition": "Component of the frontal lobe, lateral aspect.  The rostral boundary is the first appearance of the superior frontal sulcus whereas the caudal boundary is the midpoint of the paracentral sulcus on the \\",
-            "label": "Superior frontal gyrus"
-        },
-        "superiorparietal": {
-            "url": "http://uri.interlex.org/base/ilx_0111317",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006094",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The rostral and caudal boundaries of the superior parietal cortex were the precentral gyrus and lateral occipital cortex respectively. The medial and lateral boundaries were the precuneus and/or cuneus cortex and the infererior parietal cortex respectively (Christine Fennema-Notestine).",
-            "label": "Superior parietal cortex"
-        },
-        "superiortemporal": {
-            "url": "http://uri.interlex.org/base/ilx_0111328",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002769",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe, lateral aspect.  The rostral boundary is the rostral extent of the ssuperior temporal sulcus.  The caudal boundary is the cauday portion of the superior temporal gyrus (posterior to becoming continuous with the supramarginal gyrus).  The medial boundary is the lateral fissure (and when present the supramarginal gyrus), and the lateral boundary is the superior temporal suclus (Christine Fennema-Notestine).",
-            "label": "Superior temporal gyrus"
-        },
-        "supramarginal": {
-            "url": "http://uri.interlex.org/base/ilx_0111355",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002688",
-            "hasLaterality": "",
-            "definition": "Component of the parietal lobe.  The first coronal slice between the superior temporal gyrus and the postcentral gyrus where the supramarginal gyrus appears was the rostral boundary whereas the slice where the supramarginal gyrus becomes continuous with the superior parietal gyrus was the caudal boundary. The medial and lateral boundaries were the lateral banks of the intraparietal sulcus and the medial banks of the lateral fissure and/or the superior temporal gyrus respectively (Christine Fennema-Notestine).",
-            "label": "Supramarginal gyrus"
-        },
-        "frontalpole": {
-            "url": "http://uri.interlex.org/base/ilx_0104455",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002795",
-            "hasLaterality": "",
-            "definition": "Component of the frontal lobe.  The rostral and caudal boundaries of the frontal pole are the superior frontal gyrus and the rostral division of the middle frontal gyrus respectively in human (Christine Fennama-Notestine).",
-            "label": "Frontal Pole"
-        },
-        "temporalpole": {
-            "url": "http://uri.interlex.org/base/ilx_0111595",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002576",
-            "hasLaterality": "",
-            "definition": "Anterior component of the temporal lobe (rostral boundary) extends caudally to the entorhinal cortex.  The medial and lateral boundaries are the medial aspect of the temporal lobe and the superior or inferior temporal sulci, respectively (Christine Fennema-Notestine).",
-            "label": "Temporal Pole"
-        },
-        "transversetemporal": {
-            "url": "http://uri.interlex.org/base/ilx_0111910",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0003939",
-            "hasLaterality": "",
-            "definition": "Component of the temporal lobe, lateral aspect.  The rostral boundary is the first appearance of the transverse temporal sulcus whereas the caudal boundary is the last slice where the transverse temporal cortex could be identified before its merger into the insular cortex. The lateral fissure and the superior temporal gyrus are the medial and lateral boundaries respectively (Christine Fennema-Notestine).",
-            "label": "Transverse Temporal Cortex"
-        },
-        "insula": {
-            "url": "http://uri.interlex.org/base/ilx_0105519",
-            "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002022",
-            "hasLaterality": "",
-            "definition": "Gray matter of the insular region of the neocortex. In gyrencephalic animals, it is part of the insular lobe and lies in the depths of the lateral fissure and covered by portions of the frontal, parietal and temporal lobes. It includes Brodmann areas 13-16.",
-            "label": "Insula (Insular Cortex)"
-        }
+  "Measures": {
+    "Area_mm2": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
     },
-    "Measures": {
-        "NVoxels": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0112568",
-            "datumType": "http://uri.interlex.org/base/ilx_0102597",
-            "hasUnit": "voxel"
-        },
-        "Volume_mm3": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0112559",
-            "datumType": "http://uri.interlex.org/base/ilx_0738276",
-            "hasUnit": "mm^3"
-        },
-        "normMean": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738264"
-        },
-        "normStdDev": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738265"
-        },
-        "normMin": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738266"
-        },
-        "normMax": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738267"
-        },
-        "normRange": {
-            "measureOf": "http://uri.interlex.org/base/ilx_0105536",
-            "datumType": "http://uri.interlex.org/base/ilx_0738268"
-        }
+    "BrainSegVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "BrainSegVol-to-eTIV": {
+      "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
+      "fsunit": "unitless",
+      "measureOf": "fs:BrainSegVol-to-eTIV"
+    },
+    "BrainSegVolNotVent": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "BrainSegVolNotVentSurf": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "CerebralWhiteMatterVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "CortexVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "CurvInd": {
+      "datumType": "http://purl.obolibrary.org/obo/NCIT_C25390",
+      "fsunit": "unitless",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "FoldInd": {
+      "datumType": "http://purl.obolibrary.org/obo/NCIT_C25390",
+      "fsunit": "unitless",
+      "measureOf": "fs:folding"
+    },
+    "GausCurv": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^-2",
+      "hasUnit": "mm^-2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "GrayVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "MaskVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "MaskVol-to-eTIV": {
+      "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
+      "fsunit": "unitless",
+      "measureOf": "fs:MaskVol-to-eTIV"
+    },
+    "Max": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738267",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "Mean": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "MeanCurv": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^-1",
+      "hasUnit": "mm^-1",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001591"
+    },
+    "MeanThickness": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "Min": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738266",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "NVertices": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "vertex",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "NVoxels": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "voxel",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "NumVert": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "vertex",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "PialSurfArea": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "Range": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738268",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "SNR": {
+      "datumType": "http://purl.obolibrary.org/obo/STATO_0000184",
+      "fsunit": "none",
+      "measureOf": "fs:unknown Intensity SNR (none)"
+    },
+    "StdDev": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738265",
+      "fsunit": "unknown",
+      "hasUnit": "fs:unknown",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "SubCortGrayVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SupraTentorialVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SupraTentorialVolNotVent": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SupraTentorialVolNotVentVox": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "SurfArea": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "SurfaceHoles": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "ThickAvg": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "ThickStd": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738265",
+      "fsunit": "mm",
+      "hasUnit": "mm",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "TotalGrayVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "VentricleChoroidVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "Volume_mm3": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "WhiteSurfArea": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^2",
+      "hasUnit": "mm^2",
+      "measureOf": "http://purl.obolibrary.org/obo/PATO_0001323"
+    },
+    "eTIV": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhCerebralWhiteMatterVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhCortexVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "lhSurfaceHoles": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "normMax": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738267",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normMean": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738264",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normMin": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738266",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normRange": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738268",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "normStdDev": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738265",
+      "fsunit": "MR",
+      "hasUnit": "fs:MR",
+      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+    },
+    "rhCerebralWhiteMatterVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "rhCortexVol": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "fsunit": "mm^3",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "rhSurfaceHoles": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "fsunit": "unitless",
+      "hasUnit": "fs:defect-hole",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
     }
+  },
+  "Structures": {
+    "3rd-Ventricle": {
+      "fskey": [
+        "3rd-Ventricle"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002286"
+    },
+    "4th-Ventricle": {
+      "fskey": [
+        "4th-Ventricle"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002422"
+    },
+    "5th-Ventricle": {
+      "fskey": [
+        "5th-Ventricle"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0009857"
+    },
+    "Accumbens-area": {
+      "fskey": [
+        "Left-Accumbens-area",
+        "Right-Accumbens-area"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882"
+    },
+    "Amygdala": {
+      "fskey": [
+        "Left-Amygdala",
+        "Right-Amygdala"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876"
+    },
+    "BA1_exvivo": {
+      "fskey": [
+        "BA1_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA2_exvivo": {
+      "fskey": [
+        "BA2_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA3a_exvivo": {
+      "fskey": [
+        "BA3a_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA3b_exvivo": {
+      "fskey": [
+        "BA3b_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA44_exvivo": {
+      "fskey": [
+        "BA44_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA45_exvivo": {
+      "fskey": [
+        "BA45_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA4a_exvivo": {
+      "fskey": [
+        "BA4a_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA4p_exvivo": {
+      "fskey": [
+        "BA4p_exvivo"
+      ],
+      "isAbout": null
+    },
+    "BA6_exvivo": {
+      "fskey": [
+        "BA6_exvivo"
+      ],
+      "isAbout": null
+    },
+    "Brain-Stem": {
+      "fskey": [
+        "Brain-Stem"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002298"
+    },
+    "BrainSeg": {
+      "fskey": [
+        "BrainSeg"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
+    },
+    "BrainSegNotVent": {
+      "fskey": [
+        "BrainSegNotVent"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
+    },
+    "BrainSegNotVentSurf": {
+      "fskey": [
+        "BrainSegNotVentSurf"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
+    },
+    "BrainSegVol-to-eTIV": {
+      "fskey": [
+        "BrainSegVol-to-eTIV"
+      ],
+      "isAbout": null
+    },
+    "CC_Anterior": {
+      "fskey": [
+        "CC_Anterior"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015599"
+    },
+    "CC_Central": {
+      "fskey": [
+        "CC_Central"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002336"
+    },
+    "CC_Mid_Anterior": {
+      "fskey": [
+        "CC_Mid_Anterior"
+      ],
+      "isAbout": "CUSTOM: Mid Anterior segment of corpus callosum"
+    },
+    "CC_Mid_Posterior": {
+      "fskey": [
+        "CC_Mid_Posterior"
+      ],
+      "isAbout": "CUSTOM: Mid posterior segment of corpus callosum"
+    },
+    "CC_Posterior": {
+      "fskey": [
+        "CC_Posterior"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0015708"
+    },
+    "CSF": {
+      "fskey": [
+        "CSF"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001359"
+    },
+    "Caudate": {
+      "fskey": [
+        "Left-Caudate",
+        "Right-Caudate"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873"
+    },
+    "Cerebellum-Cortex": {
+      "fskey": [
+        "Left-Cerebellum-Cortex",
+        "Right-Cerebellum-Cortex"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002129"
+    },
+    "Cerebellum-White-Matter": {
+      "fskey": [
+        "Left-Cerebellum-White-Matter",
+        "Right-Cerebellum-White-Matter"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002317"
+    },
+    "CerebralWhiteMatter": {
+      "fskey": [
+        "CerebralWhiteMatter",
+        "lhCerebralWhiteMatter",
+        "rhCerebralWhiteMatter"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002437"
+    },
+    "Cortex": {
+      "fskey": [
+        "Cortex",
+        "lhCortex",
+        "rhCortex"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
+    },
+    "EstimatedTotalIntraCranialVol": {
+      "fskey": [
+        "EstimatedTotalIntraCranialVol"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0013411"
+    },
+    "G&S_cingul-Ant": {
+      "fskey": [
+        "G&S_cingul-Ant"
+      ],
+      "isAbout": null
+    },
+    "G&S_cingul-Mid-Ant": {
+      "fskey": [
+        "G&S_cingul-Mid-Ant"
+      ],
+      "isAbout": null
+    },
+    "G&S_cingul-Mid-Post": {
+      "fskey": [
+        "G&S_cingul-Mid-Post"
+      ],
+      "isAbout": null
+    },
+    "G&S_frontomargin": {
+      "fskey": [
+        "G&S_frontomargin"
+      ],
+      "isAbout": null
+    },
+    "G&S_occipital_inf": {
+      "fskey": [
+        "G&S_occipital_inf"
+      ],
+      "isAbout": null
+    },
+    "G&S_paracentral": {
+      "fskey": [
+        "G&S_paracentral"
+      ],
+      "isAbout": null
+    },
+    "G&S_subcentral": {
+      "fskey": [
+        "G&S_subcentral"
+      ],
+      "isAbout": null
+    },
+    "G&S_transv_frontopol": {
+      "fskey": [
+        "G&S_transv_frontopol"
+      ],
+      "isAbout": null
+    },
+    "G_Ins_lg&S_cent_ins": {
+      "fskey": [
+        "G_Ins_lg&S_cent_ins"
+      ],
+      "isAbout": null
+    },
+    "G_cingul-Post-dorsal": {
+      "fskey": [
+        "G_cingul-Post-dorsal"
+      ],
+      "isAbout": null
+    },
+    "G_cingul-Post-ventral": {
+      "fskey": [
+        "G_cingul-Post-ventral"
+      ],
+      "isAbout": null
+    },
+    "G_cuneus": {
+      "fskey": [
+        "G_cuneus"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Opercular": {
+      "fskey": [
+        "G_front_inf-Opercular"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Orbital": {
+      "fskey": [
+        "G_front_inf-Orbital"
+      ],
+      "isAbout": null
+    },
+    "G_front_inf-Triangul": {
+      "fskey": [
+        "G_front_inf-Triangul"
+      ],
+      "isAbout": null
+    },
+    "G_front_middle": {
+      "fskey": [
+        "G_front_middle"
+      ],
+      "isAbout": null
+    },
+    "G_front_sup": {
+      "fskey": [
+        "G_front_sup"
+      ],
+      "isAbout": null
+    },
+    "G_insular_short": {
+      "fskey": [
+        "G_insular_short"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_lat-fusifor": {
+      "fskey": [
+        "G_oc-temp_lat-fusifor"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_med-Lingual": {
+      "fskey": [
+        "G_oc-temp_med-Lingual"
+      ],
+      "isAbout": null
+    },
+    "G_oc-temp_med-Parahip": {
+      "fskey": [
+        "G_oc-temp_med-Parahip"
+      ],
+      "isAbout": null
+    },
+    "G_occipital_middle": {
+      "fskey": [
+        "G_occipital_middle"
+      ],
+      "isAbout": null
+    },
+    "G_occipital_sup": {
+      "fskey": [
+        "G_occipital_sup"
+      ],
+      "isAbout": null
+    },
+    "G_orbital": {
+      "fskey": [
+        "G_orbital"
+      ],
+      "isAbout": null
+    },
+    "G_pariet_inf-Angular": {
+      "fskey": [
+        "G_pariet_inf-Angular"
+      ],
+      "isAbout": null
+    },
+    "G_pariet_inf-Supramar": {
+      "fskey": [
+        "G_pariet_inf-Supramar"
+      ],
+      "isAbout": null
+    },
+    "G_parietal_sup": {
+      "fskey": [
+        "G_parietal_sup"
+      ],
+      "isAbout": null
+    },
+    "G_postcentral": {
+      "fskey": [
+        "G_postcentral"
+      ],
+      "isAbout": null
+    },
+    "G_precentral": {
+      "fskey": [
+        "G_precentral"
+      ],
+      "isAbout": null
+    },
+    "G_precuneus": {
+      "fskey": [
+        "G_precuneus"
+      ],
+      "isAbout": null
+    },
+    "G_rectus": {
+      "fskey": [
+        "G_rectus"
+      ],
+      "isAbout": null
+    },
+    "G_subcallosal": {
+      "fskey": [
+        "G_subcallosal"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-G_T_transv": {
+      "fskey": [
+        "G_temp_sup-G_T_transv"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Lateral": {
+      "fskey": [
+        "G_temp_sup-Lateral"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Plan_polar": {
+      "fskey": [
+        "G_temp_sup-Plan_polar"
+      ],
+      "isAbout": null
+    },
+    "G_temp_sup-Plan_tempo": {
+      "fskey": [
+        "G_temp_sup-Plan_tempo"
+      ],
+      "isAbout": null
+    },
+    "G_temporal_inf": {
+      "fskey": [
+        "G_temporal_inf"
+      ],
+      "isAbout": null
+    },
+    "G_temporal_middle": {
+      "fskey": [
+        "G_temporal_middle"
+      ],
+      "isAbout": null
+    },
+    "Hippocampus": {
+      "fskey": [
+        "Left-Hippocampus",
+        "Right-Hippocampus"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954"
+    },
+    "Inf-Lat-Vent": {
+      "fskey": [
+        "Left-Inf-Lat-Vent",
+        "Right-Inf-Lat-Vent"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006091"
+    },
+    "Lat_Fis-ant-Horizont": {
+      "fskey": [
+        "Lat_Fis-ant-Horizont"
+      ],
+      "isAbout": null
+    },
+    "Lat_Fis-ant-Vertical": {
+      "fskey": [
+        "Lat_Fis-ant-Vertical"
+      ],
+      "isAbout": null
+    },
+    "Lat_Fis-post": {
+      "fskey": [
+        "Lat_Fis-post"
+      ],
+      "isAbout": null
+    },
+    "Lateral-Ventricle": {
+      "fskey": [
+        "Left-Lateral-Ventricle",
+        "Right-Lateral-Ventricle"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002285"
+    },
+    "MT_exvivo": {
+      "fskey": [
+        "MT_exvivo"
+      ],
+      "isAbout": null
+    },
+    "Mask": {
+      "fskey": [
+        "Mask"
+      ],
+      "isAbout": null
+    },
+    "MaskVol-to-eTIV": {
+      "fskey": [
+        "MaskVol-to-eTIV"
+      ],
+      "isAbout": null
+    },
+    "Optic-Chiasm": {
+      "fskey": [
+        "Optic-Chiasm"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000959"
+    },
+    "Pallidum": {
+      "fskey": [
+        "Left-Pallidum",
+        "Right-Pallidum"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514"
+    },
+    "Pole_occipital": {
+      "fskey": [
+        "Pole_occipital"
+      ],
+      "isAbout": null
+    },
+    "Pole_temporal": {
+      "fskey": [
+        "Pole_temporal"
+      ],
+      "isAbout": null
+    },
+    "Putamen": {
+      "fskey": [
+        "Left-Putamen",
+        "Right-Putamen"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874"
+    },
+    "S_calcarine": {
+      "fskey": [
+        "S_calcarine"
+      ],
+      "isAbout": null
+    },
+    "S_central": {
+      "fskey": [
+        "S_central"
+      ],
+      "isAbout": null
+    },
+    "S_cingul-Marginalis": {
+      "fskey": [
+        "S_cingul-Marginalis"
+      ],
+      "isAbout": null
+    },
+    "S_circular_insula_ant": {
+      "fskey": [
+        "S_circular_insula_ant"
+      ],
+      "isAbout": null
+    },
+    "S_circular_insula_inf": {
+      "fskey": [
+        "S_circular_insula_inf"
+      ],
+      "isAbout": null
+    },
+    "S_circular_insula_sup": {
+      "fskey": [
+        "S_circular_insula_sup"
+      ],
+      "isAbout": null
+    },
+    "S_collat_transv_ant": {
+      "fskey": [
+        "S_collat_transv_ant"
+      ],
+      "isAbout": null
+    },
+    "S_collat_transv_post": {
+      "fskey": [
+        "S_collat_transv_post"
+      ],
+      "isAbout": null
+    },
+    "S_front_inf": {
+      "fskey": [
+        "S_front_inf"
+      ],
+      "isAbout": null
+    },
+    "S_front_middle": {
+      "fskey": [
+        "S_front_middle"
+      ],
+      "isAbout": null
+    },
+    "S_front_sup": {
+      "fskey": [
+        "S_front_sup"
+      ],
+      "isAbout": null
+    },
+    "S_interm_prim-Jensen": {
+      "fskey": [
+        "S_interm_prim-Jensen"
+      ],
+      "isAbout": null
+    },
+    "S_intrapariet&P_trans": {
+      "fskey": [
+        "S_intrapariet&P_trans"
+      ],
+      "isAbout": null
+    },
+    "S_oc-temp_lat": {
+      "fskey": [
+        "S_oc-temp_lat"
+      ],
+      "isAbout": null
+    },
+    "S_oc-temp_med&Lingual": {
+      "fskey": [
+        "S_oc-temp_med&Lingual"
+      ],
+      "isAbout": null
+    },
+    "S_oc_middle&Lunatus": {
+      "fskey": [
+        "S_oc_middle&Lunatus"
+      ],
+      "isAbout": null
+    },
+    "S_oc_sup&transversal": {
+      "fskey": [
+        "S_oc_sup&transversal"
+      ],
+      "isAbout": null
+    },
+    "S_occipital_ant": {
+      "fskey": [
+        "S_occipital_ant"
+      ],
+      "isAbout": null
+    },
+    "S_orbital-H_Shaped": {
+      "fskey": [
+        "S_orbital-H_Shaped"
+      ],
+      "isAbout": null
+    },
+    "S_orbital_lateral": {
+      "fskey": [
+        "S_orbital_lateral"
+      ],
+      "isAbout": null
+    },
+    "S_orbital_med-olfact": {
+      "fskey": [
+        "S_orbital_med-olfact"
+      ],
+      "isAbout": null
+    },
+    "S_parieto_occipital": {
+      "fskey": [
+        "S_parieto_occipital"
+      ],
+      "isAbout": null
+    },
+    "S_pericallosal": {
+      "fskey": [
+        "S_pericallosal"
+      ],
+      "isAbout": null
+    },
+    "S_postcentral": {
+      "fskey": [
+        "S_postcentral"
+      ],
+      "isAbout": null
+    },
+    "S_precentral-inf-part": {
+      "fskey": [
+        "S_precentral-inf-part"
+      ],
+      "isAbout": null
+    },
+    "S_precentral-sup-part": {
+      "fskey": [
+        "S_precentral-sup-part"
+      ],
+      "isAbout": null
+    },
+    "S_suborbital": {
+      "fskey": [
+        "S_suborbital"
+      ],
+      "isAbout": null
+    },
+    "S_subparietal": {
+      "fskey": [
+        "S_subparietal"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_inf": {
+      "fskey": [
+        "S_temporal_inf"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_sup": {
+      "fskey": [
+        "S_temporal_sup"
+      ],
+      "isAbout": null
+    },
+    "S_temporal_transverse": {
+      "fskey": [
+        "S_temporal_transverse"
+      ],
+      "isAbout": null
+    },
+    "SubCortGray": {
+      "fskey": [
+        "SubCortGray"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000955"
+    },
+    "SupraTentorial": {
+      "fskey": [
+        "SupraTentorial"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001869"
+    },
+    "SupraTentorialNotVent": {
+      "fskey": [
+        "SupraTentorialNotVent"
+      ],
+      "isAbout": null
+    },
+    "SupraTentorialNotVentVox": {
+      "fskey": [
+        "SupraTentorialNotVentVox"
+      ],
+      "isAbout": null
+    },
+    "SurfaceHoles": {
+      "fskey": [
+        "SurfaceHoles",
+        "lhSurfaceHoles",
+        "rhSurfaceHoles"
+      ],
+      "isAbout": "<UNKNOWN - SurfaceHoles>"
+    },
+    "Thalamus-Proper": {
+      "fskey": [
+        "Left-Thalamus-Proper",
+        "Right-Thalamus-Proper"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897"
+    },
+    "TotalGray": {
+      "fskey": [
+        "TotalGray"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0005401"
+    },
+    "UnsegmentedWhiteMatter": {
+      "fskey": [
+        "Left-UnsegmentedWhiteMatter",
+        "Right-UnsegmentedWhiteMatter"
+      ],
+      "isAbout": null
+    },
+    "V1_exvivo": {
+      "fskey": [
+        "V1_exvivo"
+      ],
+      "isAbout": null
+    },
+    "V2_exvivo": {
+      "fskey": [
+        "V2_exvivo"
+      ],
+      "isAbout": null
+    },
+    "VentralDC": {
+      "fskey": [
+        "Left-VentralDC",
+        "Right-VentralDC"
+      ],
+      "isAbout": "CUSTOM: it was 'invented' by CMA. Something like: Ventral Diencephalon contains the hypothalamus, basal forebrain, and sublenticular extended amygdala (SLEA), as well as a large portion of ventral tegmentum. See also https://doi.org/10.1016/j.biopsych.2008.01.018"
+    },
+    "VentricleChoroidVol": {
+      "fskey": [
+        "VentricleChoroidVol"
+      ],
+      "isAbout": null
+    },
+    "WM-hypointensities": {
+      "fskey": [
+        "WM-hypointensities",
+        "Left-WM-hypointensities",
+        "Right-WM-hypointensities"
+      ],
+      "isAbout": "CUSTOM: Region of hypointense signal in the white matter"
+    },
+    "bankssts": {
+      "fskey": [
+        "bankssts"
+      ],
+      "isAbout": null
+    },
+    "caudalanteriorcingulate": {
+      "fskey": [
+        "caudalanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "caudalmiddlefrontal": {
+      "fskey": [
+        "caudalmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "choroid-plexus": {
+      "fskey": [
+        "Left-choroid-plexus",
+        "Right-choroid-plexus"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001886"
+    },
+    "cuneus": {
+      "fskey": [
+        "cuneus"
+      ],
+      "isAbout": null
+    },
+    "entoinal": {
+      "fskey": [
+        "entorhinal"
+      ],
+      "isAbout": null
+    },
+    "entoinal_exvivo": {
+      "fskey": [
+        "entorhinal_exvivo"
+      ],
+      "isAbout": null
+    },
+    "frontalpole": {
+      "fskey": [
+        "frontalpole"
+      ],
+      "isAbout": null
+    },
+    "fusiform": {
+      "fskey": [
+        "fusiform"
+      ],
+      "isAbout": null
+    },
+    "inferiorparietal": {
+      "fskey": [
+        "inferiorparietal"
+      ],
+      "isAbout": null
+    },
+    "inferiortemporal": {
+      "fskey": [
+        "inferiortemporal"
+      ],
+      "isAbout": null
+    },
+    "insula": {
+      "fskey": [
+        "insula"
+      ],
+      "isAbout": null
+    },
+    "isthmuscingulate": {
+      "fskey": [
+        "isthmuscingulate"
+      ],
+      "isAbout": null
+    },
+    "lateraloccipital": {
+      "fskey": [
+        "lateraloccipital"
+      ],
+      "isAbout": null
+    },
+    "lateralorbitofrontal": {
+      "fskey": [
+        "lateralorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "lingual": {
+      "fskey": [
+        "lingual"
+      ],
+      "isAbout": null
+    },
+    "medialorbitofrontal": {
+      "fskey": [
+        "medialorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "middletemporal": {
+      "fskey": [
+        "middletemporal"
+      ],
+      "isAbout": null
+    },
+    "non-WM-hypointensities": {
+      "fskey": [
+        "non-WM-hypointensities",
+        "Left-non-WM-hypointensities",
+        "Right-non-WM-hypointensities"
+      ],
+      "isAbout": "CUSTOM: Region of hypointense signal in regions other than white matter"
+    },
+    "paracentral": {
+      "fskey": [
+        "paracentral"
+      ],
+      "isAbout": null
+    },
+    "parahippocampal": {
+      "fskey": [
+        "parahippocampal"
+      ],
+      "isAbout": null
+    },
+    "parsopercularis": {
+      "fskey": [
+        "parsopercularis"
+      ],
+      "isAbout": null
+    },
+    "parsorbitalis": {
+      "fskey": [
+        "parsorbitalis"
+      ],
+      "isAbout": null
+    },
+    "parstriangularis": {
+      "fskey": [
+        "parstriangularis"
+      ],
+      "isAbout": null
+    },
+    "pericalcarine": {
+      "fskey": [
+        "pericalcarine"
+      ],
+      "isAbout": null
+    },
+    "periinal_exvivo": {
+      "fskey": [
+        "perirhinal_exvivo"
+      ],
+      "isAbout": null
+    },
+    "postcentral": {
+      "fskey": [
+        "postcentral"
+      ],
+      "isAbout": null
+    },
+    "posteriorcingulate": {
+      "fskey": [
+        "posteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "precentral": {
+      "fskey": [
+        "precentral"
+      ],
+      "isAbout": null
+    },
+    "precuneus": {
+      "fskey": [
+        "precuneus"
+      ],
+      "isAbout": null
+    },
+    "rostralanteriorcingulate": {
+      "fskey": [
+        "rostralanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "rostralmiddlefrontal": {
+      "fskey": [
+        "rostralmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "superiorfrontal": {
+      "fskey": [
+        "superiorfrontal"
+      ],
+      "isAbout": null
+    },
+    "superiorparietal": {
+      "fskey": [
+        "superiorparietal"
+      ],
+      "isAbout": null
+    },
+    "superiortemporal": {
+      "fskey": [
+        "superiortemporal"
+      ],
+      "isAbout": null
+    },
+    "supramarginal": {
+      "fskey": [
+        "supramarginal"
+      ],
+      "isAbout": null
+    },
+    "temporalpole": {
+      "fskey": [
+        "temporalpole"
+      ],
+      "isAbout": null
+    },
+    "transversetemporal": {
+      "fskey": [
+        "transversetemporal"
+      ],
+      "isAbout": null
+    },
+    "unknown": {
+      "fskey": [
+        "unknown"
+      ],
+      "isAbout": null
+    },
+    "vessel": {
+      "fskey": [
+        "Left-vessel",
+        "Right-vessel"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001981"
+    },
+    "wm-bankssts": {
+      "fskey": [
+        "wm-lh-bankssts",
+        "wm-rh-bankssts"
+      ],
+      "isAbout": null
+    },
+    "wm-caudalanteriorcingulate": {
+      "fskey": [
+        "wm-lh-caudalanteriorcingulate",
+        "wm-rh-caudalanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-caudalmiddlefrontal": {
+      "fskey": [
+        "wm-lh-caudalmiddlefrontal",
+        "wm-rh-caudalmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-cuneus": {
+      "fskey": [
+        "wm-lh-cuneus",
+        "wm-rh-cuneus"
+      ],
+      "isAbout": null
+    },
+    "wm-entoinal": {
+      "fskey": [
+        "wm-lh-entorhinal",
+        "wm-rh-entorhinal"
+      ],
+      "isAbout": null
+    },
+    "wm-frontalpole": {
+      "fskey": [
+        "wm-lh-frontalpole",
+        "wm-rh-frontalpole"
+      ],
+      "isAbout": null
+    },
+    "wm-fusiform": {
+      "fskey": [
+        "wm-lh-fusiform",
+        "wm-rh-fusiform"
+      ],
+      "isAbout": null
+    },
+    "wm-inferiorparietal": {
+      "fskey": [
+        "wm-lh-inferiorparietal",
+        "wm-rh-inferiorparietal"
+      ],
+      "isAbout": null
+    },
+    "wm-inferiortemporal": {
+      "fskey": [
+        "wm-lh-inferiortemporal",
+        "wm-rh-inferiortemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-insula": {
+      "fskey": [
+        "wm-lh-insula",
+        "wm-rh-insula"
+      ],
+      "isAbout": null
+    },
+    "wm-isthmuscingulate": {
+      "fskey": [
+        "wm-lh-isthmuscingulate",
+        "wm-rh-isthmuscingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-lateraloccipital": {
+      "fskey": [
+        "wm-lh-lateraloccipital",
+        "wm-rh-lateraloccipital"
+      ],
+      "isAbout": null
+    },
+    "wm-lateralorbitofrontal": {
+      "fskey": [
+        "wm-lh-lateralorbitofrontal",
+        "wm-rh-lateralorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-lingual": {
+      "fskey": [
+        "wm-lh-lingual",
+        "wm-rh-lingual"
+      ],
+      "isAbout": null
+    },
+    "wm-medialorbitofrontal": {
+      "fskey": [
+        "wm-lh-medialorbitofrontal",
+        "wm-rh-medialorbitofrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-middletemporal": {
+      "fskey": [
+        "wm-lh-middletemporal",
+        "wm-rh-middletemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-paracentral": {
+      "fskey": [
+        "wm-lh-paracentral",
+        "wm-rh-paracentral"
+      ],
+      "isAbout": null
+    },
+    "wm-parahippocampal": {
+      "fskey": [
+        "wm-lh-parahippocampal",
+        "wm-rh-parahippocampal"
+      ],
+      "isAbout": null
+    },
+    "wm-parsopercularis": {
+      "fskey": [
+        "wm-lh-parsopercularis",
+        "wm-rh-parsopercularis"
+      ],
+      "isAbout": null
+    },
+    "wm-parsorbitalis": {
+      "fskey": [
+        "wm-lh-parsorbitalis",
+        "wm-rh-parsorbitalis"
+      ],
+      "isAbout": null
+    },
+    "wm-parstriangularis": {
+      "fskey": [
+        "wm-lh-parstriangularis",
+        "wm-rh-parstriangularis"
+      ],
+      "isAbout": null
+    },
+    "wm-pericalcarine": {
+      "fskey": [
+        "wm-lh-pericalcarine",
+        "wm-rh-pericalcarine"
+      ],
+      "isAbout": null
+    },
+    "wm-postcentral": {
+      "fskey": [
+        "wm-lh-postcentral",
+        "wm-rh-postcentral"
+      ],
+      "isAbout": null
+    },
+    "wm-posteriorcingulate": {
+      "fskey": [
+        "wm-lh-posteriorcingulate",
+        "wm-rh-posteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-precentral": {
+      "fskey": [
+        "wm-lh-precentral",
+        "wm-rh-precentral"
+      ],
+      "isAbout": null
+    },
+    "wm-precuneus": {
+      "fskey": [
+        "wm-lh-precuneus",
+        "wm-rh-precuneus"
+      ],
+      "isAbout": null
+    },
+    "wm-rostralanteriorcingulate": {
+      "fskey": [
+        "wm-lh-rostralanteriorcingulate",
+        "wm-rh-rostralanteriorcingulate"
+      ],
+      "isAbout": null
+    },
+    "wm-rostralmiddlefrontal": {
+      "fskey": [
+        "wm-lh-rostralmiddlefrontal",
+        "wm-rh-rostralmiddlefrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiorfrontal": {
+      "fskey": [
+        "wm-lh-superiorfrontal",
+        "wm-rh-superiorfrontal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiorparietal": {
+      "fskey": [
+        "wm-lh-superiorparietal",
+        "wm-rh-superiorparietal"
+      ],
+      "isAbout": null
+    },
+    "wm-superiortemporal": {
+      "fskey": [
+        "wm-lh-superiortemporal",
+        "wm-rh-superiortemporal"
+      ],
+      "isAbout": null
+    },
+    "wm-supramarginal": {
+      "fskey": [
+        "wm-lh-supramarginal",
+        "wm-rh-supramarginal"
+      ],
+      "isAbout": null
+    },
+    "wm-temporalpole": {
+      "fskey": [
+        "wm-lh-temporalpole",
+        "wm-rh-temporalpole"
+      ],
+      "isAbout": null
+    },
+    "wm-transversetemporal": {
+      "fskey": [
+        "wm-lh-transversetemporal",
+        "wm-rh-transversetemporal"
+      ],
+      "isAbout": null
+    }
+  }
 }
