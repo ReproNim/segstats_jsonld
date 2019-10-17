@@ -1,0 +1,147 @@
+{
+  "count": 36,
+  "FSL(structure='Background', hemi=None, measure='NVoxels', unit='voxel')": {
+    "id": "000001",
+    "label": "Background (voxels)"
+  },
+  "FSL(structure='Background', hemi=None, measure='Volume', unit='mm^3')": {
+    "id": "000002",
+    "label": "Background (mm^3)"
+  },
+  "FSL(structure='Left-Accumbens-area', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000003",
+    "label": "Left-Accumbens-area (voxels)"
+  },
+  "FSL(structure='Left-Accumbens-area', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000004",
+    "label": "Left-Accumbens-area (mm^3)"
+  },
+  "FSL(structure='Left-Amygdala', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000005",
+    "label": "Left-Amygdala (voxels)"
+  },
+  "FSL(structure='Left-Amygdala', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000006",
+    "label": "Left-Amygdala (mm^3)"
+  },
+  "FSL(structure='Left-Caudate', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000007",
+    "label": "Left-Caudate (voxels)"
+  },
+  "FSL(structure='Left-Caudate', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000008",
+    "label": "Left-Caudate (mm^3)"
+  },
+  "FSL(structure='Left-Hippocampus', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000009",
+    "label": "Left-Hippocampus (voxels)"
+  },
+  "FSL(structure='Left-Hippocampus', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000010",
+    "label": "Left-Hippocampus (mm^3)"
+  },
+  "FSL(structure='Left-Pallidum', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000011",
+    "label": "Left-Pallidum (voxels)"
+  },
+  "FSL(structure='Left-Pallidum', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000012",
+    "label": "Left-Pallidum (mm^3)"
+  },
+  "FSL(structure='Left-Putamen', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000013",
+    "label": "Left-Putamen (voxels)"
+  },
+  "FSL(structure='Left-Putamen', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000014",
+    "label": "Left-Putamen (mm^3)"
+  },
+  "FSL(structure='Left-Thalamus-Proper', hemi='Left', measure='NVoxels', unit='voxel')": {
+    "id": "000015",
+    "label": "Left-Thalamus-Proper (voxels)"
+  },
+  "FSL(structure='Left-Thalamus-Proper', hemi='Left', measure='Volume', unit='mm^3')": {
+    "id": "000016",
+    "label": "Left-Thalamus-Proper (mm^3)"
+  },
+  "FSL(structure='Right-Accumbens-area', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000017",
+    "label": "Right-Accumbens-area (voxels)"
+  },
+  "FSL(structure='Right-Accumbens-area', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000018",
+    "label": "Right-Accumbens-area (mm^3)"
+  },
+  "FSL(structure='Right-Amygdala', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000019",
+    "label": "Right-Amygdala (voxels)"
+  },
+  "FSL(structure='Right-Amygdala', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000020",
+    "label": "Right-Amygdala (mm^3)"
+  },
+  "FSL(structure='Right-Caudate', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000021",
+    "label": "Right-Caudate (voxels)"
+  },
+  "FSL(structure='Right-Caudate', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000022",
+    "label": "Right-Caudate (mm^3)"
+  },
+  "FSL(structure='Right-Hippocampus', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000023",
+    "label": "Right-Hippocampus (voxels)"
+  },
+  "FSL(structure='Right-Hippocampus', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000024",
+    "label": "Right-Hippocampus (mm^3)"
+  },
+  "FSL(structure='Right-Pallidum', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000025",
+    "label": "Right-Pallidum (voxels)"
+  },
+  "FSL(structure='Right-Pallidum', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000026",
+    "label": "Right-Pallidum (mm^3)"
+  },
+  "FSL(structure='Right-Putamen', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000027",
+    "label": "Right-Putamen (voxels)"
+  },
+  "FSL(structure='Right-Putamen', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000028",
+    "label": "Right-Putamen (mm^3)"
+  },
+  "FSL(structure='Right-Thalamus-Proper', hemi='Right', measure='NVoxels', unit='voxel')": {
+    "id": "000029",
+    "label": "Right-Thalamus-Proper (voxels)"
+  },
+  "FSL(structure='Right-Thalamus-Proper', hemi='Right', measure='Volume', unit='mm^3')": {
+    "id": "000030",
+    "label": "Right-Thalamus-Proper (mm^3)"
+  },
+  "FSL(structure='csf', hemi=None, measure='NVoxels', unit='voxel')": {
+    "id": "000031",
+    "label": "csf (voxels)"
+  },
+  "FSL(structure='csf', hemi=None, measure='Volume', unit='mm^3')": {
+    "id": "000032",
+    "label": "csf (mm^3)"
+  },
+  "FSL(structure='gray', hemi=None, measure='NVoxels', unit='voxel')": {
+    "id": "000033",
+    "label": "gray (voxels)"
+  },
+  "FSL(structure='gray', hemi=None, measure='Volume', unit='mm^3')": {
+    "id": "000034",
+    "label": "gray (mm^3)"
+  },
+  "FSL(structure='white', hemi=None, measure='NVoxels', unit='voxel')": {
+    "id": "000035",
+    "label": "white (voxels)"
+  },
+  "FSL(structure='white', hemi=None, measure='Volume', unit='mm^3')": {
+    "id": "000036",
+    "label": "white (mm^3)"
+  }
+}

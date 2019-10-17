@@ -1,0 +1,89 @@
+{
+  "Measures": {
+    "NVoxels": {
+      "datumType": "http://uri.interlex.org/base/ilx_0102597",
+      "hasUnit": "voxel",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    },
+    "Volume": {
+      "datumType": "http://uri.interlex.org/base/ilx_0738276",
+      "hasUnit": "mm^3",
+      "measureOf": "http://uri.interlex.org/base/ilx_0112559"
+    }
+  },
+  "Structures": {
+    "Accumbens-area": {
+      "fslkey": [
+        "Left-Accumbens-area",
+        "Right-Accumbens-area"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001882"
+    },
+    "Amygdala": {
+      "fslkey": [
+        "Left-Amygdala",
+        "Right-Amygdala"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001876"
+    },
+    "Background": {
+      "fslkey": [
+        "Background"
+      ],
+      "isAbout": null
+    },
+    "Caudate": {
+      "fslkey": [
+        "Left-Caudate",
+        "Right-Caudate"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001873"
+    },
+    "Hippocampus": {
+      "fslkey": [
+        "Left-Hippocampus",
+        "Right-Hippocampus"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001954"
+    },
+    "Pallidum": {
+      "fslkey": [
+        "Left-Pallidum",
+        "Right-Pallidum"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0006514"
+    },
+    "Putamen": {
+      "fslkey": [
+        "Left-Putamen",
+        "Right-Putamen"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001874"
+    },
+    "Thalamus-Proper": {
+      "fslkey": [
+        "Left-Thalamus-Proper",
+        "Right-Thalamus-Proper"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001897"
+    },
+    "csf": {
+      "fslkey": [
+        "csf"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0001359"
+    },
+    "gray": {
+      "fslkey": [
+        "gray"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956"
+    },
+    "white": {
+      "fslkey": [
+        "white"
+      ],
+      "isAbout": "http://purl.obolibrary.org/obo/UBERON_0002437"
+    }
+  }
+}
