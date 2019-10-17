@@ -1,5 +1,7 @@
 from collections import namedtuple
 import json
+from pathlib import Path
+import os
 
 from .fsutils import hemiless
 
@@ -13,7 +15,7 @@ def read_fsl_stats(stat_file):
         data = json.load(fp)
 
     with open(cde_file, "r") as fp:
-        cde = json.load(fp)
+        fsl_cde = json.load(fp)
 
     measures = []
     for key, value in data.items():
@@ -24,12 +26,12 @@ def read_fsl_stats(stat_file):
             unit="voxel",
         )
         volkey = FSL(structure=key, hemi=voxkey.hemi, measure="Volume", unit="mm^3")
-        if voxkey in cde:
-            measures.append((f'{fs_cde[str(voxkey)]["id"]}', value[0]))
+        if str(voxkey) in fsl_cde:
+            measures.append((f'{fsl_cde[str(voxkey)]["id"]}', str(int(value[0]))))
         else:
             raise ValueError(f"Key {voxkey} not found in FSL data elements file")
-        if volkey in cde:
-            measures.append((f'{fs_cde[str(volkey)]["id"]}', value[1]))
+        if str(volkey) in fsl_cde:
+            measures.append((f'{fsl_cde[str(volkey)]["id"]}', str(value[1])))
         else:
             raise ValueError(f"Key {volkey} not found in FSL data elements file")
     return measures
@@ -133,15 +135,15 @@ def convert_stats_to_nidm(stats):
     from nidm.experiment.Core import getUUID
     import prov
 
-    fs = prov.model.Namespace("fs", str(Constants.FREESURFER))
+    fsl = prov.model.Namespace("fsl", str(Constants.FSL))
     niiri = prov.model.Namespace("niiri", str(Constants.NIIRI))
     nidm = prov.model.Namespace("nidm", "http://purl.org/nidash/nidm#")
     doc = prov.model.ProvDocument()
     e = doc.entity(identifier=niiri[getUUID()])
-    e.add_asserted_type(nidm["FSStatsCollection"])
+    e.add_asserted_type(nidm["FSLStatsCollection"])
     e.add_attributes(
         {
-            fs["fs_" + val[0]]: prov.model.Literal(
+            fsl["fsl_" + val[0]]: prov.model.Literal(
                 val[1],
                 datatype=prov.model.XSD["float"]
                 if "." in val[1]
