@@ -7,7 +7,6 @@ import json
 import os
 from collections import namedtuple
 from pathlib import Path
-import uuid
 import rdflib as rl
 from requests import get
 
@@ -15,14 +14,6 @@ FS = namedtuple("FS", ["structure", "hemi", "measure", "unit"])
 cde_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfer-cdes.json"
 map_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfermap.json"
 lut_file = Path(os.path.dirname(__file__)) / "mapping_data" / "FreeSurferColorLUT.txt"
-prefix = {
-    "@context": {
-        "@version": 1.1,
-        "repronim": "http://terms.repronim.org/",
-        "fs": "repronim:fs_",
-    }
-}
-fs_uri = "fs:"
 
 
 def get_segid(filename, structure):
@@ -232,6 +223,7 @@ def collate_fs_items(freesurfer_stats_dir, error_on_new_key=True):
 
 def get_normative_measure(measure):
     normative = {"measureOf": None, "datumType": None, "hasUnit": None}
+    fs_uri = "fs:"
     if "Ratio" in measure[1]:
         normative["measureOf"] = fs_uri + measure[0]
         normative["datumType"] = "http://purl.obolibrary.org/obo/STATO_0000184"
