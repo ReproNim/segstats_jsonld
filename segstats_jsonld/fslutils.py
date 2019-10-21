@@ -110,6 +110,8 @@ def create_cde_graph(restrict_to=None):
                 item = fsl[item.replace("fsl:", "")]
             if subkey in ["isAbout", "datumType", "measureOf"]:
                 g.add((fsl[fslid], nidm[subkey], rl.URIRef(item)))
+            elif subkey in ["hasUnit"]:
+                g.add((fsl[fslid], nidm[subkey], rl.Literal(item)))
             else:
                 if isinstance(item, rl.URIRef):
                     g.add((fsl[fslid], fsl[subkey], item))
