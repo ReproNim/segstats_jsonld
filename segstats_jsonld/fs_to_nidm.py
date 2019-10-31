@@ -104,7 +104,12 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False):
         nidmdoc.add((software_activity,fs[key],Literal(value)))
 
     #create software agent and associate with software activity
-    software_agent = niiri[getUUID()]
+    #search and see if a software agent exists for this software, if so use it, if not create it
+    for software_uid in nidmdoc.subjects(predicate=Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE,object=URIRef(Constants.FREESURFER) ):
+        software_agent = software_uid
+        break
+    else:
+        software_agent = niiri[getUUID()]
     nidmdoc.add((software_agent,RDF.type,Constants.PROV['Agent']))
     neuro_soft=Namespace(Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE)
     nidmdoc.add((software_agent,Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE,URIRef(Constants.FREESURFER)))
