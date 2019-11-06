@@ -239,16 +239,17 @@ def main():
                         help='Optional NIDM file to add segmentation data to.')
     args = parser.parse_args()
 
-    # if output_dir doesn't exist then create it
-    out_path = os.path.dirname(args.output_dir)
-    if not os.path.exists(out_path):
-        os.makedirs(out_path)
 
 
     # test whether user supplied stats file directly and if so they the subject id must also be supplied so we
     # know which subject the stats file is for
     if args.segfile and (args.subjid is None):
         parser.error("-f/--seg_file requires -subjid/--subjid to be set!")
+
+    # if output_dir doesn't exist then create it
+    out_path = os.path.dirname(args.output_dir)
+    if not os.path.exists(out_path):
+        os.makedirs(out_path)
 
     # WIP: trying to find a way to reference data in module. This does not feel kosher but works
     #datapath = mapping_data.__path__._path[0] + '/'
