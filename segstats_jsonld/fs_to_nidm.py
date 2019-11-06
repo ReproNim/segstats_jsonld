@@ -231,13 +231,19 @@ def main():
     parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='If a path to a URL or a stats file'
                             'is supplied via the -f/--seg_file parameters then -subjid parameter must be set with'
                             'the subject identifier to be used in the NIDM files')
-    parser.add_argument('-o', '--output_dir', dest='output_dir', type=str,
-                        help='Output directory', required=True)
+    parser.add_argument('-o', '--output', dest='output_dir', type=str,
+                        help='Output filename with full path', required=True)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
     parser.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,
                         help='Optional NIDM file to add segmentation data to.')
     args = parser.parse_args()
+
+    # if output_dir doesn't exist then create it
+    out_path = os.path.dirname(args.output_dir)
+    if not os.path.exists(out_path):
+        os.makedirs(out_path)
+
 
     # test whether user supplied stats file directly and if so they the subject id must also be supplied so we
     # know which subject the stats file is for
@@ -279,11 +285,13 @@ def main():
 
                     #serialize NIDM file
                     if args.jsonld is not False:
-                        with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
+                        # with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
+                        with open(join(args.output_dir),'w') as f:
                             print("Writing NIDM file...")
                             f.write(nidmdoc.serializeJSONLD())
                     else:
-                        with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
+                        # with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
+                        with open(join(args.output_dir),'w') as f:
                             print("Writing NIDM file...")
                             f.write(nidmdoc.serializeTurtle())
 
@@ -366,9 +374,11 @@ def main():
             #serialize NIDM file
             print("Writing NIDM file...")
             if args.jsonld is not False:
-                nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='jsonld')
+                # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='jsonld')
+                nidmdoc.serialize(destination=join(args.output_dir),format='jsonld')
             else:
-                nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='turtle')
+                # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='turtle')
+                nidmdoc.serialize(destination=join(args.output_dir),format='turtle')
 
 
             #nidmdoc.save_DotGraph(join(args.output_dir,output_filename + ".pdf"), format="pdf")
