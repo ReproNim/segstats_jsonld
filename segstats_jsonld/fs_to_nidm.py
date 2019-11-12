@@ -54,7 +54,7 @@ import json
 import urllib.request as ur
 from urllib.parse import urlparse
 
-from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode
+from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode, XSD
 from segstats_jsonld.fsutils import read_stats, convert_stats_to_nidm, create_cde_graph
 
 from io import StringIO
@@ -97,6 +97,8 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     nidmdoc.bind("ndar",ndar)
     dct = Namespace(Constants.DCT)
     nidmdoc.bind("dct",dct)
+    sio = Namespace(Constants.SIO)
+    nidmdoc.bind("sio",sio)
 
 
 
@@ -129,7 +131,7 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
         # create a new agent for subjid
         participant_agent = niiri[getUUID()]
         nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
-        nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid)))
+        nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid, datatype=XSD.string)))
 
     else:
         # query to get agent id for subjid
@@ -155,7 +157,7 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
                     print('Explicitly creating agent in existing NIDM file...')
                     participant_agent = niiri[getUUID()]
                     nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
-                    nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid)))
+                    nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid, datatype=XSD.string)))
                 else:
                     print('Not explicitly adding agent to NIDM file, no output written')
                     exit()
