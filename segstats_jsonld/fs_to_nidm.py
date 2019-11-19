@@ -123,9 +123,10 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     nidmdoc.add((software_agent,RDF.type,Constants.PROV["SoftwareAgent"]))
     association_bnode = BNode()
     nidmdoc.add((software_activity,Constants.PROV['qualifiedAssociation'],association_bnode))
-    nidmdoc.add((association_bnode,RDF.type,Constants.PROV['Agent']))
+    nidmdoc.add((association_bnode,RDF.type,Constants.PROV['Association']))
     nidmdoc.add((association_bnode,Constants.PROV['hadRole'],Constants.NIDM_NEUROIMAGING_ANALYSIS_SOFTWARE))
-    nidmdoc.add((association_bnode,Constants.PROV['wasAssociatedWith'],software_agent))
+    nidmdoc.add((association_bnode,Constants.PROV['agent'],software_agent))
+
 
     if not add_to_nidm:
         # create a new agent for subjid
@@ -169,9 +170,9 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     #create a blank node and qualified association with prov:Agent for participant
     association_bnode = BNode()
     nidmdoc.add((software_activity,Constants.PROV['qualifiedAssociation'],association_bnode))
-    nidmdoc.add((association_bnode,RDF.type,Constants.PROV['Agent']))
+    nidmdoc.add((association_bnode,RDF.type,Constants.PROV['Association']))
     nidmdoc.add((association_bnode,Constants.PROV['hadRole'],Constants.SIO["Subject"]))
-    nidmdoc.add((association_bnode,Constants.PROV['wasAssociatedWith'],participant_agent))
+    nidmdoc.add((association_bnode,Constants.PROV['agent'],participant_agent))
 
     # add association between FSStatsCollection and computation activity
     nidmdoc.add((URIRef(fs_stats_entity_id.uri),Constants.PROV['wasGeneratedBy'],software_activity))
