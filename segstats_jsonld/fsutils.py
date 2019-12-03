@@ -490,6 +490,10 @@ def create_cde_graph(restrict_to=None):
     g.bind("fs", fs)
     g.bind("nidm", nidm)
 
+    # added by DBK to create subclass relationship
+    g.add((fs["DataElement"], rl.RDFS['subClassOf'], nidm['DataElement']))
+
+
     for key, value in fs_cde.items():
         if key == "count":
             continue
@@ -509,6 +513,9 @@ def create_cde_graph(restrict_to=None):
                 g.add((fs[fsid], nidm[subkey], rl.URIRef(item)))
             elif subkey in ["hasUnit"]:
                 g.add((fs[fsid], nidm[subkey], rl.Literal(item)))
+            # added by DBK to use rdfs:label
+            elif subkey in ["label"]:
+                g.add((fs[fsid], rl.RDFS['label'], rl.Literal(item)))
             else:
                 if isinstance(item, rl.URIRef):
                     g.add((fs[fsid], fs[subkey], item))
