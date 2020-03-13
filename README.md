@@ -30,8 +30,40 @@ This project will need expertise in programming, structural neuroimaging, and an
 
 
 ## Installation
-Currently, ``segstats_jsonld`` is available from test PyPi with the following command:
 
 ```
-pip install -i https://test.pypi.org/simple/ segstats-jsonld
+$ conda create -n segstats_jsonld python=3
+$ source activate segstats_jsonld
+$ cd segstats_jsonld
+$ pip install -e .
+```
+
+## Usage
+
+```
+$ segstats2nidm 
+
+This program will load in a aseg.stats file from Freesurfer
+                                        , augment the Freesurfer anatomical region designations with common data element
+                                        anatomical designations, and save the statistics + region designations out as
+                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s SUBJECT_DIR, --subject_dir SUBJECT_DIR
+                        Path to Freesurfer subject directory
+  -f SEGFILE, --seg_file SEGFILE
+                        Path or URL to a specific Freesurferstats file. Note, currently supported is aseg.stats, lh/rh.aparc.stats
+  -subjid SUBJID, --subjid SUBJID
+                        If a path to a URL or a stats fileis supplied via the -f/--seg_file parameters then -subjid parameter must be set withthe subject identifier to be used in the NIDM files
+  -o OUTPUT_DIR, --output OUTPUT_DIR
+                        Output filename with full path
+  -j, --jsonld          If flag set then NIDM file will be written as JSONLD instead of TURTLE
+  -add_de, --add_de     If flag set then data element data dictionary will be added to nidm file else it will written to aseparate file as fsl_cde.ttl in the output directory (or same directory as nidm file
+                        if -n paramemteris used.
+  -n NIDM_FILE, --nidm NIDM_FILE
+                        Optional NIDM file to add segmentation data to.
+  -forcenidm, --forcenidm
+                        If adding to NIDM file this parameter forces the data to be added even if the participantdoesnt currently exist in the NIDM file.
+
 ```
