@@ -52,6 +52,7 @@ import urllib.request as ur
 from urllib.parse import urlparse
 
 from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode, XSD
+from rdflib.serializer import Serializer
 from segstats_jsonld.fsutils import read_stats, convert_stats_to_nidm, create_cde_graph
 
 from io import StringIO
@@ -96,7 +97,8 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     nidmdoc.bind("dct",dct)
     sio = Namespace(Constants.SIO)
     nidmdoc.bind("sio",sio)
-
+    nidm = Namespace(Constants.NIDM)
+    nidmdoc.bind("nidm",nidm)
 
 
     software_activity = niiri[getUUID()]
@@ -310,7 +312,7 @@ def main():
         freesurfer_version = read_buildstamp(args.subject_dir)
         # files=['aseg.stats']
         # get subject id from args.subject_dir
-        subjid = os.path.dirname(args.subject_dir)
+        subjid = os.path.basename(args.subject_dir)
         for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
             if basename(stats_file) in supported_files:
                 #read in stats file
@@ -327,7 +329,7 @@ def main():
 
                     # convert nidm stats graph to rdflib
                     g2 = Graph()
-                    g2.parse(source=StringIO(doc.serializeTurtle()),format='turtle')
+                    g2.parse(source=StringIO(doc.serialize(format='rdf', rdf_format='ttl')),format='ttl')
 
                     if args.add_de is not None:
                         nidmdoc = g+g2
@@ -340,14 +342,14 @@ def main():
                     #serialize NIDM file
                     if args.jsonld is not False:
                         # with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.json'),'w') as f:
-                        with open(join(args.output_dir),'w') as f:
-                            print("Writing NIDM file...")
-                            f.write(nidmdoc.serializeJSONLD())
+                        #with open(join(args.output_dir,splitext(basename(stats_file))[0]+'_nidm.json'),'w') as f:
+                        print("Writing NIDM file...")
+                        nidmdoc.serialize(join(args.output_dir,splitext(basename(stats_file))[0]+'_nidm.jsonld'),format='json-ld',indent=4)
                     else:
                         # with open(join(args.output_dir,splitext(basename(stats_file))[0]+'.ttl'),'w') as f:
-                        with open(join(args.output_dir),'w') as f:
-                            print("Writing NIDM file...")
-                            f.write(nidmdoc.serializeTurtle())
+                        # with open(join(args.output_dir,splitext(basename(stats_file))[0]+'_nidm.ttl'),'w') as f:
+                        print("Writing NIDM file...")
+                        nidmdoc.serialize(join(args.output_dir,splitext(basename(stats_file))[0]+'_nidm.ttl'),format='turtle')
 
                     # added to support separate cde serialization
                     if args.add_de is None:
@@ -437,7 +439,7 @@ def main():
             print("Writing NIDM file...")
             if args.jsonld is not False:
                 # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='jsonld')
-                nidmdoc.serialize(destination=join(args.output_dir),format='jsonld')
+                nidmdoc.serialize(destination=join(args.output_dir),format='json-ld', indent=4)
             else:
                 # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='turtle')
                 nidmdoc.serialize(destination=join(args.output_dir),format='turtle')
