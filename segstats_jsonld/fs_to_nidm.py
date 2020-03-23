@@ -203,6 +203,21 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     # add association between FSStatsCollection and computation activity
     nidmdoc.add((URIRef(fs_stats_entity_id.uri),Constants.PROV['wasGeneratedBy'],software_activity))
 
+    # get project uuid from NIDM doc and make association with software_activity
+    query = """
+                        prefix nidm: <http://purl.org/nidash/nidm#>
+                        PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+                        select distinct ?project
+                        where {
+
+                            ?project rdf:type nidm:Project .
+
+                        }"""
+
+    qres = nidmdoc.query(query)
+    for row in qres:
+        nidmdoc.add((software_activity, Constants.DCT["isPartOf"], row['project']))
 
 
 def read_buildstamp(subdir):
