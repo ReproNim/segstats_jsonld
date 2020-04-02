@@ -180,12 +180,12 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
                             print('Found subject ID after stripping zeros: %s in NIDM file (agent: %s)' %(subjid.lstrip('0'),row[0]))
                             participant_agent = row[0]
                 #######################################################################################
-                if (forceagent is not False) and (qres2==0):
+                if (forceagent is not False) and (len(qres2)==0):
                     print('Explicitly creating agent in existing NIDM file...')
                     participant_agent = niiri[getUUID()]
                     nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
                     nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid, datatype=XSD.string)))
-                elif (forceagent is False) and (qres==0) and (qres2==0):
+                elif (forceagent is False) and (len(qres)==0) and (len(qres2)==0):
                     print('Not explicitly adding agent to NIDM file, no output written')
                     exit()
             else:
@@ -372,6 +372,38 @@ def main():
                         g.serialize(destination=join(dirname(args.output_dir),"fs_cde.ttl"),format='turtle')
 
                     # doc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
+                # we adding these data to an existing NIDM file
+                else:
+                    #read in NIDM file with rdflib
+                    g1 = Graph()
+                    g1.parse(args.nidm_file,format=util.guess_format(args.nidm_file))
+
+                    # convert nidm stats graph to rdflib
+                    g2 = Graph()
+                    g2.parse(source=StringIO(doc.serialize(format='rdf',rdf_format='turtle')),format='turtle')
+
+                    if args.add_de is not None:
+                        print("Combining graphs...")
+                        nidmdoc = g + g1 + g2
+                    else:
+                        nidmdoc = g1 + g2
+
+                    if args.forcenidm is not False:
+                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True, forceagent=True)
+                    else:
+                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True)
+
+
+                    #serialize NIDM file
+                    print("Writing Augmented NIDM file...")
+                    if args.jsonld is not False:
+                        nidmdoc.serialize(destination=args.nidm_file + '.json',format='jsonld')
+                    else:
+                        nidmdoc.serialize(destination=args.nidm_file,format='turtle')
+
+                    if args.add_de is None:
+                        # serialize cde graph
+                        g.serialize(destination=join(dirname(args.output_dir),"fs_cde.ttl"),format='turtle')
 
     # else if the user didn't set subject_dir on command line then they must have set a segmentation file directly
     elif args.segfile is not None:
