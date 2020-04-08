@@ -42,7 +42,7 @@ setup(
     url="https://github.com/dbkeator/segstats_jsonld",
     packages=PACKAGES,
     install_requires=[
-        "nidm",
+        "pynidm",
         "pandas",
         "prov",
         "xlrd",
