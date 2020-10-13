@@ -1,4 +1,4 @@
--e git+https://github.com/incf-nidash/PyNIDM.git#egg=PyNIDM
+pynidm
 pandas
 prov
 xlrd
