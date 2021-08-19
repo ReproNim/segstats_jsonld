@@ -34,6 +34,7 @@ This project will need expertise in programming, structural neuroimaging, and an
 ```
 $ conda create -n segstats_jsonld python=3
 $ source activate segstats_jsonld
+$ git clone https://github.com/ReproNim/segstats_jsonld.git
 $ cd segstats_jsonld
 $ pip install -e .
 ```
