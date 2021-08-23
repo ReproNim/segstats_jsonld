@@ -45,15 +45,19 @@ import os
 from os.path import join,basename,splitext,isfile,dirname
 from socket import getfqdn
 import glob
+import pandas as pd
 
 import prov.model as prov
 import json
 import urllib.request as ur
 from urllib.parse import urlparse
+from rapidfuzz import fuzz
+
 
 from rdflib import Graph, RDF, URIRef, util, term,Namespace,Literal,BNode, XSD
 from rdflib.serializer import Serializer
-from segstats_jsonld.fsutils import read_stats, convert_stats_to_nidm, create_cde_graph
+from segstats_jsonld.fsutils import read_stats, convert_stats_to_nidm, convert_csv_stats_to_nidm,\
+    create_cde_graph
 
 from io import StringIO
 
@@ -61,6 +65,240 @@ import tempfile
 
 
 from segstats_jsonld import mapping_data
+
+FREESURFER_CDE = \
+    'https://raw.githubusercontent.com/ReproNim/segstats_jsonld/master/segstats_jsonld/mapping_data/fs_cde.ttl'
+
+MEASURE_OF_KEY = {
+    "http://purl.obolibrary.org/obo/PATO_0001591":"curvature",
+    "http://purl.obolibrary.org/obo/PATO_0001323":"area",
+    "http://uri.interlex.org/base/ilx_0111689":"thickness",
+    "http://uri.interlex.org/base/ilx_0738276":"scalar",
+    "http://uri.interlex.org/base/ilx_0112559":"volume",
+    "https://surfer.nmr.mgh.harvard.edu/folding":"folding",
+    "https://surfer.nmr.mgh.harvard.edu/BrainSegVol-to-eTIV":"BrainSegVol-to-eTIV",
+    "https://surfer.nmr.mgh.harvard.edu/MaskVol-to-eTIV":"MaskVol-to-eTIV"
+}
+
+# minimum match score for fuzzy matching NIDM terms
+MIN_MATCH_SCORE = 30
+
+def get_fs_cdes():
+    '''
+    This function will load the standard FS CDEs for each region/measure located at:
+    https://raw.githubusercontent.com/ReproNim/segstats_jsonld/master/segstats_jsonld/mapping_data/fs_cde.ttl
+    :return: dataframe of nidm:measureOf entries and freesurfer CDE graph
+    '''
+
+    fs_graph = Graph()
+
+    try:
+        fs_graph.parse(location=FREESURFER_CDE, format="turtle")
+    except Exception:
+        logging.info("Error opening %s FS CDE file..continuing" % FREESURFER_CDE)
+        exit
+
+
+    # query for uuid, label, datumtype, measureOf
+    query = '''
+        prefix fs: <https://surfer.nmr.mgh.harvard.edu/>
+        prefix nidm: <http://purl.org/nidash/nidm#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        select distinct ?uuid ?measure ?structure ?label
+        where {
+  
+        ?uuid a fs:DataElement ;
+            nidm:measureOf ?measure ;
+            rdfs:label ?label ;
+            fs:structure ?structure .
+        } order by ?uuid '''
+
+    measureOf_query = '''
+    
+        prefix fs: <https://surfer.nmr.mgh.harvard.edu/>
+        prefix nidm: <http://purl.org/nidash/nidm#>
+        prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        select distinct ?measure
+        where {
+  
+        ?uuid a fs:DataElement ;
+            nidm:measureOf ?measure .
+        }
+    
+    
+    '''
+    # list to store results
+    measureOf_results=[]
+    # run measureOf query
+    qres = fs_graph.query(measureOf_query)
+    # get bound variable names from query
+    columns = [str(var) for var in qres.vars]
+
+    # append result as row to result list
+    for row in qres:
+        measureOf_results.append(list(row))
+
+    # convert results list to Pandas DataFrame and return
+    measureOf_df = pd.DataFrame(measureOf_results, columns=columns)
+
+    return fs_graph, measureOf_df
+
+def map_csv_variables_to_freesurfer_cdes(df):
+    '''
+    This function will cycle through the column names in the dataframe df and ask the user to match them to
+    one of the freesufer CDEs
+    :param df: CSV file dataframe
+    :param measureOf_df: freesurfer measuresOf
+    :param fs_graph: RDFLIB graph of freesurfer CDEs
+    :return:
+    '''
+    
+    # step 1: load freesurfer CDEs graph and get dataframe of selected properties
+    fs_graph,measureOf_df = get_fs_cdes()
+
+    # step 2: ask which column has subject ID
+    option = 1
+    for column in df.columns:
+        print("%d: %s" % (option, column))
+        option = option + 1
+    selection = input("Please select the subject ID field from the list above: ")
+    # Make sure user selected one of the options.  If not present user with selection input again
+    while (not selection.isdigit()) or (int(selection) > int(option)):
+        # Wait for user input
+        selection = input("Please select the subject ID field from the list above: \t" % option)
+    id_field = df.columns[int(selection) - 1]
+
+    # step 3: ask the user whether all the data in this file comes from a single measurement type
+    # such as all volumes or all thicknesses.  If so, we don't have to ask about each one
+    option = 1
+    print()
+    for key, value in MEASURE_OF_KEY.items():
+        print("%d: %s" % (option, value))
+        option = option + 1
+    print("%d: mixed measurement types" %option)
+
+    selection = input("Select which measurement type the variables in your CSV file refer to or"
+                      " select %d for mixed types: \t" %option)
+
+    # Make sure user selected one of the options.  If not present user with selection input again
+    while (not selection.isdigit()) or (int(selection) > int(option)):
+        # Wait for user input
+        selection = input("Please select an option (1:%d) from above: \t" % option)
+
+    # store type of measurement this is
+    if selection == option:
+        measurement_type = "mixed"
+    else:
+        measurement_type = list(MEASURE_OF_KEY)[int(selection)-1]
+
+    # step 4: cycle through remaining variables if not id_field and ask what region this measurement is for
+    # if user selected a mixed type then we have to ask for the measurement type then the freesurfer region
+    # otherwise we can just query for the regions x measurement type
+
+    if measurement_type != "mixed":
+        # query for rdfs:label for measureOf == measurement_type
+        query = '''
+            prefix fs: <https://surfer.nmr.mgh.harvard.edu/>
+            prefix nidm: <http://purl.org/nidash/nidm#>
+            prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+            select distinct ?uuid ?label
+            where {
+  
+                ?uuid a fs:DataElement ;
+                    nidm:measureOf <%s> ;
+                    nidm:datumType <http://uri.interlex.org/base/ilx_0738276> ;
+                    rdfs:label ?label .
+            } order by ?label
+        
+        ''' % (measurement_type)
+
+        # run query
+        qres = fs_graph.query(query)
+
+        # dictionary to store freesurfer labels and UUIDs for measurement type
+        freesurfer_region_labels = {}
+        # append result as row to result list
+        for row in qres:
+            freesurfer_region_labels[str(row[1]).lower()] = row[0]
+
+    # WIP: NEED TO ADD ADDITIONAL CODE WHEN TYPES ARE MIXED IN CSV FILE
+
+
+    # dictionary storing freesurfer region UUID to CSV file variable mappings
+    variable_to_freesurfer_cde = {}
+
+    # loop through variables in CSV
+    for column in df.columns:
+        if column == id_field:
+            continue
+        else:
+            search_term = column
+        # now present regions to use based on caseless fuzzy match of labels to variable
+        go_loop = True
+        while go_loop:
+            option = 1
+            print()
+            print("Freesurfer Measure Association")
+            print("Query String: %s " % search_term)
+
+            # look for fuzzy matching freesurfer label
+            match_scores = {}
+            for key, value in freesurfer_region_labels.items():
+                match_scores[key] = {}
+                match_scores[key]['score'] = fuzz.token_sort_ratio(search_term.lower(), key)
+                match_scores[key]['uuid'] = value
+
+
+            options = {}
+            # present matches to user and give option to re-query
+            for key, subdict in match_scores.items():
+                if match_scores[key]['score'] > MIN_MATCH_SCORE:
+                    print("%d: Label: %s " % (option, key))
+                    options[str(option)] = key
+                    option = option + 1
+
+            # Add option to change query string
+            print("%d: Change query string from: \"%s\"" % (option, search_term))
+            # Wait for user input
+            selection = input("Please select an option (1:%d) from above: \t" % option)
+
+            # Make sure user selected one of the options.  If not present user with selection input again
+            while (not selection.isdigit()) or (int(selection) > int(option)):
+                # Wait for user input
+                selection = input("Please select an option (1:%d) from above: \t" % option)
+            # check if selection is to re-run query with new search term
+            if int(selection) == (option):
+                # ask user for new search string
+                search_term = input("Please input new search string for CSV column: %s \t:" % column)
+                print("---------------------------------------------------------------------------------------")
+            else:
+                # user selected a freesurfer term for this region
+                # store FS CDE UUID and CSV file variable mapping
+                variable_to_freesurfer_cde[column] = match_scores[options[selection]]['uuid']
+                print("\nUser selection: %s, Freesurfer CDE UUID: %s" %(options[selection],
+                                match_scores[options[selection]]['uuid']))
+                go_loop = False
+
+    # now ask user to supply some provenance information
+    provenance={}
+    print("\n Now you will be asked some questions intended to capture some provenance about the freesufer"
+          "data you are storing in NIDM.  Ideally you should run this tool using the Freesurfer subject's "
+          "directory or the aparc+aseg.mgz file.  Then provenance would be captures automatically for you.\n\n")
+    provenance['description'] = input("Please input a textual description of how these data were created: \t")
+    provenance['version'] = input("Please input the Freesufer version number used: \t")
+    provenance['os'] = input("Please input operating system used: \t")
+
+    # store variable_to_freesufer_cde mappings for later use
+    
+
+    # return variable_to_freesurfer_cde or maybe return the CDE graph?
+    return variable_to_freesurfer_cde,provenance
 
 
 def url_validator(url):
@@ -284,6 +522,14 @@ def main():
                         help='Path to Freesurfer subject directory')
     group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer'
                             'stats file. Note, currently supported is aseg.stats, lh/rh.aparc.stats')
+    group.add_argument('-csv', '--csv_file', dest='csvfile', type=str, help='Path to CSV file which includes '
+                            'a header row with 1 column containing subject IDs and the other columns are variables'
+                            'indicating the Freesurfer-derived region measure (e.g. volume, surface area, etc.  If '
+                            'you use this mode of running this software you will be asked to match your region '
+                            'variables to standard Freesurfer region / measure labels presented to you (so this '
+                            'program will end up being interactive.  In future WIP we will add the ability to export'
+                            'a json sidecar file with those mappings for automated runs of future CSV files with the '
+                            'same set of variables.')
     parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='If a path to a URL or a stats file'
                             'is supplied via the -f/--seg_file parameters then -subjid parameter must be set with'
                             'the subject identifier to be used in the NIDM files')
@@ -342,7 +588,7 @@ def main():
                     print("Creating NIDM file...")
                     # If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
 
-                    # convert nidm stats graph to rdflib
+                    # convert provtoolbox rdf stats graph to rdflib graph for ease of working with it
                     g2 = Graph()
                     g2.parse(source=StringIO(doc.serialize(format='rdf', rdf_format='ttl')),format='ttl')
 
@@ -369,7 +615,7 @@ def main():
                     # added to support separate cde serialization
                     if args.add_de is None:
                         # serialize cde graph
-                        g.serialize(destination=join(dirname(args.output_dir),"fs_cde.ttl"),format='turtle')
+                        g.serialize(destination=join((args.output_dir),"fs_cde.ttl"),format='turtle')
 
                     # doc.save_DotGraph(join(args.output_dir,splitext(basename(stats_file))[0] + ".pdf"), format="pdf")
                 # we adding these data to an existing NIDM file
@@ -529,7 +775,31 @@ def main():
             if args.add_de is None:
                 # serialize cde graph
                 g.serialize(destination=join(dirname(args.output_dir),"fs_cde.ttl"),format='turtle')
+    elif args.csvfile is not None:
+        # added to support CSV files with volume data from freesurfer
+        # problem is the variable names aren't guaranteed to match freesurfer names so we have to do some
+        # interactions with the user...
+        
+        # step 1: read CSV file and get header row
+        df = pd.read_csv(args.csvfile)
+        
 
+
+        # step 2: interact with the user about the variables in this CSV file.
+
+        var_to_freesurfer_cde,provenance = map_csv_variables_to_freesurfer_cdes(df)
+
+        # step 3: create the Freesurfer CDE graph
+
+        g = create_cde_graph()
+
+        # step 4: now we need to cycle through each row of the CSV file and store the data in graph
+        for index, row in df.iterrows():
+            # here we need to create the nidm statements to store the volume measures, the PDE entities
+            # to stores the mappings between the variables and the freesurfer CDEs and the activity provenance
+            # information.
+
+            [e, doc] = convert_csv_stats_to_nidm(row,var_to_freesurfer_cde)
 
 
 if __name__ == "__main__":

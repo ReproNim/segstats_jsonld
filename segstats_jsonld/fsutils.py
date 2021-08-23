@@ -263,7 +263,7 @@ def get_normative_measure(measure):
             raise ValueError(f"Could not parse {measure}")
         normative["hasUnit"] = fs_uri + measure[2]
     elif "Thick" in measure[0]:
-        normative["measureOf"] = "http://uri.interlex.org/base/ilx_0738276"
+        normative["measureOf"] = "http://uri.interlex.org/base/ilx_0111689"
         if "Mean" in measure[0] or "Avg" in measure[0]:
             normative["datumType"] = "http://uri.interlex.org/base/ilx_0738264"
         elif "Std" in measure[0]:
@@ -537,6 +537,38 @@ def convert_stats_to_nidm(stats):
 
     Returns the entity and the prov document
     """
+    from nidm.core import Constants
+    from nidm.experiment.Core import getUUID
+    import prov
+
+    fs = prov.model.Namespace("fs", str(Constants.FREESURFER))
+    niiri = prov.model.Namespace("niiri", str(Constants.NIIRI))
+    nidm = prov.model.Namespace("nidm", "http://purl.org/nidash/nidm#")
+    doc = prov.model.ProvDocument()
+    e = doc.entity(identifier=niiri[getUUID()])
+    e.add_asserted_type(nidm["FSStatsCollection"])
+    e.add_attributes(
+        {
+            fs["fs_" + val[0]]: prov.model.Literal(
+                val[1],
+                datatype=prov.model.XSD["float"]
+                if "." in val[1]
+                else prov.model.XSD["integer"],
+            )
+            for val in stats
+        }
+    )
+    return e, doc
+
+def convert_csv_stats_to_nidm(row, var_to_cde_mapping):
+    '''
+    This function supports storing CSV-formatted segmentation results derived from Freesufer
+    in a NIDM entity
+    :param row: row of data where variables are mapped to freesurfer CDEs using [var_to_cde_mapping]
+    :param var_to_cde_mapping: dictionary mapping the variable in row to a freesurfer CDE.
+    :return: Returns the entity and the prov document
+    '''
+
     from nidm.core import Constants
     from nidm.experiment.Core import getUUID
     import prov
