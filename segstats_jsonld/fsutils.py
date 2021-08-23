@@ -560,7 +560,7 @@ def convert_stats_to_nidm(stats):
     )
     return e, doc
 
-def convert_csv_stats_to_nidm(row, var_to_cde_mapping):
+def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename):
     '''
     This function supports storing CSV-formatted segmentation results derived from Freesufer
     in a NIDM entity
@@ -576,18 +576,27 @@ def convert_csv_stats_to_nidm(row, var_to_cde_mapping):
     fs = prov.model.Namespace("fs", str(Constants.FREESURFER))
     niiri = prov.model.Namespace("niiri", str(Constants.NIIRI))
     nidm = prov.model.Namespace("nidm", "http://purl.org/nidash/nidm#")
+    nfo = prov.model.Namespace("nfo", "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#")
     doc = prov.model.ProvDocument()
     e = doc.entity(identifier=niiri[getUUID()])
     e.add_asserted_type(nidm["FSStatsCollection"])
-    e.add_attributes(
-        {
-            fs["fs_" + val[0]]: prov.model.Literal(
-                val[1],
-                datatype=prov.model.XSD["float"]
-                if "." in val[1]
-                else prov.model.XSD["integer"],
+    # add filename to record
+    e.add_attributes({nfo["filename"]: prov.model.Literal(filename)})
+    # figure out which variable is subject ID
+    id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
+    for (colname, colval) in row.iteritems():
+        if colname == id_column:
+            continue
+        else:
+            e.add_attributes(
+                {
+                    fs[var_to_cde_mapping[colname].rsplit('/', 1)[-1]]: prov.model.Literal(
+                    #fs["fs_" + val[0]]: prov.model.Literal(
+                        colval,
+                        datatype=prov.model.XSD["float"]
+                        if "." in str(colval)
+                        else prov.model.XSD["integer"],
+                    )
+                }
             )
-            for val in stats
-        }
-    )
     return e, doc
