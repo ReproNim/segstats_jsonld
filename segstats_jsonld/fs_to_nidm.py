@@ -237,6 +237,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
             go_loop = True
             while go_loop:
                 option = 1
+                print("---------------------------------------------------------------------------------------")
                 print()
                 print("Freesurfer Measure Association")
                 print("Query String: %s " % search_term)
@@ -258,7 +259,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
                         option = option + 1
 
                 # Add option to change query string
-                print("%d: Change query string from: \"%s\"" % (option, search_term))
+                print("\n%d: Change query string from: \"%s\" \n" % (option, search_term))
                 # Wait for user input
                 selection = input("Please select an option (1:%d) from above: \t" % option)
 
@@ -269,6 +270,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
                 # check if selection is to re-run query with new search term
                 if int(selection) == (option):
                     # ask user for new search string
+                    print("---------------------------------------------------------------------------------------")
                     search_term = input("Please input new search string for CSV column: %s \t:" % column)
                     print("---------------------------------------------------------------------------------------")
                 else:
