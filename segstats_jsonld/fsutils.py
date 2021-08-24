@@ -9,6 +9,8 @@ from collections import namedtuple
 from pathlib import Path
 import rdflib as rl
 from requests import get
+from nidm.core.Constants import DD
+
 
 FS = namedtuple("FS", ["structure", "hemi", "measure", "unit"])
 cde_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfer-cdes.json"
@@ -263,7 +265,7 @@ def get_normative_measure(measure):
             raise ValueError(f"Could not parse {measure}")
         normative["hasUnit"] = fs_uri + measure[2]
     elif "Thick" in measure[0]:
-        normative["measureOf"] = "http://uri.interlex.org/base/ilx_0738276"
+        normative["measureOf"] = "http://uri.interlex.org/base/ilx_0111689"
         if "Mean" in measure[0] or "Avg" in measure[0]:
             normative["datumType"] = "http://uri.interlex.org/base/ilx_0738264"
         elif "Std" in measure[0]:
@@ -558,4 +560,54 @@ def convert_stats_to_nidm(stats):
             for val in stats
         }
     )
+    return e, doc
+
+def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename,id_column):
+    '''
+    This function supports storing CSV-formatted segmentation results derived from Freesufer
+    in a NIDM entity
+    :param row: row of data where variables are mapped to freesurfer CDEs using [var_to_cde_mapping]
+    :param var_to_cde_mapping: dictionary mapping the variable in row to a freesurfer CDE.
+    :return: Returns the entity and the prov document
+    '''
+
+    from nidm.core import Constants
+    from nidm.experiment.Core import getUUID
+    import prov
+
+    fs = prov.model.Namespace("fs", str(Constants.FREESURFER))
+    niiri = prov.model.Namespace("niiri", str(Constants.NIIRI))
+    nidm = prov.model.Namespace("nidm", "http://purl.org/nidash/nidm#")
+    nfo = prov.model.Namespace("nfo", "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#")
+    doc = prov.model.ProvDocument()
+    e = doc.entity(identifier=niiri[getUUID()])
+    e.add_asserted_type(nidm["FSStatsCollection"])
+    # add filename to record
+    e.add_attributes({nfo["filename"]: prov.model.Literal(filename)})
+
+    # added to support json_map files having been made from a different source file
+    # get filename from DD tuple
+    # get one of the keys
+    key_tuple = eval(list(var_to_cde_mapping.keys())[0])
+    filename = key_tuple.source
+
+    # figure out which variable is subject ID
+    #id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
+    for (colname, colval) in row.iteritems():
+        if colname == id_column:
+            continue
+        else:
+            current_tuple = str(DD(source=filename, variable=colname))
+
+            e.add_attributes(
+                {
+                    fs[var_to_cde_mapping[current_tuple]['sameAs'].rsplit('/', 1)[-1]]: prov.model.Literal(
+                    #fs["fs_" + val[0]]: prov.model.Literal(
+                        colval,
+                        datatype=prov.model.XSD["float"]
+                        if "." in str(colval)
+                        else prov.model.XSD["integer"],
+                    )
+                }
+            )
     return e, doc
