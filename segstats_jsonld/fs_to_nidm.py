@@ -299,7 +299,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
     # now ask user to supply some provenance information
     provenance={}
     print("---------------------------------------------------------------------------------------")
-    print("\nNow you will be asked some questions intended to capture some provenance about the freesufer"
+    print("\nNow you will be asked some questions intended to capture some provenance about the freesufer "
           "data you are storing in NIDM.  Ideally you should run this tool using the Freesurfer subject's "
           "directory or the aparc+aseg.mgz file.  Then provenance would be captures automatically for you.\n\n")
     provenance['description'] = input("Please input a textual description of how these data were created: \t")
