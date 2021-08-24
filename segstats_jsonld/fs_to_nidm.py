@@ -38,7 +38,7 @@
 from nidm.core import Constants
 from nidm.experiment.Core import getUUID
 from nidm.core.Constants import DD
-from nidm.experiment.Utils import DD_to_nidm
+from nidm.experiment.Utils import DD_to_nidm, tupleKeysToSimpleKeys
 
 
 # standard library
@@ -229,14 +229,14 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
         # dictionary storing freesurfer region UUID to CSV file variable mappings
         variable_to_freesurfer_cde = {}
-        current_tuple = str(DD(source=csv_file, variable=id_field))
-        variable_to_freesurfer_cde[current_tuple] = {}
-        variable_to_freesurfer_cde[current_tuple]['source_variable'] = id_field
-        variable_to_freesurfer_cde[current_tuple]['description'] = "subject/participant identifier"
-        variable_to_freesurfer_cde[current_tuple]['valueType'] = URIRef(Constants.XSD["string"])
-        variable_to_freesurfer_cde[current_tuple]['isAbout'] = {}
-        variable_to_freesurfer_cde[current_tuple]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
-        variable_to_freesurfer_cde[current_tuple]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
+        #current_tuple = str(DD(source=csv_file, variable=id_field))
+        variable_to_freesurfer_cde[id_field] = {}
+        variable_to_freesurfer_cde[id_field]['source_variable'] = id_field
+        variable_to_freesurfer_cde[id_field]['description'] = "subject/participant identifier"
+        variable_to_freesurfer_cde[id_field]['valueType'] = URIRef(Constants.XSD["string"])
+        variable_to_freesurfer_cde[id_field]['isAbout'] = {}
+        variable_to_freesurfer_cde[id_field]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
+        variable_to_freesurfer_cde[id_field]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
 
         # loop through variables in CSV
         for column in df.columns:
@@ -392,7 +392,8 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
         # create a new agent for subjid
         participant_agent = niiri[getUUID()]
         nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
-        nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid, datatype=XSD.string)))
+        nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Person']))
+        nidmdoc.add((participant_agent,URIRef(Constants.NDAR["src_subject_id"]),Literal(subjid, datatype=XSD.string)))
 
     else:
         # query to get agent id for subjid
@@ -465,21 +466,36 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     # add association between FSStatsCollection and computation activity
     nidmdoc.add((URIRef(fs_stats_entity_id.uri),Constants.PROV['wasGeneratedBy'],software_activity))
 
+
     # get project uuid from NIDM doc and make association with software_activity
     query = """
-                        prefix nidm: <http://purl.org/nidash/nidm#>
-                        PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                prefix nidm: <http://purl.org/nidash/nidm#>
+                                PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-                        select distinct ?project
-                        where {
+                                select distinct ?project
+                                where {
 
-                            ?project rdf:type nidm:Project .
+                                    ?project rdf:type nidm:Project .
 
-                        }"""
+                                }"""
 
     qres = nidmdoc.query(query)
     for row in qres:
-        nidmdoc.add((software_activity, Constants.DCT["isPartOf"], row['project']))
+        project_activity = row['project']
+        #nidmdoc.add((software_activity, Constants.DCT["isPartOf"], row['project']))
+
+
+    # create session for this
+    session_activity = niiri[getUUID()]
+    nidmdoc.add((session_activity, RDF.type, Constants.PROV['Activity']))
+    nidmdoc.add((session_activity, RDF.type, Constants.NIDM['Session']))
+
+
+    nidmdoc.add((session_activity, Constants.DCT["isPartOf"], project_activity))
+    # associate freesurfer segmentation activity with session
+    nidmdoc.add((software_activity, Constants.DCT["isPartOf"], session_activity))
+
+
 
 
 def read_buildstamp(subdir):
@@ -541,6 +557,7 @@ def main():
     #subjects directory.
 
     group = parser.add_mutually_exclusive_group(required=True)
+    group2 = parser.add_mutually_exclusive_group(required=True)
 
     group.add_argument('-s', '--subject_dir', dest='subject_dir', type=str,
                         help='Path to Freesurfer subject directory')
@@ -557,15 +574,15 @@ def main():
     parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='If a path to a URL or a stats file'
                             'is supplied via the -f/--seg_file parameters then -subjid parameter must be set with'
                             'the subject identifier to be used in the NIDM files')
-    parser.add_argument('-o', '--output', dest='output_dir', type=str,
-                        help='Output filename with full path', required=True)
+    group2.add_argument('-o', '--output', dest='output_dir', type=str,
+                        help='Output filename with full path', required=False, default=None)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
     parser.add_argument('-add_de', '--add_de', dest='add_de', action='store_true', default = None,
                         help='If flag set then data element data dictionary will be added to nidm file else it will written to a'
                             'separate file as fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemter'
                             'is used.')
-    parser.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,
+    group2.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,default=None,
                         help='Optional NIDM file to add segmentation data to.')
     parser.add_argument('-forcenidm','--forcenidm', action='store_true',required=False,
                         help='If adding to NIDM file this parameter forces the data to be added even if the participant'
@@ -584,9 +601,10 @@ def main():
         parser.error("-f/--seg_file requires -subjid/--subjid to be set!")
 
     # if output_dir doesn't exist then create it
-    out_path = os.path.dirname(args.output_dir)
-    if not os.path.exists(out_path):
-        os.makedirs(out_path)
+    #if args.output_dir is not None:
+    #    out_path = os.path.dirname(args.output_dir)
+    #    if not os.path.exists(out_path):
+    #        os.makedirs(out_path)
 
     # WIP: trying to find a way to reference data in module. This does not feel kosher but works
     #datapath = mapping_data.__path__._path[0] + '/'
@@ -853,8 +871,12 @@ def main():
         df = pd.read_csv(args.csvfile, dtype={id_field: str})
 
         # step 3: interact with the user about the variables in this CSV file.
+        if args.nidm_file:
+            var_to_freesurfer_cde, provenance = map_csv_variables_to_freesurfer_cdes(df=df, id_field=id_field,
+                    json_map=json_map,outdir=args.nidm_file,csv_file=args.csvfile)
 
-        var_to_freesurfer_cde,provenance = map_csv_variables_to_freesurfer_cdes(df=df,id_field=id_field,
+        else:
+            var_to_freesurfer_cde,provenance = map_csv_variables_to_freesurfer_cdes(df=df,id_field=id_field,
                     json_map=json_map,outdir=args.output_dir,csv_file=args.csvfile)
 
         # step 4: create the Freesurfer CDE graph
@@ -870,6 +892,20 @@ def main():
         nidm_file = args.nidm_file
         print("Creating NIDM file...")
 
+        if (nidm_file is None):
+            nidmdoc = Graph()
+            niiri = Namespace("http://iri.nidash.org/")
+
+            project_activity = niiri[getUUID()]
+            nidmdoc.add((project_activity, RDF.type, Constants.PROV['Activity']))
+            nidmdoc.add((project_activity, RDF.type, Constants.NIDM['Project']))
+            nidmdoc.add((project_activity, Constants.DCT["description"],
+                         Literal("Freesurfer segmentation statistics from CSV file")))
+            nidmdoc.add((project_activity, Constants.NFO["filename"],
+                         Literal(basename(args.csvfile))))
+            nidmdoc.add((project_activity, Constants.PROV["Location"],
+                         Literal(dirname(args.csvfile))))
+
         # step 5: now we need to cycle through each row of the CSV file and store the data in graph
         for index, row in df.iterrows():
             # here we need to create the nidm statements to store the volume measures, the PDE entities
@@ -880,22 +916,29 @@ def main():
 
             print("\tProcessing subject: %s..." %subjid)
 
-            [e, doc] = convert_csv_stats_to_nidm(row,var_to_freesurfer_cde,filename=args.csvfile,id_column=id_field)
+            [e, doc] = convert_csv_stats_to_nidm(row,var_to_freesurfer_cde,filename=basename(args.csvfile),id_column=id_field)
+
+            # add session for this row and associations with project
+            #session_activity = niiri[getUUID()]
+            #nidmdoc.add((session_activity, RDF.type, Constants.PROV['Activity']))
+            #nidmdoc.add((session_activity, RDF.type, Constants.NIDM['Session']))
+            #nidmdoc.add((session_activity, Constants.DCT["isPartOf"], project_activity))
+            ## associate freesurfer segmentation activity with session
+            #nidmdoc.add((URIRef(e.identifier.uri), Constants.DCT["isPartOf"], session_activity))
 
 
             # If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
             if (nidm_file is None) and (first_row):
 
-                # If user did not choose to add this data to an existing NIDM file then create a new one for the CSV data
 
                 # convert nidm stats graph to rdflib
                 g2 = Graph()
                 g2.parse(source=StringIO(doc.serialize(format='rdf', rdf_format='turtle')), format='turtle')
 
                 if args.add_de is not None:
-                    nidmdoc = g + g2 + pde
+                    nidmdoc = nidmdoc + g + g2 + pde
                 else:
-                    nidmdoc = g2 + pde
+                    nidmdoc = nidmdoc + g2 + pde
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
                              description=provenance['description'])
@@ -987,7 +1030,7 @@ def main():
 
             if args.add_de is None:
                 # serialize cde graph
-                g.serialize(destination=join(dirname(args.output_dir), "fs_cde.ttl"), format='turtle')
+                g.serialize(destination=join(dirname(args.nidm_file), "fs_cde.ttl"), format='turtle')
 
 
 if __name__ == "__main__":

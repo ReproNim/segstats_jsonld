@@ -584,6 +584,13 @@ def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename,id_column):
     e.add_asserted_type(nidm["FSStatsCollection"])
     # add filename to record
     e.add_attributes({nfo["filename"]: prov.model.Literal(filename)})
+
+    # added to support json_map files having been made from a different source file
+    # get filename from DD tuple
+    # get one of the keys
+    key_tuple = eval(list(var_to_cde_mapping.keys())[0])
+    filename = key_tuple.source
+
     # figure out which variable is subject ID
     #id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
     for (colname, colval) in row.iteritems():
