@@ -37,6 +37,8 @@
 
 from nidm.core import Constants
 from nidm.experiment.Core import getUUID
+from nidm.core.Constants import DD
+from nidm.experiment.Utils import DD_to_nidm
 
 
 # standard library
