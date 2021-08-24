@@ -149,7 +149,7 @@ def get_fs_cdes():
 
     return fs_graph, measureOf_df
 
-def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
+def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=None):
     '''
     This function will cycle through the column names in the dataframe df and ask the user to match them to
     one of the freesufer CDEs
@@ -165,6 +165,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
     else:
 
         # step 1: load freesurfer CDEs graph and get dataframe of selected properties
+        print("Loading Freesurfer measurement types...")
         fs_graph,measureOf_df = get_fs_cdes()
 
 
@@ -228,12 +229,24 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
 
         # dictionary storing freesurfer region UUID to CSV file variable mappings
         variable_to_freesurfer_cde = {}
-        variable_to_freesurfer_cde[id_field] = Constants.NIDM_SUBJECTID.uri
+        current_tuple = str(DD(source=csv_file, variable=id_field))
+        variable_to_freesurfer_cde[current_tuple] = {}
+        variable_to_freesurfer_cde[current_tuple]['source_variable'] = id_field
+        variable_to_freesurfer_cde[current_tuple]['description'] = "subject/participant identifier"
+        variable_to_freesurfer_cde[current_tuple]['valueType'] = URIRef(Constants.XSD["string"])
+        variable_to_freesurfer_cde[current_tuple]['isAbout'] = {}
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
+
         # loop through variables in CSV
         for column in df.columns:
+
             if column == id_field:
                 continue
             else:
+                current_tuple = str(DD(source=csv_file, variable=column))
+                variable_to_freesurfer_cde[current_tuple] = {}
+                variable_to_freesurfer_cde[current_tuple]['source_variable'] = column
                 search_term = column
             # now present regions to use based on caseless fuzzy match of labels to variable
             go_loop = True
@@ -242,7 +255,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
                 print("---------------------------------------------------------------------------------------")
                 print()
                 print("Freesurfer Measure Association")
-                print("Query String: %s " % search_term)
+                print("Query String: %s \n" % search_term)
 
                 # look for fuzzy matching freesurfer label
                 match_scores = {}
@@ -278,14 +291,15 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,json_map=None):
                 else:
                     # user selected a freesurfer term for this region
                     # store FS CDE UUID and CSV file variable mapping
-                    variable_to_freesurfer_cde[column] = match_scores[options[selection]]['uuid']
+                    variable_to_freesurfer_cde[current_tuple]['sameAs'] = match_scores[options[selection]]['uuid']
                     print("\nUser selection: %s, Freesurfer CDE UUID: %s" %(options[selection],
                                     match_scores[options[selection]]['uuid']))
                     go_loop = False
 
     # now ask user to supply some provenance information
     provenance={}
-    print("\n Now you will be asked some questions intended to capture some provenance about the freesufer"
+    print("---------------------------------------------------------------------------------------")
+    print("\nNow you will be asked some questions intended to capture some provenance about the freesufer"
           "data you are storing in NIDM.  Ideally you should run this tool using the Freesurfer subject's "
           "directory or the aparc+aseg.mgz file.  Then provenance would be captures automatically for you.\n\n")
     provenance['description'] = input("Please input a textual description of how these data were created: \t")
@@ -795,18 +809,34 @@ def main():
         # interactions with the user...
         
         # step 1: read CSV file and get header row
+        print("Loading CSV file....")
         df = pd.read_csv(args.csvfile)
 
         # load previous mappings...assumes complete mappings
         if args.json_map is not None:
+            print("Loading user-supplied JSON mapping file....")
             with open(args.json_map) as json_file:
                 json_map = json.load(json_file)
 
-            id_field = list(json_map.keys())[list(json_map.values()).
-                index(Constants.NIDM_SUBJECTID.uri)]
+            # loop through keys and see which is the subject ID field
+            stop_loops=False
+            for key,value in json_map.items():
+                if stop_loops:
+                    break
+                for subkey,subvalue in json_map[key].items():
+                    if subkey == 'isAbout':
+                        if json_map[key][subkey]['url'] == Constants.NIDM_SUBJECTID.uri:
+                            id_field = key.split("variable")[1].split("=")[1].split(")")[0].lstrip(
+                            "'").rstrip("'")
+                            stop_loops = True
+                            break
+
+            #id_field = list(json_map.keys())[list(json_map.values()).
+            #    index(Constants.NIDM_SUBJECTID.uri)]
 
         # step 2: ask which column has subject ID or load json_map if provided
         else:
+            json_map = None
             option = 1
             for column in df.columns:
                 print("%d: %s" % (option, column))
@@ -824,11 +854,17 @@ def main():
 
         # step 3: interact with the user about the variables in this CSV file.
 
-        var_to_freesurfer_cde,provenance = map_csv_variables_to_freesurfer_cdes(df=df,id_field=id_field,json_map=json_map,outdir=args.output_dir)
+        var_to_freesurfer_cde,provenance = map_csv_variables_to_freesurfer_cdes(df=df,id_field=id_field,
+                    json_map=json_map,outdir=args.output_dir,csv_file=args.csvfile)
 
         # step 4: create the Freesurfer CDE graph
 
         g = create_cde_graph()
+
+        # step 4b: create the personal data elements mapping CSV variables to the Freesurfer CDEs
+
+        pde = DD_to_nidm(var_to_freesurfer_cde)
+
 
         first_row=True
         nidm_file = args.nidm_file
@@ -840,12 +876,11 @@ def main():
             # to stores the mappings between the variables and the freesurfer CDEs and the activity provenance
             # information.
 
-            subjid = str(row[list(var_to_freesurfer_cde.keys())[list(var_to_freesurfer_cde.values()).
-                index(Constants.NIDM_SUBJECTID.uri)]])
+            subjid = str(row[id_field])
 
             print("\tProcessing subject: %s..." %subjid)
 
-            [e, doc] = convert_csv_stats_to_nidm(row,var_to_freesurfer_cde)
+            [e, doc] = convert_csv_stats_to_nidm(row,var_to_freesurfer_cde,filename=args.csvfile,id_column=id_field)
 
 
             # If user has added an existing NIDM file as a command line parameter then add to existing file for subjects who exist in the NIDM file
@@ -858,9 +893,9 @@ def main():
                 g2.parse(source=StringIO(doc.serialize(format='rdf', rdf_format='turtle')), format='turtle')
 
                 if args.add_de is not None:
-                    nidmdoc = g + g2
+                    nidmdoc = g + g2 + pde
                 else:
-                    nidmdoc = g2
+                    nidmdoc = g2 + pde
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
                              description=provenance['description'])
@@ -893,9 +928,9 @@ def main():
 
                 if args.add_de is not None:
                     print("Combining graphs...")
-                    nidmdoc = g + g1 + g2
+                    nidmdoc = g + g1 + g2 + pde
                 else:
-                    nidmdoc = g1 + g2
+                    nidmdoc = g1 + g2 + pde
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,

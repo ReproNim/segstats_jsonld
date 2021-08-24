@@ -9,6 +9,8 @@ from collections import namedtuple
 from pathlib import Path
 import rdflib as rl
 from requests import get
+from nidm.core.Constants import DD
+
 
 FS = namedtuple("FS", ["structure", "hemi", "measure", "unit"])
 cde_file = Path(os.path.dirname(__file__)) / "mapping_data" / "freesurfer-cdes.json"
@@ -560,7 +562,7 @@ def convert_stats_to_nidm(stats):
     )
     return e, doc
 
-def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename):
+def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename,id_column):
     '''
     This function supports storing CSV-formatted segmentation results derived from Freesufer
     in a NIDM entity
@@ -583,14 +585,16 @@ def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename):
     # add filename to record
     e.add_attributes({nfo["filename"]: prov.model.Literal(filename)})
     # figure out which variable is subject ID
-    id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
+    #id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
     for (colname, colval) in row.iteritems():
         if colname == id_column:
             continue
         else:
+            current_tuple = str(DD(source=filename, variable=colname))
+
             e.add_attributes(
                 {
-                    fs[var_to_cde_mapping[colname].rsplit('/', 1)[-1]]: prov.model.Literal(
+                    fs[var_to_cde_mapping[current_tuple]['sameAs'].rsplit('/', 1)[-1]]: prov.model.Literal(
                     #fs["fs_" + val[0]]: prov.model.Literal(
                         colval,
                         datatype=prov.model.XSD["float"]
