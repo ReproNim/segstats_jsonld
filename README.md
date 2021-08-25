@@ -42,12 +42,11 @@ $ pip install -e .
 ## Usage
 
 ```
-$ segstats2nidm 
+usage: segstats2nidm [-h] (-s SUBJECT_DIR | -f SEGFILE | -csv CSVFILE) [-subjid SUBJID] [-o OUTPUT_DIR] [-j] [-add_de] [-n NIDM_FILE]
+                     [-forcenidm] [-json_map JSON_MAP]
 
-This program will load in a aseg.stats file from Freesurfer
-                                        , augment the Freesurfer anatomical region designations with common data element
-                                        anatomical designations, and save the statistics + region designations out as
-                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))
+This program will load in a aseg.stats file from Freesurfer, augment the Freesurfer anatomical region designations with common data element
+anatomical designations, and save the statistics + region designations out as NIDM serializations (i.e. TURTLE, JSON-LD RDF))
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -55,16 +54,27 @@ optional arguments:
                         Path to Freesurfer subject directory
   -f SEGFILE, --seg_file SEGFILE
                         Path or URL to a specific Freesurferstats file. Note, currently supported is aseg.stats, lh/rh.aparc.stats
+  -csv CSVFILE, --csv_file CSVFILE
+                        Path to CSV file which includes a header row with 1 column containing subject IDs and the other columns are
+                        variablesindicating the Freesurfer-derived region measure (e.g. volume, surface area, etc. If you use this mode of
+                        running this software you will be asked to match your region variables to standard Freesurfer region / measure labels
+                        presented to you (so this program will end up being interactive. In future WIP we will add the ability to exporta json
+                        sidecar file with those mappings for automated runs of future CSV files with the same set of variables.
   -subjid SUBJID, --subjid SUBJID
-                        If a path to a URL or a stats fileis supplied via the -f/--seg_file parameters then -subjid parameter must be set withthe subject identifier to be used in the NIDM files
+                        If a path to a URL or a stats fileis supplied via the -f/--seg_file parameters then -subjid parameter must be set
+                        withthe subject identifier to be used in the NIDM files
   -o OUTPUT_DIR, --output OUTPUT_DIR
                         Output filename with full path
   -j, --jsonld          If flag set then NIDM file will be written as JSONLD instead of TURTLE
-  -add_de, --add_de     If flag set then data element data dictionary will be added to nidm file else it will written to aseparate file as fsl_cde.ttl in the output directory (or same directory as nidm file
-                        if -n paramemteris used.
+  -add_de, --add_de     If flag set then data element data dictionary will be added to nidm file else it will written to aseparate file as
+                        fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemteris used.
   -n NIDM_FILE, --nidm NIDM_FILE
                         Optional NIDM file to add segmentation data to.
   -forcenidm, --forcenidm
-                        If adding to NIDM file this parameter forces the data to be added even if the participantdoesnt currently exist in the NIDM file.
+                        If adding to NIDM file this parameter forces the data to be added even if the participantdoesnt currently exist in the
+                        NIDM file.
+  -json_map JSON_MAP, --json_map JSON_MAP
+                        If storing freesurfer segmentation data stored in a CSV file and you've previouslystored the variable to Freesurfer CDE
+                        mappings, this can be reused. Otherwisethis argument is ignored
 
 ```
