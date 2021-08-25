@@ -229,14 +229,14 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
         # dictionary storing freesurfer region UUID to CSV file variable mappings
         variable_to_freesurfer_cde = {}
-        #current_tuple = str(DD(source=csv_file, variable=id_field))
-        variable_to_freesurfer_cde[id_field] = {}
-        variable_to_freesurfer_cde[id_field]['source_variable'] = id_field
-        variable_to_freesurfer_cde[id_field]['description'] = "subject/participant identifier"
-        variable_to_freesurfer_cde[id_field]['valueType'] = URIRef(Constants.XSD["string"])
-        variable_to_freesurfer_cde[id_field]['isAbout'] = {}
-        variable_to_freesurfer_cde[id_field]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
-        variable_to_freesurfer_cde[id_field]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
+        current_tuple = str(DD(source=csv_file, variable=id_field))
+        variable_to_freesurfer_cde[current_tuple] = {}
+        variable_to_freesurfer_cde[current_tuple]['source_variable'] = id_field
+        variable_to_freesurfer_cde[current_tuple]['description'] = "subject/participant identifier"
+        variable_to_freesurfer_cde[current_tuple]['valueType'] = URIRef(Constants.XSD["string"])
+        variable_to_freesurfer_cde[current_tuple]['isAbout'] = {}
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
 
         # loop through variables in CSV
         for column in df.columns:
@@ -548,7 +548,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(prog='fs_to_nidm.py',
                                      description='''This program will load in a aseg.stats file from Freesurfer
-                                        , augment the Freesurfer anatomical region designations with common data element
+                                     , augment the Freesurfer anatomical region designations with common data element
                                         anatomical designations, and save the statistics + region designations out as
                                         NIDM serializations (i.e. TURTLE, JSON-LD RDF))''',
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
