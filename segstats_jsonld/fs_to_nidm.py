@@ -164,8 +164,11 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
     else:
 
+        variable_to_freesurfer_cde = {}
+
         # step 1: load freesurfer CDEs graph and get dataframe of selected properties
-        print("Loading Freesurfer measurement types...")
+        print("---------------------------------------------------------------------------------------")
+        print("\nLoading Freesurfer measurement types...")
         fs_graph,measureOf_df = get_fs_cdes()
 
 
@@ -197,6 +200,11 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
         # otherwise we can just query for the regions x measurement type
 
         if measurement_type != "mixed":
+            # WIP: hack for now....need to do this better
+            if measurement_type == 'http://uri.interlex.org/base/ilx_0111689':
+                datum = 'http://uri.interlex.org/base/ilx_0738265'
+            else:
+                datum = 'http://uri.interlex.org/base/ilx_0738276'
             # query for rdfs:label for measureOf == measurement_type
             query = '''
                 prefix fs: <https://surfer.nmr.mgh.harvard.edu/>
@@ -209,11 +217,11 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
       
                     ?uuid a fs:DataElement ;
                         nidm:measureOf <%s> ;
-                        nidm:datumType <http://uri.interlex.org/base/ilx_0738276> ;
+                        nidm:datumType <%s> ;
                         rdfs:label ?label .
                 } order by ?label
             
-            ''' % (measurement_type)
+            ''' % (measurement_type,datum)
 
             # run query
             qres = fs_graph.query(query)
@@ -228,7 +236,6 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
 
         # dictionary storing freesurfer region UUID to CSV file variable mappings
-        variable_to_freesurfer_cde = {}
         current_tuple = str(DD(source=csv_file, variable=id_field))
         variable_to_freesurfer_cde[current_tuple] = {}
         variable_to_freesurfer_cde[current_tuple]['source_variable'] = id_field
@@ -240,11 +247,12 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
         # loop through variables in CSV
         for column in df.columns:
-
+            current_tuple = str(DD(source=csv_file, variable=column))
             if column == id_field:
                 continue
+            elif current_tuple in variable_to_freesurfer_cde.keys():
+                continue
             else:
-                current_tuple = str(DD(source=csv_file, variable=column))
                 variable_to_freesurfer_cde[current_tuple] = {}
                 variable_to_freesurfer_cde[current_tuple]['source_variable'] = column
                 search_term = column
@@ -296,6 +304,10 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
                                     match_scores[options[selection]]['uuid']))
                     go_loop = False
 
+            # store variable_to_freesufer_cde mappings for later use
+            with open(join(dirname(outdir), splitext(basename(csv_file))[0]+'_map.json'), 'w') as fp:
+                json.dump(variable_to_freesurfer_cde, fp)
+
     # now ask user to supply some provenance information
     provenance={}
     print("---------------------------------------------------------------------------------------")
@@ -306,9 +318,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
     provenance['version'] = input("Please input the Freesufer version number used: \t")
     provenance['sysname'] = input("Please input operating system used: \t")
 
-    # store variable_to_freesufer_cde mappings for later use
-    with open(join(dirname(outdir),'json_map.json'), 'w') as fp:
-        json.dump(variable_to_freesurfer_cde, fp)
+
 
     # return variable_to_freesurfer_cde or maybe return the CDE graph?
     return variable_to_freesurfer_cde,provenance
@@ -827,6 +837,7 @@ def main():
         # interactions with the user...
         
         # step 1: read CSV file and get header row
+        print("---------------------------------------------------------------------------------------")
         print("Loading CSV file....")
         df = pd.read_csv(args.csvfile)
 
