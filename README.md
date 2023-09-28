@@ -78,3 +78,21 @@ optional arguments:
                         mappings, this can be reused. Otherwisethis argument is ignored
 
 ```
+
+### Updating the FreeSurfer Common Data Elements
+
+This section describes how one can update the common data elements from FreeSurfer
+as they update the names they are using for their elements.
+
+```Python
+from fsutils import collate_fs_items, create_fs_mapper
+collate_fs_items('/path/to/statsdir', error_on_new_key=False)
+create_fs_mapper()
+```
+
+This will add new structures to freesurfermap.json file, which you can edit to
+improve connections to ontologies (e.g., by editing the `isAbout`).
+
+```Python
+create_fs_mapper()
+```
