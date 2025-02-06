@@ -326,7 +326,7 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
 
 def url_validator(url):
     '''
-    Tests whether url is a valide url
+    Tests whether url is a valid url
     :param url: url to test
     :return: True for valid url else False
     '''
