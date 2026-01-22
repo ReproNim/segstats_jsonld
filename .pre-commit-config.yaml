@@ -13,3 +13,9 @@ repos:
     rev: 19.3b0
     hooks:
     -   id: black
+
+- repo: https://github.com/codespell-project/codespell
+  # Configuration for codespell is in .codespellrc
+  rev: v2.4.0
+  hooks:
+  - id: codespell
