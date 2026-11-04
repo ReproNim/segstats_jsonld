@@ -368,16 +368,15 @@ def get_label(url):
     g.parse(data=res.text, format="application/rdf+xml")
     if "interlex" in url:
         url = url.replace("/base/ilx", "/base/ontologies/ilx")
-    query = "SELECT ?label WHERE { <%s> rdfs:label ?label . }" % url
-    query2 = (
-        "SELECT ?label WHERE { <%s> <http://purl.obolibrary.org/obo/IAO_0000136>/rdfs:label ?label . }"
-        % url
-    )
+    # the term is bound, not pasted into the query text
+    term = {"term": rl.URIRef(url)}
+    query = "SELECT ?label WHERE { ?term rdfs:label ?label . }"
+    query2 = "SELECT ?label WHERE { ?term <http://purl.obolibrary.org/obo/IAO_0000136>/rdfs:label ?label . }"
     try:
-        label = str(g.query(query).bindings.pop()["label"])
+        label = str(g.query(query, initBindings=term).bindings.pop()["label"])
     except IndexError:
         try:
-            label = str(g.query(query2).bindings.pop()["label"])
+            label = str(g.query(query2, initBindings=term).bindings.pop()["label"])
         except IndexError:
             label = url
     return label

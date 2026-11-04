@@ -49,7 +49,7 @@ def t1w(name):
     return f"/bids/sub-0051456/{name[:5]}/anat/sub-0051456_{name}_T1w.nii.gz"
 
 
-def run_fs_to_nidm(tmp_path, *extra, input_ttl=INPUT_TTL):
+def run_fs_to_nidm(tmp_path, *extra, input_ttl=INPUT_TTL, returncode=0):
     # The layout freesurfer-nidm writes: <out>/sub-<id>/freesurfer
     subject_dir = tmp_path / "sub-0051456" / "freesurfer"
     (subject_dir / "stats").mkdir(parents=True)
@@ -65,7 +65,9 @@ def run_fs_to_nidm(tmp_path, *extra, input_ttl=INPUT_TTL):
          "-n", str(nidm), "--forcenidm", *extra],
         cwd=REPO_ROOT, capture_output=True, text=True,
     )
-    assert result.returncode == 0, result.stdout + result.stderr
+    assert result.returncode == returncode, result.stdout + result.stderr
+    if returncode:
+        return result
     return Graph().parse(nidm, format="turtle"), result.stderr
 
 
@@ -90,14 +92,16 @@ def test_subjid_attaches_stats_to_the_input_subject(tmp_path):
 
 
 def test_without_subjid_the_directory_name_is_the_subject_id(tmp_path):
-    """The previous behaviour, kept for callers whose directory is named after
-    the subject: here the directory is "freesurfer", so a new agent is made."""
-    g, err = run_fs_to_nidm(tmp_path)
-    agents = subject_agents(g)
-    assert SUBJECT not in agents
-    assert list(g.subjects(None, Literal("freesurfer", datatype=XSD.string)))
-    # the case behind #21 must be visible to a caller that only reads warnings
-    assert "Subject ID freesurfer not found in the input NIDM" in err
+    """Here the directory is "freesurfer", which is not a subject in the input.
+    That used to attach the stats to a new agent "freesurfer" under --forcenidm
+    and succeed (#21); now the run fails, names the ids the input has, and
+    writes nothing."""
+    result = run_fs_to_nidm(tmp_path, returncode=1)
+    assert "Subject ID freesurfer not found in the input NIDM" in result.stderr
+    assert "51456" in result.stderr
+    assert "Found subject ID" not in result.stdout
+    assert (tmp_path / "nidm.ttl").read_text() == INPUT_TTL
+    assert not (tmp_path / "fs_cde.ttl").exists()
 
 
 def test_acq_filename_picks_the_acquisition_among_several(tmp_path):

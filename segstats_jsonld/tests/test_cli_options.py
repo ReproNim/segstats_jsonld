@@ -12,6 +12,7 @@ TESTDATA = Path(__file__).resolve().parent / "testdata"
 REPO_ROOT = Path(__file__).resolve().parents[2]
 PROV = Namespace("http://www.w3.org/ns/prov#")
 DCT_DESCRIPTION = URIRef("http://purl.org/dc/terms/description")
+NDAR_ID = URIRef("https://ndar.nih.gov/api/datadictionary/v2/dataelement/src_subject_id")
 
 INPUT_TTL = """
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -78,3 +79,35 @@ def test_subject_dir_with_nidm_keeps_every_stats_file(tmp_path):
     assert result.returncode == 0, result.stdout + result.stderr
     g = Graph().parse(nidm, format="turtle")
     assert len(stats_activities(g)) == 2
+
+
+def test_forcenidm_adds_the_subject_to_an_input_without_subjects(tmp_path):
+    """The one case --forcenidm still creates an agent: the input NIDM has no
+    subjects at all. Every stats file attaches to that one agent."""
+    subject_dir = make_subject_dir(tmp_path)
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL.split("<http://iri.nidash.org/subject-51456>")[0])
+
+    result = run("-s", str(subject_dir), "-n", str(nidm), "--forcenidm")
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    g = Graph().parse(nidm, format="turtle")
+    ids = list(g.objects(None, NDAR_ID))
+    assert [str(i) for i in ids] == ["sub-0051456"]
+    assert len(stats_activities(g)) == 2
+    # the agent was created by this run, so it is never reported as found
+    assert "Found subject ID" not in result.stdout
+
+
+def test_lookup_miss_fails_and_writes_nothing(tmp_path):
+    subject_dir = make_subject_dir(tmp_path)
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    before = md5(nidm)
+
+    result = run("-s", str(subject_dir), "-subjid", "sub-0099999", "-n", str(nidm), "--forcenidm")
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "Subject ID sub-0099999 not found in the input NIDM" in result.stderr
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]

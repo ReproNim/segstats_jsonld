@@ -49,6 +49,7 @@ from segstats_jsonld._pynidm import (
 # standard library
 from pickle import dumps
 import os
+import sys
 from os.path import join,basename,splitext,isfile,dirname
 from socket import getfqdn
 import glob
@@ -224,15 +225,16 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
                 where {
       
                     ?uuid a fs:DataElement ;
-                        nidm:measureOf <%s> ;
-                        nidm:datumType <%s> ;
+                        nidm:measureOf ?measureOf ;
+                        nidm:datumType ?datumType ;
                         rdfs:label ?label .
                 } order by ?label
             
-            ''' % (measurement_type,datum)
+            '''
 
-            # run query
-            qres = fs_graph.query(query)
+            # run query; the IRIs are bound, not pasted into the query text
+            qres = fs_graph.query(query, initBindings={"measureOf": URIRef(measurement_type),
+                                                        "datumType": URIRef(datum)})
 
             # dictionary to store freesurfer labels and UUIDs for measurement type
             freesurfer_region_labels = {}
@@ -384,7 +386,83 @@ def select_acquisition(rows, acq_filenames, subjid):
     return sorted(set(chosen))
 
 
-def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2_images=None, add_to_nidm=False, forceagent=False, description=None, acq_filename=None):
+class SubjectLookupError(Exception):
+    """The subject the stats belong to cannot be identified in the input NIDM."""
+
+
+def normalise_subject_id(subject_id):
+    '''
+    The form two subject ids are compared in: without a leading "sub-" and
+    without leading zeros, so that sub-0051456, 0051456 and 51456 are the same
+    subject. BIDS directories carry "sub-"; participants.tsv, and so the
+    input NIDM, may or may not, and some datasets drop the zero padding.
+    '''
+    text = str(subject_id)
+    if text.startswith("sub-"):
+        text = text[len("sub-"):]
+    return text.lstrip("0") or text
+
+
+def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None):
+    '''
+    Return the subject agent (a prov:Agent with ndar:src_subject_id) in nidmdoc
+    whose id is subjid, comparing both sides with normalise_subject_id. The
+    literal is compared as text, so PyNIDM 4.x's "..."^^xsd:string and
+    PyNIDM 5's plain literal both match.
+
+    No match: if the input NIDM has no subject agents and forceagent is set,
+    a new agent with that id is created; if it has subject agents, the run
+    cannot tell which one the stats belong to, and SubjectLookupError is raised
+    whatever forceagent says. Several matches also raise.
+
+    :param created_agents: agents created by earlier calls in this run (-s
+        with -n converts each stats file separately; -csv one row at a time).
+        They are reused when they match, and do not count as input subjects.
+    '''
+    if created_agents is None:
+        created_agents = set()
+    subject_ids = {}
+    for agent, sid in nidmdoc.subject_objects(URIRef(NIDM_SUBJECTID_URI)):
+        if (agent, RDF.type, Constants.PROV['Agent']) in nidmdoc:
+            subject_ids.setdefault(agent, set()).add(str(sid))
+
+    wanted = normalise_subject_id(subjid)
+    matches = sorted(agent for agent, ids in subject_ids.items()
+                     if any(normalise_subject_id(i) == wanted for i in ids))
+
+    if len(matches) > 1:
+        found = "; ".join("%s (%s)" % (agent, ", ".join(sorted(subject_ids[agent]))) for agent in matches)
+        raise SubjectLookupError("Subject ID %s matches %d subject agents in the input NIDM: %s. "
+                                 "No output written" % (subjid, len(matches), found))
+    if matches:
+        agent = matches[0]
+        if agent in created_agents:
+            print('Using the agent created earlier in this run for subject ID %s (agent: %s)' % (subjid, agent))
+        else:
+            print('Found subject ID %s in NIDM file as %s (agent: %s)'
+                  % (subjid, ", ".join(sorted(subject_ids[agent])), agent))
+        return agent
+
+    input_ids = sorted(i for agent, ids in subject_ids.items() if agent not in created_agents for i in ids)
+    if input_ids:
+        raise SubjectLookupError("Subject ID %s not found in the input NIDM, whose subject IDs are: %s. "
+                                 "IDs are compared without a leading \"sub-\" and leading zeros. "
+                                 "No output written" % (subjid, ", ".join(input_ids)))
+    if forceagent is not False:
+        print('Subject ID %s: the input NIDM has no subjects; creating an agent for it (--forcenidm)' % subjid)
+        warnings.warn(f"Subject ID {subjid} not found in the input NIDM, which has no subjects; the stats "
+                      f"are attached to a new agent with that ID (--forcenidm)")
+        agent = Namespace("http://iri.nidash.org/")[getUUID()]
+        nidmdoc.add((agent, RDF.type, Constants.PROV['Agent']))
+        nidmdoc.add((agent, URIRef(NIDM_SUBJECTID_URI), Literal(subjid, datatype=XSD.string)))
+        created_agents.add(agent)
+        return agent
+    print('Subject ID %s not found: the input NIDM has no subjects. Pass --forcenidm to add it; '
+          'no output written' % subjid)
+    exit()
+
+
+def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2_images=None, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
     NIDM-E file for the matching subject ID
@@ -399,7 +477,10 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
     :param description:
     :param acq_filename: file names of the anatomical images the stats came from, used to
         pick their AcquisitionObjects in the input NIDM (see select_acquisition)
+    :param created_agents: set of subject agents created by earlier calls in the same run
+        (see _input_subject_agent); updated in place
     :return:
+    :raises SubjectLookupError: with add_to_nidm, when the subject cannot be identified
     '''
 
     #for each of the header items create a dictionary where namespaces are freesurfer
@@ -414,6 +495,11 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
     nidmdoc.bind("sio",sio)
     nidm = Namespace(Constants.NIDM)
     nidmdoc.bind("nidm",nidm)
+
+    # identify the input subject before anything is added, so a lookup that
+    # fails leaves the graph as it was
+    if add_to_nidm:
+        participant_agent = _input_subject_agent(nidmdoc, subjid, forceagent, created_agents)
 
     # Create T1 image entities if provided
     t1_entities = []
@@ -507,100 +593,6 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
         nidmdoc.add((participant_agent,URIRef(Constants.NDAR["src_subject_id"]),Literal(subjid, datatype=XSD.string)))
 
     else:
-        # query to get agent id for subjid
-        #find subject ids and sessions in NIDM document
-        # The id is compared with str(): PyNIDM 4.x writes src_subject_id as
-        # "..."^^xsd:string and PyNIDM 5 as a plain literal, and rdflib treats
-        # the two as different terms, so matching the typed form alone missed
-        # every subject in a PyNIDM 5 input.
-            query = """
-                    PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
-                    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                    PREFIX prov:<http://www.w3.org/ns/prov#>
-                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-                    select distinct ?agent
-                    where {
-
-                        ?agent rdf:type prov:Agent ;
-                        ndar:src_subject_id ?sid .
-                        FILTER(str(?sid) = \"%s\")
-
-                    }""" % subjid
-            #print(query)
-            qres = nidmdoc.query(query)
-            if len(qres) == 0:
-                print('Subject ID (%s) was not found in existing NIDM file...' %subjid)
-                ##############################################################################
-                # added to account for issues with some BIDS datasets that have "sub-" prefix in directories
-                # but not in participants.tsv files or existing NIDM files.
-                qres2=[]
-                subjid_stripped = subjid
-                # Try stripping "sub-" prefix first (BIDS directories have this, but NIDM files may not)
-                if subjid.startswith('sub-'):
-                    subjid_stripped = subjid[4:]
-                    print('Trying to find subject ID without "sub-" prefix: %s' % subjid_stripped)
-                    query = """
-                        PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
-                        PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX prov:<http://www.w3.org/ns/prov#>
-                        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-                        select distinct ?agent
-                        where {
-
-                            ?agent rdf:type prov:Agent ;
-                            ndar:src_subject_id ?sid .
-                            FILTER(str(?sid) = \"%s\")
-
-                        }""" % subjid_stripped
-                    qres2 = nidmdoc.query(query)
-                    if len(qres2) != 0:
-                        for row in qres2:
-                            print('Found subject ID after stripping "sub-": %s in NIDM file (agent: %s)' %(subjid_stripped,row[0]))
-                            participant_agent = row[0]
-                
-                # If still not found, try stripping leading zeros
-                if len(qres2) == 0 and (len(subjid_stripped) - len(subjid_stripped.lstrip('0'))) != 0:
-                    print('Trying to find subject ID without leading zeros....')
-                    query = """
-                        PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
-                        PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX prov:<http://www.w3.org/ns/prov#>
-                        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-                        select distinct ?agent
-                        where {
-
-                            ?agent rdf:type prov:Agent ;
-                            ndar:src_subject_id ?sid .
-                            FILTER(str(?sid) = \"%s\")
-
-                        }""" % subjid_stripped.lstrip('0')
-                    #print(query)
-                    qres2 = nidmdoc.query(query)
-                    if len(qres2) == 0:
-                        print("Still can't find subject id after stripping leading zeros...")
-                    else:
-                        for row in qres2:
-                            print('Found subject ID after stripping zeros: %s in NIDM file (agent: %s)' %(subjid_stripped.lstrip('0'),row[0]))
-                            participant_agent = row[0]
-                #######################################################################################
-                if (forceagent is not False) and (len(qres2)==0):
-                    print('Explicitly creating agent in existing NIDM file...')
-                    warnings.warn(f"Subject ID {subjid} not found in the input NIDM; the stats are attached "
-                                  f"to a new agent with that ID (--forcenidm)")
-                    participant_agent = niiri[getUUID()]
-                    nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
-                    nidmdoc.add((participant_agent,URIRef(NIDM_SUBJECTID_URI),Literal(subjid, datatype=XSD.string)))
-                elif (forceagent is False) and (len(qres)==0) and (len(qres2)==0):
-                    print('Not explicitly adding agent to NIDM file, no output written')
-                    exit()
-            else:
-                 for row in qres:
-                    print('Found subject ID: %s in NIDM file (agent: %s)' %(subjid,row[0]))
-                    participant_agent = row[0]
-
             # When extending an existing NIDM file, link the segmentation software activity to the
             # anatomical acquisition used to produce the stats (mirrors FSL workflow).
             query_acq = prepareQuery(
@@ -792,6 +784,19 @@ def main():
                      "stats file would be kept. Omit -j to add the stats to the -n file as Turtle, or use "
                      "-o OUTPUT_DIR with -j to write one JSON-LD file per stats file")
 
+    try:
+        _convert(args)
+    except SubjectLookupError as err:
+        # nothing has been written when the lookup fails
+        sys.exit("fs_to_nidm.py: error: %s" % err)
+
+
+def _convert(args):
+    """Run the conversion main() parsed and checked the arguments for."""
+    # subject agents this run creates (--forcenidm), shared by the per-stats-file
+    # and per-row calls of add_seg_data
+    created_agents = set()
+
     # if output_dir doesn't exist then create it
     #if args.output_dir is not None:
     #    out_path = os.path.dirname(args.output_dir)
@@ -883,10 +888,10 @@ def main():
 
                     if args.forcenidm is not False:
                         add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
-                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, forceagent=True)
+                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
                     else:
                         add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
-                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True)
+                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
                     #serialize NIDM file
@@ -1012,10 +1017,10 @@ def main():
 
             if args.forcenidm is not False:
                 add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, forceagent=True)
+                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
             else:
                 add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True)
+                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
             #serialize NIDM file
@@ -1185,10 +1190,10 @@ def main():
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, forceagent=True, description=provenance['description'])
+                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, description=provenance['description'])
+                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
 
                 first_row = False
 
@@ -1204,10 +1209,10 @@ def main():
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, forceagent=True, description=provenance['description'])
+                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, description=provenance['description'])
+                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
 
 
 

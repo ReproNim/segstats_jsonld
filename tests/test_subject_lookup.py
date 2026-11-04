@@ -1,10 +1,15 @@
-"""add_seg_data finds the input subject whichever literal form its id has.
+"""How add_seg_data finds the input subject the stats belong to.
 
-PyNIDM 4.x's bids2nidm writes ndar:src_subject_id as "..."^^xsd:string and
-PyNIDM 5's as a plain literal. rdflib treats the two as different terms, so a
-lookup that spells the datatype matches only the 4.x form; on 5.x input
---forcenidm then minted a second subject agent with no link to the input's
-demographics or acquisitions, and the run still succeeded.
+The id given (-subjid, the -s directory name or a -csv cell) and the id
+stored in the input NIDM (ndar:src_subject_id) are compared after the same
+normalisation on both sides: a leading "sub-" and leading zeros are removed,
+and the literal is compared as a string, so PyNIDM 4.x's "..."^^xsd:string
+and PyNIDM 5's plain literal both match. BIDS directories carry "sub-" and
+participants.tsv may or may not; ABIDE stores 51456 for sub-0051456.
+
+When the input has subjects and none matches, the run fails, even with
+--forcenidm: attaching the stats to a new agent would leave them unconnected
+to the subject's demographics and acquisitions while the run succeeded.
 """
 from types import SimpleNamespace
 
@@ -12,19 +17,32 @@ import pytest
 from rdflib import BNode, Graph, Literal, Namespace, RDF, URIRef, XSD
 
 from segstats_jsonld._pynidm import NIDM_SUBJECTID_URI, Constants
-from segstats_jsonld.fs_to_nidm import add_seg_data
+from segstats_jsonld.fs_to_nidm import SubjectLookupError, add_seg_data
 
 NFO = Namespace("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#")
+SUBJECT_ID = URIRef(NIDM_SUBJECTID_URI)
 T1W = "sub-0050002_T1w.nii.gz"
+STATS = SimpleNamespace(uri="http://example.org/entity/fsstats")
+SPELLINGS = ["sub-0050002", "0050002", "50002"]
+
+
+def _project_graph():
+    graph = Graph()
+    graph.add((URIRef("http://example.org/project"), RDF.type, Constants.NIDM["Project"]))
+    return graph
+
+
+def _add_subject(graph, name, stored_id, datatype=XSD.string):
+    subject = URIRef(f"http://example.org/agent/{name}")
+    graph.add((subject, RDF.type, Constants.PROV["Agent"]))
+    graph.add((subject, RDF.type, Constants.PROV["Person"]))
+    graph.add((subject, SUBJECT_ID, Literal(stored_id, datatype=datatype)))
+    return subject
 
 
 def _input_graph(stored_id, datatype):
-    graph = Graph()
-    graph.add((URIRef("http://example.org/project"), RDF.type, Constants.NIDM["Project"]))
-    subject = URIRef("http://example.org/agent/participant")
-    graph.add((subject, RDF.type, Constants.PROV["Agent"]))
-    graph.add((subject, RDF.type, Constants.PROV["Person"]))
-    graph.add((subject, URIRef(NIDM_SUBJECTID_URI), Literal(stored_id, datatype=datatype)))
+    graph = _project_graph()
+    subject = _add_subject(graph, "participant", stored_id, datatype)
 
     acq_activity = URIRef("http://example.org/activity/acq")
     assoc = BNode()
@@ -43,20 +61,106 @@ def _input_graph(stored_id, datatype):
     return graph, subject, acquisition
 
 
+def _stats_subjects(graph):
+    """Agents a FreeSurfer stats activity is associated with in the subject role."""
+    agents = set()
+    for activity in graph.subjects(Constants.DCT["description"], None):
+        for assoc in graph.objects(activity, Constants.PROV["qualifiedAssociation"]):
+            if (assoc, Constants.PROV["hadRole"], Constants.SIO["Subject"]) in graph:
+                agents.update(graph.objects(assoc, Constants.PROV["agent"]))
+    return agents
+
+
 @pytest.mark.parametrize("datatype", [XSD.string, None], ids=["xsd-string", "plain"])
-@pytest.mark.parametrize("stored_id", ["sub-0050002", "0050002", "50002"])
-def test_add_seg_data_finds_subject_whatever_the_literal_form(stored_id, datatype):
+@pytest.mark.parametrize("stored_id", SPELLINGS)
+@pytest.mark.parametrize("given_id", SPELLINGS)
+def test_finds_the_subject_whatever_the_spelling_on_either_side(given_id, stored_id, datatype, capsys):
     graph, subject, acquisition = _input_graph(stored_id, datatype)
 
-    add_seg_data(
-        graph,
-        {},
-        "sub-0050002",
-        SimpleNamespace(uri="http://example.org/entity/fsstats"),
-        add_to_nidm=True,
-        forceagent=True,
-        acq_filename=[T1W],
-    )
+    add_seg_data(graph, {}, given_id, STATS, add_to_nidm=True, forceagent=True, acq_filename=[T1W])
 
-    assert set(graph.subjects(URIRef(NIDM_SUBJECTID_URI), None)) == {subject}
+    assert set(graph.subjects(SUBJECT_ID, None)) == {subject}
+    assert _stats_subjects(graph) == {subject}
     assert (None, Constants.PROV["used"], acquisition) in graph
+    assert "Found subject ID" in capsys.readouterr().out
+
+
+def test_several_matching_subjects_is_an_error_naming_them():
+    graph = _project_graph()
+    first = _add_subject(graph, "first", "0050002")
+    second = _add_subject(graph, "second", "sub-50002", None)
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    assert str(first) in str(err.value) and str(second) in str(err.value)
+    assert _stats_subjects(graph) == set()
+    assert len(set(graph.subjects(SUBJECT_ID, None))) == 2
+
+
+@pytest.mark.parametrize("forceagent", [True, False], ids=["forcenidm", "no-forcenidm"])
+def test_no_match_while_the_input_has_subjects_is_an_error_listing_them(forceagent):
+    graph = _project_graph()
+    _add_subject(graph, "a", "0050003")
+    _add_subject(graph, "b", "sub-0050004", None)
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=forceagent)
+
+    message = str(err.value)
+    assert "sub-0050002" in message and "0050003" in message and "sub-0050004" in message
+    # no agent was made for the requested id
+    assert {str(o) for o in graph.objects(None, SUBJECT_ID)} == {"0050003", "sub-0050004"}
+    assert _stats_subjects(graph) == set()
+
+
+def test_forcenidm_creates_an_agent_only_when_the_input_has_no_subjects(capsys):
+    graph = _project_graph()
+
+    add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    (agent,) = _stats_subjects(graph)
+    assert list(graph.objects(agent, SUBJECT_ID)) == [Literal("sub-0050002", datatype=XSD.string)]
+    assert "Found subject ID" not in capsys.readouterr().out
+
+
+def test_later_calls_reuse_the_agent_created_earlier_in_the_run(capsys):
+    """-s with -n converts each stats file separately; the agent made for the
+    first one must be reused, and not reported as found in the input. A later
+    -csv row with another id still sees an input without subjects."""
+    graph = _project_graph()
+    created = set()
+
+    add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True,
+                 created_agents=created)
+    add_seg_data(graph, {}, "sub-0050002", SimpleNamespace(uri="http://example.org/entity/second"),
+                 add_to_nidm=True, forceagent=True, created_agents=created)
+    add_seg_data(graph, {}, "sub-0050009", SimpleNamespace(uri="http://example.org/entity/third"),
+                 add_to_nidm=True, forceagent=True, created_agents=created)
+
+    assert len(created) == 2
+    assert {str(o) for o in graph.objects(None, SUBJECT_ID)} == {"sub-0050002", "sub-0050009"}
+    assert "Found subject ID" not in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("stored_id", ['A"1\\x', 'sub-0"\\'])
+def test_quotes_and_backslashes_in_ids_are_compared_as_text(stored_id):
+    graph = _project_graph()
+    subject = _add_subject(graph, "odd", stored_id)
+    _add_subject(graph, "other", "B02")
+
+    add_seg_data(graph, {}, stored_id, STATS, add_to_nidm=True)
+
+    assert _stats_subjects(graph) == {subject}
+
+
+def test_an_id_shaped_like_a_query_matches_nothing():
+    """Interpolated into SPARQL, this id made the filter true for every agent."""
+    graph = _project_graph()
+    _add_subject(graph, "alice", "A01")
+    _add_subject(graph, "bob", "B02")
+
+    with pytest.raises(SubjectLookupError):
+        add_seg_data(graph, {}, 'Z99" || "1" = "1', STATS, add_to_nidm=True, forceagent=True)
+
+    assert _stats_subjects(graph) == set()
