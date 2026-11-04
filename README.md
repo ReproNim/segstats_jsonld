@@ -121,7 +121,8 @@ options:
   sides. If the NIDM file has subjects and none matches, or several match, the run fails (exit 1)
   and writes nothing, with or without `--forcenidm`; earlier releases attached the stats to a new
   subject agent under `--forcenidm`. `--forcenidm` now adds a subject only to a NIDM file that has
-  none, and without it such a file is an error.
+  none, and without it such a file is an error. A subject is any node with `ndar:src_subject_id`
+  (under the `https://` or the `http://` NDAR IRI), whatever its `rdf:type`.
 - `-j` with both `-s` and `-n` is refused with a message naming the alternatives (earlier releases
   failed on it with an rdflib plugin error).
 

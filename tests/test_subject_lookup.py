@@ -180,14 +180,57 @@ def test_an_agent_typed_only_prov_person_is_a_subject():
     assert _stats_subjects(graph) == {person}
 
 
-def test_an_untyped_node_is_not_a_subject():
+# Every node carrying a subject id is a subject, whatever its rdf:type and
+# under either NDAR IRI. A participant that a stricter rule did not see made
+# the input look subject-less, so --forcenidm attached the stats to a new agent
+# and the run exited 0.
+HTTP_SUBJECT_ID = URIRef(str(SUBJECT_ID).replace("https://", "http://", 1))
+SUBJECT_KINDS = ["nidm-subject", "untyped", "http-ndar-iri"]
+
+
+def _add_participant(graph, kind, stored_id):
+    node = URIRef(f"http://example.org/participant/{kind}/{stored_id}")
+    if kind == "nidm-subject":
+        graph.add((node, RDF.type, Constants.NIDM["Subject"]))
+    predicate = HTTP_SUBJECT_ID if kind == "http-ndar-iri" else SUBJECT_ID
+    if kind == "http-ndar-iri":
+        graph.add((node, RDF.type, Constants.PROV["Person"]))
+    graph.add((node, predicate, Literal(stored_id)))
+    return node
+
+
+@pytest.mark.parametrize("kind", SUBJECT_KINDS)
+def test_any_node_with_a_subject_id_is_found(kind):
     graph = _project_graph()
-    graph.add((URIRef("http://example.org/thing"), SUBJECT_ID, Literal("0050002")))
+    node = _add_participant(graph, kind, "0050002")
 
     add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
 
-    (agent,) = _stats_subjects(graph)
-    assert agent != URIRef("http://example.org/thing")
+    assert _stats_subjects(graph) == {node}
+
+
+@pytest.mark.parametrize("forceagent", [True, False], ids=["forcenidm", "no-forcenidm"])
+@pytest.mark.parametrize("kind", SUBJECT_KINDS)
+def test_a_miss_beside_any_node_with_a_subject_id_is_an_error(kind, forceagent):
+    graph = _project_graph()
+    _add_participant(graph, kind, "0050003")
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=forceagent)
+
+    assert "0050003" in str(err.value)
+    assert _stats_subjects(graph) == set()
+
+
+def test_a_typed_and_an_untyped_node_with_the_same_id_are_two_matches():
+    graph = _project_graph()
+    typed = _add_subject(graph, "typed", "0050002")
+    untyped = _add_participant(graph, "untyped", "50002")
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    assert str(typed) in str(err.value) and str(untyped) in str(err.value)
 
 
 @pytest.mark.parametrize("value, expected", [

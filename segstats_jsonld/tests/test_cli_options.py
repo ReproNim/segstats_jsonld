@@ -115,6 +115,31 @@ def test_lookup_miss_fails_and_writes_nothing(tmp_path):
     assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]
 
 
+PARTICIPANT_TTL = {
+    "nidm-subject": '<http://iri.nidash.org/p> a nidm:Subject ; ndar:src_subject_id "51456" .',
+    "untyped": '<http://iri.nidash.org/p> ndar:src_subject_id "51456" .',
+    "http-ndar-iri": '<http://iri.nidash.org/p> a prov:Agent, prov:Person ; '
+                     '<http://ndar.nih.gov/api/datadictionary/v2/dataelement/src_subject_id> "51456" .',
+}
+
+
+@pytest.mark.parametrize("kind", sorted(PARTICIPANT_TTL))
+def test_a_miss_beside_any_node_with_a_subject_id_fails_even_with_forcenidm(tmp_path, kind):
+    """A participant not typed prov:Agent/prov:Person, or stored under the
+    http:// NDAR IRI, is still a subject: the input is not subject-less, so a
+    miss fails instead of attaching the stats to a new agent."""
+    subject_dir = make_subject_dir(tmp_path, stats=("aseg.stats",))
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL.split("<http://iri.nidash.org/subject-51456>")[0] + PARTICIPANT_TTL[kind] + "\n")
+    before = md5(nidm)
+
+    result = run("-s", str(subject_dir), "-subjid", "sub-0099999", "-n", str(nidm), "--forcenidm")
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "not found in the input NIDM, whose subject IDs are: 51456" in result.stderr
+    assert md5(nidm) == before
+
+
 def test_t1_and_t2_options_are_gone(tmp_path):
     """--t1/--t2 wrote a second image entity per stats file, disconnected from
     the input's acquisition; -acq_filename links the input's acquisition."""
