@@ -1,11 +1,13 @@
 """Command-line combinations of fs_to_nidm: which are refused, and where the
 output of the accepted ones lands."""
 import hashlib
+import os
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 from rdflib import Graph, Namespace, URIRef
 
 TESTDATA = Path(__file__).resolve().parent / "testdata"
@@ -139,3 +141,26 @@ def test_no_subjects_without_forcenidm_fails_and_writes_nothing(tmp_path):
     assert "no subject agents" in result.stderr and "--forcenidm" in result.stderr
     assert md5(nidm) == before
     assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]
+
+
+def help_text():
+    env = dict(os.environ, COLUMNS="100")
+    result = subprocess.run([sys.executable, "-m", "segstats_jsonld.fs_to_nidm", "-h"],
+                            cwd=REPO_ROOT, capture_output=True, text=True, env=env)
+    assert result.returncode == 0, result.stderr
+    return result.stdout
+
+
+def test_help_says_how_output_is_given():
+    text = " ".join(help_text().split())
+    assert "Exactly one of -o/--output and -n/--nidm is required" in text
+    # with -s, -o is a directory; with -f or -csv, a file
+    assert "With -s, the directory" in text and "with -f or -csv, the output file" in text
+
+
+@pytest.mark.skipif(not (3, 10) <= sys.version_info[:2] < (3, 13),
+                    reason="argparse formats help differently outside 3.10-3.12")
+def test_readme_usage_is_the_help_output():
+    readme = (REPO_ROOT / "README.md").read_text()
+    block = readme.split("## Usage", 1)[1].split("```", 2)[1]
+    assert block.strip("\n") == help_text().strip("\n")

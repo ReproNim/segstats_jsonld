@@ -174,3 +174,16 @@ def test_select_acquisition(rows, names, expected):
         got = select_acquisition(rows, names, "sub-01")
     assert got == [URIRef(e) for e in expected]
     assert bool(caught) == (not expected)
+
+
+def test_the_remedy_offered_with_csv_is_one_csv_users_can_take():
+    """-acq_filename is refused with -csv, so the warning must not suggest it there."""
+    from segstats_jsonld.fs_to_nidm import select_acquisition
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        assert select_acquisition([A, B], None, "01", from_csv=True) == []
+        assert select_acquisition([A, B], None, "01") == []
+    csv_message, cli_message = (str(w.message) for w in caught)
+    assert "-acq_filename names" not in csv_message
+    assert "-s or -f" in csv_message and "-acq_filename" in csv_message
+    assert "-acq_filename names the ones used" in cli_message

@@ -347,7 +347,7 @@ def url_validator(url):
     except:
         return False
 
-def select_acquisition(rows, acq_filenames, subjid):
+def select_acquisition(rows, acq_filenames, subjid, from_csv=False):
     '''
     Pick the anatomical AcquisitionObjects the stats were computed from.
 
@@ -355,6 +355,8 @@ def select_acquisition(rows, acq_filenames, subjid):
     :param acq_filenames: file names of the images FreeSurfer used (recon-all
         averages repeated runs), or None
     :param subjid: subject identifier, for messages
+    :param from_csv: the stats come from a -csv row, where -acq_filename is not accepted,
+        so the warning names a remedy that is
     :return: list of AcquisitionObjects to link; empty to leave the stats unlinked
 
     A subject can have several anatomical acquisitions (sessions, runs, acq-
@@ -370,8 +372,13 @@ def select_acquisition(rows, acq_filenames, subjid):
             warnings.warn(f"No anatomical AcquisitionObject found for subject {subjid}; "
                           f"the stats are not linked to an acquisition")
         else:
+            if from_csv:
+                remedy = ("to link them, convert this subject's stats with -s or -f and name the images "
+                          "with -acq_filename")
+            else:
+                remedy = "-acq_filename names the ones used"
             warnings.warn(f"{len(candidates)} anatomical AcquisitionObjects found for subject {subjid}; "
-                          f"the stats are not linked to an acquisition (-acq_filename names the ones used)")
+                          f"the stats are not linked to an acquisition ({remedy})")
         return []
     chosen = []
     for name in acq_filenames:
@@ -419,6 +426,7 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
     is raised. Several matches also raise. These are the rules of
     ants_seg_to_nidm's lookup, so both converters find the same subject.
 
+    :param from_csv: the stats come from a -csv row (changes only the wording of warnings)
     :param created_agents: agents created by earlier calls in this run (-s
         with -n converts each stats file separately; -csv one row at a time).
         They are reused when they match, and do not count as input subjects.
@@ -466,7 +474,7 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
                              "no output written (--forcenidm adds a new agent for it)" % subjid)
 
 
-def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None):
+def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None, from_csv=False):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
     NIDM-E file for the matching subject ID
@@ -566,7 +574,7 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False,
                 """
             )
             res = list(nidmdoc.query(query_acq, initBindings={"subject": participant_agent}))
-            for acq_obj in select_acquisition(res, acq_filename, subjid):
+            for acq_obj in select_acquisition(res, acq_filename, subjid, from_csv=from_csv):
                 nidmdoc.add((software_activity, Constants.PROV['used'], acq_obj))
 
     #create a blank node and qualified association with prov:Agent for participant
@@ -663,11 +671,10 @@ def main():
 
     import argparse
     parser = argparse.ArgumentParser(prog='fs_to_nidm.py',
-                                     description='''This program will load in a aseg.stats file from Freesurfer
-                                     , augment the Freesurfer anatomical region designations with common data element
-                                        anatomical designations, and save the statistics + region designations out as
-                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))''',
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+                                     description='This program reads FreeSurfer stats files (e.g. aseg.stats), '
+                                     'maps the FreeSurfer regions and measures to common data elements, and writes '
+                                     'the statistics as NIDM (Turtle or JSON-LD), either as new files (-o) or added '
+                                     'to an existing NIDM file (-n).')
     #DBK: added mutually exclusive arguments to support pulling a named stats file (e.g. aseg.stats) as a URL such as
     #data hosted in an amazon bucket or from a mounted filesystem where you don't have access to the original
     #subjects directory.
@@ -677,36 +684,42 @@ def main():
 
     group.add_argument('-s', '--subject_dir', dest='subject_dir', type=str,
                         help='Path to Freesurfer subject directory')
-    group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer'
+    group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer '
                             'stats file. Check supported_files for list of supported stats files.')
     group.add_argument('-csv', '--csv_file', dest='csvfile', type=str, help='Path to CSV file which includes '
-                            'a header row with 1 column containing subject IDs and the other columns are variables'
+                            'a header row with 1 column containing subject IDs and the other columns are variables '
                             'indicating the Freesurfer-derived region measure (e.g. volume, surface area, etc.  If '
                             'you use this mode of running this software you will be asked to match your region '
                             'variables to standard Freesurfer region / measure labels presented to you (so this '
-                            'program will end up being interactive.  In future WIP we will add the ability to export'
+                            'program will end up being interactive.  In future WIP we will add the ability to export '
                             'a json sidecar file with those mappings for automated runs of future CSV files with the '
                             'same set of variables.')
     parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='Subject identifier to be used in '
                             'the NIDM files. Required with -f/--seg_file. With -s/--subject_dir it defaults to the '
                             'name of the subject directory; set it when that directory is not named after the subject')
-    group2.add_argument('-o', '--output', dest='output_dir', type=str,
-                        help='Output filename with full path', required=False, default=None)
+    group2.add_argument('-o', '--output', dest='output_dir', metavar='OUTPUT', type=str, required=False, default=None,
+                        help='Where to write a new NIDM file. With -s, the directory that gets one '
+                             '<stats>_nidm.ttl (or .jsonld) per stats file; with -f or -csv, the output file. '
+                             'Exactly one of -o/--output and -n/--nidm is required')
+    group2.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,default=None,
+                        help='Existing NIDM file to add the stats to; it is rewritten in place (with -j the '
+                             'result goes to <NIDM_FILE>.json instead). Exactly one of -o/--output and '
+                             '-n/--nidm is required')
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
                         help='If flag set then NIDM file will be written as JSONLD instead of TURTLE. With -n '
                              'the JSON-LD goes to <NIDM_FILE>.json. Not allowed with -s and -n together')
     parser.add_argument('-add_de', '--add_de', dest='add_de', action='store_true', default = None,
-                        help='If flag set then data element data dictionary will be added to nidm file else it will written to a'
-                            'separate file as fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemter'
-                            'is used.')
-    group2.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,default=None,
-                        help='Optional NIDM file to add segmentation data to.')
+                        help='If flag set then the data element dictionary is added to the NIDM file, else it is '
+                             'written to a separate file, fs_cde.ttl, in the output directory (or the directory '
+                             'of the -n NIDM file)')
     parser.add_argument('-forcenidm','--forcenidm', action='store_true',required=False,
-                        help='If adding to NIDM file this parameter forces the data to be added even if the participant'
-                             'doesnt currently exist in the NIDM file.')
+                        help='With -n: if the NIDM file has no subjects at all, add a new subject agent with the '
+                             'subject ID and attach the stats to it. If the file has subjects and none matches the '
+                             'subject ID (compared without a leading "sub-" and leading zeros), the run fails '
+                             'with or without this option')
     parser.add_argument('-json_map', '--json_map', dest='json_map', required=False, default=None,
-                        help='If storing freesurfer segmentation data stored in a CSV file and you\'ve previously'
-                             'stored the variable to Freesurfer CDE mappings, this can be reused.  Otherwise'
+                        help='If storing freesurfer segmentation data stored in a CSV file and you\'ve previously '
+                             'stored the variable to Freesurfer CDE mappings, this can be reused.  Otherwise '
                              'this argument is ignored')
     parser.add_argument('-acq_filename', '--acq_filename', dest='acq_filename', nargs='+', required=False, default=None,
                         help='With -s or -f and -n: file names (or paths) of the anatomical images the stats were '
@@ -1107,7 +1120,7 @@ def _convert(args):
                     nidmdoc = nidmdoc + g2 + pde
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                            acq_filename=args.acq_filename, description=provenance['description'])
+                            acq_filename=args.acq_filename, description=provenance['description'], from_csv=True)
 
                 first_row = False
             # then we can continue to iterate over the rows in the CSV file, adding to the nidmdoc graph
@@ -1123,7 +1136,7 @@ def _convert(args):
                 nidmdoc = nidmdoc + g2
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                            acq_filename=args.acq_filename, description=provenance['description'])
+                            acq_filename=args.acq_filename, description=provenance['description'], from_csv=True)
 
             # we adding these data to an existing NIDM file
             elif (nidm_file is not None) and (first_row):
@@ -1143,10 +1156,10 @@ def _convert(args):
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'], from_csv=True)
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'], from_csv=True)
 
                 first_row = False
 
@@ -1162,10 +1175,10 @@ def _convert(args):
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'], from_csv=True)
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'], from_csv=True)
 
 
 

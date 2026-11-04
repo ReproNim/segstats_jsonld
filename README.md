@@ -41,47 +41,71 @@ $ pip install -e .
 
 ## Usage
 
+The program is installed as `segstats2nidm`; `python -m segstats_jsonld.fs_to_nidm` runs the same
+program. Give exactly one of `-o` (write new NIDM files) and `-n` (add the stats to an existing NIDM
+file). With `-s`, `-o` is a directory that receives one file per stats file; with `-f` or `-csv` it is
+the output file. The text below is the program's `--help`.
+
 ```
-usage: segstats2nidm [-h] (-s SUBJECT_DIR | -f SEGFILE | -csv CSVFILE) [-subjid SUBJID] [-o OUTPUT_DIR] [-j] [-add_de] [-n NIDM_FILE]
-                     [-forcenidm] [-json_map JSON_MAP] [-acq_filename ACQ_FILENAME [ACQ_FILENAME ...]]
+usage: fs_to_nidm.py [-h] (-s SUBJECT_DIR | -f SEGFILE | -csv CSVFILE) [-subjid SUBJID]
+                     (-o OUTPUT | -n NIDM_FILE) [-j] [-add_de] [-forcenidm] [-json_map JSON_MAP]
+                     [-acq_filename ACQ_FILENAME [ACQ_FILENAME ...]]
 
-This program will load in a aseg.stats file from Freesurfer, augment the Freesurfer anatomical region designations with common data element
-anatomical designations, and save the statistics + region designations out as NIDM serializations (i.e. TURTLE, JSON-LD RDF))
+This program reads FreeSurfer stats files (e.g. aseg.stats), maps the FreeSurfer regions and
+measures to common data elements, and writes the statistics as NIDM (Turtle or JSON-LD), either as
+new files (-o) or added to an existing NIDM file (-n).
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -s SUBJECT_DIR, --subject_dir SUBJECT_DIR
                         Path to Freesurfer subject directory
   -f SEGFILE, --seg_file SEGFILE
-                        Path or URL to a specific Freesurferstats file. Note, currently supported is aseg.stats, lh/rh.aparc.stats
+                        Path or URL to a specific Freesurfer stats file. Check supported_files for
+                        list of supported stats files.
   -csv CSVFILE, --csv_file CSVFILE
-                        Path to CSV file which includes a header row with 1 column containing subject IDs and the other columns are
-                        variablesindicating the Freesurfer-derived region measure (e.g. volume, surface area, etc. If you use this mode of
-                        running this software you will be asked to match your region variables to standard Freesurfer region / measure labels
-                        presented to you (so this program will end up being interactive. In future WIP we will add the ability to exporta json
-                        sidecar file with those mappings for automated runs of future CSV files with the same set of variables.
+                        Path to CSV file which includes a header row with 1 column containing
+                        subject IDs and the other columns are variables indicating the Freesurfer-
+                        derived region measure (e.g. volume, surface area, etc. If you use this
+                        mode of running this software you will be asked to match your region
+                        variables to standard Freesurfer region / measure labels presented to you
+                        (so this program will end up being interactive. In future WIP we will add
+                        the ability to export a json sidecar file with those mappings for
+                        automated runs of future CSV files with the same set of variables.
   -subjid SUBJID, --subjid SUBJID
-                        Subject identifier to be used in the NIDM files. Required with -f/--seg_file. With -s/--subject_dir it defaults to
-                        the name of the subject directory; set it when that directory is not named after the subject
-  -o OUTPUT_DIR, --output OUTPUT_DIR
-                        Output filename with full path
-  -j, --jsonld          If flag set then NIDM file will be written as JSONLD instead of TURTLE
-  -add_de, --add_de     If flag set then data element data dictionary will be added to nidm file else it will written to aseparate file as
-                        fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemteris used.
+                        Subject identifier to be used in the NIDM files. Required with
+                        -f/--seg_file. With -s/--subject_dir it defaults to the name of the
+                        subject directory; set it when that directory is not named after the
+                        subject
+  -o OUTPUT, --output OUTPUT
+                        Where to write a new NIDM file. With -s, the directory that gets one
+                        <stats>_nidm.ttl (or .jsonld) per stats file; with -f or -csv, the output
+                        file. Exactly one of -o/--output and -n/--nidm is required
   -n NIDM_FILE, --nidm NIDM_FILE
-                        Optional NIDM file to add segmentation data to.
+                        Existing NIDM file to add the stats to; it is rewritten in place (with -j
+                        the result goes to <NIDM_FILE>.json instead). Exactly one of -o/--output
+                        and -n/--nidm is required
+  -j, --jsonld          If flag set then NIDM file will be written as JSONLD instead of TURTLE.
+                        With -n the JSON-LD goes to <NIDM_FILE>.json. Not allowed with -s and -n
+                        together
+  -add_de, --add_de     If flag set then the data element dictionary is added to the NIDM file,
+                        else it is written to a separate file, fs_cde.ttl, in the output directory
+                        (or the directory of the -n NIDM file)
   -forcenidm, --forcenidm
-                        If adding to NIDM file this parameter forces the data to be added even if the participantdoesnt currently exist in the
-                        NIDM file.
+                        With -n: if the NIDM file has no subjects at all, add a new subject agent
+                        with the subject ID and attach the stats to it. If the file has subjects
+                        and none matches the subject ID (compared without a leading "sub-" and
+                        leading zeros), the run fails with or without this option
   -json_map JSON_MAP, --json_map JSON_MAP
-                        If storing freesurfer segmentation data stored in a CSV file and you've previouslystored the variable to Freesurfer CDE
-                        mappings, this can be reused. Otherwisethis argument is ignored
+                        If storing freesurfer segmentation data stored in a CSV file and you've
+                        previously stored the variable to Freesurfer CDE mappings, this can be
+                        reused. Otherwise this argument is ignored
   -acq_filename ACQ_FILENAME [ACQ_FILENAME ...], --acq_filename ACQ_FILENAME [ACQ_FILENAME ...]
-                        With -s or -f and -n: file names (or paths) of the anatomical images the stats were computed from (several for
-                        repeated runs). The stats are linked to the input NIDM acquisitions with those file names if each name matches
-                        exactly one of the subject's anatomical acquisitions, and left unlinked otherwise. Without it the stats are linked
-                        only when the subject has a single anatomical acquisition
-
+                        With -s or -f and -n: file names (or paths) of the anatomical images the
+                        stats were computed from (several for repeated runs). The stats are linked
+                        to the input NIDM acquisitions with those file names if each name matches
+                        exactly one of the subject's anatomical acquisitions, and left unlinked
+                        otherwise. Without it the stats are linked only when the subject has a
+                        single anatomical acquisition
 ```
 
 ### Updating the FreeSurfer Common Data Elements
