@@ -813,6 +813,10 @@ def _convert(args):
 
     # if we set -s or --subject_dir as parameter on command line...
     if args.subject_dir is not None:
+        stats_dir = os.path.join(args.subject_dir, "stats")
+        if not any(basename(f) in supported_files for f in glob.glob(os.path.join(stats_dir, "*.stats"))):
+            sys.exit("fs_to_nidm.py: error: no supported stats file in %s (looked for: %s); "
+                     "no output written" % (stats_dir, ", ".join(sorted(supported_files))))
         # get the freesurfer version for later use
         freesurfer_version = read_buildstamp(args.subject_dir)
         # files=['aseg.stats']

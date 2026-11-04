@@ -140,6 +140,27 @@ def test_a_miss_beside_any_node_with_a_subject_id_fails_even_with_forcenidm(tmp_
     assert md5(nidm) == before
 
 
+@pytest.mark.parametrize("output", ["-n", "-o"])
+def test_subject_dir_without_supported_stats_files_fails(tmp_path, output):
+    """An empty or unrecognised stats/ used to exit 0 silently, so even a wrong
+    -subjid passed and a caller reported success without any stats."""
+    subject_dir = make_subject_dir(tmp_path, stats=())
+    (subject_dir / "stats" / "unknown.stats").write_text("# not a supported file\n")
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    before = md5(nidm)
+    target = str(nidm) if output == "-n" else str(tmp_path)
+
+    result = run("-s", str(subject_dir), "-subjid", "sub-0099999", output, target, "--forcenidm")
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    message = " ".join(result.stderr.split())
+    assert f"no supported stats file in {subject_dir / 'stats'}" in message
+    assert "aseg.stats" in message and "lh.aparc.stats" in message
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]
+
+
 def test_t1_and_t2_options_are_gone(tmp_path):
     """--t1/--t2 wrote a second image entity per stats file, disconnected from
     the input's acquisition; -acq_filename links the input's acquisition."""

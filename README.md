@@ -123,6 +123,8 @@ options:
   subject agent under `--forcenidm`. `--forcenidm` now adds a subject only to a NIDM file that has
   none, and without it such a file is an error. A subject is any node with `ndar:src_subject_id`
   (under the `https://` or the `http://` NDAR IRI), whatever its `rdf:type`.
+- `-s` with no supported stats file in its `stats/` directory fails (exit 1) with a message naming
+  the directory and the files looked for; earlier releases exited 0 without writing anything.
 - `-j` with both `-s` and `-n` is refused with a message naming the alternatives (earlier releases
   failed on it with an rdflib plugin error).
 
