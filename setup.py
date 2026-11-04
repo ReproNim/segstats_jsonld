@@ -39,14 +39,15 @@ setup(
     long_description=long_description,
     author="David Keator",
     author_email="dbkeator@uci.edu",
-    url="https://github.com/dbkeator/segstats_jsonld",
+    url="https://github.com/ReproNim/segstats_jsonld",
     packages=PACKAGES,
     install_requires=[
-        # Pinned to match the app's requirements.txt. The converter itself
-        # runs on PyNIDM 4.x and 5 (segstats_jsonld/_pynidm.py picks the API).
-        "pynidm==5.0.0",
+        # The converter runs on PyNIDM 4.5 and 5 (segstats_jsonld/_pynidm.py
+        # picks the API). Applications that install it pin the exact version.
+        "pynidm>=4.5.0,<6",
         "pandas",
-        "prov",
+        # PyNIDM 4.5 imports prov.graph without declaring its "graph" extra.
+        "prov[graph]",
         "xlrd",
         "rdflib>=6.0.0",
         # NOTE: rdflib-jsonld is intentionally NOT listed here. It is deprecated --

@@ -1,7 +1,5 @@
-# NOTE: the container build does not read this file -- it installs this package
-# with `pip install -e .` and then applies the pins in the top-level
-# requirements.txt (pynidm==5.0.0, rdflib>=7). Kept in sync to avoid misleading
-# anyone debugging versions.
+# Development and test environment. setup.py accepts PyNIDM 4.5 and 5; this
+# file pins the version the tests are run against.
 pynidm==5.0.0
 pandas
 prov
