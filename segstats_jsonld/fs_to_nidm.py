@@ -746,7 +746,8 @@ def main():
     group2.add_argument('-o', '--output', dest='output_dir', type=str,
                         help='Output filename with full path', required=False, default=None)
     parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
-                        help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
+                        help='If flag set then NIDM file will be written as JSONLD instead of TURTLE. With -n '
+                             'the JSON-LD goes to <NIDM_FILE>.json. Not allowed with -s and -n together')
     parser.add_argument('-add_de', '--add_de', dest='add_de', action='store_true', default = None,
                         help='If flag set then data element data dictionary will be added to nidm file else it will written to a'
                             'separate file as fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemter'
@@ -782,6 +783,14 @@ def main():
         parser.error("-acq_filename applies to -s/--subject_dir or -f/--seg_file, not -csv/--csv_file")
     if args.acq_filename and not args.nidm_file:
         parser.error("-acq_filename requires -n/--nidm")
+    # -s with -n converts each stats file against a fresh read of the -n file;
+    # in Turtle the result is written back to that file, so the next stats file
+    # builds on it, but -j writes <nidm>.json instead, so every stats file but
+    # the last one would be lost
+    if args.jsonld and args.subject_dir and args.nidm_file:
+        parser.error("-j/--jsonld cannot be combined with -s/--subject_dir and -n/--nidm: only the last "
+                     "stats file would be kept. Omit -j to add the stats to the -n file as Turtle, or use "
+                     "-o OUTPUT_DIR with -j to write one JSON-LD file per stats file")
 
     # if output_dir doesn't exist then create it
     #if args.output_dir is not None:
