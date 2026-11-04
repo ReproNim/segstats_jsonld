@@ -1227,10 +1227,10 @@ def _convert(args):
                 # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='turtle')
                 nidmdoc.serialize(destination=args.output_dir, format='turtle')
 
-                # added to support separate cde serialization
-                if args.add_de is None:
-                    # serialize cde graph
-                    g.serialize(destination=join(dirname(args.output_dir), "fs_cde.ttl"), format='turtle')
+            # added to support separate cde serialization
+            if args.add_de is None:
+                # serialize cde graph
+                g.serialize(destination=join(dirname(args.output_dir), "fs_cde.ttl"), format='turtle')
 
         else:
 

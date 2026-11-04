@@ -127,3 +127,18 @@ def test_csv_lookup_miss_with_a_saved_map_writes_nothing(tmp_path):
     assert "No output written" in result.stderr
     assert md5(nidm) == before
     assert sorted(p.name for p in tmp_path.iterdir()) == ["fs.csv", "nidm.ttl", "saved_map.json"]
+
+
+@PYNIDM4_DD_TO_NIDM
+def test_csv_jsonld_output_writes_the_cde_file_beside_it(tmp_path):
+    """-add_de's help says that without it the data elements go to fs_cde.ttl in
+    the output directory; -csv -o -j used to write none."""
+    csv = write_csv(tmp_path)
+    json_map = write_json_map(tmp_path, csv)
+    out_dir = tmp_path / "out"
+    out_dir.mkdir()
+
+    result = run("-csv", str(csv), "-json_map", str(json_map), "-o", str(out_dir / "fs.jsonld"), "-j")
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert sorted(p.name for p in out_dir.iterdir()) == ["fs.jsonld", "fs_cde.ttl"]
