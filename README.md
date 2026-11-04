@@ -131,17 +131,30 @@ options:
 ### Updating the FreeSurfer Common Data Elements
 
 This section describes how one can update the common data elements from FreeSurfer
-as they update the names they are using for their elements.
+as they update the names they are using for their elements. Run it from the repository
+root with the package installed in editable mode (`pip install -e .`), so the files under
+`segstats_jsonld/mapping_data/` are the ones written.
 
 ```Python
-from fsutils import collate_fs_items, create_fs_mapper
+from segstats_jsonld.fsutils import collate_fs_items, create_fs_mapper, create_cde_graph
 collate_fs_items('/path/to/statsdir', error_on_new_key=False)
 create_fs_mapper()
 ```
 
-This will add new structures to freesurfermap.json file, which you can edit to
-improve connections to ontologies (e.g., by editing the `isAbout`).
+This adds new structures to `freesurfer-cdes.json` and `freesurfermap.json`. You can edit
+`freesurfermap.json` to improve connections to ontologies (e.g., by editing the `isAbout`) and
+run `create_fs_mapper()` again to carry the edits into `freesurfer-cdes.json`.
+
+Then regenerate `fs_cde.ttl`, the file PyNIDM reads, from `freesurfer-cdes.json`:
 
 ```Python
-create_fs_mapper()
+create_cde_graph().serialize(destination="segstats_jsonld/mapping_data/fs_cde.ttl", format="turtle")
 ```
+
+`tests/test_fs_cde_ttl.py` fails while `fs_cde.ttl` and `freesurfer-cdes.json` disagree.
+
+PyNIDM (4.x and 5.x) caches the data elements it loads in
+`<temp dir>/cde_graph.<hash>.pickle` (`<temp dir>` is Python's `tempfile.gettempdir()`, usually
+`$TMPDIR` or `/tmp`) and reuses that file without checking whether the `.ttl` files changed.
+After `fs_cde.ttl` changes, delete `cde_graph.*.pickle` there, or PyNIDM keeps resolving
+against the old data elements.

@@ -36,3 +36,16 @@ def test_thickness_measures_are_measures_of_thickness():
              if key != "count" and "Thick" in eval(key, {"FS": FS}).measure
              and value["measureOf"] != THICKNESS}
     assert wrong == {}
+
+
+def test_readme_cde_update_procedure_regenerates_fs_cde_ttl():
+    """Following the README used to leave fs_cde.ttl stale (544 terms were
+    missing from it), and its import path did not resolve."""
+    readme = (Path(__file__).resolve().parents[1] / "README.md").read_text()
+    section = readme.split("### Updating the FreeSurfer Common Data Elements", 1)[1]
+    assert "from segstats_jsonld.fsutils import" in section
+    assert "from fsutils import" not in section
+    assert ('create_cde_graph().serialize(destination="segstats_jsonld/mapping_data/fs_cde.ttl", '
+            'format="turtle")') in section
+    # PyNIDM keeps the CDE graph it built in a pickle with no version check
+    assert "cde_graph.*.pickle" in section
