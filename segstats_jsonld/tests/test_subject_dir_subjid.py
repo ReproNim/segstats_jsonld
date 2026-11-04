@@ -42,7 +42,27 @@ ACQ_TTL = INPUT_TTL + "".join(f"""
 <http://iri.nidash.org/act-{name}> a prov:Activity ;
     prov:qualifiedAssociation [ a prov:Association ; prov:agent <{SUBJECT}> ] .
 """ for name in ACQ_NAMES)
-ACQ = {name: URIRef(f"http://iri.nidash.org/acq-{name}") for name in ACQ_NAMES}
+# PyNIDM inputs also hold functional acquisitions, which must never be
+# candidates, and an anatomical acquisition can lack nfo:filename, in which
+# case it is still a candidate (it just cannot be named with -acq_filename)
+OTHER_ACQ_TTL = f"""
+<http://iri.nidash.org/acq-nofile> a nidm:AcquisitionObject, prov:Entity ;
+    nidm:hadAcquisitionModality nidm:MagneticResonanceImaging ;
+    nidm:hadImageUsageType nidm:Anatomical ;
+    prov:wasGeneratedBy <http://iri.nidash.org/act-nofile> .
+<http://iri.nidash.org/act-nofile> a prov:Activity ;
+    prov:qualifiedAssociation [ a prov:Association ; prov:agent <{SUBJECT}> ] .
+<http://iri.nidash.org/acq-bold> a nidm:AcquisitionObject, prov:Entity ;
+    nidm:hadAcquisitionModality nidm:MagneticResonanceImaging ;
+    nidm:hadImageUsageType nidm:Functional ;
+    <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#filename>
+        "bids::sub-0051456/ses-1/func/sub-0051456_ses-1_task-rest_bold.nii.gz"^^xsd:string ;
+    prov:wasGeneratedBy <http://iri.nidash.org/act-bold> .
+<http://iri.nidash.org/act-bold> a prov:Activity ;
+    prov:qualifiedAssociation [ a prov:Association ; prov:agent <{SUBJECT}> ] .
+"""
+ACQ_TTL += OTHER_ACQ_TTL
+ACQ = {name: URIRef(f"http://iri.nidash.org/acq-{name}") for name in ACQ_NAMES + ("nofile", "bold")}
 
 
 def t1w(name):
@@ -125,8 +145,9 @@ def test_several_acquisitions_without_a_file_name_are_left_unlinked(tmp_path):
     g, err = run_fs_to_nidm(tmp_path, "-subjid", "sub-0051456", input_ttl=ACQ_TTL)
     assert subject_agents(g) == {SUBJECT}
     assert used_acquisitions(g) == set()
-    # the query found all three; they are left unlinked because none was named
-    assert "3 anatomical AcquisitionObjects found for subject sub-0051456" in err
+    # the query found the four anatomical ones (the one without a file name
+    # too, not the functional one); left unlinked because none was named
+    assert "4 anatomical AcquisitionObjects found for subject sub-0051456" in err
 
 
 def test_one_unmatched_file_name_leaves_all_unlinked(tmp_path):
@@ -187,3 +208,45 @@ def test_the_remedy_offered_with_csv_is_one_csv_users_can_take():
     assert "-acq_filename names" not in csv_message
     assert "-s or -f" in csv_message and "-acq_filename" in csv_message
     assert "-acq_filename names the ones used" in cli_message
+
+
+def test_a_single_anatomical_acquisition_without_a_file_name_is_linked(tmp_path):
+    """The functional acquisition is not a candidate, and the anatomical one is
+    found although it has no nfo:filename."""
+    g, err = run_fs_to_nidm(tmp_path, "-subjid", "sub-0051456", input_ttl=INPUT_TTL + OTHER_ACQ_TTL)
+    assert used_acquisitions(g) == {ACQ["nofile"]}
+    assert NOT_LINKED not in err
+
+
+def test_a_trailing_slash_on_the_subject_dir_keeps_its_name(tmp_path):
+    """Without -subjid the id is the directory name, also when -s ends in "/"."""
+    subject_dir = tmp_path / "sub-0051456"
+    (subject_dir / "stats").mkdir(parents=True)
+    shutil.copy(TESTDATA / "aseg.stats", subject_dir / "stats" / "aseg.stats")
+    (subject_dir / "scripts").mkdir()
+    (subject_dir / "scripts" / "build-stamp.txt").write_text("freesurfer-7.4.1\n")
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    result = subprocess.run(
+        [sys.executable, "-m", "segstats_jsonld.fs_to_nidm", "-s", str(subject_dir) + "/",
+         "-n", str(nidm), "--forcenidm"],
+        cwd=REPO_ROOT, capture_output=True, text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert subject_agents(Graph().parse(nidm, format="turtle")) == {SUBJECT}
+
+
+def test_seg_file_with_nidm_writes_the_cde_file_beside_it(tmp_path):
+    nidm_dir = tmp_path / "nidm"
+    nidm_dir.mkdir()
+    nidm = nidm_dir / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    result = subprocess.run(
+        [sys.executable, "-m", "segstats_jsonld.fs_to_nidm", "-f", str(TESTDATA / "aseg.stats"),
+         "-subjid", "sub-0051456", "-n", str(nidm)],
+        cwd=tmp_path, capture_output=True, text=True,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert sorted(p.name for p in nidm_dir.iterdir()) == ["fs_cde.ttl", "nidm.ttl"]
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm"]
+    assert subject_agents(Graph().parse(nidm, format="turtle")) == {SUBJECT}

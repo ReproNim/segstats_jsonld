@@ -23,3 +23,12 @@ def test_namespaces():
     assert str(Constants.PROV) == "http://www.w3.org/ns/prov#"
     assert str(Constants.NIDM) == "http://purl.org/nidash/nidm#"
     assert PYNIDM_MAJOR in (4, 5)
+
+
+def test_measure_and_provenance_namespaces():
+    # FREESURFER must equal the fs: prefix of mapping_data/fs_cde.ttl, which
+    # PyNIDM resolves the measures against
+    assert str(Constants.FREESURFER) == "https://surfer.nmr.mgh.harvard.edu/"
+    assert str(Constants.NDAR) == "https://ndar.nih.gov/api/datadictionary/v2/dataelement/"
+    assert str(Constants.SIO) == "http://semanticscience.org/ontology/sio.owl#"
+    assert str(Constants.DCT) == "http://purl.org/dc/terms/"
