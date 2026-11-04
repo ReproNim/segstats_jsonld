@@ -55,6 +55,7 @@ from socket import getfqdn
 import glob
 import pandas as pd
 import warnings
+import contextlib
 import logging
 
 import prov.model as prov
@@ -482,6 +483,21 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
         return agent
     raise SubjectLookupError("Subject ID %s not found in the input NIDM, which has no subject agents; "
                              "no output written (--forcenidm adds a new agent for it)" % subjid)
+
+
+def _check_csv_subjects(nidm_file, subject_ids, forceagent):
+    """
+    Raise SubjectLookupError if any of the -csv rows' subject ids would fail the
+    lookup add_seg_data makes, without asking anything or writing anything. Runs
+    the same lookup, in row order, on a throwaway copy of the input NIDM.
+    """
+    graph = Graph()
+    graph.parse(nidm_file, format=util.guess_format(nidm_file))
+    created = set()
+    with contextlib.redirect_stdout(StringIO()), warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        for subjid in subject_ids:
+            _input_subject_agent(graph, subjid, forceagent, created)
 
 
 def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None, from_csv=False):
@@ -1061,6 +1077,11 @@ def _convert(args):
 
         # re-read data file with constraint that key field is read as string
         df = pd.read_csv(args.csvfile, dtype={id_field: str})
+
+        # look every row's subject up before the interactive mapping, which saves
+        # <csv>_map.json, so a run that cannot find a subject writes nothing
+        if args.nidm_file:
+            _check_csv_subjects(args.nidm_file, [str(v) for v in df[id_field]], args.forcenidm)
 
         # step 3: interact with the user about the variables in this CSV file.
         if args.nidm_file:

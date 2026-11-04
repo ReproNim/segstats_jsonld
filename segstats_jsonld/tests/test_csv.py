@@ -89,3 +89,41 @@ def test_csv_with_nidm_attaches_the_row_to_the_input_subject(tmp_path):
     values = {str(o) for _, p, o in g if str(p) == THALAMUS_CDE}
     assert values == {"7000"}
     assert (tmp_path / "fs_cde.ttl").exists()
+
+
+# id column 1; measurement type 5 (volume); the first matching region; provenance
+INTERACTIVE_ANSWERS = "1\n5\n1\n" + PROVENANCE_ANSWERS
+
+
+def test_csv_lookup_miss_writes_nothing_and_asks_no_mapping_questions(tmp_path):
+    """The rows' subjects are looked up before the interactive mapping, which
+    writes <csv>_map.json; a miss used to leave that file behind under a
+    message saying no output was written."""
+    csv = write_csv(tmp_path, subject="sub-0099999")
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    before = md5(nidm)
+
+    result = run("-csv", str(csv), "-n", str(nidm), "--forcenidm", answers=INTERACTIVE_ANSWERS)
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "Subject ID sub-0099999 not found in the input NIDM" in result.stderr
+    assert "No output written" in result.stderr
+    assert "Select which measurement type" not in result.stdout
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["fs.csv", "nidm.ttl"]
+
+
+def test_csv_lookup_miss_with_a_saved_map_writes_nothing(tmp_path):
+    csv = write_csv(tmp_path, subject="sub-0099999")
+    json_map = write_json_map(tmp_path, csv)
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL)
+    before = md5(nidm)
+
+    result = run("-csv", str(csv), "-json_map", str(json_map), "-n", str(nidm), "--forcenidm")
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "No output written" in result.stderr
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["fs.csv", "nidm.ttl", "saved_map.json"]
