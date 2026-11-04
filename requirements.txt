@@ -1,8 +1,8 @@
 # NOTE: the container build does not read this file -- it installs this package
 # with `pip install -e .` and then applies the pins in the top-level
-# requirements.txt (pynidm==4.5.0, rdflib>=7). Kept in sync to avoid misleading
+# requirements.txt (pynidm==5.0.0, rdflib>=7). Kept in sync to avoid misleading
 # anyone debugging versions.
-pynidm==4.5.0
+pynidm==5.0.0
 pandas
 prov
 xlrd

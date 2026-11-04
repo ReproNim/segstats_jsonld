@@ -43,9 +43,8 @@ setup(
     packages=PACKAGES,
     install_requires=[
         # Pinned to match the app's requirements.txt. The converter itself
-        # runs on PyNIDM 4.x and 5 (segstats_jsonld/_pynidm.py picks the API),
-        # so the pin moves when the app moves to 5.
-        "pynidm==4.5.0",
+        # runs on PyNIDM 4.x and 5 (segstats_jsonld/_pynidm.py picks the API).
+        "pynidm==5.0.0",
         "pandas",
         "prov",
         "xlrd",
