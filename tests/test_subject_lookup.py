@@ -233,6 +233,30 @@ def test_a_typed_and_an_untyped_node_with_the_same_id_are_two_matches():
     assert str(typed) in str(err.value) and str(untyped) in str(err.value)
 
 
+def _failing_lookup_input(case):
+    graph = _project_graph()
+    if case == "miss":
+        _add_subject(graph, "a", "51456")
+    elif case == "several":
+        _add_subject(graph, "a", "50002")
+        _add_subject(graph, "b", "sub-0050002")
+    return graph  # "no-subjects": the project only, and no --forcenidm
+
+
+@pytest.mark.parametrize("case", ["miss", "several", "no-subjects"])
+def test_a_failed_lookup_leaves_the_graph_unchanged(case):
+    """A library caller that catches SubjectLookupError and then serialises
+    the graph must not find stray activities or descriptions in it."""
+    graph = _failing_lookup_input(case)
+    before = set(graph)
+
+    with pytest.raises(SubjectLookupError):
+        add_seg_data(graph, {"version": "7.4.1"}, "sub-0050002", STATS, add_to_nidm=True,
+                     forceagent=case != "no-subjects")
+
+    assert set(graph) == before
+
+
 @pytest.mark.parametrize("value, expected", [
     ("sub-0050002", "50002"), ("0050002", "50002"), ("50002", "50002"),
     ("0", "0"), ("000", "0"), ("sub-00", "0"), ("sub-", ""), ("", ""),
