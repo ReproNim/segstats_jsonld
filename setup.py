@@ -50,9 +50,13 @@ setup(
         "prov[graph]",
         "xlrd",
         "rdflib>=6.0.0",
+        # imported directly; until now they arrived only through pynidm
+        "numpy",
+        "rapidfuzz",
+        "requests",
         # NOTE: rdflib-jsonld is intentionally NOT listed here. It is deprecated --
         # JSON-LD support moved into rdflib itself in 6.0. It still gets installed
-        # transitively (pynidm -> funowl -> rdflib-shim -> rdflib-jsonld==0.6.1),
+        # transitively (pynidm -> pyontutils -> funowl -> rdflib-shim -> rdflib-jsonld==0.6.1),
         # but rdflib-shim exists precisely to keep it inert under rdflib>=6, so
         # that is fine. We simply don't declare a direct dependency on it.
     ],  # Add requirements as necessary
