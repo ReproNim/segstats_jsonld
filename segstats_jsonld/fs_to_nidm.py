@@ -462,7 +462,7 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
     exit()
 
 
-def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2_images=None, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None):
+def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
     NIDM-E file for the matching subject ID
@@ -470,8 +470,6 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
     :param header:
     :param subjid:
     :param fs_stats_entity_id:
-    :param t1_images: List of paths to T1 images used for segmentation
-    :param t2_images: List of paths to T2 images used for segmentation
     :param add_to_nidm:
     :param forceagent:
     :param description:
@@ -501,36 +499,6 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
     if add_to_nidm:
         participant_agent = _input_subject_agent(nidmdoc, subjid, forceagent, created_agents)
 
-    # Create T1 image entities if provided
-    t1_entities = []
-    if t1_images:
-        for t1_image in t1_images:
-            t1_entity = niiri[getUUID()]
-            # Add core type and classification
-            nidmdoc.add((t1_entity, RDF.type, Constants.NIDM['MagneticResonanceImaging']))
-            nidmdoc.add((t1_entity, RDF.type, Constants.NIDM['T1Weighted']))
-            # Add file information
-            nidmdoc.add((t1_entity, Constants.NIDM['filename'], Literal(os.path.basename(t1_image))))
-            nidmdoc.add((t1_entity, Constants.NIDM['hasImageUsageType'], Constants.NIDM['Anatomical']))
-            # Add file location
-            nidmdoc.add((t1_entity, Constants.PROV['Location'], Literal(t1_image)))
-            t1_entities.append(t1_entity)
-
-    # Create T2 image entities if provided
-    t2_entities = []
-    if t2_images:
-        for t2_image in t2_images:
-            t2_entity = niiri[getUUID()]
-            # Add core type and classification
-            nidmdoc.add((t2_entity, RDF.type, Constants.NIDM['MagneticResonanceImaging']))
-            nidmdoc.add((t2_entity, RDF.type, Constants.NIDM['T2Weighted']))
-            # Add file information
-            nidmdoc.add((t2_entity, Constants.NIDM['filename'], Literal(os.path.basename(t2_image))))
-            nidmdoc.add((t2_entity, Constants.NIDM['hasImageUsageType'], Constants.NIDM['Anatomical']))
-            # Add file location
-            nidmdoc.add((t2_entity, Constants.PROV['Location'], Literal(t2_image)))
-            t2_entities.append(t2_entity)
-
     software_activity = niiri[getUUID()]
     nidmdoc.add((software_activity,RDF.type,Constants.PROV['Activity']))
     # if the freesurfer statistics are coming from a CSV file then the user was asked how these results
@@ -540,23 +508,6 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, t1_images=None, t2
         nidmdoc.add((software_activity,Constants.DCT["description"],Literal("Freesurfer segmentation statistics")))
     else:
         nidmdoc.add((software_activity, Constants.DCT["description"], Literal(description)))
-
-    # Add T1 and T2 image used relationships with specific roles
-    for t1_entity in t1_entities:
-        # Create qualified usage for T1
-        usage_t1 = BNode()
-        nidmdoc.add((software_activity, Constants.PROV['qualifiedUsage'], usage_t1))
-        nidmdoc.add((usage_t1, RDF.type, Constants.PROV['Usage']))
-        nidmdoc.add((usage_t1, Constants.PROV['entity'], t1_entity))
-        nidmdoc.add((usage_t1, Constants.PROV['hadRole'], Constants.NIDM['T1WeightedRole']))
-
-    for t2_entity in t2_entities:
-        # Create qualified usage for T2
-        usage_t2 = BNode()
-        nidmdoc.add((software_activity, Constants.PROV['qualifiedUsage'], usage_t2))
-        nidmdoc.add((usage_t2, RDF.type, Constants.PROV['Usage']))
-        nidmdoc.add((usage_t2, Constants.PROV['entity'], t2_entity))
-        nidmdoc.add((usage_t2, Constants.PROV['hadRole'], Constants.NIDM['T2WeightedRole']))
 
     fs = Namespace(Constants.FREESURFER)
 
@@ -753,8 +704,6 @@ def main():
                         help='If storing freesurfer segmentation data stored in a CSV file and you\'ve previously'
                              'stored the variable to Freesurfer CDE mappings, this can be reused.  Otherwise'
                              'this argument is ignored')
-    parser.add_argument('--t1', dest='t1_images', type=str, nargs='+', help='List of paths to T1 images used for segmentation')
-    parser.add_argument('--t2', dest='t2_images', type=str, nargs='+', help='List of paths to T2 images used for segmentation')
     parser.add_argument('-acq_filename', '--acq_filename', dest='acq_filename', nargs='+', required=False, default=None,
                         help='With -s or -f and -n: file names (or paths) of the anatomical images the stats were '
                              'computed from (several for repeated runs). The stats are linked to the input NIDM '
@@ -850,7 +799,7 @@ def _convert(args):
 
                     # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
                     add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename)
+                                acq_filename=args.acq_filename)
 
                     #serialize NIDM file
                     if args.jsonld is not False:
@@ -888,10 +837,10 @@ def _convert(args):
 
                     if args.forcenidm is not False:
                         add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
-                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
+                                    acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
                     else:
                         add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
-                                    t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
+                                    acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
                     #serialize NIDM file
@@ -981,7 +930,7 @@ def _convert(args):
                 nidmdoc = g2
 
             add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
-                        t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename)
+                        acq_filename=args.acq_filename)
 
 
             #serialize NIDM file
@@ -1017,10 +966,10 @@ def _convert(args):
 
             if args.forcenidm is not False:
                 add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
+                            acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
             else:
                 add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
+                            acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
             #serialize NIDM file
@@ -1154,7 +1103,7 @@ def _convert(args):
                     nidmdoc = nidmdoc + g2 + pde
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, description=provenance['description'])
+                            acq_filename=args.acq_filename, description=provenance['description'])
 
                 first_row = False
             # then we can continue to iterate over the rows in the CSV file, adding to the nidmdoc graph
@@ -1170,7 +1119,7 @@ def _convert(args):
                 nidmdoc = nidmdoc + g2
 
                 add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                            t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, description=provenance['description'])
+                            acq_filename=args.acq_filename, description=provenance['description'])
 
             # we adding these data to an existing NIDM file
             elif (nidm_file is not None) and (first_row):
@@ -1190,10 +1139,10 @@ def _convert(args):
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
 
                 first_row = False
 
@@ -1209,10 +1158,10 @@ def _convert(args):
 
                 if args.forcenidm is not False:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'])
                 else:
                     add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
-                                t1_images=args.t1_images, t2_images=args.t2_images, acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'])
 
 
 

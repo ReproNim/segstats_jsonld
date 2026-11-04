@@ -111,3 +111,17 @@ def test_lookup_miss_fails_and_writes_nothing(tmp_path):
     assert "Subject ID sub-0099999 not found in the input NIDM" in result.stderr
     assert md5(nidm) == before
     assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]
+
+
+def test_t1_and_t2_options_are_gone(tmp_path):
+    """--t1/--t2 wrote a second image entity per stats file, disconnected from
+    the input's acquisition; -acq_filename links the input's acquisition."""
+    from segstats_jsonld.fs_to_nidm import add_seg_data
+    import inspect
+
+    subject_dir = make_subject_dir(tmp_path, stats=("aseg.stats",))
+    for option in ("--t1", "--t2"):
+        result = run("-s", str(subject_dir), "-o", str(tmp_path), option, "/bids/x_T1w.nii.gz")
+        assert result.returncode == 2 and "unrecognized arguments" in result.stderr, result.stderr
+    parameters = inspect.signature(add_seg_data).parameters
+    assert "t1_images" not in parameters and "t2_images" not in parameters
