@@ -438,7 +438,6 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
     is raised. Several matches also raise. These are the rules of
     ants_seg_to_nidm's lookup, so both converters find the same subject.
 
-    :param from_csv: the stats come from a -csv row (changes only the wording of warnings)
     :param created_agents: agents created by earlier calls in this run (-s
         with -n converts each stats file separately; -csv one row at a time).
         They are reused when they match, and do not count as input subjects.

@@ -64,8 +64,10 @@ def test_jsonld_with_subject_dir_and_nidm_is_refused(tmp_path):
 
     assert result.returncode == 2, result.stdout + result.stderr
     assert "-j/--jsonld" in result.stderr
-    # the message says what to use instead
-    assert "-o" in result.stderr and "Turtle" in result.stderr
+    # the message says what to use instead (argparse's usage line always holds "-o")
+    message = " ".join(result.stderr.split())
+    assert "Omit -j to add the stats to the -n file as Turtle" in message
+    assert "use -o OUTPUT_DIR with -j to write one JSON-LD file per stats file" in message
     assert md5(nidm) == before
     assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]
 
