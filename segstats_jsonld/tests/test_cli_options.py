@@ -125,3 +125,17 @@ def test_t1_and_t2_options_are_gone(tmp_path):
         assert result.returncode == 2 and "unrecognized arguments" in result.stderr, result.stderr
     parameters = inspect.signature(add_seg_data).parameters
     assert "t1_images" not in parameters and "t2_images" not in parameters
+
+
+def test_no_subjects_without_forcenidm_fails_and_writes_nothing(tmp_path):
+    subject_dir = make_subject_dir(tmp_path, stats=("aseg.stats",))
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(INPUT_TTL.split("<http://iri.nidash.org/subject-51456>")[0])
+    before = md5(nidm)
+
+    result = run("-s", str(subject_dir), "-n", str(nidm))
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "no subject agents" in result.stderr and "--forcenidm" in result.stderr
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["nidm.ttl", "sub-0051456"]

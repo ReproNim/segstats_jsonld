@@ -164,3 +164,66 @@ def test_an_id_shaped_like_a_query_matches_nothing():
         add_seg_data(graph, {}, 'Z99" || "1" = "1', STATS, add_to_nidm=True, forceagent=True)
 
     assert _stats_subjects(graph) == set()
+
+
+# The choices below match ants_seg_to_nidm's lookup, so both converters find
+# the same subject in the same input.
+
+def test_an_agent_typed_only_prov_person_is_a_subject():
+    graph = _project_graph()
+    person = URIRef("http://example.org/agent/person")
+    graph.add((person, RDF.type, Constants.PROV["Person"]))
+    graph.add((person, SUBJECT_ID, Literal("0050002")))
+
+    add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True)
+
+    assert _stats_subjects(graph) == {person}
+
+
+def test_an_untyped_node_is_not_a_subject():
+    graph = _project_graph()
+    graph.add((URIRef("http://example.org/thing"), SUBJECT_ID, Literal("0050002")))
+
+    add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    (agent,) = _stats_subjects(graph)
+    assert agent != URIRef("http://example.org/thing")
+
+
+@pytest.mark.parametrize("value, expected", [
+    ("sub-0050002", "50002"), ("0050002", "50002"), ("50002", "50002"),
+    ("0", "0"), ("000", "0"), ("sub-00", "0"), ("sub-", ""), ("", ""),
+    (Literal("007", datatype=XSD.string), "7"),
+])
+def test_normalise_subject_id(value, expected):
+    from segstats_jsonld.fs_to_nidm import normalise_subject_id
+    assert normalise_subject_id(value) == expected
+
+
+def test_an_all_zero_id_matches_its_other_spellings():
+    graph = _project_graph()
+    subject = _add_subject(graph, "zero", "0")
+
+    add_seg_data(graph, {}, "sub-000", STATS, add_to_nidm=True)
+
+    assert _stats_subjects(graph) == {subject}
+
+
+def test_two_ids_on_one_agent_are_one_match():
+    graph = _project_graph()
+    subject = _add_subject(graph, "both", "0050002")
+    graph.add((subject, SUBJECT_ID, Literal("sub-0050002")))
+
+    add_seg_data(graph, {}, "50002", STATS, add_to_nidm=True)
+
+    assert _stats_subjects(graph) == {subject}
+
+
+def test_no_subjects_and_no_forcenidm_is_an_error():
+    graph = _project_graph()
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=False)
+
+    assert "no subject agents" in str(err.value) and "--forcenidm" in str(err.value)
+    assert list(graph.objects(None, SUBJECT_ID)) == []

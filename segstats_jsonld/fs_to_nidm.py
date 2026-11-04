@@ -386,7 +386,7 @@ def select_acquisition(rows, acq_filenames, subjid):
     return sorted(set(chosen))
 
 
-class SubjectLookupError(Exception):
+class SubjectLookupError(LookupError):
     """The subject the stats belong to cannot be identified in the input NIDM."""
 
 
@@ -400,20 +400,24 @@ def normalise_subject_id(subject_id):
     text = str(subject_id)
     if text.startswith("sub-"):
         text = text[len("sub-"):]
-    return text.lstrip("0") or text
+    stripped = text.lstrip("0")
+    # an id of only zeros keeps one, so "0" and "00" stay comparable
+    return stripped if stripped or not text else "0"
 
 
 def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None):
     '''
-    Return the subject agent (a prov:Agent with ndar:src_subject_id) in nidmdoc
+    Return the subject agent (a prov:Agent or prov:Person with ndar:src_subject_id) in nidmdoc
     whose id is subjid, comparing both sides with normalise_subject_id. The
     literal is compared as text, so PyNIDM 4.x's "..."^^xsd:string and
     PyNIDM 5's plain literal both match.
 
-    No match: if the input NIDM has no subject agents and forceagent is set,
-    a new agent with that id is created; if it has subject agents, the run
-    cannot tell which one the stats belong to, and SubjectLookupError is raised
-    whatever forceagent says. Several matches also raise.
+    An agent with several ids counts once. No match: if the input NIDM has
+    subject agents, the run cannot tell which one the stats belong to, and
+    SubjectLookupError is raised whatever forceagent says; if it has none,
+    forceagent creates an agent with that id, and without it SubjectLookupError
+    is raised. Several matches also raise. These are the rules of
+    ants_seg_to_nidm's lookup, so both converters find the same subject.
 
     :param created_agents: agents created by earlier calls in this run (-s
         with -n converts each stats file separately; -csv one row at a time).
@@ -421,9 +425,10 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
     '''
     if created_agents is None:
         created_agents = set()
+    agent_types = {Constants.PROV['Agent'], Constants.PROV['Person']}
     subject_ids = {}
     for agent, sid in nidmdoc.subject_objects(URIRef(NIDM_SUBJECTID_URI)):
-        if (agent, RDF.type, Constants.PROV['Agent']) in nidmdoc:
+        if agent_types & set(nidmdoc.objects(agent, RDF.type)):
             subject_ids.setdefault(agent, set()).add(str(sid))
 
     wanted = normalise_subject_id(subjid)
@@ -457,9 +462,8 @@ def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None)
         nidmdoc.add((agent, URIRef(NIDM_SUBJECTID_URI), Literal(subjid, datatype=XSD.string)))
         created_agents.add(agent)
         return agent
-    print('Subject ID %s not found: the input NIDM has no subjects. Pass --forcenidm to add it; '
-          'no output written' % subjid)
-    exit()
+    raise SubjectLookupError("Subject ID %s not found in the input NIDM, which has no subject agents; "
+                             "no output written (--forcenidm adds a new agent for it)" % subjid)
 
 
 def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None):
