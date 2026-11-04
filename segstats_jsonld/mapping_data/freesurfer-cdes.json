@@ -1494,7 +1494,7 @@
     "key_source": "Header",
     "isAbout": "http://purl.obolibrary.org/obo/UBERON_0000956",
     "isAbout_label": "cerebral cortex",
-    "measureOf": "http://uri.interlex.org/base/ilx_0738276",
+    "measureOf": "http://uri.interlex.org/base/ilx_0111689",
     "datumType": "http://uri.interlex.org/base/ilx_0738264",
     "hasUnit": "mm",
     "fsunit": "mm"
