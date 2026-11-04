@@ -605,7 +605,7 @@ def convert_csv_stats_to_nidm(row, var_to_cde_mapping,filename,id_column):
 
     # figure out which variable is subject ID
     #id_column = list(var_to_cde_mapping.keys())[list(var_to_cde_mapping.values()).index(Constants.NIDM_SUBJECTID.uri)]
-    for (colname, colval) in row.iteritems():
+    for (colname, colval) in row.items():
         if colname == id_column:
             continue
         else:
