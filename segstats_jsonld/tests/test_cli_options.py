@@ -164,3 +164,13 @@ def test_readme_usage_is_the_help_output():
     readme = (REPO_ROOT / "README.md").read_text()
     block = readme.split("## Usage", 1)[1].split("```", 2)[1]
     assert block.strip("\n") == help_text().strip("\n")
+
+
+def test_subjid_with_subject_dir_is_documented_as_a_change():
+    """-subjid used to be ignored with -s; callers that passed it there get a
+    different subject id now, so --help and the README say so."""
+    text = " ".join(help_text().split())
+    assert "it overrides the subject directory name" in text
+    assert "Earlier releases ignored -subjid with -s" in text
+    readme = " ".join((REPO_ROOT / "README.md").read_text().split())
+    assert "Earlier releases ignored `-subjid` with `-s`" in readme

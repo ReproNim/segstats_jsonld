@@ -74,7 +74,10 @@ options:
   -subjid SUBJID, --subjid SUBJID
                         Subject identifier to be used in the NIDM files. Required with
                         -f/--seg_file. With -s/--subject_dir it defaults to the name of the
-                        subject directory; set it when that directory is not named after the
+                        subject directory, and when given it overrides the subject directory name
+                        (set it when that directory is not named after the subject, e.g.
+                        sub-01/freesurfer). Earlier releases ignored -subjid with -s and always
+                        used the directory name. Ignored with -csv, where the ID column names each
                         subject
   -o OUTPUT, --output OUTPUT
                         Where to write a new NIDM file. With -s, the directory that gets one
@@ -107,6 +110,20 @@ options:
                         otherwise. Without it the stats are linked only when the subject has a
                         single anatomical acquisition
 ```
+
+### Changes in behaviour from earlier releases
+
+- `-subjid` with `-s` now sets the subject ID, overriding the subject directory name. Earlier
+  releases ignored `-subjid` with `-s` and always used the directory name, so a caller that passes
+  both now gets the `-subjid` value as `ndar:src_subject_id` (for example `ds000001/sub-01` instead of
+  `sub-01`). Drop `-subjid` to keep the directory name.
+- With `-n`, the subject is found by comparing IDs without a leading `sub-` and leading zeros on both
+  sides. If the NIDM file has subjects and none matches, or several match, the run fails (exit 1)
+  and writes nothing, with or without `--forcenidm`; earlier releases attached the stats to a new
+  subject agent under `--forcenidm`. `--forcenidm` now adds a subject only to a NIDM file that has
+  none, and without it such a file is an error.
+- `-j` with both `-s` and `-n` is refused with a message naming the alternatives (earlier releases
+  failed on it with an rdflib plugin error).
 
 ### Updating the FreeSurfer Common Data Elements
 

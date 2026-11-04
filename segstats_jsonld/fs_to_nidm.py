@@ -696,7 +696,10 @@ def main():
                             'same set of variables.')
     parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='Subject identifier to be used in '
                             'the NIDM files. Required with -f/--seg_file. With -s/--subject_dir it defaults to the '
-                            'name of the subject directory; set it when that directory is not named after the subject')
+                            'name of the subject directory, and when given it overrides the subject directory name '
+                            '(set it when that directory is not named after the subject, e.g. sub-01/freesurfer). '
+                            'Earlier releases ignored -subjid with -s and always used the directory name. '
+                            'Ignored with -csv, where the ID column names each subject')
     group2.add_argument('-o', '--output', dest='output_dir', metavar='OUTPUT', type=str, required=False, default=None,
                         help='Where to write a new NIDM file. With -s, the directory that gets one '
                              '<stats>_nidm.ttl (or .jsonld) per stats file; with -f or -csv, the output file. '
