@@ -46,6 +46,10 @@ program. Give exactly one of `-o` (write new NIDM files) and `-n` (add the stats
 file). With `-s`, `-o` is a directory that receives one file per stats file; with `-f` or `-csv` it is
 the output file. The text below is the program's `--help`.
 
+`-csv` requires PyNIDM 5. Under PyNIDM 4.5 every `-csv` run fails inside PyNIDM: its `DD_to_nidm`
+adds an `rdflib.Namespace` as a triple's object, which the rdflib 6 that PyNIDM 4.5 requires refuses
+("must be an rdflib term"). `-s` and `-f` work with PyNIDM 4.5 and 5.
+
 ```
 usage: fs_to_nidm.py [-h] (-s SUBJECT_DIR | -f SEGFILE | -csv CSVFILE) [-subjid SUBJID]
                      (-o OUTPUT | -n NIDM_FILE) [-j] [-add_de] [-forcenidm] [-json_map JSON_MAP]

@@ -200,3 +200,10 @@ def test_csv_without_forcenidm_on_a_subjectless_input_writes_nothing_and_asks_no
     assert "Select which measurement type" not in result.stdout
     assert md5(nidm) == before
     assert sorted(p.name for p in tmp_path.iterdir()) == ["fs.csv", "nidm.ttl"]
+
+
+def test_readme_says_csv_requires_pynidm5():
+    """The strict xfail above records that -csv fails under PyNIDM 4.x; the
+    README has to tell users so."""
+    readme = " ".join((REPO_ROOT / "README.md").read_text().split())
+    assert "`-csv` requires PyNIDM 5. Under PyNIDM 4.5 every `-csv` run fails inside PyNIDM" in readme
