@@ -449,85 +449,98 @@ def _owns_anatomical_acquisition(graph, subject):
     return bool(_anatomical_acquisitions(graph, subject))
 
 
-def _input_subject_agent(nidmdoc, subjid, forceagent=False, created_agents=None):
+def find_subject(graph, subject_id, forceagent=False, created_agents=()):
     '''
-    Return the subject in nidmdoc whose id is subjid, comparing both sides with
-    normalise_subject_id. A subject is any node carrying ndar:src_subject_id under
-    the https:// or the http:// NDAR IRI, whatever its rdf:type, so a participant
-    typed only nidm:Subject, or not typed, is never mistaken for an input without
-    subjects. The
-    literal is compared as text, so PyNIDM 4.x's "..."^^xsd:string and
-    PyNIDM 5's plain literal both match.
+    Return the node in graph that subject_id names: the subject the stats
+    belong to. This is the lookup add_seg_data makes; it is public so that a
+    caller (a BIDS app) can run the same rule on the input NIDM before
+    computing anything. It never changes graph.
 
-    An agent with several ids counts once. No match: if the input NIDM has
-    subject agents, the run cannot tell which one the stats belong to, and
-    SubjectLookupError is raised whatever forceagent says; if it has none,
-    forceagent creates an agent with that id, and without it SubjectLookupError
-    is raised. Several matches (some inputs hold two person nodes with the
-    same id, one owning the MRI acquisitions and one only an assessment) give
-    the one match that owns an anatomical MRI acquisition; if none or more
-    than one does, SubjectLookupError is raised. These are the rules of
-    ants_seg_to_nidm's lookup, so both converters find the same subject.
+    A subject is any node carrying ndar:src_subject_id under the https:// or
+    the http:// NDAR IRI, whatever its rdf:type, so a participant typed only
+    nidm:Subject, or not typed, is never mistaken for an input without
+    subjects. Ids are compared after normalise_subject_id on both sides, and
+    as text, so PyNIDM 4.x's "..."^^xsd:string and PyNIDM 5's plain literal
+    both match. A node with several ids counts once.
+
+    - One match: returned.
+    - Several matches (some inputs hold two person nodes with the same id, one
+      owning the MRI acquisitions and one only an assessment): the one match
+      that owns an anatomical MRI acquisition is returned; if none or more than
+      one does, SubjectLookupError.
+    - No match while graph has subjects: SubjectLookupError whatever forceagent
+      says, since attaching the stats to a new agent would detach them from
+      that subject's other data.
+    - No subjects at all: None with forceagent (the caller creates an agent
+      with the id), SubjectLookupError without it.
+
+    These are the rules of ants_seg_to_nidm.find_subject, so both converters
+    find the same subject.
 
     :param created_agents: agents created by earlier calls in this run (-s
         with -n converts each stats file separately; -csv one row at a time).
-        They are reused when they match, and do not count as input subjects.
+        They are found when they match, and do not count as input subjects.
+    :raises SubjectLookupError: when the subject cannot be identified
     '''
-    if created_agents is None:
-        created_agents = set()
     subject_ids = {}
     for predicate in SUBJECT_ID_PREDICATES:
-        for agent, sid in nidmdoc.subject_objects(predicate):
+        for agent, sid in graph.subject_objects(predicate):
             subject_ids.setdefault(agent, set()).add(str(sid))
 
-    wanted = normalise_subject_id(subjid)
+    wanted = normalise_subject_id(subject_id)
     matches = sorted(agent for agent, ids in subject_ids.items()
                      if any(normalise_subject_id(i) == wanted for i in ids))
 
     if len(matches) > 1:
         found = "; ".join("%s (%s)" % (agent, ", ".join(sorted(subject_ids[agent]))) for agent in matches)
-        owners = [agent for agent in matches if _owns_anatomical_acquisition(nidmdoc, agent)]
+        owners = [agent for agent in matches if _owns_anatomical_acquisition(graph, agent)]
         if len(owners) != 1:
             owning = "none of them owns" if not owners else "%d of them own" % len(owners)
             raise SubjectLookupError("Subject ID %s matches %d subject agents in the input NIDM: %s; "
                                      "%s an anatomical MRI acquisition, so the stats cannot be attached "
                                      "to one of them. No output written"
-                                     % (subjid, len(matches), found, owning))
+                                     % (subject_id, len(matches), found, owning))
         print('Subject ID %s matches %d subject agents in the input NIDM (%s); using %s, the only one '
-              'that owns an anatomical MRI acquisition' % (subjid, len(matches), found, owners[0]))
+              'that owns an anatomical MRI acquisition' % (subject_id, len(matches), found, owners[0]))
         return owners[0]
     if matches:
         agent = matches[0]
         if agent in created_agents:
-            print('Using the agent created earlier in this run for subject ID %s (agent: %s)' % (subjid, agent))
+            print('Using the agent created earlier in this run for subject ID %s (agent: %s)' % (subject_id, agent))
         else:
             print('Found subject ID %s in NIDM file as %s (agent: %s)'
-                  % (subjid, ", ".join(sorted(subject_ids[agent])), agent))
+                  % (subject_id, ", ".join(sorted(subject_ids[agent])), agent))
         return agent
 
     input_ids = sorted(i for agent, ids in subject_ids.items() if agent not in created_agents for i in ids)
     if input_ids:
         raise SubjectLookupError("Subject ID %s not found in the input NIDM, whose subject IDs are: %s. "
                                  "IDs are compared without a leading \"sub-\" and leading zeros. "
-                                 "No output written" % (subjid, ", ".join(input_ids)))
-    if forceagent is not False:
-        print('Subject ID %s: the input NIDM has no subjects; creating an agent for it (--forcenidm)' % subjid)
-        warnings.warn(f"Subject ID {subjid} not found in the input NIDM, which has no subjects; the stats "
-                      f"are attached to a new agent with that ID (--forcenidm)")
-        agent = Namespace("http://iri.nidash.org/")[getUUID()]
-        nidmdoc.add((agent, RDF.type, Constants.PROV['Agent']))
-        nidmdoc.add((agent, URIRef(NIDM_SUBJECTID_URI), Literal(subjid, datatype=XSD.string)))
-        created_agents.add(agent)
-        return agent
+                                 "No output written" % (subject_id, ", ".join(input_ids)))
+    if forceagent:
+        return None
     raise SubjectLookupError("Subject ID %s not found in the input NIDM, which has no subject agents; "
-                             "no output written (--forcenidm adds a new agent for it)" % subjid)
+                             "no output written (--forcenidm adds a new agent for it)" % subject_id)
+
+
+def _add_forced_subject_agent(nidmdoc, subjid, created_agents):
+    """The agent --forcenidm adds for subjid to an input without subjects."""
+    print('Subject ID %s: the input NIDM has no subjects; creating an agent for it (--forcenidm)' % subjid)
+    warnings.warn(f"Subject ID {subjid} not found in the input NIDM, which has no subjects; the stats "
+                  f"are attached to a new agent with that ID (--forcenidm)")
+    agent = Namespace("http://iri.nidash.org/")[getUUID()]
+    nidmdoc.add((agent, RDF.type, Constants.PROV['Agent']))
+    nidmdoc.add((agent, URIRef(NIDM_SUBJECTID_URI), Literal(subjid, datatype=XSD.string)))
+    created_agents.add(agent)
+    return agent
 
 
 def _check_csv_subjects(nidm_file, subject_ids, forceagent):
     """
     Raise SubjectLookupError if any of the -csv rows' subject ids would fail the
     lookup add_seg_data makes, without asking anything or writing anything. Runs
-    the same lookup, in row order, on a throwaway copy of the input NIDM.
+    the same lookup, in row order, on a throwaway copy of the input NIDM, adding
+    the agents --forcenidm would add as it goes.
     """
     graph = Graph()
     graph.parse(nidm_file, format=util.guess_format(nidm_file))
@@ -535,7 +548,8 @@ def _check_csv_subjects(nidm_file, subject_ids, forceagent):
     with contextlib.redirect_stdout(StringIO()), warnings.catch_warnings():
         warnings.simplefilter("ignore")
         for subjid in subject_ids:
-            _input_subject_agent(graph, subjid, forceagent, created)
+            if find_subject(graph, subjid, forceagent, created) is None:
+                _add_forced_subject_agent(graph, subjid, created)
 
 
 def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None, from_csv=False):
@@ -552,7 +566,7 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False,
     :param acq_filename: file names of the anatomical images the stats came from, used to
         pick their AcquisitionObjects in the input NIDM (see select_acquisition)
     :param created_agents: set of subject agents created by earlier calls in the same run
-        (see _input_subject_agent); updated in place
+        (see find_subject); updated in place
     :return:
     :raises SubjectLookupError: with add_to_nidm, when the subject cannot be identified
     '''
@@ -573,7 +587,11 @@ def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False,
     # identify the input subject before anything is added, so a lookup that
     # fails leaves the graph as it was
     if add_to_nidm:
-        participant_agent = _input_subject_agent(nidmdoc, subjid, forceagent, created_agents)
+        if created_agents is None:
+            created_agents = set()
+        participant_agent = find_subject(nidmdoc, subjid, forceagent, created_agents)
+        if participant_agent is None:
+            participant_agent = _add_forced_subject_agent(nidmdoc, subjid, created_agents)
 
     software_activity = niiri[getUUID()]
     nidmdoc.add((software_activity,RDF.type,Constants.PROV['Activity']))

@@ -369,3 +369,73 @@ def test_several_matches_fail_unless_exactly_one_owns_an_anatomical_acquisition(
     assert str(nodes[0]) in message and str(nodes[1]) in message
     assert "anatomical" in message and "No output written" in message
     assert set(graph) == before
+
+
+# find_subject is the lookup add_seg_data uses, public so that a BIDS app can
+# run the same rule before it computes anything. It never changes the graph.
+
+def _find(graph, *args, **kwargs):
+    from segstats_jsonld.fs_to_nidm import find_subject
+    before = set(graph)
+    try:
+        return find_subject(graph, *args, **kwargs)
+    finally:
+        assert set(graph) == before
+
+
+@pytest.mark.parametrize("given_id", SPELLINGS)
+def test_find_subject_returns_the_matching_node(given_id):
+    graph, subject, _ = _input_graph("0050002", None)
+    _add_subject(graph, "other", "0050003")
+
+    assert _find(graph, given_id) == subject
+
+
+@pytest.mark.parametrize("owner", [0, 1])
+def test_find_subject_returns_the_acquisition_owner_of_several_matches(owner):
+    graph, nodes, _ = _two_nodes_with_one_id({owner})
+
+    assert _find(graph, "sub-0050002") == nodes[owner]
+
+
+@pytest.mark.parametrize("case, forceagent", [
+    ("miss", True), ("miss", False), ("several", True), ("several", False), ("no-subjects", False),
+])
+def test_find_subject_raises_when_the_subject_cannot_be_identified(case, forceagent):
+    graph = _failing_lookup_input(case)
+
+    with pytest.raises(SubjectLookupError):
+        _find(graph, "sub-0050002", forceagent=forceagent)
+
+
+def test_find_subject_returns_none_only_for_forcenidm_without_subjects():
+    graph = _project_graph()
+
+    assert _find(graph, "sub-0050002", forceagent=True) is None
+    with pytest.raises(SubjectLookupError, match="--forcenidm"):
+        _find(graph, "sub-0050002")
+
+
+def test_find_subject_does_not_count_agents_created_earlier_as_input_subjects():
+    graph = _project_graph()
+    created = _add_subject(graph, "created", "sub-0050002")
+
+    assert _find(graph, "50002", created_agents={created}) == created
+    assert _find(graph, "sub-0050009", forceagent=True, created_agents={created}) is None
+    with pytest.raises(SubjectLookupError):
+        _find(graph, "sub-0050009", forceagent=True)
+
+
+def test_add_seg_data_looks_the_subject_up_with_find_subject(monkeypatch):
+    from segstats_jsonld import fs_to_nidm
+    calls = []
+
+    def fake(graph, subject_id, forceagent=False, created_agents=()):
+        calls.append((subject_id, forceagent))
+        raise SubjectLookupError("from find_subject")
+
+    monkeypatch.setattr(fs_to_nidm, "find_subject", fake)
+    graph, _, _ = _input_graph("0050002", None)
+    with pytest.raises(SubjectLookupError, match="from find_subject"):
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+    assert calls == [("sub-0050002", True)]

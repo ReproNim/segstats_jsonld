@@ -118,11 +118,16 @@ options:
   both now gets the `-subjid` value as `ndar:src_subject_id` (for example `ds000001/sub-01` instead of
   `sub-01`). Drop `-subjid` to keep the directory name.
 - With `-n`, the subject is found by comparing IDs without a leading `sub-` and leading zeros on both
-  sides. If the NIDM file has subjects and none matches, or several match, the run fails (exit 1)
-  and writes nothing, with or without `--forcenidm`; earlier releases attached the stats to a new
-  subject agent under `--forcenidm`. `--forcenidm` now adds a subject only to a NIDM file that has
-  none, and without it such a file is an error. A subject is any node with `ndar:src_subject_id`
-  (under the `https://` or the `http://` NDAR IRI), whatever its `rdf:type`.
+  sides. If the NIDM file has subjects and none matches, the run fails (exit 1) and writes nothing,
+  with or without `--forcenidm`; earlier releases attached the stats to a new subject agent under
+  `--forcenidm`. If several match, the one that owns an anatomical MRI acquisition is used (the run
+  prints which); if none or more than one of them does, the run fails and writes nothing.
+  `--forcenidm` now adds a subject only to a NIDM file that has none, and without it such a file is
+  an error. A subject is any node with `ndar:src_subject_id` (under the `https://` or the `http://`
+  NDAR IRI), whatever its `rdf:type`. The lookup is `segstats_jsonld.fs_to_nidm.find_subject(graph,
+  subject_id, forceagent=False, created_agents=())`, which returns the subject node (or `None` for a
+  file without subjects under `forceagent`), raises `SubjectLookupError` otherwise, and never changes
+  the graph; `ants_seg_to_nidm` has the same function with the same rules.
 - `-s` with no supported stats file in its `stats/` directory fails (exit 1) with a message naming
   the directory and the files looked for; earlier releases exited 0 without writing anything.
 - `-j` with both `-s` and `-n` is refused with a message naming the alternatives (earlier releases
