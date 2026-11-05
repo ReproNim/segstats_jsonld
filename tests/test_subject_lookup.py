@@ -294,3 +294,78 @@ def test_no_subjects_and_no_forcenidm_is_an_error():
 
     assert "no subject agents" in str(err.value) and "--forcenidm" in str(err.value)
     assert list(graph.objects(None, SUBJECT_ID)) == []
+
+
+# Several nodes with the same subject id: some delivered inputs (ADHD200 NYU,
+# Peking_1, Pittsburgh) hold two prov:Agent+prov:Person nodes per subject, one
+# owning the anatomical MRI acquisition and one associated only with an
+# assessment. The node that owns the acquisition is the one the stats belong to.
+
+def _add_anatomical_acquisition(graph, subject, name):
+    activity = URIRef(f"http://example.org/activity/{name}")
+    assoc = BNode()
+    graph.add((activity, RDF.type, Constants.NIDM["Acquisition"]))
+    graph.add((activity, Constants.PROV["qualifiedAssociation"], assoc))
+    graph.add((assoc, Constants.PROV["agent"], subject))
+    graph.add((assoc, Constants.PROV["hadRole"], Constants.SIO["Subject"]))
+    acquisition = URIRef(f"http://example.org/acquisition/{name}")
+    graph.add((acquisition, RDF.type, Constants.NIDM["AcquisitionObject"]))
+    graph.add((acquisition, Constants.PROV["wasGeneratedBy"], activity))
+    graph.add((acquisition, Constants.NIDM["hadAcquisitionModality"],
+               Constants.NIDM["MagneticResonanceImaging"]))
+    graph.add((acquisition, Constants.NIDM["hadImageUsageType"], Constants.NIDM["Anatomical"]))
+    graph.add((acquisition, NFO["filename"], Literal(f"bids::sub-0050002/anat/{name}_T1w.nii.gz")))
+    return acquisition
+
+
+def _add_assessment(graph, subject, name):
+    """An instrument-based assessment, which is not an anatomical acquisition."""
+    activity = URIRef(f"http://example.org/activity/{name}")
+    assoc = BNode()
+    graph.add((activity, RDF.type, Constants.NIDM["Acquisition"]))
+    graph.add((activity, Constants.PROV["qualifiedAssociation"], assoc))
+    graph.add((assoc, Constants.PROV["agent"], subject))
+    graph.add((assoc, Constants.PROV["hadRole"], Constants.SIO["Subject"]))
+    assessment = URIRef(f"http://example.org/assessment/{name}")
+    graph.add((assessment, RDF.type, Constants.NIDM["AcquisitionObject"]))
+    graph.add((assessment, RDF.type, Constants.NIDM["AssessmentObject"]))
+    graph.add((assessment, Constants.PROV["wasGeneratedBy"], activity))
+
+
+def _two_nodes_with_one_id(owners):
+    graph = _project_graph()
+    nodes = [_add_subject(graph, "first", "0050002"), _add_subject(graph, "second", "0050002")]
+    for node in nodes:
+        _add_assessment(graph, node, f"assessment-{node.split('/')[-1]}")
+    acquisitions = {node: _add_anatomical_acquisition(graph, node, f"acq-{node.split('/')[-1]}")
+                    for n, node in enumerate(nodes) if n in owners}
+    return graph, nodes, acquisitions
+
+
+@pytest.mark.parametrize("owner", [0, 1], ids=["first-owns", "second-owns"])
+def test_of_several_matches_the_one_owning_the_anatomical_acquisition_is_chosen(owner, capsys):
+    graph, nodes, acquisitions = _two_nodes_with_one_id({owner})
+
+    add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    chosen = nodes[owner]
+    assert _stats_subjects(graph) == {chosen}
+    assert (None, Constants.PROV["used"], acquisitions[chosen]) in graph
+    assert len(set(graph.subjects(SUBJECT_ID, None))) == 2
+    out = capsys.readouterr().out
+    assert str(chosen) in out and "anatomical" in out
+    assert str(nodes[1 - owner]) in out
+
+
+@pytest.mark.parametrize("owners", [set(), {0, 1}], ids=["neither-owns", "both-own"])
+def test_several_matches_fail_unless_exactly_one_owns_an_anatomical_acquisition(owners):
+    graph, nodes, _ = _two_nodes_with_one_id(owners)
+    before = set(graph)
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    message = str(err.value)
+    assert str(nodes[0]) in message and str(nodes[1]) in message
+    assert "anatomical" in message and "No output written" in message
+    assert set(graph) == before
