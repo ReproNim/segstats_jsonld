@@ -301,7 +301,7 @@ def test_no_subjects_and_no_forcenidm_is_an_error():
 # owning the anatomical MRI acquisition and one associated only with an
 # assessment. The node that owns the acquisition is the one the stats belong to.
 
-def _add_anatomical_acquisition(graph, subject, name):
+def _add_anatomical_acquisition(graph, subject, name, usage="Anatomical"):
     activity = URIRef(f"http://example.org/activity/{name}")
     assoc = BNode()
     graph.add((activity, RDF.type, Constants.NIDM["Acquisition"]))
@@ -313,7 +313,7 @@ def _add_anatomical_acquisition(graph, subject, name):
     graph.add((acquisition, Constants.PROV["wasGeneratedBy"], activity))
     graph.add((acquisition, Constants.NIDM["hadAcquisitionModality"],
                Constants.NIDM["MagneticResonanceImaging"]))
-    graph.add((acquisition, Constants.NIDM["hadImageUsageType"], Constants.NIDM["Anatomical"]))
+    graph.add((acquisition, Constants.NIDM["hadImageUsageType"], Constants.NIDM[usage]))
     graph.add((acquisition, NFO["filename"], Literal(f"bids::sub-0050002/anat/{name}_T1w.nii.gz")))
     return acquisition
 
@@ -332,13 +332,18 @@ def _add_assessment(graph, subject, name):
     graph.add((assessment, Constants.PROV["wasGeneratedBy"], activity))
 
 
-def _two_nodes_with_one_id(owners):
+def _two_nodes_with_one_id(owners, functional=(), names=("first", "second")):
+    """Nodes storing the same id 0050002, each with an assessment; the nodes
+    numbered in owners also own an anatomical MRI acquisition, those in
+    functional only a functional one."""
     graph = _project_graph()
-    nodes = [_add_subject(graph, "first", "0050002"), _add_subject(graph, "second", "0050002")]
+    nodes = [_add_subject(graph, name, "0050002") for name in names]
     for node in nodes:
         _add_assessment(graph, node, f"assessment-{node.split('/')[-1]}")
     acquisitions = {node: _add_anatomical_acquisition(graph, node, f"acq-{node.split('/')[-1]}")
                     for n, node in enumerate(nodes) if n in owners}
+    for n in functional:
+        _add_anatomical_acquisition(graph, nodes[n], f"bold-{n}", usage="Functional")
     return graph, nodes, acquisitions
 
 
@@ -357,9 +362,12 @@ def test_of_several_matches_the_one_owning_the_anatomical_acquisition_is_chosen(
     assert str(nodes[1 - owner]) in out
 
 
-@pytest.mark.parametrize("owners", [set(), {0, 1}], ids=["neither-owns", "both-own"])
-def test_several_matches_fail_unless_exactly_one_owns_an_anatomical_acquisition(owners):
-    graph, nodes, _ = _two_nodes_with_one_id(owners)
+@pytest.mark.parametrize("owners, functional", [(set(), ()), ({0, 1}, ()), (set(), (0,))],
+                         ids=["neither-owns", "both-own", "one-owns-only-a-functional-acquisition"])
+def test_several_matches_fail_unless_exactly_one_owns_an_anatomical_acquisition(owners, functional):
+    """A functional MRI acquisition is not ownership: only an anatomical one is
+    what the stats were computed from."""
+    graph, nodes, _ = _two_nodes_with_one_id(owners, functional)
     before = set(graph)
 
     with pytest.raises(SubjectLookupError) as err:
@@ -368,7 +376,48 @@ def test_several_matches_fail_unless_exactly_one_owns_an_anatomical_acquisition(
     message = str(err.value)
     assert str(nodes[0]) in message and str(nodes[1]) in message
     assert "anatomical" in message and "No output written" in message
+    assert ("none of them owns" in message) == (not owners)
     assert set(graph) == before
+
+
+def test_the_failure_names_the_candidates_that_own_an_anatomical_acquisition():
+    graph, nodes, _ = _two_nodes_with_one_id({0, 2}, names=("first", "second", "third"))
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050002", STATS, add_to_nidm=True, forceagent=True)
+
+    assert ("2 of them own an anatomical MRI acquisition (%s, %s)" % (nodes[0], nodes[2])
+            in str(err.value))
+
+
+@pytest.mark.parametrize("given_id", ["sub-01", "01", "1"])
+def test_the_owner_rule_does_not_choose_between_different_stored_ids(given_id):
+    """"sub-01" and "001" are different BIDS labels that only normalise alike,
+    so they may be two participants: the owner of the scan is not chosen over
+    the node that stores the requested label."""
+    graph = _project_graph()
+    exact = _add_subject(graph, "exact", "sub-01")
+    _add_assessment(graph, exact, "assessment-exact")
+    other = _add_subject(graph, "other", "001")
+    _add_anatomical_acquisition(graph, other, "acq-other")
+    before = set(graph)
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, given_id, STATS, add_to_nidm=True, forceagent=True)
+
+    message = str(err.value)
+    assert "%s (sub-01)" % exact in message and "%s (001)" % other in message
+    assert "differ" in message and "No output written" in message
+    assert set(graph) == before
+
+
+def test_a_miss_lists_each_stored_id_once():
+    graph, _, _ = _two_nodes_with_one_id({0})
+
+    with pytest.raises(SubjectLookupError) as err:
+        add_seg_data(graph, {}, "sub-0050009", STATS, add_to_nidm=True, forceagent=True)
+
+    assert str(err.value).count("0050002") == 1
 
 
 # find_subject is the lookup add_seg_data uses, public so that a BIDS app can

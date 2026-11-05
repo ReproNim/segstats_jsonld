@@ -124,8 +124,10 @@ options:
 - With `-n`, the subject is found by comparing IDs without a leading `sub-` and leading zeros on both
   sides. If the NIDM file has subjects and none matches, the run fails (exit 1) and writes nothing,
   with or without `--forcenidm`; earlier releases attached the stats to a new subject agent under
-  `--forcenidm`. If several match, the one that owns an anatomical MRI acquisition is used (the run
-  prints which); if none or more than one of them does, the run fails and writes nothing.
+  `--forcenidm`. If several match and all store the same ID, the one that owns an anatomical MRI
+  acquisition is used (the run prints which); if none or more than one of them does, the run fails
+  and writes nothing. If several match but store different IDs (`sub-01` and `001`), the run fails
+  and writes nothing.
   `--forcenidm` now adds a subject only to a NIDM file that has none, and without it such a file is
   an error. A subject is any node with `ndar:src_subject_id` (under the `https://` or the `http://`
   NDAR IRI), whatever its `rdf:type`. The lookup is `segstats_jsonld.fs_to_nidm.find_subject(graph,
