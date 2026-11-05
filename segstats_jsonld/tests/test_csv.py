@@ -142,3 +142,61 @@ def test_csv_jsonld_output_writes_the_cde_file_beside_it(tmp_path):
 
     assert result.returncode == 0, result.stdout + result.stderr
     assert sorted(p.name for p in out_dir.iterdir()) == ["fs.jsonld", "fs_cde.ttl"]
+
+
+# An input with no subjects: the pre-check must follow --forcenidm exactly as
+# the write path does, and share the agents it would create between rows.
+SUBJECTLESS_TTL = """
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix nidm: <http://purl.org/nidash/nidm#> .
+<http://iri.nidash.org/project> a nidm:Project, prov:Activity .
+"""
+SUBJECT_ID = URIRef("https://ndar.nih.gov/api/datadictionary/v2/dataelement/src_subject_id")
+
+
+def write_rows(tmp_path, *rows):
+    csv = tmp_path / "fs.csv"
+    csv.write_text("id,Left-Thalamus-Proper\n" + "".join(f"{sid},{value}\n" for sid, value in rows))
+    return csv
+
+
+@PYNIDM4_DD_TO_NIDM
+def test_csv_forcenidm_on_a_subjectless_input_shares_new_agents_between_rows(tmp_path):
+    """01 and 001 are one subject and get one new agent; 02 gets another. The
+    pre-check has to see the agent it would create for 01 as created in this
+    run, or it refuses 02 as a miss beside an input subject."""
+    csv = write_rows(tmp_path, ("01", 7000), ("001", 7100), ("02", 7200))
+    json_map = write_json_map(tmp_path, csv)
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(SUBJECTLESS_TTL)
+
+    result = run("-csv", str(csv), "-json_map", str(json_map), "-n", str(nidm), "--forcenidm")
+
+    assert result.returncode == 0, result.stdout + result.stderr
+    g = Graph().parse(nidm, format="turtle")
+    agents = {}
+    for activity in g.subjects(DCT_DESCRIPTION, Literal("volumes from a csv test")):
+        (value,) = {str(g.value(entity, URIRef(THALAMUS_CDE)))
+                    for entity in g.subjects(PROV["wasGeneratedBy"], activity)}
+        (agent,) = {g.value(assoc, PROV["agent"])
+                    for assoc in g.objects(activity, PROV["qualifiedAssociation"])
+                    if (assoc, PROV["hadRole"], SIO_SUBJECT) in g}
+        agents[value] = agent
+    assert set(agents) == {"7000", "7100", "7200"}
+    assert agents["7000"] == agents["7100"] != agents["7200"]
+    assert {str(o) for o in g.objects(None, SUBJECT_ID)} == {"01", "02"}
+
+
+def test_csv_without_forcenidm_on_a_subjectless_input_writes_nothing_and_asks_nothing(tmp_path):
+    csv = write_rows(tmp_path, ("01", 7000))
+    nidm = tmp_path / "nidm.ttl"
+    nidm.write_text(SUBJECTLESS_TTL)
+    before = md5(nidm)
+
+    result = run("-csv", str(csv), "-n", str(nidm), answers=INTERACTIVE_ANSWERS)
+
+    assert result.returncode == 1, result.stdout + result.stderr
+    assert "which has no subject agents" in result.stderr and "--forcenidm" in result.stderr
+    assert "Select which measurement type" not in result.stdout
+    assert md5(nidm) == before
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["fs.csv", "nidm.ttl"]
