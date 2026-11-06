@@ -81,7 +81,7 @@ def create_cde_graph(restrict_to=None):
     Any CDE that has a mapping will be mapped
     """
     import rdflib as rl
-    from nidm.core import Constants
+    from segstats_jsonld._pynidm import Constants
 
     with open(cde_file, "r") as fp:
         fsl_cde = json.load(fp)
@@ -133,8 +133,7 @@ def convert_stats_to_nidm(stats):
 
     Returns the entity and the prov document
     """
-    from nidm.core import Constants
-    from nidm.experiment.Core import getUUID
+    from segstats_jsonld._pynidm import Constants, getUUID
     import prov
 
     fsl = prov.model.Namespace("fsl", str(Constants.FSL))

@@ -39,15 +39,26 @@ setup(
     long_description=long_description,
     author="David Keator",
     author_email="dbkeator@uci.edu",
-    url="https://github.com/dbkeator/segstats_jsonld",
+    url="https://github.com/ReproNim/segstats_jsonld",
     packages=PACKAGES,
     install_requires=[
-        "pynidm",
+        # The converter runs on PyNIDM 4.5 and 5 (segstats_jsonld/_pynidm.py
+        # picks the API). Applications that install it pin the exact version.
+        "pynidm>=4.5.0,<6",
         "pandas",
-        "prov",
+        # PyNIDM 4.5 imports prov.graph without declaring its "graph" extra.
+        "prov[graph]",
         "xlrd",
         "rdflib>=6.0.0",
-        "rdflib-jsonld>=0.6.0"
+        # imported directly; until now they arrived only through pynidm
+        "numpy",
+        "rapidfuzz",
+        "requests",
+        # NOTE: rdflib-jsonld is intentionally NOT listed here. It is deprecated --
+        # JSON-LD support moved into rdflib itself in 6.0. It still gets installed
+        # transitively (pynidm -> pyontutils -> funowl -> rdflib-shim -> rdflib-jsonld==0.6.1),
+        # but rdflib-shim exists precisely to keep it inert under rdflib>=6, so
+        # that is fine. We simply don't declare a direct dependency on it.
     ],  # Add requirements as necessary
     include_package_data=True,
     extras_require={

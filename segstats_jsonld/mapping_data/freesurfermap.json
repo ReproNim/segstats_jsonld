@@ -96,7 +96,7 @@
       "datumType": "http://uri.interlex.org/base/ilx_0738264",
       "fsunit": "mm",
       "hasUnit": "mm",
-      "measureOf": "http://uri.interlex.org/base/ilx_0738276"
+      "measureOf": "http://uri.interlex.org/base/ilx_0111689"
     },
     "Min": {
       "datumType": "http://uri.interlex.org/base/ilx_0738266",

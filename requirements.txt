@@ -1,4 +1,6 @@
-pynidm
+# Development and test environment. setup.py accepts PyNIDM 4.5 and 5; this
+# file pins the version the tests are run against.
+pynidm==5.0.0
 pandas
 prov
 xlrd

@@ -35,20 +35,28 @@
 #**************************************************************************************
 
 
-from nidm.core import Constants
-from nidm.experiment.Core import getUUID
-from nidm.core.Constants import DD
-from nidm.experiment.Utils import DD_to_nidm, tupleKeysToSimpleKeys
+from segstats_jsonld._pynidm import (
+    DD,
+    NIDM_SUBJECTID_LOCALPART,
+    NIDM_SUBJECTID_URI,
+    Constants,
+    DD_to_nidm,
+    getUUID,
+    tupleKeysToSimpleKeys,
+)
 
 
 # standard library
 from pickle import dumps
 import os
+import sys
 from os.path import join,basename,splitext,isfile,dirname
 from socket import getfqdn
 import glob
 import pandas as pd
 import warnings
+import contextlib
+import logging
 
 import prov.model as prov
 import json
@@ -218,15 +226,16 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
                 where {
       
                     ?uuid a fs:DataElement ;
-                        nidm:measureOf <%s> ;
-                        nidm:datumType <%s> ;
+                        nidm:measureOf ?measureOf ;
+                        nidm:datumType ?datumType ;
                         rdfs:label ?label .
                 } order by ?label
             
-            ''' % (measurement_type,datum)
+            '''
 
-            # run query
-            qres = fs_graph.query(query)
+            # run query; the IRIs are bound, not pasted into the query text
+            qres = fs_graph.query(query, initBindings={"measureOf": URIRef(measurement_type),
+                                                        "datumType": URIRef(datum)})
 
             # dictionary to store freesurfer labels and UUIDs for measurement type
             freesurfer_region_labels = {}
@@ -244,8 +253,8 @@ def map_csv_variables_to_freesurfer_cdes(df,id_field,outdir,csv_file,json_map=No
         variable_to_freesurfer_cde[current_tuple]['description'] = "subject/participant identifier"
         variable_to_freesurfer_cde[current_tuple]['valueType'] = URIRef(Constants.XSD["string"])
         variable_to_freesurfer_cde[current_tuple]['isAbout'] = {}
-        variable_to_freesurfer_cde[current_tuple]['isAbout']['url'] = Constants.NIDM_SUBJECTID.uri
-        variable_to_freesurfer_cde[current_tuple]['isAbout']['label'] = Constants.NIDM_SUBJECTID.localpart
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['url'] = NIDM_SUBJECTID_URI
+        variable_to_freesurfer_cde[current_tuple]['isAbout']['label'] = NIDM_SUBJECTID_LOCALPART
 
         # loop through variables in CSV
         for column in df.columns:
@@ -339,16 +348,241 @@ def url_validator(url):
     except:
         return False
 
-def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None):
+def select_acquisition(rows, acq_filenames, subjid, from_csv=False):
+    '''
+    Pick the anatomical AcquisitionObjects the stats were computed from.
+
+    :param rows: query results with .acqObj and .filename (the input's nfo:filename)
+    :param acq_filenames: file names of the images FreeSurfer used (recon-all
+        averages repeated runs), or None
+    :param subjid: subject identifier, for messages
+    :param from_csv: the stats come from a -csv row, where -acq_filename is not accepted,
+        so the warning names a remedy that is
+    :return: list of AcquisitionObjects to link; empty to leave the stats unlinked
+
+    A subject can have several anatomical acquisitions (sessions, runs, acq-
+    variants). With acq_filenames, each name must match exactly one acquisition,
+    and all of them are linked. Without it, a single candidate is linked. Anything
+    else is left unlinked with a warning rather than linked to a guess.
+    '''
+    if not acq_filenames:
+        candidates = sorted({r.acqObj for r in rows})
+        if len(candidates) == 1:
+            return candidates
+        if not candidates:
+            warnings.warn(f"No anatomical AcquisitionObject found for subject {subjid}; "
+                          f"the stats are not linked to an acquisition")
+        else:
+            if from_csv:
+                remedy = ("to link them, convert this subject's stats with -s or -f and name the images "
+                          "with -acq_filename")
+            else:
+                remedy = "-acq_filename names the ones used"
+            warnings.warn(f"{len(candidates)} anatomical AcquisitionObjects found for subject {subjid}; "
+                          f"the stats are not linked to an acquisition ({remedy})")
+        return []
+    chosen = []
+    for name in acq_filenames:
+        want = os.path.basename(name)
+        matches = sorted({r.acqObj for r in rows
+                          if r.filename is not None and str(r.filename).split('/')[-1] == want})
+        if len(matches) != 1:
+            warnings.warn(f"{len(matches)} anatomical AcquisitionObjects with file name {want} found for "
+                          f"subject {subjid}; the stats are not linked to an acquisition")
+            return []
+        chosen.append(matches[0])
+    return sorted(set(chosen))
+
+
+class SubjectLookupError(LookupError):
+    """The subject the stats belong to cannot be identified in the input NIDM."""
+
+
+def normalise_subject_id(subject_id):
+    '''
+    The form two subject ids are compared in: without a leading "sub-" and
+    without leading zeros, so that sub-0051456, 0051456 and 51456 are the same
+    subject. BIDS directories carry "sub-"; participants.tsv, and so the
+    input NIDM, may or may not, and some datasets drop the zero padding.
+    '''
+    text = str(subject_id)
+    if text.startswith("sub-"):
+        text = text[len("sub-"):]
+    stripped = text.lstrip("0")
+    # an id of only zeros keeps one, so "0" and "00" stay comparable
+    return stripped if stripped or not text else "0"
+
+
+# ndar:src_subject_id as PyNIDM writes it, and under the http:// form of the
+# same NDAR IRI, which other NIDM producers use.
+SUBJECT_ID_PREDICATES = (
+    URIRef(NIDM_SUBJECTID_URI),
+    URIRef(NIDM_SUBJECTID_URI.replace("https://", "http://", 1)),
+)
+
+
+# The anatomical MRI acquisitions a subject node owns: AcquisitionObjects
+# generated by an activity associated with that node.
+_ANATOMICAL_ACQUISITION_QUERY = prepareQuery(
+    """
+    PREFIX prov:  <http://www.w3.org/ns/prov#>
+    PREFIX nidm:  <http://purl.org/nidash/nidm#>
+    PREFIX nfo:   <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
+    SELECT DISTINCT ?acqObj ?filename
+    WHERE {
+        ?acqObj a nidm:AcquisitionObject ;
+        prov:wasGeneratedBy/prov:qualifiedAssociation/prov:agent ?subject ;
+        nidm:hadAcquisitionModality nidm:MagneticResonanceImaging ;
+        nidm:hadImageUsageType nidm:Anatomical .
+        OPTIONAL { ?acqObj nfo:filename ?filename }
+    }
+    """
+)
+
+
+def _anatomical_acquisitions(graph, subject):
+    """Rows (.acqObj, .filename) of the anatomical MRI acquisitions subject owns."""
+    return list(graph.query(_ANATOMICAL_ACQUISITION_QUERY, initBindings={"subject": subject}))
+
+
+def _owns_anatomical_acquisition(graph, subject):
+    return bool(_anatomical_acquisitions(graph, subject))
+
+
+def find_subject(graph, subject_id, forceagent=False, created_agents=()):
+    '''
+    Return the node in graph that subject_id names: the subject the stats
+    belong to. This is the lookup add_seg_data makes; it is public so that a
+    caller (a BIDS app) can run the same rule on the input NIDM before
+    computing anything. It never changes graph.
+
+    A subject is any node carrying ndar:src_subject_id under the https:// or
+    the http:// NDAR IRI, whatever its rdf:type, so a participant typed only
+    nidm:Subject, or not typed, is never mistaken for an input without
+    subjects. Ids are compared after normalise_subject_id on both sides, and
+    as text, so PyNIDM 4.x's "..."^^xsd:string and PyNIDM 5's plain literal
+    both match. A node with several ids counts once.
+
+    - One match: returned.
+    - Several matches that all store the same id, character for character
+      (some inputs hold two person nodes for one participant, one owning the
+      MRI acquisitions and one only an assessment): the one match that owns an
+      anatomical MRI acquisition is returned; if none or more than one does,
+      SubjectLookupError naming the owners.
+    - Several matches whose stored ids differ (they match only after
+      normalisation, as "sub-01" and "001" do, and may be different
+      participants): SubjectLookupError.
+    - No match while graph has subjects: SubjectLookupError whatever forceagent
+      says, since attaching the stats to a new agent would detach them from
+      that subject's other data.
+    - No subjects at all: None with forceagent (the caller creates an agent
+      with the id), SubjectLookupError without it.
+
+    These are the rules of ants_seg_to_nidm.find_subject, so both converters
+    find the same subject.
+
+    :param created_agents: agents created by earlier calls in this run (-s
+        with -n converts each stats file separately; -csv one row at a time).
+        They are found when they match, and do not count as input subjects.
+    :raises SubjectLookupError: when the subject cannot be identified
+    '''
+    subject_ids = {}
+    for predicate in SUBJECT_ID_PREDICATES:
+        for agent, sid in graph.subject_objects(predicate):
+            subject_ids.setdefault(agent, set()).add(str(sid))
+
+    wanted = normalise_subject_id(subject_id)
+    matches = sorted(agent for agent, ids in subject_ids.items()
+                     if any(normalise_subject_id(i) == wanted for i in ids))
+
+    if len(matches) > 1:
+        found = "; ".join("%s (%s)" % (agent, ", ".join(sorted(subject_ids[agent]))) for agent in matches)
+        matched_ids = sorted({i for agent in matches for i in subject_ids[agent]
+                              if normalise_subject_id(i) == wanted})
+        if len(matched_ids) > 1:
+            raise SubjectLookupError("Subject ID %s matches %d subject agents in the input NIDM: %s; "
+                                     "their stored subject IDs differ (%s), so they may be different "
+                                     "participants and the stats cannot be attached to one of them. "
+                                     "No output written"
+                                     % (subject_id, len(matches), found, ", ".join(matched_ids)))
+        owners = [agent for agent in matches if _owns_anatomical_acquisition(graph, agent)]
+        if len(owners) != 1:
+            owning = ("none of them owns" if not owners else "%d of them own" % len(owners))
+            which = " (%s)" % ", ".join(str(agent) for agent in owners) if owners else ""
+            raise SubjectLookupError("Subject ID %s matches %d subject agents in the input NIDM: %s; "
+                                     "%s an anatomical MRI acquisition%s, so the stats cannot be "
+                                     "attached to one of them. No output written"
+                                     % (subject_id, len(matches), found, owning, which))
+        print('Subject ID %s matches %d subject agents in the input NIDM (%s); using %s, the only one '
+              'that owns an anatomical MRI acquisition' % (subject_id, len(matches), found, owners[0]))
+        return owners[0]
+    if matches:
+        agent = matches[0]
+        if agent in created_agents:
+            print('Using the agent created earlier in this run for subject ID %s (agent: %s)' % (subject_id, agent))
+        else:
+            print('Found subject ID %s in NIDM file as %s (agent: %s)'
+                  % (subject_id, ", ".join(sorted(subject_ids[agent])), agent))
+        return agent
+
+    input_ids = sorted({i for agent, ids in subject_ids.items() if agent not in created_agents for i in ids})
+    if input_ids:
+        raise SubjectLookupError("Subject ID %s not found in the input NIDM, whose subject IDs are: %s. "
+                                 "IDs are compared without a leading \"sub-\" and leading zeros. "
+                                 "No output written" % (subject_id, ", ".join(input_ids)))
+    if forceagent:
+        return None
+    raise SubjectLookupError("Subject ID %s not found in the input NIDM, which has no subject agents; "
+                             "no output written (--forcenidm adds a new agent for it)" % subject_id)
+
+
+def _add_forced_subject_agent(nidmdoc, subjid, created_agents):
+    """The agent --forcenidm adds for subjid to an input without subjects."""
+    print('Subject ID %s: the input NIDM has no subjects; creating an agent for it (--forcenidm)' % subjid)
+    warnings.warn(f"Subject ID {subjid} not found in the input NIDM, which has no subjects; the stats "
+                  f"are attached to a new agent with that ID (--forcenidm)")
+    agent = Namespace("http://iri.nidash.org/")[getUUID()]
+    nidmdoc.add((agent, RDF.type, Constants.PROV['Agent']))
+    nidmdoc.add((agent, URIRef(NIDM_SUBJECTID_URI), Literal(subjid, datatype=XSD.string)))
+    created_agents.add(agent)
+    return agent
+
+
+def _check_csv_subjects(nidm_file, subject_ids, forceagent):
+    """
+    Raise SubjectLookupError if any of the -csv rows' subject ids would fail the
+    lookup add_seg_data makes, without asking anything or writing anything. Runs
+    the same lookup, in row order, on a throwaway copy of the input NIDM, adding
+    the agents --forcenidm would add as it goes.
+    """
+    graph = Graph()
+    graph.parse(nidm_file, format=util.guess_format(nidm_file))
+    created = set()
+    with contextlib.redirect_stdout(StringIO()), warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        for subjid in subject_ids:
+            if find_subject(graph, subjid, forceagent, created) is None:
+                _add_forced_subject_agent(graph, subjid, created)
+
+
+def add_seg_data(nidmdoc, header, subjid, fs_stats_entity_id, add_to_nidm=False, forceagent=False, description=None, acq_filename=None, created_agents=None, from_csv=False):
     '''
     WIP: this function creates a NIDM file of brain volume data and if user supplied a NIDM-E file it will add brain volumes to the
     NIDM-E file for the matching subject ID
     :param nidmdoc:
     :param header:
+    :param subjid:
+    :param fs_stats_entity_id:
     :param add_to_nidm:
+    :param forceagent:
+    :param description:
+    :param acq_filename: file names of the anatomical images the stats came from, used to
+        pick their AcquisitionObjects in the input NIDM (see select_acquisition)
+    :param created_agents: set of subject agents created by earlier calls in the same run
+        (see find_subject); updated in place
     :return:
+    :raises SubjectLookupError: with add_to_nidm, when the subject cannot be identified
     '''
-
 
     #for each of the header items create a dictionary where namespaces are freesurfer
     niiri=Namespace("http://iri.nidash.org/")
@@ -363,6 +597,14 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
     nidm = Namespace(Constants.NIDM)
     nidmdoc.bind("nidm",nidm)
 
+    # identify the input subject before anything is added, so a lookup that
+    # fails leaves the graph as it was
+    if add_to_nidm:
+        if created_agents is None:
+            created_agents = set()
+        participant_agent = find_subject(nidmdoc, subjid, forceagent, created_agents)
+        if participant_agent is None:
+            participant_agent = _add_forced_subject_agent(nidmdoc, subjid, created_agents)
 
     software_activity = niiri[getUUID()]
     nidmdoc.add((software_activity,RDF.type,Constants.PROV['Activity']))
@@ -373,6 +615,7 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
         nidmdoc.add((software_activity,Constants.DCT["description"],Literal("Freesurfer segmentation statistics")))
     else:
         nidmdoc.add((software_activity, Constants.DCT["description"], Literal(description)))
+
     fs = Namespace(Constants.FREESURFER)
 
     # add freesurfer aparc+aseg header items to NIDM file.  If we have statistics from a CSV file instead of from
@@ -408,93 +651,10 @@ def add_seg_data(nidmdoc,header,subjid,fs_stats_entity_id, add_to_nidm=False, fo
         nidmdoc.add((participant_agent,URIRef(Constants.NDAR["src_subject_id"]),Literal(subjid, datatype=XSD.string)))
 
     else:
-        # query to get agent id for subjid
-        #find subject ids and sessions in NIDM document
-            query = """
-                    PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
-                    PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                    PREFIX prov:<http://www.w3.org/ns/prov#>
-                    PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-                    select distinct ?agent
-                    where {
-
-                        ?agent rdf:type prov:Agent ;
-                        ndar:src_subject_id \"%s\"^^xsd:string .
-
-                    }""" % subjid
-            #print(query)
-            qres = nidmdoc.query(query)
-            if len(qres) == 0:
-                print('Subject ID (%s) was not found in existing NIDM file...' %subjid)
-                ##############################################################################
-                # added to account for issues with some BIDS datasets that have leading 00's in subject directories
-                # but not in participants.tsv files.
-                qres2=[]
-                if (len(subjid) - len(subjid.lstrip('0'))) != 0:
-                    print('Trying to find subject ID without leading zeros....')
-                    query = """
-                        PREFIX ndar:<https://ndar.nih.gov/api/datadictionary/v2/dataelement/>
-                        PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX prov:<http://www.w3.org/ns/prov#>
-                        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-
-                        select distinct ?agent
-                        where {
-
-                            ?agent rdf:type prov:Agent ;
-                            ndar:src_subject_id \"%s\"^^xsd:string .
-
-                        }""" % subjid.lstrip('0')
-                    #print(query)
-                    qres2 = nidmdoc.query(query)
-                    if len(qres2) == 0:
-                        print("Still can't find subject id after stripping leading zeros...")
-                    else:
-                        for row in qres2:
-                            print('Found subject ID after stripping zeros: %s in NIDM file (agent: %s)' %(subjid.lstrip('0'),row[0]))
-                            participant_agent = row[0]
-                #######################################################################################
-                if (forceagent is not False) and (len(qres2)==0):
-                    print('Explicitly creating agent in existing NIDM file...')
-                    participant_agent = niiri[getUUID()]
-                    nidmdoc.add((participant_agent,RDF.type,Constants.PROV['Agent']))
-                    nidmdoc.add((participant_agent,URIRef(Constants.NIDM_SUBJECTID.uri),Literal(subjid, datatype=XSD.string)))
-                elif (forceagent is False) and (len(qres)==0) and (len(qres2)==0):
-                    print('Not explicitly adding agent to NIDM file, no output written')
-                    exit()
-            else:
-                 for row in qres:
-                    print('Found subject ID: %s in NIDM file (agent: %s)' %(subjid,row[0]))
-                    participant_agent = row[0]
-
             # When extending an existing NIDM file, link the segmentation software activity to the
             # anatomical acquisition used to produce the stats (mirrors FSL workflow).
-            query_acq = prepareQuery(
-                """
-                PREFIX prov:  <http://www.w3.org/ns/prov#>
-                PREFIX nidm:  <http://purl.org/nidash/nidm#>
-                PREFIX sio:   <http://semanticscience.org/resource/>
-                PREFIX nfo:   <http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#>
-                SELECT DISTINCT ?acqObj
-                WHERE {
-                    ?acqObj a nidm:AcquisitionObject ;
-                    prov:wasGeneratedBy/prov:qualifiedAssociation/prov:agent ?subject ;
-                    nidm:hadAcquisitionModality nidm:MagneticResonanceImaging ;
-                    nidm:hadImageUsageType nidm:Anatomical
-                }
-                """
-            )
-            res = list(nidmdoc.query(query_acq, initBindings={"subject": participant_agent}))
-            if not res:
-                warnings.warn(f"No T1-weighted AcquisitionObject found for subject {subjid}")
-                acq_obj = None
-            elif len(res) > 1:
-                raise RuntimeError(f"Expected exactly 1 AcquisitionObject, found {len(res)}")
-            else:
-                acq_obj = res[0].acqObj
-
-            if acq_obj:
+            res = _anatomical_acquisitions(nidmdoc, participant_agent)
+            for acq_obj in select_acquisition(res, acq_filename, subjid, from_csv=from_csv):
                 nidmdoc.add((software_activity, Constants.PROV['used'], acq_obj))
 
     #create a blank node and qualified association with prov:Agent for participant
@@ -591,11 +751,10 @@ def main():
 
     import argparse
     parser = argparse.ArgumentParser(prog='fs_to_nidm.py',
-                                     description='''This program will load in a aseg.stats file from Freesurfer
-                                     , augment the Freesurfer anatomical region designations with common data element
-                                        anatomical designations, and save the statistics + region designations out as
-                                        NIDM serializations (i.e. TURTLE, JSON-LD RDF))''',
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+                                     description='This program reads FreeSurfer stats files (e.g. aseg.stats), '
+                                     'maps the FreeSurfer regions and measures to common data elements, and writes '
+                                     'the statistics as NIDM (Turtle or JSON-LD), either as new files (-o) or added '
+                                     'to an existing NIDM file (-n).')
     #DBK: added mutually exclusive arguments to support pulling a named stats file (e.g. aseg.stats) as a URL such as
     #data hosted in an amazon bucket or from a mounted filesystem where you don't have access to the original
     #subjects directory.
@@ -605,36 +764,52 @@ def main():
 
     group.add_argument('-s', '--subject_dir', dest='subject_dir', type=str,
                         help='Path to Freesurfer subject directory')
-    group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer'
+    group.add_argument('-f', '--seg_file', dest='segfile', type=str,help='Path or URL to a specific Freesurfer '
                             'stats file. Check supported_files for list of supported stats files.')
     group.add_argument('-csv', '--csv_file', dest='csvfile', type=str, help='Path to CSV file which includes '
-                            'a header row with 1 column containing subject IDs and the other columns are variables'
+                            'a header row with 1 column containing subject IDs and the other columns are variables '
                             'indicating the Freesurfer-derived region measure (e.g. volume, surface area, etc.  If '
                             'you use this mode of running this software you will be asked to match your region '
                             'variables to standard Freesurfer region / measure labels presented to you (so this '
-                            'program will end up being interactive.  In future WIP we will add the ability to export'
+                            'program will end up being interactive.  In future WIP we will add the ability to export '
                             'a json sidecar file with those mappings for automated runs of future CSV files with the '
                             'same set of variables.')
-    parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='If a path to a URL or a stats file'
-                            'is supplied via the -f/--seg_file parameters then -subjid parameter must be set with'
-                            'the subject identifier to be used in the NIDM files')
-    group2.add_argument('-o', '--output', dest='output_dir', type=str,
-                        help='Output filename with full path', required=False, default=None)
-    parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
-                        help='If flag set then NIDM file will be written as JSONLD instead of TURTLE')
-    parser.add_argument('-add_de', '--add_de', dest='add_de', action='store_true', default = None,
-                        help='If flag set then data element data dictionary will be added to nidm file else it will written to a'
-                            'separate file as fsl_cde.ttl in the output directory (or same directory as nidm file if -n paramemter'
-                            'is used.')
+    parser.add_argument('-subjid','--subjid',dest='subjid',required=False, help='Subject identifier to be used in '
+                            'the NIDM files. Required with -f/--seg_file. With -s/--subject_dir it defaults to the '
+                            'name of the subject directory, and when given it overrides the subject directory name '
+                            '(set it when that directory is not named after the subject, e.g. sub-01/freesurfer). '
+                            'Earlier releases ignored -subjid with -s and always used the directory name. '
+                            'Ignored with -csv, where the ID column names each subject')
+    group2.add_argument('-o', '--output', dest='output_dir', metavar='OUTPUT', type=str, required=False, default=None,
+                        help='Where to write a new NIDM file. With -s, the directory that gets one '
+                             '<stats>_nidm.ttl (or .jsonld) per stats file; with -f or -csv, the output file. '
+                             'Exactly one of -o/--output and -n/--nidm is required')
     group2.add_argument('-n','--nidm', dest='nidm_file', type=str, required=False,default=None,
-                        help='Optional NIDM file to add segmentation data to.')
+                        help='Existing NIDM file to add the stats to; it is rewritten in place (with -j the '
+                             'result goes to <NIDM_FILE>.json instead). Exactly one of -o/--output and '
+                             '-n/--nidm is required')
+    parser.add_argument('-j', '--jsonld', dest='jsonld', action='store_true', default = False,
+                        help='If flag set then NIDM file will be written as JSONLD instead of TURTLE. With -n '
+                             'the JSON-LD goes to <NIDM_FILE>.json. Not allowed with -s and -n together')
+    parser.add_argument('-add_de', '--add_de', dest='add_de', action='store_true', default = None,
+                        help='If flag set then the data element dictionary is added to the NIDM file, else it is '
+                             'written to a separate file, fs_cde.ttl, in the output directory (or the directory '
+                             'of the -n NIDM file)')
     parser.add_argument('-forcenidm','--forcenidm', action='store_true',required=False,
-                        help='If adding to NIDM file this parameter forces the data to be added even if the participant'
-                             'doesnt currently exist in the NIDM file.')
+                        help='With -n: if the NIDM file has no subjects at all, add a new subject agent with the '
+                             'subject ID and attach the stats to it. If the file has subjects and none matches the '
+                             'subject ID (compared without a leading "sub-" and leading zeros), the run fails '
+                             'with or without this option')
     parser.add_argument('-json_map', '--json_map', dest='json_map', required=False, default=None,
-                        help='If storing freesurfer segmentation data stored in a CSV file and you\'ve previously'
-                             'stored the variable to Freesurfer CDE mappings, this can be reused.  Otherwise'
+                        help='If storing freesurfer segmentation data stored in a CSV file and you\'ve previously '
+                             'stored the variable to Freesurfer CDE mappings, this can be reused.  Otherwise '
                              'this argument is ignored')
+    parser.add_argument('-acq_filename', '--acq_filename', dest='acq_filename', nargs='+', required=False, default=None,
+                        help='With -s or -f and -n: file names (or paths) of the anatomical images the stats were '
+                             'computed from (several for repeated runs). The stats are linked to the input NIDM '
+                             'acquisitions with those file names if each name matches exactly one of the subject\'s '
+                             'anatomical acquisitions, and left unlinked otherwise. Without it the stats are linked '
+                             'only when the subject has a single anatomical acquisition')
     args = parser.parse_args()
 
 
@@ -643,6 +818,33 @@ def main():
     # know which subject the stats file is for
     if args.segfile and (args.subjid is None):
         parser.error("-f/--seg_file requires -subjid/--subjid to be set!")
+    # -acq_filename names one subject's images: with -csv it would apply to every row's
+    # subject, and without -n there is no input acquisition to link to
+    if args.acq_filename and args.csvfile:
+        parser.error("-acq_filename applies to -s/--subject_dir or -f/--seg_file, not -csv/--csv_file")
+    if args.acq_filename and not args.nidm_file:
+        parser.error("-acq_filename requires -n/--nidm")
+    # -s with -n converts each stats file against a fresh read of the -n file;
+    # in Turtle the result is written back to that file, so the next stats file
+    # builds on it, but -j writes <nidm>.json instead, so every stats file but
+    # the last one would be lost
+    if args.jsonld and args.subject_dir and args.nidm_file:
+        parser.error("-j/--jsonld cannot be combined with -s/--subject_dir and -n/--nidm: only the last "
+                     "stats file would be kept. Omit -j to add the stats to the -n file as Turtle, or use "
+                     "-o OUTPUT_DIR with -j to write one JSON-LD file per stats file")
+
+    try:
+        _convert(args)
+    except SubjectLookupError as err:
+        # nothing has been written when the lookup fails
+        sys.exit("fs_to_nidm.py: error: %s" % err)
+
+
+def _convert(args):
+    """Run the conversion main() parsed and checked the arguments for."""
+    # subject agents this run creates (--forcenidm), shared by the per-stats-file
+    # and per-row calls of add_seg_data
+    created_agents = set()
 
     # if output_dir doesn't exist then create it
     #if args.output_dir is not None:
@@ -665,11 +867,16 @@ def main():
 
     # if we set -s or --subject_dir as parameter on command line...
     if args.subject_dir is not None:
+        stats_dir = os.path.join(args.subject_dir, "stats")
+        if not any(basename(f) in supported_files for f in glob.glob(os.path.join(stats_dir, "*.stats"))):
+            sys.exit("fs_to_nidm.py: error: no supported stats file in %s (looked for: %s); "
+                     "no output written" % (stats_dir, ", ".join(sorted(supported_files))))
         # get the freesurfer version for later use
         freesurfer_version = read_buildstamp(args.subject_dir)
         # files=['aseg.stats']
-        # get subject id from args.subject_dir
-        subjid = os.path.basename(args.subject_dir)
+        # -subjid names the subject when the directory is not named after it
+        # (e.g. <out>/sub-<id>/freesurfer); otherwise use the directory name
+        subjid = args.subjid if args.subjid else os.path.basename(os.path.normpath(args.subject_dir))
         for stats_file in glob.glob(os.path.join(args.subject_dir,"stats","*.stats")):
             if basename(stats_file) in supported_files:
                 print("Processing stats file: %s" %stats_file)
@@ -695,7 +902,8 @@ def main():
                         nidmdoc = g2
 
                     # WIP: more thought needed for version that works with adding to existing NIDM file versus creating a new NIDM file....
-                    add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier)
+                    add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
+                                acq_filename=args.acq_filename)
 
                     #serialize NIDM file
                     if args.jsonld is not False:
@@ -732,15 +940,17 @@ def main():
                         nidmdoc = g1 + g2
 
                     if args.forcenidm is not False:
-                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True, forceagent=True)
+                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
+                                    acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
                     else:
-                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True)
+                        add_seg_data(nidmdoc=nidmdoc,header=header,subjid=subjid,fs_stats_entity_id=e.identifier, 
+                                    acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
                     #serialize NIDM file
                     print("Writing Augmented NIDM file...")
                     if args.jsonld is not False:
-                        nidmdoc.serialize(destination=args.nidm_file + '.json',format='jsonld')
+                        nidmdoc.serialize(destination=args.nidm_file + '.json',format='json-ld')
                     else:
                         nidmdoc.serialize(destination=args.nidm_file,format='turtle')
 
@@ -823,7 +1033,8 @@ def main():
             else:
                 nidmdoc = g2
 
-            add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier)
+            add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
+                        acq_filename=args.acq_filename)
 
 
             #serialize NIDM file
@@ -858,21 +1069,23 @@ def main():
                 nidmdoc = g1 + g2
 
             if args.forcenidm is not False:
-                add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True, forceagent=True)
+                add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
+                            acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True)
             else:
-                add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier,add_to_nidm=True)
+                add_seg_data(nidmdoc=nidmdoc,header=header,subjid=args.subjid,fs_stats_entity_id=e.identifier, 
+                            acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents)
 
 
             #serialize NIDM file
             print("Writing Augmented NIDM file...")
             if args.jsonld is not False:
-                nidmdoc.serialize(destination=args.nidm_file + '.json',format='jsonld')
+                nidmdoc.serialize(destination=args.nidm_file + '.json',format='json-ld')
             else:
                 nidmdoc.serialize(destination=args.nidm_file,format='turtle')
 
             if args.add_de is None:
                 # serialize cde graph
-                g.serialize(destination=join(dirname(args.output_dir),"fs_cde.ttl"),format='turtle')
+                g.serialize(destination=join(dirname(args.nidm_file), "fs_cde.ttl"), format='turtle')
     elif args.csvfile is not None:
         # added to support CSV files with volume data from freesurfer
         # problem is the variable names aren't guaranteed to match freesurfer names so we have to do some
@@ -896,7 +1109,7 @@ def main():
                     break
                 for subkey,subvalue in json_map[key].items():
                     if subkey == 'isAbout':
-                        if json_map[key][subkey]['url'] == Constants.NIDM_SUBJECTID.uri:
+                        if json_map[key][subkey]['url'] == NIDM_SUBJECTID_URI:
                             id_field = key.split("variable")[1].split("=")[1].split(")")[0].lstrip(
                             "'").rstrip("'")
                             stop_loops = True
@@ -922,6 +1135,11 @@ def main():
 
         # re-read data file with constraint that key field is read as string
         df = pd.read_csv(args.csvfile, dtype={id_field: str})
+
+        # look every row's subject up before the interactive mapping, which saves
+        # <csv>_map.json, so a run that cannot find a subject writes nothing
+        if args.nidm_file:
+            _check_csv_subjects(args.nidm_file, [str(v) for v in df[id_field]], args.forcenidm)
 
         # step 3: interact with the user about the variables in this CSV file.
         if args.nidm_file:
@@ -993,8 +1211,8 @@ def main():
                 else:
                     nidmdoc = nidmdoc + g2 + pde
 
-                add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                             description=provenance['description'])
+                add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                            acq_filename=args.acq_filename, description=provenance['description'], from_csv=True)
 
                 first_row = False
             # then we can continue to iterate over the rows in the CSV file, adding to the nidmdoc graph
@@ -1009,8 +1227,8 @@ def main():
 
                 nidmdoc = nidmdoc + g2
 
-                add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                             description=provenance['description'])
+                add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                            acq_filename=args.acq_filename, description=provenance['description'], from_csv=True)
 
             # we adding these data to an existing NIDM file
             elif (nidm_file is not None) and (first_row):
@@ -1029,11 +1247,11 @@ def main():
                     nidmdoc = g1 + g2 + pde
 
                 if args.forcenidm is not False:
-                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                                 add_to_nidm=True, forceagent=True,description=provenance['description'])
+                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'], from_csv=True)
                 else:
-                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                                 add_to_nidm=True,description=provenance['description'])
+                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'], from_csv=True)
 
                 first_row = False
 
@@ -1048,11 +1266,11 @@ def main():
                 nidmdoc = nidmdoc + g2
 
                 if args.forcenidm is not False:
-                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                                 add_to_nidm=True, forceagent=True, description=provenance['description'])
+                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, forceagent=True, description=provenance['description'], from_csv=True)
                 else:
-                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier,
-                                 add_to_nidm=True, description=provenance['description'])
+                    add_seg_data(nidmdoc=nidmdoc, header=provenance, subjid=subjid, fs_stats_entity_id=e.identifier, 
+                                acq_filename=args.acq_filename, add_to_nidm=True, created_agents=created_agents, description=provenance['description'], from_csv=True)
 
 
 
@@ -1067,17 +1285,17 @@ def main():
                 # nidmdoc.serialize(destination=join(args.output_dir,output_filename) + '.ttl',format='turtle')
                 nidmdoc.serialize(destination=args.output_dir, format='turtle')
 
-                # added to support separate cde serialization
-                if args.add_de is None:
-                    # serialize cde graph
-                    g.serialize(destination=join(dirname(args.output_dir), "fs_cde.ttl"), format='turtle')
+            # added to support separate cde serialization
+            if args.add_de is None:
+                # serialize cde graph
+                g.serialize(destination=join(dirname(args.output_dir), "fs_cde.ttl"), format='turtle')
 
         else:
 
             # serialize NIDM file
             print("Writing Augmented NIDM file...")
             if args.jsonld is not False:
-                nidmdoc.serialize(destination=nidm_file + '.json', format='jsonld')
+                nidmdoc.serialize(destination=nidm_file + '.json', format='json-ld')
             else:
                 nidmdoc.serialize(destination=nidm_file, format='turtle')
 
