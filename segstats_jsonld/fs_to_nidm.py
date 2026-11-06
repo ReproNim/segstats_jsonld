@@ -709,17 +709,18 @@ def read_buildstamp(subdir):
     :param subdir: path to subject directory, e.g. args.subject_dir
     """
     if os.path.exists(subdir):
+        stamp_filename = os.path.join(subdir, 'scripts', 'build-stamp.txt')
         try:
-            with open(subdir + '/scripts/build-stamp.txt', 'r') as f:
+            with open(stamp_filename, 'r') as f:
                 freesurfer_version = f.readlines()[0]
         # except a FileNotFound error
         except OSError as e:
             freesurfer_version = input(
-                """
-                Could not find a build timestamp in the supplied subject directory.
+                f"""
+                Could not find a build timestamp ({stamp_filename}) in the supplied subject directory.
                 The used freesurfer version can not be extracted. Please enter the
                 version of freesurfer you are using, if available: """
-                or "")
+            ) or ""
     return freesurfer_version
 
 
